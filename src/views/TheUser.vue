@@ -19,6 +19,6 @@ export default defineComponent({
 </script>
 <style>
 .the-user{
-  @apply grid grid-cols-[max-content,1fr] gap-3 p-3 bg-red-500 h-full
+  @apply grid grid-cols-[max-content,1fr] gap-3 p-3 h-full
 }
 </style>

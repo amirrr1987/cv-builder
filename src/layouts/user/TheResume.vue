@@ -13,6 +13,6 @@ export default defineComponent({
 </script>
 <style>
 .the-resume{
-    @apply bg-green-400 p-3
+    @apply p-3 border rounded
 }
 </style>
