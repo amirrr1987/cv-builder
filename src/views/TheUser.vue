@@ -6,8 +6,8 @@
 </template>
 <script lang="ts">
 import {defineComponent} from "vue";
-import TheForm from "../layouts/user/TheForm.vue";
-import TheResume from "../layouts/user/TheResume.vue";
+import TheForm from "../pages/user/TheForm.vue";
+import TheResume from "../pages/user/TheResume.vue";
 
 export default defineComponent({
     name: "TheUser",
