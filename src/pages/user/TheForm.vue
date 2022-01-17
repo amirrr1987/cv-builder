@@ -1,6 +1,5 @@
 <template>
   <div class="w-96 p-3 border rounded grid auto-rows-max overflow-y-scroll">
-
     <label for="photo">photo :</label>
     <input type="file" name="photo" />
 
@@ -41,18 +40,41 @@
       placeholder="email"
     />
 
-    <label for="skillSummary">Skill Summary :</label>
-    <input
-      type="text"
-      v-model.trim="userInfo.skillSummary"
-      required
-      placeholder="Skill Summary"
-    />
+    <label for="skillSummary"
+      >Skill Summary :
+      <button @click="addSkillSummary">
+        <i class="icon--plus"></i></button
+    ></label>
+    <template v-for="(item, index) in skillSummaryList" :key="index">
+      <input
+        type="text"
+        v-model.trim="item.url"
+        required
+        placeholder="Skill Summary"
+      />
+    </template>
 
-    <button>
-      <i class="icon--plus"></i>
-    </button>
     <textarea v-model.trim="userInfo.aboutMe" placeholder="education" />
+
+
+
+
+    <label for="links"
+      >links :
+      <button @click="addlink">
+        <i class="icon--plus"></i></button
+    ></label>
+
+
+    <template v-for="(item, index) in linkList" :key="index">
+      <input
+        type="text"
+        v-model.trim="item.url"
+        required
+        placeholder="social"
+      />
+    </template>
+
 
     <select v-model="userInfo.links">
       <template v-for="(item, index) in icons.glyphs" :key="index">
@@ -60,12 +82,7 @@
       </template>
     </select>
 
-    <input
-      type="url"
-      v-model.trim="userInfo.link"
-      required
-      placeholder="socal"
-    />
+
   </div>
 </template>
 <script lang="ts">
@@ -79,12 +96,40 @@ export default defineComponent({
     watchEffect(() => SetDataStore("UserInfo", userInfo.value));
     const iconClass = ref("");
 
-    console.log(icons);
+    const skillSummaryList = ref([
+      {
+        url: "",
+        icon: "",
+      },
+    ]);
+    const addSkillSummary = () => {
+      skillSummaryList.value.push({
+        url: "",
+        icon: "",
+      });
+    };
+
+    const linkList = ref([
+      {
+        url: "",
+        icon: "",
+      },
+    ]);
+    const addlink = () => {
+      linkList.value.push({
+        url: "",
+        icon: "",
+      });
+    };
 
     return {
       userInfo,
       iconClass,
       icons,
+      skillSummaryList,
+      addSkillSummary,
+      linkList,
+      addlink
     };
   },
 });
