@@ -1,6 +1,6 @@
 import { reactive, readonly } from "vue";
 
-const State = reactive<object>({});
+const State = reactive<any>({});
 
 export const GetDataStore = (key: string):any => {
   return State[key];
