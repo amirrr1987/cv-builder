@@ -1,18 +1,16 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
+
 
 const router = createRouter({
-  history: createWebHistory(),
-  scrollBehavior(to, from, position) {
-    return { top: 0 };
-  },
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: "/",
-      name: "TheSite",
-      component: () => import("../views/TheUser.vue"),
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: HomeView
+    // },
 
-    },
-  ],
-});
+  ]
+})
 
-export default router;
+export default router
