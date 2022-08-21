@@ -1,68 +1,182 @@
 <template>
-    <header>
-        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-            <div class="flex flex-wrap justify-between items-center mx-auto container">
+    <header class="mb-10 ">
+        <nav class="bg-white border-gray-200 px-2 md:px-4 py-2.5 dark:bg-gray-900">
+            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <a href="https://flowbite.com" class="flex items-center">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="ResumeITLogo">
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">ResumeIT</span>
                 </a>
-                <div class="flex items-center lg:order-2">
-                    <RouterLink to="/login"
-                        class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                        Log
-                        in</RouterLink>
-                    <RouterLink to="/register"
-                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                        Get
-                        started</RouterLink>
-                    <button data-collapse-toggle="mobile-menu-2" type="button"
-                        class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                        aria-controls="mobile-menu-2" aria-expanded="false">
+                <div class="flex items-center md:order-2">
+                    <div class="relative">
+                        <button type="button" data-dropdown-toggle="language-dropdown-menu"
+                            class="inline-flex justify-center items-center p-2 text-sm text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <svg class="mr-2 w-5 h-5 rounded-full" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3900 3900">
+                                <path fill="#b22234" d="M0 0h7410v3900H0z"></path>
+                                <path d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0" stroke="#fff"
+                                    stroke-width="300">
+                                </path>
+                                <path fill="#3c3b6e" d="M0 0h2964v2100H0z"></path>
+                                <g fill="#fff">
+                                    <g id="d">
+                                        <g id="c">
+                                            <g id="e">
+                                                <g id="b">
+                                                    <path id="a"
+                                                        d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z">
+                                                    </path>
+                                                    <use xlink:href="#a" y="420"></use>
+                                                    <use xlink:href="#a" y="840"></use>
+                                                    <use xlink:href="#a" y="1260"></use>
+                                                </g>
+                                                <use xlink:href="#a" y="1680"></use>
+                                            </g>
+                                            <use xlink:href="#b" x="247" y="210"></use>
+                                        </g>
+                                        <use xlink:href="#c" x="494"></use>
+                                    </g>
+                                    <use xlink:href="#d" x="988"></use>
+                                    <use xlink:href="#c" x="1976"></use>
+                                    <use xlink:href="#e" x="2470"></use>
+                                </g>
+                            </svg>
+                            English (US)
+                        </button>
+                        <!-- Dropdown -->
+                        <div class="z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 block absolute left-0"
+                            id="language-dropdown-menu" data-popper-reference-hidden="" data-popper-escaped=""
+                            data-popper-placement="bottom"
+                            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(647px, 84px);">
+                            <ul class="py-1" role="none">
+                                <li>
+                                    <a href="#"
+                                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">
+                                        <div class="inline-flex items-center">
+                                            <svg aria-hidden="true" class="h-3.5 w-3.5 rounded-full mr-2"
+                                                xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-us"
+                                                viewBox="0 0 512 512">
+                                                <g fill-rule="evenodd">
+                                                    <g stroke-width="1pt">
+                                                        <path fill="#bd3d44"
+                                                            d="M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
+                                                            transform="scale(3.9385)"></path>
+                                                        <path fill="#fff"
+                                                            d="M0 10h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
+                                                            transform="scale(3.9385)"></path>
+                                                    </g>
+                                                    <path fill="#192f5d" d="M0 0h98.8v70H0z" transform="scale(3.9385)">
+                                                    </path>
+                                                    <path fill="#fff"
+                                                        d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z"
+                                                        transform="scale(3.9385)"></path>
+                                                </g>
+                                            </svg>
+                                            English (US)
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">
+                                        <div class="inline-flex items-center">
+                                            <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-de"
+                                                viewBox="0 0 512 512">
+                                                <path fill="#ffce00" d="M0 341.3h512V512H0z"></path>
+                                                <path d="M0 0h512v170.7H0z"></path>
+                                                <path fill="#d00" d="M0 170.7h512v170.6H0z"></path>
+                                            </svg>
+                                            Deutsch
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">
+                                        <div class="inline-flex items-center">
+                                            <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-it"
+                                                viewBox="0 0 512 512">
+                                                <g fill-rule="evenodd" stroke-width="1pt">
+                                                    <path fill="#fff" d="M0 0h512v512H0z"></path>
+                                                    <path fill="#009246" d="M0 0h170.7v512H0z"></path>
+                                                    <path fill="#ce2b37" d="M341.3 0H512v512H341.3z"></path>
+                                                </g>
+                                            </svg>
+                                            Italiano
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">
+                                        <div class="inline-flex items-center">
+                                            <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" id="flag-icon-css-cn"
+                                                viewBox="0 0 512 512">
+                                                <defs>
+                                                    <path id="a" fill="#ffde00" d="M1-.3L-.7.8 0-1 .6.8-1-.3z"></path>
+                                                </defs>
+                                                <path fill="#de2910" d="M0 0h512v512H0z"></path>
+                                                <use width="30" height="20" transform="matrix(76.8 0 0 76.8 128 128)"
+                                                    xlink:href="#a">
+                                                </use>
+                                                <use width="30" height="20"
+                                                    transform="rotate(-121 142.6 -47) scale(25.5827)" xlink:href="#a">
+                                                </use>
+                                                <use width="30" height="20"
+                                                    transform="rotate(-98.1 198 -82) scale(25.6)" xlink:href="#a"></use>
+                                                <use width="30" height="20"
+                                                    transform="rotate(-74 272.4 -114) scale(25.6137)" xlink:href="#a">
+                                                </use>
+                                                <use width="30" height="20"
+                                                    transform="matrix(16 -19.968 19.968 16 256 230.4)" xlink:href="#a">
+                                                </use>
+                                            </svg>
+                                            中文 (繁體)
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#"
+                        class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Login</a>
+                    <a href="#"
+                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Sign
+                        up</a>
+                    <button data-collapse-toggle="mega-menu" type="button"
+                        class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        aria-controls="mega-menu" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
                     </button>
                 </div>
-                <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                    <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                <div id="mega-menu"
+                    class="hidden justify-between items-center w-full text-sm md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
                         <li>
-                            <RouterLink to="/"
-                                class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                                aria-current="page">Home</RouterLink>
+                            <a href="#"
+                                class="text-base block py-2 pr-4 pl-3 text-primary-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-primary-500 md:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-primary-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                aria-current="page">Home</a>
                         </li>
                         <li>
-                            <RouterLink to="/about"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                Company</RouterLink>
+                            <a href="#"
+                                class="text-base block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-gray-400 md:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-primary-500 md:dark:hover:bg-transparent dark:border-gray-700">Team</a>
                         </li>
                         <li>
-                            <RouterLink to="/contact"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                Marketplace</RouterLink>
-                        </li>
-                        <li>
-                            <RouterLink to="/pricing"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                Features</RouterLink>
-                        </li>
-                        <li>
-                            <RouterLink to="/contact"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                Team</RouterLink>
-                        </li>
-                        <li>
-                            <RouterLink to="/contact"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                Contact</RouterLink>
+                            <a href="#"
+                                class="text-base block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-gray-400 md:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-primary-500 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -92,12 +206,11 @@
             <div class="container mx-auto">
                 <h2
                     class="mb-6 text-3xl font-extrabold tracking-tight leading-tight text-gray-900 lg:text-center dark:text-white md:text-4xl">
-                    Flowbite in other technologies</h2>
+                    ResumeIT in other technologies</h2>
                 <p
                     class="mb-10 text-lg font-normal text-gray-500 dark:text-gray-400 lg:text-center lg:text-xl lg:px-64 lg:mb-16">
                     You can now also get started with open-source component libraries built for frameworks such as
                     React, Vue.js, Svelte and Angular.</p>
-
                 <div class="grid grid-cols-5">
                     <div class="col-start-2 col-end-5 grid grid-cols-3 gap-5">
                         <div>
@@ -122,7 +235,6 @@
                 </div>
             </div>
         </section>
-
         <section class="bg-white dark:bg-gray-900">
             <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
                 <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
@@ -146,11 +258,33 @@
             </div>
         </section>
         <section class="bg-white dark:bg-gray-900">
+            <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <img class="w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
+                        alt="office content 1">
+                    <img class="mt-4 w-full lg:mt-10 rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
+                        alt="office content 2">
+                </div>
+                <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
+                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">We didn't
+                        reinvent the wheel</h2>
+                    <p class="mb-4">We are strategists, designers and developers. Innovators and problem solvers. Small
+                        enough to be simple and quick, but big enough to deliver the scope you want at the pace you
+                        need. Small enough to be simple and quick, but big enough to deliver the scope you want at the
+                        pace you need.</p>
+                    <p>We are strategists, designers and developers. Innovators and problem solvers. Small enough to be
+                        simple and quick.</p>
+                </div>
+            </div>
+        </section>
+        <!-- <section class="bg-white dark:bg-gray-900">
             <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <div class="max-w-screen-md">
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Let's find
                         more that brings us together.</h2>
-                    <p class="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect
+                    <p class="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">ResumeIT helps you connect
                         with friends, family and communities of people who share your interests. Connecting with your
                         friends and family as well as discovering new ones is easy with features like Groups, Watch and
                         Marketplace.</p>
@@ -172,15 +306,13 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-
+        </section> -->
         <section class="bg-white dark:bg-gray-900">
             <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <div class="max-w-screen-md mb-8 lg:mb-16">
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for
                         business teams like yours</h2>
-                    <p class="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where
+                    <p class="text-gray-500 sm:text-xl dark:text-gray-400">Here at ResumeIT we focus on markets where
                         technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
                 </div>
                 <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
@@ -296,7 +428,6 @@
                 </dl>
             </div>
         </section>
-
         <section class="bg-white dark:bg-gray-900">
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
                 <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
@@ -319,7 +450,7 @@
                             </h3>
                             <span class="text-gray-500 dark:text-gray-400">CEO & Web Developer</span>
                             <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Bonnie drives the technical
-                                strategy of the flowbite platform and brand.</p>
+                                strategy of theresumeITplatform and brand.</p>
                             <ul class="flex space-x-4 sm:mt-0">
                                 <li>
                                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
@@ -372,7 +503,7 @@
                             </h3>
                             <span class="text-gray-500 dark:text-gray-400">CTO</span>
                             <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Jese drives the technical
-                                strategy of the flowbite platform and brand.</p>
+                                strategy of theresumeITplatform and brand.</p>
                             <ul class="flex space-x-4 sm:mt-0">
                                 <li>
                                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
@@ -425,7 +556,7 @@
                             </h3>
                             <span class="text-gray-500 dark:text-gray-400">Senior Front-end Developer</span>
                             <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Michael drives the
-                                technical strategy of the flowbite platform and brand.</p>
+                                technical strategy of theresumeITplatform and brand.</p>
                             <ul class="flex space-x-4 sm:mt-0">
                                 <li>
                                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
@@ -478,7 +609,7 @@
                             </h3>
                             <span class="text-gray-500 dark:text-gray-400">Marketing & Sale</span>
                             <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Lana drives the technical
-                                strategy of the flowbite platform and brand.</p>
+                                strategy of theresumeITplatform and brand.</p>
                             <ul class="flex space-x-4 sm:mt-0">
                                 <li>
                                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
@@ -521,26 +652,6 @@
                 </div>
             </div>
         </section>
-
-
-        <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                <div class="mx-auto max-w-screen-sm text-center">
-                    <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/404/404-computer.svg" alt="">
-                    <h1
-                        class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">
-                        404</h1>
-                    <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">
-                        Something's
-                        missing.</p>
-                    <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, we can't find that page.
-                        You'll find lots to explore on the home page. </p>
-                    <a href="#"
-                        class="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">Back
-                        to Homepage</a>
-                </div>
-            </div>
-        </section>
         <section class="bg-white dark:bg-gray-900">
             <div class="py-8 lg:py-16 mx-auto max-w-screen-xl px-4">
                 <h2
@@ -580,7 +691,6 @@
                             </defs>
                         </svg>
                     </a>
-
                     <a href="#" class="flex justify-center items-center">
                         <svg class="h-9 hover:text-gray-900 dark:hover:text-white" viewBox="0 0 124 38"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -677,8 +787,6 @@
                 </div>
             </div>
         </section>
-
-
         <section class="bg-white dark:bg-gray-900">
             <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
@@ -714,88 +822,13 @@
                 </form>
             </div>
         </section>
-
-
-        <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                <div class="mx-auto max-w-screen-md sm:text-center">
-                    <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">
-                        Sign up for our newsletter</h2>
-                    <p class="mx-auto mb-8 max-w-2xl font-light text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">
-                        Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to
-                        sign up with your email.</p>
-                    <form action="#">
-                        <div class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
-                            <div class="relative w-full">
-                                <label for="email"
-                                    class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email
-                                    address</label>
-                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
-                                        </path>
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                                    </svg>
-                                </div>
-                                <input
-                                    class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Enter your email" type="email" id="email" required="">
-                            </div>
-                            <div>
-                                <button type="submit"
-                                    class="py-3 px-5 w-full text-sm font-medium text
-                                    -center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>
-                            </div>
-                        </div>
-                        <div
-                            class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300">
-                            We care about the protection of your data. <a href="#"
-                                class="font-medium text-primary-600 dark:text-primary-500 hover:underline">Read our
-                                Privacy Policy</a>.</div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 px-4 mx-auto max-w-screen-md text-center lg:py-16 lg:px-12">
-                <svg class="mx-auto mb-4 w-10 h-10 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512">
-                    <path fill="currentColor"
-                        d="M331.8 224.1c28.29 0 54.88 10.99 74.86 30.97l19.59 19.59c40.01-17.74 71.25-53.3 81.62-96.65c5.725-23.92 5.34-47.08 .2148-68.4c-2.613-10.88-16.43-14.51-24.34-6.604l-68.9 68.9h-75.6V97.2l68.9-68.9c7.912-7.912 4.275-21.73-6.604-24.34c-21.32-5.125-44.48-5.51-68.4 .2148c-55.3 13.23-98.39 60.22-107.2 116.4C224.5 128.9 224.2 137 224.3 145l82.78 82.86C315.2 225.1 323.5 224.1 331.8 224.1zM384 278.6c-23.16-23.16-57.57-27.57-85.39-13.9L191.1 158L191.1 95.99l-127.1-95.99L0 63.1l96 127.1l62.04 .0077l106.7 106.6c-13.67 27.82-9.251 62.23 13.91 85.39l117 117.1c14.62 14.5 38.21 14.5 52.71-.0016l52.75-52.75c14.5-14.5 14.5-38.08-.0016-52.71L384 278.6zM227.9 307L168.7 247.9l-148.9 148.9c-26.37 26.37-26.37 69.08 0 95.45C32.96 505.4 50.21 512 67.5 512s34.54-6.592 47.72-19.78l119.1-119.1C225.5 352.3 222.6 329.4 227.9 307zM64 472c-13.25 0-24-10.75-24-24c0-13.26 10.75-24 24-24S88 434.7 88 448C88 461.3 77.25 472 64 472z" />
-                </svg>
-                <h1
-                    class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">
-                    Under Maintenance</h1>
-                <p class="
-                font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Our Enterprise
-                    administrators are performing scheduled maintenance.</p>
-            </div>
-        </section>
-        <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                <div class="mx-auto max-w-screen-sm text-center">
-                    <h1
-                        class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">
-                        500</h1>
-                    <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">Internal
-                        Server Error.</p>
-                    <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">We are already working to solve
-                        the problem. </p>
-                </div>
-            </div>
-        </section>
     </main>
-
-
-    <footer class="p-4 bg-white sm:p-6 dark:bg-gray-900 border-t">
+    <footer id="footer" class="p-4 bg-white sm:p-6 dark:bg-gray-900 border-t">
         <div class="container mx-auto md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
                 <a href="https://flowbite.com/" class="flex items-center">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-8" alt="FlowBite Logo">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-8" alt="ResumeITLogo">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ResumeIT</span>
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -803,7 +836,7 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                     <ul class="text-gray-600 dark:text-gray-400">
                         <li class="mb-4">
-                            <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                            <a href="https://flowbite.com/" class="hover:underline">ResumeIT</a>
                         </li>
                         <li>
                             <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
@@ -883,7 +916,6 @@
             </div>
         </div>
     </footer>
-
 </template>
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';

@@ -28,6 +28,9 @@ import Services from "./services";
 
 </script>
 <style>
+html{
+  @apply scroll-smooth;
+}
 #app {
   /* @apply grid min-h-screen grid-cols-12; */
 }
