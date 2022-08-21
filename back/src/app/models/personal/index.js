@@ -64,7 +64,11 @@ const schemaPersonal = new mongoose.Schema({
             skills: { type: [String], required: true, default: [""] },
         }]
     },
-    socials: { type: [Object], required: true, default: [{ title: "", icon: "", link: "" }] },
+    socials: {
+        type: [Object], required: true, default: [{
+            title: "", icon: "", link: ""
+        }]
+    },
 
 });
 

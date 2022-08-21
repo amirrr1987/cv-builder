@@ -1,6 +1,7 @@
 <template>
-  <TheSide />
-  <TheMain />
+  <!-- <TheSide /> -->
+  <!-- <TheMain /> -->
+  <RouterView/>
 </template>
 <script setup lang="ts">
 import TheSide from "./views/TheSide.vue";
@@ -14,20 +15,20 @@ import Services from "./services";
 // const personalStore = stores.usePersonalStore()
 
 
-onMounted(async () => {
-  try {
-    const { data } = await Services.GetPersonalApi();
-    console.log(data);
-    stores.usePersonalStore().$state = data[0];
+// onMounted(async () => {
+//   try {
+//     const { data } = await Services.GetPersonalApi();
+//     console.log(data);
+//     stores.usePersonalStore().$state = data[0];
     
-  } catch (error) {
+//   } catch (error) {
 
-  }
-})
+//   }
+// })
 
 </script>
 <style>
 #app {
-  @apply grid min-h-screen grid-cols-12;
+  /* @apply grid min-h-screen grid-cols-12; */
 }
 </style>
