@@ -1,9 +1,9 @@
 
-const PersonalController = require("./personal");
+const ProfileController = require("./profile");
 const AuthController = require("./auth");
 
 const controllers = {
-    PersonalController,
+    ProfileController,
     AuthController
 };
 

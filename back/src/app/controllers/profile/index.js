@@ -1,9 +1,9 @@
 const Joi = require("joi");
-const { usePersonalModel } = require("../../models");
+const { useProfileModel } = require("../../models");
 
 class Controller {
     async getAll(req, res) {
-        const resualt = await usePersonalModel
+        const resualt = await useProfileModel
             .find()
             .sort({ _id: 1 })
         res.statusCode = 200;
@@ -12,10 +12,10 @@ class Controller {
             message: "success"
         });
     }
-    async getPersonal(req, res) {
-        const resualt = await usePersonalModel
-            .findById(req.params.personalId)
-        
+    async getProfile(req, res) {
+        const resualt = await useProfileModel
+            .findById(req.params.profileId)
+
         res.send({
             payload: resualt,
             message: "success"
@@ -112,7 +112,7 @@ class Controller {
         //     social: Joi.array()
         // });
 
-        const newPersonal = usePersonalModel(obj)
+        const newProfile = useProfileModel(obj)
 
         // try {
         //     await schema.validateAsync(obj);
@@ -123,8 +123,8 @@ class Controller {
         // }
 
         try {
-            await newPersonal.save()
-            res.send(newPersonal);
+            await newProfile.save()
+            res.send(newProfile);
         }
         catch (err) {
             console.log("error:", "save error");
@@ -133,7 +133,7 @@ class Controller {
 
     }
 
-    async postPersonal(req, res) {
+    async postProfile(req, res) {
         const { body } = req;
 
         let obj = {
@@ -210,7 +210,7 @@ class Controller {
             ]
         }
 
-        const resualt = await usePersonalModel
+        const resualt = await useProfileModel
             .findByIdAndUpdate(req.params.personalId, obj)
 
         res.statusCode = 200;

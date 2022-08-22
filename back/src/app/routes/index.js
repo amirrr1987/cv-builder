@@ -2,10 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 
-const PersonalRoutes = require("./personal");
+const ProfileRoutes = require("./profile");
 const AuthRoutes = require("./auth");
 
-router.use("/api/personal", PersonalRoutes);
+router.use("/api/profile", ProfileRoutes);
 
 router.use("/api/auth", AuthRoutes);
 

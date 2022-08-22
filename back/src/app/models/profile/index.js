@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const schemaPersonal = new mongoose.Schema({
+const schemaProfile = new mongoose.Schema({
     image: { type: String, required: true, default: "" },
     about: { type: String, required: true, default: "" },
     title: { type: String, required: true, default: "" },
@@ -71,6 +71,6 @@ const schemaPersonal = new mongoose.Schema({
 
 });
 
-const usePersonalModel = mongoose.model("personal", schemaPersonal);
+const useProfileModel = mongoose.model("profile", schemaProfile);
 
-module.exports = usePersonalModel;
+module.exports = useProfileModel;

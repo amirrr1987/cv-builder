@@ -1,9 +1,9 @@
 
-const usePersonalModel = require("./personal");
+const useProfileModel = require("./profile");
 const useAuthModel = require("./auth");
 
 const models = {
-    usePersonalModel,
+    useProfileModel,
     useAuthModel
 };
 
