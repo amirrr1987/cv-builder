@@ -215,8 +215,7 @@ class Controller {
 
         res.statusCode = 200;
         res.send({
-            payload: resualt,
-            message: "success"
+            message: "update success"
         });
 
     }

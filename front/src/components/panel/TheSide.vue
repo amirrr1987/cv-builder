@@ -1,5 +1,6 @@
 <template>
     <aside class="bg-white p-5 h-screen overflow-y-scroll col-span-2">
+        
         <div class="mb-6">
             <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">img</label>
             <input v-model="profile.image" type="text" id="img"
@@ -103,6 +104,6 @@ const profile = computed(() => {
 })
 
 const updatePrsonal = () => {
-    profileStore.updatePersonal(profile)
+    profileStore.updatePersonal()
 }
 </script>

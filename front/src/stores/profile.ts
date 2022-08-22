@@ -10,23 +10,17 @@ export const useProfileStore = defineStore({
         first: '',
         last: ''
       },
-      _id: "62fcc34181a707c5d4f1e0ae",
-      image: "https://api.lorem.space/image/face?w=150&h=150",
-      about: "Hello I`m Amir",
-      title: "FrontEndDeveloper",
-      subTitle: "Vue.js",
+      _id: "",
+      image: "",
+      about: "",
+      title: "",
+      subTitle: "",
       address: {
         country: "",
         province: "",
         region: ""
       },
       skillsSummary: [
-        {
-          label: ""
-        },
-        {
-          label: ""
-        },
         {
           label: ""
         }
@@ -40,21 +34,9 @@ export const useProfileStore = defineStore({
       educations: [
         {
           label: ""
-        },
-        {
-          label: ""
-        },
-        {
-          label: ""
         }
       ],
       techExperiences: [
-        {
-          label: ""
-        },
-        {
-          label: ""
-        },
         {
           label: ""
         }
@@ -108,8 +90,7 @@ export const useProfileStore = defineStore({
       this.profileId = id
     },
 
-    updatePersonal(data: any) {
-      Object.assign(this.profile, data);
+    updatePersonal() {
       this.postData()
     },
     async postData() {
@@ -125,8 +106,8 @@ export const useProfileStore = defineStore({
     async getData() {
       try {
         const { data } = await Services.GetPersonalApi(this.$state.profileId)
-        Object.assign(this.profile, data)
-        console.log('🔥 data', data)
+        Object.assign(this.$state.profile, data.payload)
+        console.log('🔥 data resived and assign store', data.payload)
       } catch (error) {
 
         console.log('🔥 error', error)
