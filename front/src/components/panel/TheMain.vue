@@ -1,9 +1,4 @@
 <template>
-    <!-- 
-
-   gap-px aspect-[3508/2480] 
-
- -->
     <main class="col-span-10 grid grid-cols-12 overflow-y-scroll h-screen">
         <section class=" col-span-2 grid grid-rows-silde gap-y-5 bg-primary-lightest py-3 px-5">
 
@@ -153,8 +148,8 @@
     </main>
 </template>
 <script setup lang="ts">
-import stores from './../stores'
+import stores from '@/stores'
 import { Icon } from '@iconify/vue';
-import ExperienceItem from "./../components/ExperienceItem.vue";
+import ExperienceItem from "@/components/panel/ExperienceItem.vue";
 const personalStore = stores.usePersonalStore()
 </script>

@@ -9,7 +9,8 @@
         </div>
 
         <div class="mb-6">
-            <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">first name</label>
+            <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">first
+                name</label>
             <input v-model="personalStore.$state.fullName.first" type="text" id="fname"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
@@ -119,9 +120,7 @@
     </aside>
 </template>
 <script setup lang="ts">
-import stores from './../stores'
-import { Icon } from '@iconify/vue';
-import ExperienceItem from "./../components/ExperienceItem.vue";
+import stores from '@/stores'
 const personalStore = stores.usePersonalStore()
 
 </script>
