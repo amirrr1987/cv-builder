@@ -1,52 +1,44 @@
 <template>
     <aside class="bg-white p-5 h-screen overflow-y-scroll col-span-2">
-
         <div class="mb-6">
             <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">img</label>
-            <input v-model="personalStore.$state.image" type="text" id="img"
+            <input v-model="profile.image" type="text" id="img"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
         <div class="mb-6">
             <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">first
                 name</label>
-            <input v-model="personalStore.$state.fullName.first" type="text" id="fname"
+            <input v-model="profile.fullName.first" type="text" id="fname"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
         <div class="mb-6">
             <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">last name</label>
-            <input v-model="personalStore.$state.fullName.last" type="text" id="lname"
+            <input v-model="profile.fullName.last" type="text" id="lname"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
         <div class="mb-6">
             <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">title</label>
-            <input v-model="personalStore.$state.title" type="text" id="title"
+            <input v-model="profile.title" type="text" id="title"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
         <div class="mb-6">
             <label for="subTitle"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">subTitle</label>
-            <input v-model="personalStore.$state.subTitle" type="text" id="subTitle"
+            <input v-model="profile.subTitle" type="text" id="subTitle"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
-
         <div class="mb-6">
             <label for="about" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">about</label>
-            <input v-model="personalStore.$state.about" type="text" id="about"
+            <input v-model="profile.about" type="text" id="about"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
-        <template v-for="(item, index) in personalStore.$state.contacts" :key="index">
+        <template v-for="(item, index) in profile.contacts" :key="index">
             <div class="mb-6">
                 <label for="mobile"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">mobile</label>
@@ -57,84 +49,60 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="" required="true">
             </div>
-
         </template>
-
-
         <hr class="my-3">
         <div class="flex justify-between mb-5">
             <div>skillSummary</div>
-            <button type="button" @click.prevent="personalStore.addSkillSummary"
+            <button type="button" @click.prevent="profileStore.addSkillSummary"
                 class="text-blue-500 w-8 h-8 rounded-full text-2xl">+</button>
-
         </div>
-        <template v-for="(item, index) in personalStore.$state.skillsSummary" :key="index">
-
+        <template v-for="(item, index) in profile.skillsSummary" :key="index">
             <div class="mb-6">
-
-
                 <div class="grid grid-cols-[1fr,max-content] gap-1 items-center border px-3 ">
                     <input v-model="item.label" type="text" :id="`skillSummary${index + 1}`"
                         class="outline-none border-0 focus:outline-0" placeholder="" required="true">
-                    <button @click.prevent="personalStore.removeSkillSummary(index)"
+                    <button @click.prevent="profileStore.removeSkillSummary(index)"
                         class="text-red-500 w-8 h-8 rounded-full text-3xl">-</button>
                 </div>
             </div>
-
         </template>
-
-
-
         <div class="mb-6">
             <label for="education"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">education</label>
-            <input v-model="personalStore.$state.educations" type="text" id="education"
+            <input v-model="profile.educations" type="text" id="education"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
-
-
         <hr class="my-3">
         <div class="flex justify-between mb-5">
             <div>teaching</div>
-            <button type="button" @click.prevent="personalStore.addTechExperiences"
+            <button type="button" @click.prevent="profileStore.addTechExperiences"
                 class="text-blue-500 w-8 h-8 rounded-full text-2xl">+</button>
-
         </div>
-
-        <template v-for="(item, index) in personalStore.$state.techExperiences" :key="item">
+        <template v-for="(item, index) in profile.techExperiences" :key="item">
             <div class="mb-6">
                 <div class="grid grid-cols-[1fr,max-content] gap-1 items-center border px-3 ">
                     <input v-model="item.label" type="text" :id="`skillSummary${index + 1}`"
                         class="outline-none border-0 focus:outline-0" placeholder="" required="true">
-                    <button @click.prevent="personalStore.removeTechExperiences(index)"
+                    <button @click.prevent="profileStore.removeTechExperiences(index)"
                         class="text-red-500 w-8 h-8 rounded-full text-3xl">-</button>
                 </div>
             </div>
-
         </template>
-
-
         <button @click="updatePrsonal" class="bg-red-500 px-5 py-2">update</button>
-
-
-
     </aside>
 </template>
 <script setup lang="ts">
 import stores from '@/stores'
-import Services from '@/services';
-const personalStore = stores.usePersonalStore()
+import { computed } from '@vue/reactivity';
 
+const profileStore = stores.useProfileStore()
 
-const updatePrsonal = async () => {
-    try {
-        const { data } = await Services.UpdatePersonalApi('63032a93f270bed204018ce1', personalStore.$state)
+const profile = computed(() => {
+    return profileStore.$state.profile
+})
 
-        console.log('🔥 data', data)
-
-    } catch (error) {
-        console.log('🔥 error', error)
-    }
+const updatePrsonal = () => {
+    profileStore.updatePersonal(profile)
 }
 </script>

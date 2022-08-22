@@ -1,6 +1,6 @@
-import { usePersonalStore } from './personal'
+import { useProfileStore } from './profile'
 const stores= {
-    usePersonalStore
+    useProfileStore
 }
 
 export default stores;

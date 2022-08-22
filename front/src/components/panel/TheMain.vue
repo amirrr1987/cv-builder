@@ -6,10 +6,10 @@
                 <img class="w-36 h-36 rounded-full m-auto" :src="personalStore.image" :title="fullName" :alt="fullName">
                 <div class="text-center ">
                     <div class="font-bold capitalize text-lg mt-3 text-primary-dark">{{ fullName }}</div>
-                    <div class="capitalize text-base text-primary-dark ">{{ personalStore.$state.title }}</div>
+                    <div class="capitalize text-base text-primary-dark ">{{ personalStore.$state.profile.title }}</div>
                     <div class="text- font-light text-gray">
                         (
-                        <span class="text-green-600">{{ personalStore.$state.subTitle }}</span>
+                        <span class="text-green-600">{{ personalStore.$state.profile.subTitle }}</span>
                         <span class="text-yellow-500">.js</span>
                         )
                     </div>
@@ -20,12 +20,12 @@
 
             <div>
                 <div class="capitalize font-bold text-primary-dark">about me:</div>
-                <div class="p-1 text-xs font-light text-gray">{{ personalStore.$state.about }}</div>
+                <div class="p-1 text-xs font-light text-gray">{{ personalStore.$state.profile.about }}</div>
             </div>
 
             <div>
                 <div class="capitalize font-bold text-primary-dark">contact me:</div>
-                <template v-for="(item, index) in personalStore.$state.contacts" :key="index">
+                <template v-for="(item, index) in personalStore.$state.profile.contacts" :key="index">
                     <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1">
                         <Icon :icon="item.icon" />
                         <span>{{ item.label }}</span>
@@ -37,7 +37,7 @@
             <div class="">
                 <div class="capitalize font-bold text-primary-dark">skill summery:</div>
                 <div class="p-1 text-xs capitalize font-light  text-gray">
-                    <template v-for="(item, index) in personalStore.$state.skillsSummary" :key="index">
+                    <template v-for="(item, index) in personalStore.$state.profile.skillsSummary" :key="index">
                         <div>{{ item.label }}</div>
                     </template>
                 </div>
@@ -45,7 +45,7 @@
 
             <div class="">
                 <div class="capitalize font-bold text-primary-dark">education:</div>
-                <template v-for="(item, index) in personalStore.$state.educations" :key="index">
+                <template v-for="(item, index) in personalStore.$state.profile.educations" :key="index">
                     <div class="p-1 text-xs font-light text-gray ">
                         {{ item.label }}
                     </div>
@@ -56,7 +56,7 @@
             <div class="">
                 <div class="capitalize font-bold text-primary-dark">teaching exprince:</div>
                 <div class="p-1 text-xs font-light text-gray ">
-                    <template v-for="(item, index) in personalStore.$state.techExperiences" :key="index">
+                    <template v-for="(item, index) in personalStore.$state.profile.techExperiences" :key="index">
                         <div>{{ item.label }}</div>
                     </template>
                 </div>
@@ -151,8 +151,8 @@ import stores from '@/stores'
 import { Icon } from '@iconify/vue';
 import ExperienceItem from "@/components/panel/ExperienceItem.vue";
 import { computed } from 'vue';
-const personalStore = stores.usePersonalStore()
+const personalStore = stores.useProfileStore()
 const fullName = computed(() => {
-    return `${personalStore.$state.fullName.first} ${personalStore.$state.fullName.last}`
+    return `${personalStore.$state.profile.fullName.first} ${personalStore.$state.profile.fullName.last}`
 })
 </script>

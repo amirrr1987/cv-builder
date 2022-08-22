@@ -7,14 +7,19 @@ class Controller {
             .find()
             .sort({ _id: 1 })
         res.statusCode = 200;
-        res.send(resualt);
+        res.send({
+            payload: resualt,
+            message: "success"
+        });
     }
     async getPersonal(req, res) {
         const resualt = await models.usePersonalModel
             .findById(req.params.personalId)
-        res.statusCode = 200;
-        console.log(resualt);
-        res.send(resualt);
+        
+        res.send({
+            payload: resualt,
+            message: "success"
+        });
     }
     async postAll(req, res) {
         const { body } = req;
@@ -206,49 +211,13 @@ class Controller {
         }
 
         const resualt = await models.usePersonalModel
-            .findByIdAndUpdate(req.params.personalId,obj)
-        
-        
- 
-        // const schema = Joi.object({
-        //     image: Joi.string().min(3).max(30).message("image must be between 3 and 30 characters"),
-        //     fName: Joi.string().min(3).max(30).message("fName must be between 3 and 30 characters"),
-        //     lName: Joi.string().min(3).max(30).message("lName must be between 3 and 30 characters"),
-        //     title: Joi.string().min(3).max(30).message("title must be between 3 and 30 characters"),
-        //     subTitle: Joi.string().min(3).max(30).message("subTitle must be between 3 and 30 characters"),
-        //     about: Joi.string().min(3).max(30).message("about must be between 3 and 30 characters"),
-        //     contact: Joi.array(),
-        //     skillSummary: Joi.array(),
-        //     education: Joi.string().min(3).max(3000).message("education must be between 3 and 30 characters"),
-        //     techExperience: Joi.array(),
-        //     softwareKnowledge: Joi.array(),
-        //     experience: Joi.array(),
-        //     social: Joi.array()
-        // });
+            .findByIdAndUpdate(req.params.personalId, obj)
 
-        // const newPersonal = models.usePersonalModel(obj)
-
-
-        // res.statusCode = 200;
-        
-        res.send(resualt);
-
-        // try {
-        //     await schema.validateAsync(obj);
-        // }
-        // catch (err) {
-        //     console.log("error:", "vaidation error");
-        //     res.send({ error: err.message });
-        // }
-
-        // try {
-            // await newPersonal.save()
-            // res.send(newPersonal);
-        // }
-        // catch (err) {
-            // console.log("error:", "save error");
-            // res.send({ error: err.message });
-        // }
+        res.statusCode = 200;
+        res.send({
+            payload: resualt,
+            message: "success"
+        });
 
     }
 
