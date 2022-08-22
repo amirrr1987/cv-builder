@@ -1,9 +1,9 @@
 const Joi = require("joi");
-const models = require("../../models");
+const { usePersonalModel } = require("../../models");
 
 class Controller {
     async getAll(req, res) {
-        const resualt = await models.usePersonalModel
+        const resualt = await usePersonalModel
             .find()
             .sort({ _id: 1 })
         res.statusCode = 200;
@@ -13,7 +13,7 @@ class Controller {
         });
     }
     async getPersonal(req, res) {
-        const resualt = await models.usePersonalModel
+        const resualt = await usePersonalModel
             .findById(req.params.personalId)
         
         res.send({
@@ -112,7 +112,7 @@ class Controller {
         //     social: Joi.array()
         // });
 
-        const newPersonal = models.usePersonalModel(obj)
+        const newPersonal = usePersonalModel(obj)
 
         // try {
         //     await schema.validateAsync(obj);
@@ -210,7 +210,7 @@ class Controller {
             ]
         }
 
-        const resualt = await models.usePersonalModel
+        const resualt = await usePersonalModel
             .findByIdAndUpdate(req.params.personalId, obj)
 
         res.statusCode = 200;

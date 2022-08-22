@@ -2,18 +2,14 @@ const express = require("express");
 
 const router = express.Router();
 
-const controllers = require("../../controllers");
+const { PersonalController } = require("../../controllers");
 
+router.get("/", PersonalController.getAll);
 
-router.get("/", controllers.PersonalController.getAll);
+router.get("/:personalId", PersonalController.getPersonal);
 
-router.get("/:personalId", controllers.PersonalController.getPersonal);
+router.post("/", PersonalController.postAll);
 
-router.post("/", controllers.PersonalController.postAll);
-
-router.put("/:personalId", controllers.PersonalController.postPersonal);
-
-
-
+router.put("/:personalId", PersonalController.postPersonal);
 
 module.exports = router;

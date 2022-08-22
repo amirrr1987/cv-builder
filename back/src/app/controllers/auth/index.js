@@ -1,10 +1,10 @@
 const Joi = require("joi");
-const models = require("../../models");
+const { useAuthModel } = require("../../models");
 
 class Controller {
     
     async getAll(req, res) {
-        const resualt = await models.useAuthModel
+        const resualt = await useAuthModel
             .find()
             .sort({ _id: 1 })
         res.statusCode = 200;
@@ -22,7 +22,7 @@ class Controller {
             password: Joi.string().min(4).max(32).message("password must be between 4 and 8 characters")
         });
 
-        const newUser = models.useAuthModel(obj)
+        const newUser = useAuthModel(obj)
 
         try {
             await schema.validateAsync(obj);

@@ -32,18 +32,18 @@ const useAxios = (headers = {}): AxiosInstance => {
 }
 
 const GetPersonalApi = async (personalId:string) => {
-    return await useAxios().get(`personal/${personalId}`)
+    return await useAxios().get(`profile/${personalId}`)
 }
 
 const setPersonalApi = async (survey: any) => {
     return await useAxios().post(
-        `personal/`, survey
+        `profile/`, survey
     )
 }
 
 const UpdatePersonalApi = async (personalId: string, personalData: any) => {
     return await useAxios().put(
-        `personal/${personalId}`, personalData
+        `profile/${personalId}`, personalData
     )
 }
 
