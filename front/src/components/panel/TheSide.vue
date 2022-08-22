@@ -46,21 +46,20 @@
                 placeholder="" required="true">
         </div>
 
+        <template v-for="(item, index) in personalStore.$state.contacts" :key="index">
+            <div class="mb-6">
+                <label for="mobile"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">mobile</label>
+                <input v-model="item.label" type="text" id="mobile"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="" required="true">
+                <input v-model="item.icon" type="text" id="mobile"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="" required="true">
+            </div>
 
-        <div class="mb-6">
-            <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">mobile</label>
-            <input v-model="personalStore.$state.mobile" type="text" id="mobile"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
+        </template>
 
-
-        <div class="mb-6">
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">email</label>
-            <input v-model="personalStore.$state.email" type="text" id="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
 
         <hr class="my-3">
         <div class="flex justify-between mb-5">
@@ -69,13 +68,13 @@
                 class="text-blue-500 w-8 h-8 rounded-full text-2xl">+</button>
 
         </div>
-        <template v-for="(item, index) in personalStore.$state.skillSummary" :key="index">
+        <template v-for="(item, index) in personalStore.$state.skillsSummary" :key="index">
 
             <div class="mb-6">
 
 
                 <div class="grid grid-cols-[1fr,max-content] gap-1 items-center border px-3 ">
-                    <input v-model="item.skill" type="text" :id="`skillSummary${index + 1}`"
+                    <input v-model="item.label" type="text" :id="`skillSummary${index + 1}`"
                         class="outline-none border-0 focus:outline-0" placeholder="" required="true">
                     <button @click.prevent="personalStore.removeSkillSummary(index)"
                         class="text-red-500 w-8 h-8 rounded-full text-3xl">-</button>
@@ -89,7 +88,7 @@
         <div class="mb-6">
             <label for="education"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">education</label>
-            <input v-model="personalStore.$state.education" type="text" id="education"
+            <input v-model="personalStore.$state.educations" type="text" id="education"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="" required="true">
         </div>
@@ -98,17 +97,17 @@
         <hr class="my-3">
         <div class="flex justify-between mb-5">
             <div>teaching</div>
-            <button type="button" @click.prevent="personalStore.addTeaching"
+            <button type="button" @click.prevent="personalStore.addTechExperiences"
                 class="text-blue-500 w-8 h-8 rounded-full text-2xl">+</button>
 
         </div>
 
-        <template v-for="(item, index) in personalStore.$state.teaching" :key="item">
+        <template v-for="(item, index) in personalStore.$state.techExperiences" :key="item">
             <div class="mb-6">
                 <div class="grid grid-cols-[1fr,max-content] gap-1 items-center border px-3 ">
-                    <input v-model="item.title" type="text" :id="`skillSummary${index + 1}`"
+                    <input v-model="item.label" type="text" :id="`skillSummary${index + 1}`"
                         class="outline-none border-0 focus:outline-0" placeholder="" required="true">
-                    <button @click.prevent="personalStore.removeTeaching(index)"
+                    <button @click.prevent="personalStore.removeTechExperiences(index)"
                         class="text-red-500 w-8 h-8 rounded-full text-3xl">-</button>
                 </div>
             </div>

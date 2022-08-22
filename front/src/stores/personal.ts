@@ -90,10 +90,10 @@ export const usePersonalStore = defineStore({
   //   // fullName: (state) => state.fullName.first + ' ' + state.fullName.last,
   // },
   actions: {
-    addTeaching() {
+    addTechExperiences() {
       this.techExperiences.push({ label: "" })
     },
-    techExperiences(index: number) {
+    removeTechExperiences(index: number) {
       this.techExperiences.splice(index, 1)
     },
 
