@@ -3,10 +3,9 @@
         <section class=" col-span-2 grid grid-rows-silde gap-y-5 bg-primary-lightest py-3 px-5">
 
             <div class="">
-                <img class="w-36 h-36 rounded-full m-auto" :src="personalStore.img" :title="personalStore.fullName"
-                    :alt="personalStore.fullName">
+                <img class="w-36 h-36 rounded-full m-auto" :src="personalStore.image" :title="fullName" :alt="fullName">
                 <div class="text-center ">
-                    <div class="font-bold capitalize text-lg mt-3 text-primary-dark">{{ personalStore.fullName }}</div>
+                    <div class="font-bold capitalize text-lg mt-3 text-primary-dark">{{ fullName }}</div>
                     <div class="capitalize text-base text-primary-dark ">{{ personalStore.$state.title }}</div>
                     <div class="text- font-light text-gray">
                         (
@@ -26,39 +25,39 @@
 
             <div>
                 <div class="capitalize font-bold text-primary-dark">contact me:</div>
-                <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1">
-                    <Icon icon="icon-park-outline:mail" />
-                    <span>{{ personalStore.$state.email }}</span>
-                </div>
-                <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1">
-                    <Icon icon="icon-park-outline:phone" />
-                    <span>{{ personalStore.$state.mobile }}</span>
-                </div>
+                <template v-for="(item, index) in personalStore.$state.contacts" :key="index">
+                    <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1">
+                        <Icon :icon="item.icon" />
+                        <span>{{ item.label }}</span>
+                    </div>
+                </template>
             </div>
 
 
             <div class="">
                 <div class="capitalize font-bold text-primary-dark">skill summery:</div>
                 <div class="p-1 text-xs capitalize font-light  text-gray">
-                    <template v-for="item in personalStore.$state.skillSummary" :key="item">
-                        <div>{{ item.skill }}</div>
+                    <template v-for="(item, index) in personalStore.$state.skillsSummary" :key="index">
+                        <div>{{ item.label }}</div>
                     </template>
                 </div>
             </div>
 
             <div class="">
                 <div class="capitalize font-bold text-primary-dark">education:</div>
-                <div class="p-1 text-xs font-light text-gray ">
-                    {{ personalStore.$state.education }}
-                </div>
+                <template v-for="(item, index) in personalStore.$state.educations" :key="index">
+                    <div class="p-1 text-xs font-light text-gray ">
+                        {{ item.label }}
+                    </div>
+                </template>
             </div>
 
 
             <div class="">
                 <div class="capitalize font-bold text-primary-dark">teaching exprince:</div>
                 <div class="p-1 text-xs font-light text-gray ">
-                    <template v-for="item in personalStore.$state.teaching">
-                        <div>{{ item.title }}</div>
+                    <template v-for="(item, index) in personalStore.$state.techExperiences" :key="index">
+                        <div>{{ item.label }}</div>
                     </template>
                 </div>
             </div>
@@ -151,5 +150,9 @@
 import stores from '@/stores'
 import { Icon } from '@iconify/vue';
 import ExperienceItem from "@/components/panel/ExperienceItem.vue";
+import { computed } from 'vue';
 const personalStore = stores.usePersonalStore()
+const fullName = computed(() => {
+    return `${personalStore.$state.fullName.first} ${personalStore.$state.fullName.last}`
+})
 </script>

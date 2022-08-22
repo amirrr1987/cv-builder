@@ -37,7 +37,7 @@ const router = createRouter({
       ]
     },
     {
-      path: '/panel/:id',
+      path: '/panel/:personalId',
       name: 'ThePanel',
       component: ThePanel
     },

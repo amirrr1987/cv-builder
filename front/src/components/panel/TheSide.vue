@@ -116,11 +116,26 @@
         </template>
 
 
+        <button @click="updatePrsonal" class="bg-red-500 px-5 py-2">update</button>
+
+
 
     </aside>
 </template>
 <script setup lang="ts">
 import stores from '@/stores'
+import Services from '@/services';
 const personalStore = stores.usePersonalStore()
 
+
+const updatePrsonal = async () => {
+    try {
+        const { data } = await Services.UpdatePersonalApi('63032a93f270bed204018ce1', personalStore.$state)
+
+        console.log('🔥 data', data)
+
+    } catch (error) {
+        console.log('🔥 error', error)
+    }
+}
 </script>

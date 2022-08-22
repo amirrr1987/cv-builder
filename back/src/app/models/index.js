@@ -1,12 +1,10 @@
 
-const useHomeModel = require("./home");
-// const AboutController = require("./about");
 const usePersonalModel = require("./personal");
+const useAuthModel = require("./auth");
 
 const models = {
-    useHomeModel,
-    // AboutController,
-    usePersonalModel
+    usePersonalModel,
+    useAuthModel
 };
 
 module.exports = models;

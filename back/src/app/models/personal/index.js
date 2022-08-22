@@ -8,7 +8,7 @@ const schemaPersonal = new mongoose.Schema({
     fullName: {
         type: Object, required: true, default: {
             first: { type: String, required: true, default: "" },
-            last: { type: String, required: true, default: "" },
+            last: { type: String, required: true, default: "" }
         }
     },
     address: {
@@ -16,7 +16,6 @@ const schemaPersonal = new mongoose.Schema({
             country: { type: String, required: true, default: "" },
             province: { type: String, required: true, default: "" },
             region: { type: String, required: true, default: "" }
-
         }
     },
     skillsSummary: {

@@ -164,8 +164,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <RouterLink to="/login" class="font-medium text-base text-gray-600">Login</RouterLink>
-                        <RouterLink to="/register"
+                        <RouterLink to="/auth/login" class="font-medium text-base text-gray-600">Login</RouterLink>
+                        <RouterLink to="/auth/register"
                             class="font-normal text-base bg-primary-600 text-primary-50 px-5 py-1 rounded-lg">Signup
                         </RouterLink>
                     </div>

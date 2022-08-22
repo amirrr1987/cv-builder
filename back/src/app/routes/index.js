@@ -2,13 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-const HomeRoutes = require("./home");
-// const AboutRoutes = require("./about");
 const PersonalRoutes = require("./personal");
+const AuthRoutes = require("./auth");
 
-router.use("/api/home", HomeRoutes);
-// router.use("/api/about", AboutRoutes);
 router.use("/api/personal", PersonalRoutes);
+
+router.use("/api/auth", AuthRoutes);
 
 router.use((req, res) => {
     res.status(404);

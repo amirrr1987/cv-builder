@@ -6,17 +6,11 @@ export const usePersonalStore = defineStore({
 
 
     fullName: {
-      first: {
-        required: true,
-        default: ""
-      },
-      last: {
-        required: true,
-        default: ""
-      }
+      first: '',
+      last: ''
     },
     _id: "62fcc34181a707c5d4f1e0ae",
-    image: "image.png",
+    image: "https://api.lorem.space/image/face?w=150&h=150",
     about: "Hello I`m Amir",
     title: "FrontEndDeveloper",
     subTitle: "Vue.js",
@@ -92,22 +86,22 @@ export const usePersonalStore = defineStore({
 
 
   }),
-  getters: {
-    fullName: (state) => state.fullName.first + ' ' + state.fullName.last,
-  },
+  // getters: {
+  //   // fullName: (state) => state.fullName.first + ' ' + state.fullName.last,
+  // },
   actions: {
     addTeaching() {
-      this.teaching.push({ title: "" })
+      this.techExperiences.push({ label: "" })
     },
-    removeTeaching(index: number) {
-      this.teaching.splice(index, 1)
+    techExperiences(index: number) {
+      this.techExperiences.splice(index, 1)
     },
 
     addSkillSummary() {
-      this.skillSummary.push({ skill: "" })
+      this.skillsSummary.push({ label: "" })
     },
     removeSkillSummary(index: number) {
-      this.skillSummary.splice(index, 1)
+      this.skillsSummary.splice(index, 1)
     }
 
   }
