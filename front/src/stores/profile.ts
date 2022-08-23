@@ -73,11 +73,19 @@ export const useProfileStore = defineStore({
   //   // fullName: (state) => state.fullName.first + ' ' + state.fullName.last,
   // },
   actions: {
+
     addTechExperiences() {
       this.profile.techExperiences.push({ label: "" })
     },
     removeTechExperiences(index: number) {
       this.profile.techExperiences.splice(index, 1)
+    },
+
+    addContacts() {
+      this.profile.contacts.push({ label: "", icon: '' })
+    },
+    removeContacts(index:number) {
+      this.profile.contacts.splice(index, 1)
     },
 
     addSkillSummary() {
@@ -86,6 +94,14 @@ export const useProfileStore = defineStore({
     removeSkillSummary(index: number) {
       this.profile.skillsSummary.splice(index, 1)
     },
+
+    addEducations() {
+      this.profile.educations.push({ label: "" })
+    },
+    removeEducations(index: number) {
+      this.profile.educations.splice(index, 1)
+    },
+
     setProfileId(id: string) {
       this.profileId = id
     },
