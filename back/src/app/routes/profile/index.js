@@ -8,7 +8,7 @@ router.get("/", ProfileController.getAll);
 
 router.get("/:profileId", ProfileController.getProfile);
 
-router.post("/", ProfileController.postAll);
+// router.post("/", ProfileController.postAll);
 
 router.put("/:profileId", ProfileController.postProfile);
 

@@ -84,7 +84,7 @@ export const useProfileStore = defineStore({
     addContacts() {
       this.profile.contacts.push({ label: "", icon: '' })
     },
-    removeContacts(index:number) {
+    removeContacts(index: number) {
       this.profile.contacts.splice(index, 1)
     },
 
@@ -113,6 +113,7 @@ export const useProfileStore = defineStore({
       try {
         const { data } = await Services.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
         console.log('🔥 postData', data)
+        await this.getData()
       } catch (error) {
 
         console.log('🔥 error', error)
