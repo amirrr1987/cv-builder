@@ -55,7 +55,7 @@ const schemaProfile = new mongoose.Schema({
     },
     experiences: {
         type: [Object], required: true, default: [{
-            title: { type: String, required: true, default: "" },
+            label: { type: String, required: true, default: "" },
             company: { type: String, required: true, default: "" },
             description: { type: String, required: true, default: "" },
             beginDate: { type: String, required: true, default: "" },
@@ -65,7 +65,7 @@ const schemaProfile = new mongoose.Schema({
     },
     socials: {
         type: [Object], required: true, default: [{
-            title: "", icon: "", link: ""
+            label: "", icon: "", link: ""
         }]
     },
 

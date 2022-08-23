@@ -51,7 +51,7 @@ export const useProfileStore = defineStore({
       ],
       experiences: [
         {
-          title: "",
+          label: "",
           company: "",
           description: "",
           beginDate: "",
@@ -60,7 +60,7 @@ export const useProfileStore = defineStore({
       ],
       socials: [
         {
-          title: "",
+          label: "",
           icon: "",
           link: ""
         }
@@ -100,6 +100,21 @@ export const useProfileStore = defineStore({
     },
     removeEducations(index: number) {
       this.profile.educations.splice(index, 1)
+    },
+
+    addSocials() {
+      this.profile.socials.push({ label: "", icon: "", link: "" })
+    },
+    removeSocials(index: number) {
+      this.profile.socials.splice(index, 1)
+    },
+
+
+    addExperiences() {
+      this.profile.experiences.push({ label: "", company: "", description: "", beginDate: "", endDate: "" })
+    },
+    removeExperiences(index: number) {
+      this.profile.experiences.splice(index, 1)
     },
 
     setProfileId(id: string) {

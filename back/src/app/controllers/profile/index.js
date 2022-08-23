@@ -88,7 +88,7 @@ class Controller {
             experiences: [
                 ...body.experiences.map((item) => {
                     return {
-                        title: item.title,
+                        label: item.label,
                         company: item.company,
                         description: item.description,
                         beginDate: item.beginDate,
@@ -99,7 +99,7 @@ class Controller {
             socials: [
                 ...body.socials.map((item) => {
                     return {
-                        title: item.title,
+                        label: item.label,
                         icon: item.icon,
                         link: item.link
                     }
