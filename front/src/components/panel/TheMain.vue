@@ -1,9 +1,9 @@
 <template>
     <main class="col-span-10 grid grid-cols-12 overflow-y-scroll h-screen">
         <section class=" col-span-2 grid grid-rows-silde gap-y-5 bg-primary-lightest py-3 px-5">
-
             <div class="">
-                <img class="w-36 h-36 rounded-full m-auto" :src="personalStore.image" :title="fullName" :alt="fullName">
+                <img class="w-36 h-36 rounded-full m-auto" :src="personalStore.$state.profile.image" :title="fullName"
+                    :alt="fullName">
                 <div class="text-center ">
                     <div class="font-bold capitalize text-lg mt-3 text-primary-dark">{{ fullName }}</div>
                     <div class="capitalize text-base text-primary-dark ">{{ personalStore.$state.profile.title }}</div>
@@ -15,16 +15,13 @@
                     </div>
                 </div>
             </div>
-
             <hr>
-
             <div>
-                <div class="capitalize font-bold text-primary-dark">about me:</div>
+                <div class="capitalize font-bold text-primary-dark">about me</div>
                 <div class="p-1 text-xs font-light text-gray">{{ personalStore.$state.profile.about }}</div>
             </div>
-
             <div>
-                <div class="capitalize font-bold text-primary-dark">contact me:</div>
+                <div class="capitalize font-bold text-primary-dark">contact me</div>
                 <template v-for="(item, index) in personalStore.$state.profile.contacts" :key="index">
                     <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1">
                         <Icon :icon="item.icon" />
@@ -32,58 +29,39 @@
                     </div>
                 </template>
             </div>
-
-
             <div class="">
-                <div class="capitalize font-bold text-primary-dark">skill summery:</div>
+                <div class="capitalize font-bold text-primary-dark">skill summery</div>
                 <div class="p-1 text-xs capitalize font-light  text-gray">
                     <template v-for="(item, index) in personalStore.$state.profile.skillsSummary" :key="index">
                         <div>{{ item.label }}</div>
                     </template>
                 </div>
             </div>
-
             <div class="">
-                <div class="capitalize font-bold text-primary-dark">education:</div>
+                <div class="capitalize font-bold text-primary-dark">education</div>
                 <template v-for="(item, index) in personalStore.$state.profile.educations" :key="index">
                     <div class="p-1 text-xs font-light text-gray ">
                         {{ item.label }}
                     </div>
                 </template>
             </div>
-
-
             <div class="">
-                <div class="capitalize font-bold text-primary-dark">teaching exprince:</div>
+                <div class="capitalize font-bold text-primary-dark">teaching exprince</div>
                 <div class="p-1 text-xs font-light text-gray ">
                     <template v-for="(item, index) in personalStore.$state.profile.techExperiences" :key="index">
                         <div>{{ item.label }}</div>
                     </template>
                 </div>
             </div>
-
             <div class="grid gap-y-1 text-center auto-rows-min py-5">
-                <a href="https://stackoverflow.com/users/11471489/amir-maghami" target="_blank"
-                    class="flex items-center">
-                    <i class="icon--stackoverflow  text-primary-dark"></i>
-                    <span class="text-xs text-gray ">http://shorturl.at/rBCF5</span>
-                </a>
-                <a href="https://github.com/Amirrr1987" target="_blank" class="flex items-center">
-                    <i class="icon--github  text-primary-dark"></i>
-                    <span class="text-xs text-gray ">https://github.com/Amirrr1987</span>
-                </a>
-                <a href="https://codepen.io/Amirrr1987" target="_blank" class="flex items-center">
-                    <i class="icon--codeopen  text-primary-dark"></i>
-                    <span class="text-xs text-gray ">https://codepen.io/Amirrr1987</span>
-                </a>
-                <a href="https://www.codewars.com/users/Amirrr1987" target="_blank" class="flex items-center">
-                    <CodeWars class="  text-primary-dark" />
-                    <span class="text-xs text-gray ">https://codepen.io/Amirrr1987</span>
-                </a>
+                <template v-for="item in personalStore.$state.profile.socials" :key="index">
+                    <a :href="item.link" target="_blank"
+                        class="flex items-center space-x-1">
+                        <Icon :icon="item.icon" />
+                        <span class="text-xs text-gray ">{{item.label}}</span>
+                    </a>
+                </template>
             </div>
-
-
-
         </section>
         <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-10">
             <div class="grid auto-rows-max gap-y-3">
@@ -108,10 +86,8 @@
                         <div class="text-sm text-gray-light">Git, Git Flow</div>
                     </div>
                 </div>
-
                 <hr class="mx-5">
                 <div class="capitalize font-bold text-lg text-primary-dark">experience</div>
-
                 <ExperienceItem office="hacoupian" officeUrl="http://hacoupian.net/"
                     description="In ERP Web Application : Create customer survery module, Create laundery management panel admin, Create employment modele"
                     technology="Vue.js Compotion Api, TypeScript, Ant Design Vue, Tailwind, LESS, SCSS "
@@ -140,9 +116,7 @@
                 <ExperienceItem title="HelpDesk" office="Farzanegan Pouya High School"
                     officeUrl="http://www.farzaneganepoya.ir/school/#/Frontpage" description="fix users issue"
                     technology="Network+" begin="Sep, 2012" end="Sep, 2013" month="12" />
-
             </div>
-
         </section>
     </main>
 </template>
