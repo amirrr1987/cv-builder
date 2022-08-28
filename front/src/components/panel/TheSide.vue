@@ -1,258 +1,195 @@
 <template>
-    <aside class="bg-white p-5 h-screen overflow-y-scroll col-span-2">
-        <div class="mb-6">
-            <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image</label>
-            <input v-model="profile.image" type="text" id="img"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
-        <hr class="my-5">
-        <div class="mb-6">
-            <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First
-                name</label>
-            <input v-model="profile.fullName.first" type="text" id="fname"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
-        <hr class="my-5">
-        <div class="mb-6">
-            <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label>
-            <input v-model="profile.fullName.last" type="text" id="lname"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
-        <hr class="my-5">
-        <div class="mb-6">
-            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
-            <input v-model="profile.title" type="text" id="title"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
-        <hr class="my-5">
-        <div class="mb-6">
-            <label for="subTitle"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">SubTitle</label>
-            <input v-model="profile.subTitle" type="text" id="subTitle"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-        </div>
-        <hr class="my-5">
-        <div class="mb-6">
-            <label for="about" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">About</label>
-            <textarea v-model="profile.about" type="text" id="about"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required="true">
-                </textarea>
-        </div>
-        <hr class="my-5">
-        <div class="grid gap-y-3">
-            <div class="grid grid-cols-12 gap-x-3">
-                <label class="col-span-11 block text-sm font-medium text-gray-900 dark:text-gray-300">Contacts</label>
-                <button type="button" @click.prevent="profileStore.addContacts"
-                    class="col-span-1 text-blue-500 rounded-full text-2xl">+</button>
-            </div>
-            <div class="grid grid-cols-12 gap-3">
-                <template v-for="(item, index) in profile.contacts" :key="index">
-                    <select v-model="item.icon" id="icons"
-                        class="col-span-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Choose a country</option>
-                        <template v-for="item in contactIcons">
-                            <option :value="item.icon">
-                                {{ item.label }}
-                            </option>
-                        </template>
-                    </select>
-                    <input v-model="item.label" type="text" id="mobile"
-                        class="col-span-9 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required="true">
-                    <div class="col-span-1">
-                        <button type="button" @click.prevent="profileStore.removeContacts(index)"
-                            class="col-span-1 text-red-500 rounded-full text-2xl">-</button>
+    <Card class="col-span-2 h-screen overflow-y-scroll">
+        <Form layout="vertical">
+            <FormItem label="Image">
+                <Input v-model:value="profile.image" />
+            </FormItem>
+            <Divider />
+            <FormItem label="First">
+                <Input v-model:value="profile.fullName.first" />
+            </FormItem>
+            <FormItem label="Last">
+                <Input v-model:value="profile.fullName.last" />
+            </FormItem>
+            <Divider />
+            <FormItem label="Title">
+                <Input v-model:value="profile.title" />
+            </FormItem>
+            <FormItem label="SubTitle">
+                <Input v-model:value="profile.subTitle" />
+            </FormItem>
+            <FormItem label="About">
+                <Textarea v-model:value="profile.about" />
+            </FormItem>
+            <Divider />
+            <FormItem>
+                <template #label>
+                    <div class="flex justify-between w-full">
+                        <span>Contacts</span>
+                        <Button type="primary" @click.prevent="profileStore.addContacts">
+                            <Icon icon="icon-park-outline:plus" />
+                        </Button>
                     </div>
                 </template>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="grid gap-y-3">
-            <div class="grid grid-cols-12 gap-x-3">
-                <label class="col-span-11 block text-sm font-medium text-gray-900 dark:text-gray-300">Skill
-                    Summary</label>
-                <button type="button" @click.prevent="profileStore.addSkillSummary"
-                    class="col-span-1 text-blue-500 rounded-full text-2xl">+</button>
-            </div>
-            <div class="grid grid-cols-12 gap-3">
-                <template v-for="(item, index) in profile.skillsSummary" :key="index">
-                    <input v-model="item.label" type="text" id="mobile"
-                        class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required="true">
-                    <div class="col-span-1">
-                        <button type="button" @click.prevent="profileStore.removeSkillSummary(index)"
-                            class="col-span-1 text-red-500 rounded-full text-2xl">-</button>
-                    </div>
-                </template>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="grid gap-y-3">
-            <div class="grid grid-cols-12 gap-x-3">
-                <label class="col-span-11 block text-sm font-medium text-gray-900 dark:text-gray-300">Educations</label>
-                <button type="button" @click.prevent="profileStore.addEducations"
-                    class="col-span-1 text-blue-500 rounded-full text-2xl">+</button>
-            </div>
-            <div class="grid grid-cols-12 gap-3">
-                <template v-for="(item, index) in profile.educations" :key="index">
-                    <input v-model="item.label" type="text" id="mobile"
-                        class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required="true">
-                    <div class="col-span-1">
-                        <button type="button" @click.prevent="profileStore.removeEducations(index)"
-                            class="col-span-1 text-red-500 rounded-full text-2xl">-</button>
-                    </div>
-                </template>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="grid gap-y-3">
-            <div class="grid grid-cols-12 gap-x-3">
-                <label class="col-span-11 block text-sm font-medium text-gray-900 dark:text-gray-300">Teaching</label>
-                <button type="button" @click.prevent="profileStore.addTechExperiences"
-                    class="col-span-1 text-blue-500 rounded-full text-2xl">+</button>
-            </div>
-            <div class="grid grid-cols-12 gap-3">
-                <template v-for="(item, index) in profile.techExperiences" :key="index">
-                    <input v-model="item.label" type="text" id="mobile"
-                        class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required="true">
-                    <div class="col-span-1 flex justify-center items-center">
-                        <button type="button" @click.prevent="profileStore.removeTechExperiences(index)"
-                            class="col-span-1 text-red-500 rounded-full text-sm">
-                            <Icon icon="icon-park-outline:close" />
-                        </button>
-                    </div>
-                </template>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="grid gap-y-3">
-            <div class="grid grid-cols-12 gap-x-3">
-                <label class="col-span-11 block text-base font-bold text-gray-900 dark:text-gray-300">Socials</label>
-                <button type="button" @click.prevent="profileStore.addSocials"
-                    class="col-span-1 text-green-400 rounded-full text-2xl">
-                    <Icon icon="icon-park-outline:plus" />
-                </button>
-            </div>
-            <div class="grid gap-y-3">
-                <template v-for="(item, index) in profile.socials" :key="index">
-                    <div class="bg-gray-200 grid grid-cols-12 gap-1 items-center justify-center p-2 rounded">
-                        <input v-model="item.label" type="text" id="mobile"
-                            class="col-span-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required="true">
-                        <select v-model="item.icon" id="icons"
-                            class="col-span-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Choose a country</option>
+                <div class="grid grid-cols-[max-content,1fr,max-content] gap-1">
+                    <template v-for="(item, index) in profile.contacts" :key="index">
+                        <Select v-model="item.icon">
                             <template v-for="item in contactIcons">
-                                <option :value="item.icon">
-                                    {{ item.label }}
-                                </option>
+                                <SelectOption :value="item.icon" class="flex items-center justify-center">
+                                    <Icon :icon="item.icon" />
+                                </SelectOption>
                             </template>
-                        </select>
-                        <input v-model="item.link" type="text" id="mobile"
-                            class="col-span-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required="true">
-                        <div class="col-span-2 flex justify-center items-center">
-                            <button type="button" @click.prevent="profileStore.removeSocials(index)"
-                                class="col-span-1 text-red-500 rounded text-sm">
-                                <Icon icon="icon-park-outline:close" />
-                            </button>
-                        </div>
+                        </Select>
+                        <Input v-model:value="item.label" type="text" />
+                        <Button type="primary" @click.prevent="profileStore.removeContacts(index)">
+                            <Icon icon="icon-park-outline:minus" />
+                        </Button>
+                    </template>
+                </div>
+            </FormItem>
+            <Divider />
+            <FormItem>
+                <template #label>
+                    <div class="flex justify-between w-full">
+                        <span>Skills Summary</span>
+                        <Button type="primary" @click.prevent="profileStore.addSkillSummary">
+                            <Icon icon="icon-park-outline:plus" />
+                        </Button>
                     </div>
                 </template>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="grid gap-y-3">
-            <div class="grid grid-cols-12 gap-x-3">
-                <label
-                    class="col-span-11 block text-base font-bold text-gray-900 dark:text-gray-300">Experiences</label>
-                <button type="button" @click.prevent="profileStore.addExperiences"
-                    class="col-span-1 text-green-400 rounded-full text-2xl">
-                    <Icon icon="icon-park-outline:plus" />
-                </button>
-            </div>
-            <div class="grid gap-y-3">
+                <div class="grid grid-cols-[1fr,max-content] gap-1">
+                    <template v-for="(item, index) in profile.skillsSummary" :key="index">
+                        <Input v-model:value="item.label" type="text" />
+                        <Button type="primary" @click.prevent="profileStore.removeContacts(index)">
+                            <Icon icon="icon-park-outline:minus" />
+                        </Button>
+                    </template>
+                </div>
+            </FormItem>
+            <Divider />
+            <FormItem>
+                <template #label>
+                    <div class="flex justify-between w-full">
+                        <span>Educations</span>
+                        <Button type="primary" @click.prevent="profileStore.addEducations">
+                            <Icon icon="icon-park-outline:plus" />
+                        </Button>
+                    </div>
+                </template>
+                <div class="grid grid-cols-[1fr,max-content] gap-1">
+                    <template v-for="(item, index) in profile.educations" :key="index">
+                        <Input v-model:value="item.label" type="text" />
+                        <Button type="primary" @click.prevent="profileStore.removeEducations(index)">
+                            <Icon icon="icon-park-outline:minus" />
+                        </Button>
+                    </template>
+                </div>
+            </FormItem>
+            <Divider />
+            <FormItem>
+                <template #label>
+                    <div class="flex justify-between w-full">
+                        <span>Teach Experiences</span>
+                        <Button type="primary" @click.prevent="profileStore.addTechExperiences">
+                            <Icon icon="icon-park-outline:plus" />
+                        </Button>
+                    </div>
+                </template>
+                <div class="grid grid-cols-[1fr,max-content] gap-1">
+                    <template v-for="(item, index) in profile.techExperiences" :key="index">
+                        <Input v-model:value="item.label" type="text" />
+                        <Button type="primary" @click.prevent="profileStore.removeTechExperiences(index)">
+                            <Icon icon="icon-park-outline:minus" />
+                        </Button>
+                    </template>
+                </div>
+            </FormItem>
+            <Divider />
+            <FormItem>
+                <template #label>
+                    <div class="flex justify-between w-full">
+                        <span>Socials</span>
+                        <Button type="primary" @click.prevent="profileStore.addSocials">
+                            <Icon icon="icon-park-outline:plus" />
+                        </Button>
+                    </div>
+                </template>
+                <template v-for="(item, index) in profile.socials" :key="index">
+                    <div class="grid grid-cols-[1fr,max-content] gap-1">
+                        <div class=" grid grid-cols-2 gap-1 relative py-5">
+                            <Input v-model:value="item.label" type="text" placeholder="label" />
+                            <Select v-model="item.icon">
+                                <template v-for="item in contactIcons">
+                                    <SelectOption :value="item.icon" class="flex items-center justify-center">
+                                        <Icon :icon="item.icon" />
+                                    </SelectOption>
+                                </template>
+                            </Select>
+                            <Input class="col-span-2" v-model:value="item.link" type="text" placeholder="link" />
+                        </div>
+                        <Button type="primary" @click.prevent="profileStore.removeSocials(index)">
+                            <Icon icon="icon-park-outline:minus" />
+                        </Button>
+                    </div>
+                </template>
+            </FormItem>
+            <Divider />
+            <FormItem>
+                <template #label>
+                    <div class="flex justify-between w-full">
+                        <span>Experiences</span>
+                        <Button type="primary" @click.prevent="profileStore.addExperiences">
+                            <Icon icon="icon-park-outline:plus" />
+                        </Button>
+                    </div>
+                </template>
                 <template v-for="(item, index) in profile.experiences" :key="index">
-                    <div class="grid grid-cols-12 gap-3 bg-gray-200 p-2 rounded">
-                        <div class="col-span-11">
-                            <label for="">Title</label>
-                            <input v-model="item.title" type="text" id="mobile"
-                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="" required="true">
-                        </div>
-                        <div class="col-span-1  flex justify-center items-start">
-                            <button type="button" @click.prevent="profileStore.removeExperiences(index)"
-                                class="col-span-1 text-red-500 rounded text-sm">
-                                <Icon icon="icon-park-outline:close" />
-                            </button>
-                        </div>
-                        <div class="col-span-12">
-                            <label for="">Company name</label>
-                            <input v-model="item.company.name" type="text" id="mobile"
-                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="" required="true">
-                        </div>
-                        <div class="col-span-12">
-                            <label for="">Company url</label>
-                            <input v-model="item.company.url" type="text" id="mobile"
-                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="" required="true">
-                        </div>
-                        <div class="col-span-12">
-                            <label for="">Description</label>
-                            <textarea v-model="item.description" type="text" id="mobile"
-                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="" required="true" rows="5"></textarea>
-                        </div>
-                        <div class="col-span-12">
-                            <label for="" class="block">Skills</label>
+                    <Card class="bg-gray-300">
+                        <FormItem label="title">
+                            <Input v-model:value="item.title" type="text" placeholder="label" />
+                        </FormItem>
+                        <FormItem label="company name">
+                            <Input v-model:value="item.company.name" type="text" placeholder="label" />
+                        </FormItem>
+                        <FormItem label="company url">
+                            <Input v-model:value="item.company.url" type="text" placeholder="label" />
+                        </FormItem>
+                        <FormItem label="description">
+                            <Textarea :rows="5" v-model:value="item.description" type="text" placeholder="label" />
+                        </FormItem>
+                        <FormItem label="Skills">
                             <div class="grid grid-cols-2 gap-2">
                                 <template v-for="single in item.skills" :key="index">
-                                    <input type="text"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        v-model="single.label" />
+                                    <Input class="mb-1" v-model:value="single.label" type="text" placeholder="label" />
                                 </template>
-                                <button type="button" @click.prevent="profileStore.addExperiencesSkills(index)"
-                                    class="col-span-1 text-green-400 rounded-full text-2xl">
+                                <Button type="button" @click.prevent="profileStore.addExperiencesSkills(index)">
                                     <Icon icon="icon-park-outline:plus" />
-                                </button>
+                                </Button>
                             </div>
-                            <!-- <textarea v-model="single.label" type="text" id="mobile"
-                                    class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required="true" rows="5"></textarea> -->
-                        </div>
-                        <div class="col-span-6">
-                            <label for="">beginDate</label>
-                            <input v-model="item.beginDate" type="date"
-                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="" required="true">
-                        </div>
-                        <div class="col-span-6">
-                            <label for="">endDate</label>
-                            <input v-model="item.endDate" type="date"
-                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="" required="true">
-                        </div>
-                    </div>
+                        </FormItem>
+                        <FormItem label="beginDate">
+                            <DatePicker v-model:value="item.beginDate" placeholder="beginDate" />
+                        </FormItem>
+                        <FormItem label="endDate">
+                            <DatePicker v-model:value="item.endDate" placeholder="label" />
+                        </FormItem>
+                    </Card>
                 </template>
-            </div>
-        </div>
-        <hr class="my-5">
-        <button @click="updatePrsonal" class="bg-green-400 text-white rounded px-5 py-2">Update</button>
-    </aside>
+            </FormItem>
+
+            <FormItem>
+                <Button type="primary" @click="updatePrsonal">
+                    update
+                </Button>
+            </FormItem>
+        </Form>
+    </Card>
 </template>
 <script setup lang="ts">
 import stores from '@/stores'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
+import { Input, FormItem, Form, DatePicker, Card, Divider, Select, SelectOption, Textarea, Button } from 'ant-design-vue';
 const profileStore = stores.useProfileStore()
 const profile = computed(() => {
     return profileStore.$state.profile
