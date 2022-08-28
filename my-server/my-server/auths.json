@@ -1,0 +1,6 @@
+{ 
+    "_id" : ObjectId("6309b1f5f003217926f486cb"), 
+    "email" : "maghami.A1987@gmail.com", 
+    "password" : "1234", 
+    "__v" : NumberInt(0)
+}

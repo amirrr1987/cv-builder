@@ -56,11 +56,20 @@ const schemaProfile = new mongoose.Schema({
     experiences: {
         type: [Object], required: true, default: [{
             label: { type: String, required: true, default: "" },
-            company: { type: String, required: true, default: "" },
+            company: {
+                type: Object, required: true, default: {
+                    name: { type: String, required: true, default: "" },
+                    url: { type: String, required: true, default: "" }
+                }
+            },
             description: { type: String, required: true, default: "" },
             beginDate: { type: String, required: true, default: "" },
             endDate: { type: String, required: true, default: "" },
-            skills: { type: [String], required: true, default: [""] },
+            skills: {
+                type: [Object], required: true, default: [{
+                    label: { type: String, required: true, default: "" }
+                }]
+            },
         }]
     },
     socials: {

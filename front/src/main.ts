@@ -7,7 +7,9 @@ import App from './App.vue'
 import router from './router'
 
 import './assets/style/index.css'
-import 'flowbite';
+import 'virtual:windi.css'
+import 'virtual:windi-devtools'
+
 
 const app = createApp(App)
 

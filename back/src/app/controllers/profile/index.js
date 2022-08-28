@@ -29,6 +29,108 @@ class Controller {
         }
     }
 
+    async postAll(req, res) {
+        const { body } = req;
+        let obj = {
+            image: body.image,
+            about: body.about,
+            title: body.title,
+            subTitle: body.subTitle,
+            fullName: {
+                first: body.fullName.first,
+                last: body.fullName.last,
+            },
+            address: {
+                country: body.address.country,
+                province: body.address.province,
+                region: body.address.region,
+            },
+
+            skillsSummary: [
+                ...body.skillsSummary.map((item) => {
+                    return {
+                        label: item.label
+                    }
+                }),
+            ],
+            contacts: [
+                ...body.contacts.map((item) => {
+                    return {
+                        label: item.label,
+                        icon: item.icon
+                    }
+                }),
+            ],
+            educations: [
+                ...body.educations.map((item) => {
+                    return {
+                        label: item.label,
+                    }
+                }),
+            ],
+            techExperiences: [
+                ...body.techExperiences.map((item) => {
+                    return {
+                        label: item.label,
+                    }
+                }),
+            ],
+            softwareKnowledges: [
+                ...body.softwareKnowledges.map((item) => {
+                    return {
+                        label: item.label,
+                        skills: item.skills
+                    }
+                }),
+            ],
+            experiences: [
+                ...body.experiences.map((item) => {
+                    return {
+                        title: item.title,
+                        company: {
+                            name: item.company.name,
+                            url: item.company.url
+                        },
+                        description: item.description,
+                        beginDate: item.beginDate,
+                        endDate: item.endDate,
+                        skills: [
+                            ...item.skills.map((single) => {
+                                return {
+                                    label: single.label
+                                }
+                            }),
+                        ]
+                    }
+                }),
+            ],
+            socials: [
+                ...body.socials.map((item) => {
+                    return {
+                        label: item.label,
+                        icon: item.icon,
+                        link: item.link
+                    }
+                }),
+            ]
+        }
+        try {
+            const item = await useProfileModel(obj)
+            Object.assign(item, obj)
+            console.log(item);
+            await item.save();
+            res.statusCode = 200;
+            res.send({
+                message: "Created",
+            });
+        } catch (error) {
+            console.log(error);
+
+        }
+
+    }
+
+
 
     async postProfile(req, res) {
         const { body } = req;
@@ -88,11 +190,21 @@ class Controller {
             experiences: [
                 ...body.experiences.map((item) => {
                     return {
-                        label: item.label,
-                        company: item.company,
+                        title: item.title,
+                        company: {
+                            name: item.company.name,
+                            url: item.company.url
+                        },
                         description: item.description,
                         beginDate: item.beginDate,
                         endDate: item.endDate,
+                        skills: [
+                            ...item.skills.map((single) => {
+                                return {
+                                    label: single.label
+                                }
+                            }),
+                        ]
                     }
                 }),
             ],

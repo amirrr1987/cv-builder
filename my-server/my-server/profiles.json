@@ -1,0 +1,372 @@
+{ 
+    "_id" : ObjectId("6309d0715b32aa645314ca19"), 
+    "image" : "https://api.lorem.space/image/face?w=150&h=150", 
+    "about" : "Lorem ipsum dolor sit amet. Ut necessitatibus veniam aut sint ipsam sit quis aspernatur 33 nobis ducimus. Et fugiat vero rem facere sequi aut tempore voluptas.", 
+    "title" : "front end developer", 
+    "subTitle" : "vue.js", 
+    "fullName" : {
+        "first" : "Araz", 
+        "last" : "Maghami"
+    }, 
+    "address" : {
+        "country" : "iran", 
+        "province" : "iran", 
+        "region" : "iran"
+    }, 
+    "skillsSummary" : [
+        {
+            "label" : "Web"
+        }, 
+        {
+            "label" : "Mobile"
+        }
+    ], 
+    "contacts" : [
+        {
+            "label" : "maghami.a1987@gmail.com", 
+            "icon" : "email"
+        }, 
+        {
+            "label" : "09198881400", 
+            "icon" : "mobile"
+        }
+    ], 
+    "educations" : [
+        {
+            "label" : "education 1"
+        }, 
+        {
+            "label" : "education 2"
+        }, 
+        {
+            "label" : ""
+        }
+    ], 
+    "techExperiences" : [
+        {
+            "label" : "techExperience 1"
+        }, 
+        {
+            "label" : "techExperience 2"
+        }
+    ], 
+    "softwareKnowledges" : [
+        {
+            "label" : "CSS", 
+            "skills" : [
+                "css", 
+                "scss"
+            ]
+        }, 
+        {
+            "label" : "html", 
+            "skills" : [
+                "html", 
+                "pug"
+            ]
+        }
+    ], 
+    "experiences" : [
+        {
+            "title" : "Front End Developer", 
+            "company" : {
+                "name" : "Hacoupian", 
+                "url" : "https://hacoupian.net/"
+            }, 
+            "description" : "In ERP Web Application : Create customer survey module, Create laundry management panel admin, Create employment module", 
+            "beginDate" : "2021-04-01", 
+            "endDate" : "2022-08-28", 
+            "skills" : [
+                {
+                    "label" : "HTML"
+                }, 
+                {
+                    "label" : "CSS"
+                }, 
+                {
+                    "label" : "sfdsfd"
+                }, 
+                {
+                    "label" : "sdfsdf"
+                }, 
+                {
+                    "label" : "sdf"
+                }, 
+                {
+                    "label" : "sdfsdfsdf"
+                }
+            ]
+        }, 
+        {
+            "title" : "Front End Developer", 
+            "company" : {
+                "name" : "Asrevira", 
+                "url" : "https://asrevira.com/"
+            }, 
+            "description" : "Protal Application width 4 user accessibility", 
+            "beginDate" : "2020-09-28", 
+            "endDate" : "2021-05-31", 
+            "skills" : [
+                {
+                    "label" : "Vue.js"
+                }, 
+                {
+                    "label" : "Vuetify"
+                }, 
+                {
+                    "label" : "Vuex"
+                }, 
+                {
+                    "label" : "SCSS"
+                }
+            ]
+        }, 
+        {
+            "title" : "Web Developer", 
+            "company" : {
+                "name" : "HakimTejarat", 
+                "url" : "http://hakimtejarat.com/"
+            }, 
+            "description" : "Create local Web Applications for user and create website", 
+            "beginDate" : "2019-06-01", 
+            "endDate" : "2020-09-30", 
+            "skills" : [
+                {
+                    "label" : "HTML"
+                }, 
+                {
+                    "label" : "CSS"
+                }, 
+                {
+                    "label" : "SCSS"
+                }, 
+                {
+                    "label" : "Bootstrap"
+                }, 
+                {
+                    "label" : "WordPress"
+                }
+            ]
+        }, 
+        {
+            "title" : "Front End Developer", 
+            "company" : {
+                "name" : "ABC Startup Accelerator", 
+                "url" : "http://www.ablockchain.center/"
+            }, 
+            "description" : "create Web and Landing page for startups, create cryptocurrency startup front-end", 
+            "beginDate" : "2018-09-01", 
+            "endDate" : "2019-06-30", 
+            "skills" : [
+                {
+                    "label" : "HTML"
+                }, 
+                {
+                    "label" : "CSS"
+                }, 
+                {
+                    "label" : "JavaScript"
+                }, 
+                {
+                    "label" : "Bootstrap"
+                }
+            ]
+        }, 
+        {
+            "title" : "Technician", 
+            "company" : {
+                "name" : "Shalchilar", 
+                "url" : "https://www.shalchilar.net/"
+            }, 
+            "description" : "Update Website", 
+            "beginDate" : "2016-05-01", 
+            "endDate" : "2018-10-31", 
+            "skills" : [
+                {
+                    "label" : "Ventilator Technician : learn new device"
+                }, 
+                {
+                    "label" : "update website"
+                }
+            ]
+        }, 
+        {
+            "title" : "IT man", 
+            "company" : {
+                "name" : "Ansar Hoveze", 
+                "url" : "https://bayatechgroup.com/bayatek-company/"
+            }, 
+            "description" : "handle Website width WordPress and fix users issues", 
+            "beginDate" : "2015-10-01", 
+            "endDate" : "2016-06-28", 
+            "skills" : [
+                {
+                    "label" : "HTML"
+                }, 
+                {
+                    "label" : "CSS"
+                }, 
+                {
+                    "label" : "JavaScript"
+                }, 
+                {
+                    "label" : "Bootstrap"
+                }, 
+                {
+                    "label" : "WordPress"
+                }, 
+                {
+                    "label" : "Network+"
+                }
+            ]
+        }, 
+        {
+            "title" : "Helpdesk", 
+            "company" : {
+                "name" : "Mofid middle school", 
+                "url" : "https://mofidsch.ir/m1/"
+            }, 
+            "description" : "Network: fix users issues and intern HTML CSS", 
+            "beginDate" : "2014-08-01", 
+            "endDate" : "2015-09-30", 
+            "skills" : [
+                {
+                    "label" : "HTML"
+                }, 
+                {
+                    "label" : "CSS"
+                }, 
+                {
+                    "label" : "Network+"
+                }
+            ]
+        }, 
+        {
+            "title" : "Helpdesk", 
+            "company" : {
+                "name" : "Farzanegan Pouya High School", 
+                "url" : "http://www.farzaneganepoya.ir/school/#/Frontpage"
+            }, 
+            "description" : "fix users issue", 
+            "beginDate" : "2012-09-01", 
+            "endDate" : "2013-09-30", 
+            "skills" : [
+                {
+                    "label" : "Network+"
+                }
+            ]
+        }
+    ], 
+    "socials" : [
+        {
+            "label" : null, 
+            "icon" : "insta", 
+            "link" : "insta"
+        }, 
+        {
+            "label" : null, 
+            "icon" : "telegram", 
+            "link" : "telegram"
+        }
+    ], 
+    "__v" : NumberInt(23)
+},
+{ 
+    "_id" : ObjectId("6309dd4dffd91762f166c49f"), 
+    "image" : "https://api.lorem.space/image/face?w=150&h=150", 
+    "about" : "Lorem ipsum dolor sit amet. Ut necessitatibus veniam aut sint ipsam sit quis aspernatur 33 nobis ducimus. Et fugiat vero rem facere sequi aut tempore voluptas.", 
+    "title" : "front end developer", 
+    "subTitle" : "vue.js", 
+    "fullName" : {
+        "first" : "Araz", 
+        "last" : "Maghami"
+    }, 
+    "address" : {
+        "country" : "iran", 
+        "province" : "iran", 
+        "region" : "iran"
+    }, 
+    "skillsSummary" : [
+        {
+            "label" : "Web"
+        }, 
+        {
+            "label" : "Mobile"
+        }
+    ], 
+    "contacts" : [
+        {
+            "label" : "maghami.a1987@gmail.com", 
+            "icon" : "email"
+        }, 
+        {
+            "label" : "09198881400", 
+            "icon" : "mobile"
+        }
+    ], 
+    "educations" : [
+        {
+            "label" : "education 1"
+        }, 
+        {
+            "label" : "education 2"
+        }
+    ], 
+    "techExperiences" : [
+        {
+            "label" : "techExperience 1"
+        }, 
+        {
+            "label" : "techExperience 2"
+        }
+    ], 
+    "softwareKnowledges" : [
+        {
+            "label" : "CSS", 
+            "skills" : [
+                "css", 
+                "scss"
+            ]
+        }, 
+        {
+            "label" : "html", 
+            "skills" : [
+                "html", 
+                "pug"
+            ]
+        }
+    ], 
+    "experiences" : [
+        {
+            "title" : "Front End Developer", 
+            "company" : {
+                "name" : "Hacoupian", 
+                "url" : "sdfsdf.com"
+            }, 
+            "description" : "In ERP Web Application : Create customer survey module, Create laundry management panel admin, Create employment module", 
+            "beginDate" : "2021-04-01", 
+            "endDate" : "2022-08-27", 
+            "skills" : [
+                {
+                    "label" : "HTML"
+                }, 
+                {
+                    "label" : "CSS"
+                }
+            ]
+        }
+    ], 
+    "socials" : [
+        {
+            "label" : null, 
+            "icon" : "insta", 
+            "link" : "insta"
+        }, 
+        {
+            "label" : null, 
+            "icon" : "telegram", 
+            "link" : "telegram"
+        }
+    ], 
+    "__v" : NumberInt(5)
+}

@@ -183,8 +183,8 @@
                 <template v-for="(item, index) in profile.experiences" :key="index">
                     <div class="grid grid-cols-12 gap-3 bg-gray-200 p-2 rounded">
                         <div class="col-span-11">
-                            <label for="">label</label>
-                            <input v-model="item.label" type="text" id="mobile"
+                            <label for="">Title</label>
+                            <input v-model="item.title" type="text" id="mobile"
                                 class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" required="true">
                         </div>
@@ -195,26 +195,49 @@
                             </button>
                         </div>
                         <div class="col-span-12">
-                            <label for="">company</label>
-                            <input v-model="item.company" type="text" id="mobile"
+                            <label for="">Company name</label>
+                            <input v-model="item.company.name" type="text" id="mobile"
                                 class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" required="true">
                         </div>
                         <div class="col-span-12">
-                            <label for="">description</label>
+                            <label for="">Company url</label>
+                            <input v-model="item.company.url" type="text" id="mobile"
+                                class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="" required="true">
+                        </div>
+                        <div class="col-span-12">
+                            <label for="">Description</label>
                             <textarea v-model="item.description" type="text" id="mobile"
                                 class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" required="true" rows="5"></textarea>
                         </div>
+                        <div class="col-span-12">
+                            <label for="" class="block">Skills</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <template v-for="single in item.skills" :key="index">
+                                    <input type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        v-model="single.label" />
+                                </template>
+                                <button type="button" @click.prevent="profileStore.addExperiencesSkills(index)"
+                                    class="col-span-1 text-green-400 rounded-full text-2xl">
+                                    <Icon icon="icon-park-outline:plus" />
+                                </button>
+                            </div>
+                            <!-- <textarea v-model="single.label" type="text" id="mobile"
+                                    class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="" required="true" rows="5"></textarea> -->
+                        </div>
                         <div class="col-span-6">
                             <label for="">beginDate</label>
-                            <input v-model="item.beginDate" type="text" id="mobile"
+                            <input v-model="item.beginDate" type="date"
                                 class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" required="true">
                         </div>
                         <div class="col-span-6">
                             <label for="">endDate</label>
-                            <input v-model="item.endDate" type="text" id="mobile"
+                            <input v-model="item.endDate" type="date"
                                 class="col-span-11 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" required="true">
                         </div>
@@ -244,11 +267,11 @@ const contactIcons = reactive([
     },
     {
         label: "phone",
-        icon: "cib:phone"
+        icon: "ci:phone"
     },
     {
         label: "mail",
-        icon: "cib:gmail"
+        icon: "codicon:mail"
     },
     {
         label: "skype",
@@ -269,7 +292,7 @@ const contactIcons = reactive([
     {
         label: "stack-overflow",
         icon: "cib:stackoverflow"
-    }, 
+    },
     {
         label: "codepen",
         icon: "cib:codepen"
