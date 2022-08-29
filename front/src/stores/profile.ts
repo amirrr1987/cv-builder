@@ -1,11 +1,12 @@
 import Services from '@/services'
 import { defineStore } from 'pinia'
+import type { ProfileModel } from '../models'
 // import moment from 'moment'
 // import { ref } from 'vue';
 // let temp = ref(0);
 export const useProfileStore = defineStore({
   id: 'personal',
-  state: () => ({
+  state: () => <ProfileModel>({
     profileId: '',
     profile: {
       fullName: {
