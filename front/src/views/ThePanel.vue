@@ -2,7 +2,7 @@
 <template>
     <Layout>
         <LayoutHeader class="header">
-            <div class="logo" />
+
             <Menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
                 <MenuItem key="1">nav 1</MenuItem>
                 <MenuItem key="2">nav 2</MenuItem>
@@ -12,8 +12,8 @@
         <Layout>
             <LayoutSider width="350" style="background: #fff">
 
-                <TheSide/>
-                 <Menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline"
+                <TheSide />
+                <Menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline"
                     :style="{ height: '100%', borderRight: 0 }">
                     <SubMenu key="sub1">
                         <template #title>
@@ -51,14 +51,9 @@
                         <MenuItem key="11">option11</MenuItem>
                         <MenuItem key="12">option12</MenuItem>
                     </SubMenu>
-                    </Menu>
+                </Menu>
             </LayoutSider>
             <Layout style="padding: 0 24px 24px">
-                <Breadcrumb style="margin: 16px 0">
-                    <BreadcrumbItem>Home</BreadcrumbItem>
-                    <BreadcrumbItem>List</BreadcrumbItem>
-                    <BreadcrumbItem>App</BreadcrumbItem>
-                </Breadcrumb>
                 <LayoutContent :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
                     <TheMain />
                 </LayoutContent>
@@ -69,8 +64,8 @@
 
 <script setup lang="ts">
 
-import { Layout, LayoutHeader, LayoutSider, LayoutContent, Menu, MenuItem, SubMenu, Breadcrumb, BreadcrumbItem } from "ant-design-vue";
-import { onMounted } from "vue";
+import { Layout, LayoutHeader, LayoutSider, LayoutContent, Menu, MenuItem, SubMenu } from "ant-design-vue";
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import stores from '@/stores'
 import TheSide from "@/components/panel/TheSide.vue";
@@ -87,4 +82,29 @@ onMounted(async () => {
         console.log(error);
     }
 })
+
+
+const selectedKeys1 = ref(['2'])
+const selectedKeys2 = ref(['1'])
+const collapsed = ref(false)
+const openKeys = ref(['sub1'])
 </script>
+
+<style>
+#components-layout-demo-top-side-2 .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+</style>

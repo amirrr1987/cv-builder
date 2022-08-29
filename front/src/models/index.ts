@@ -41,8 +41,8 @@ export interface Experience {
     title: string;
     company: Company;
     description: string;
-    beginDate: Dayjs;
-    endDate: Dayjs;
+    beginDate: Dayjs | null;
+    endDate: Dayjs | null;
     skills: Education[];
 }
 

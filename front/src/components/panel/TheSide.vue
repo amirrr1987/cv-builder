@@ -18,7 +18,15 @@
                 <Input v-model:value="profile.fullName.first" />
             </FormItem>
             <FormItem label="Last">
-                <Input v-model:value="profile.fullName.last" />
+                <Input v-model:value="profile.fullName.last">
+                <template #suffix>
+                    <Button type="text" danger size="small" shape="circle" class="!flex justify-center items-center">
+                        <template #icon>
+                            <Icon icon="icon-park-outline:close" />
+                        </template>
+                    </Button>
+                </template>
+                </Input>
             </FormItem>
             <Divider />
             <FormItem label="Title">
@@ -198,8 +206,18 @@
                         </FormItem>
                         <FormItem label="Skills">
                             <div class="grid grid-cols-2 gap-2">
-                                <template v-for="single in item.skills" :key="index">
-                                    <Input v-model:value="single.label" type="text" placeholder="label" />
+                                <template v-for="(single,skillIndex) in item.skills" :key="skillIndex">
+                                    <Input v-model:value="single.label" type="text" placeholder="label">
+                                    <template #suffix>
+                                        <Button type="text" danger size="small" shape="circle"
+                                            class="!flex justify-center items-center"
+                                            @click.prevent="profileStore.removeExperiencesSkill(index,skillIndex)">
+                                            <template #icon>
+                                                <Icon icon=" icon-park-outline:close" />
+                                            </template>
+                                        </Button>
+                                    </template>
+                                    </Input>
                                 </template>
                                 <Button type="dashed" block class="!flex justify-center items-center"
                                     @click.prevent="profileStore.addExperiencesSkills(index)">
@@ -291,7 +309,7 @@ function getBase64(img: Blob, callback: (base64Url: string) => void) {
     reader.readAsDataURL(img);
 }
 
-const fileList = ref([]);
+// const fileList = ref([]);
 const loading = ref<boolean>(false);
 const imageUrl = ref<string>('');
 
@@ -313,21 +331,20 @@ const handleChange = (info: UploadChangeParam) => {
     }
 };
 
-const beforeUpload = (file: UploadProps['fileList'][number]) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('You can only upload JPG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
-    }
-    return isJpgOrPng && isLt2M;
-};
+// const beforeUpload = (file: UploadProps['fileList'][number]) => {
+//     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+//     if (!isJpgOrPng) {
+//         message.error('You can only upload JPG file!');
+//     }
+//     const isLt2M = file.size / 1024 / 1024 < 2;
+//     if (!isLt2M) {
+//         message.error('Image must smaller than 2MB!');
+//     }
+//     return isJpgOrPng && isLt2M;
+// };
 
 </script>
 <style >
-
 .ant-col.ant-form-item-label label {
     display: flex;
     justify-content: space-between;
@@ -337,6 +354,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
     display: grid !important;
     grid-template-columns: max-content 1fr max-content;
 }
+
 span.ant-select-selection-item {
     display: flex;
     justify-content: center;

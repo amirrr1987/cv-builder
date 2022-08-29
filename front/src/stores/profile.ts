@@ -60,8 +60,8 @@ export const useProfileStore = defineStore({
             url: ''
           },
           description: "",
-          beginDate: "",
-          endDate: "",
+          beginDate: null,
+          endDate: null,
           skills: [{
             label: ''
           }]
@@ -130,8 +130,8 @@ export const useProfileStore = defineStore({
           url: ''
         },
         description: "",
-        beginDate: "",
-        endDate: "",
+        beginDate: null,
+        endDate: null,
         skills: [{
           label: ''
         }]
@@ -145,6 +145,10 @@ export const useProfileStore = defineStore({
       this.profile.experiences[index].skills.push({
         label: ''
       })
+    },
+    removeExperiencesSkill(index:number,skillIndex:number) {
+      let indexx = this.profile.experiences.findIndex(index)
+      this.profile.experiences[indexx].skills.splice(skillIndex,1)
     },
     setProfileId(id: string) {
       this.profileId = id
