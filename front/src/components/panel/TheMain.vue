@@ -1,6 +1,6 @@
 <template>
-    <main class="col-span-10 grid grid-cols-12 overflow-y-scroll h-screen">
-        <section class=" col-span-2 grid grid-rows-silde gap-y-5 bg-primary-lightest py-3 px-5">
+    <main class="grid grid-cols-12 overflow-y-scroll" id="printMe">
+        <section class=" col-span-3 grid grid-rows-silde gap-y-5 bg-primary-lightest py-3 px-5">
             <div class="">
                 <img class="w-36 h-36 rounded-full m-auto" :src="personalStore.$state.profile.image" :title="fullName"
                     :alt="fullName">
@@ -62,7 +62,7 @@
                 </template>
             </div>
         </section>
-        <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-10">
+        <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-9">
             <div class="grid auto-rows-max gap-y-3">
                 <div class="grid auto-rows-max gap-y-3">
                     <div class="capitalize font-bold text-lg text-primary-dark">software knowledge</div>
@@ -88,7 +88,7 @@
                 <hr class="mx-5">
                 <div class="capitalize font-bold text-lg text-primary-dark flex justify-between">
                     <span>experience</span>
-                    <span>{{ personalStore.$state.profileId }}</span>
+                    <span>{{ personalStore.$state.profileId }} </span>
                 </div>
 
                 <template v-for="item in personalStore.$state.profile.experiences" :key="item">
@@ -105,6 +105,10 @@ import stores from '@/stores'
 import { Icon } from '@iconify/vue';
 import ExperienceItem from "@/components/panel/ExperienceItem.vue";
 import { computed } from 'vue';
+
+const print = {
+    mounted: () => print
+}
 const personalStore = stores.useProfileStore()
 const fullName = computed(() => {
     return `${personalStore.$state.profile.fullName.first} ${personalStore.$state.profile.fullName.last}`

@@ -10,6 +10,6 @@ html {
 }
 
 #app {
-  @apply grid min-h-screen;
+  /* @apply grid min-h-screen; */
 }
 </style>

@@ -146,9 +146,11 @@ export const useProfileStore = defineStore({
         label: ''
       })
     },
-    removeExperiencesSkill(index:number,skillIndex:number) {
-      let indexx = this.profile.experiences.findIndex(index)
-      this.profile.experiences[indexx].skills.splice(skillIndex,1)
+    removeExperiencesSkill(index: string, skillIndex: number) {
+      let indexx = this.profile.experiences.findIndex((item) => {
+        return item.company.name === index
+      })
+      this.profile.experiences[indexx].skills.splice(skillIndex, 1)
     },
     setProfileId(id: string) {
       this.profileId = id

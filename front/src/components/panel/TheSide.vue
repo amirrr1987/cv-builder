@@ -1,26 +1,25 @@
 <template>
-    <Card class="col-span-2 h-screen overflow-y-scroll">
-        <Form layout="vertical">
-            <FormItem label="Image">
-                <Upload v-model:value="profile.image" name="avatar" list-type="picture-card" class="avatar-uploader"
-                    :show-upload-list="false" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    :before-upload="beforeUpload" @change="handleChange">
-                    <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
-                    <div v-else>
-                        <loading-outlined v-if="loading"></loading-outlined>
-                        <plus-outlined v-else></plus-outlined>
-                        <div class="ant-upload-text">Upload</div>
-                    </div>
-                </Upload>
-            </FormItem>
-            <Divider />
+    <!-- <Card > -->
+    <Form layout="vertical" class="overflow-y-scroll !p-5">
+        <FormItem label="Image">
+            <Upload v-model:value="profile.image" name="avatar" list-type="picture-card" class="avatar-uploader"
+                :show-upload-list="false" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                :before-upload="beforeUpload" @change="handleChange">
+                <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
+                <div v-else>
+                    <loading-outlined v-if="loading"></loading-outlined>
+                    <plus-outlined v-else></plus-outlined>
+                    <div class="ant-upload-text">Upload</div>
+                </div>
+            </Upload>
+        </FormItem>
+        <Divider />
+        <div class="grid grid-cols-2 gap-4">
             <FormItem label="First">
-                <Input v-model:value="profile.fullName.first" />
-            </FormItem>
-            <FormItem label="Last">
-                <Input v-model:value="profile.fullName.last">
+                <Input v-model:value="profile.fullName.first">
                 <template #suffix>
-                    <Button type="text" danger size="small" shape="circle" class="!flex justify-center items-center">
+                    <Button @click="profile.fullName.first = ''" type="text" danger size="small" shape="circle"
+                        class="!flex justify-center items-center">
                         <template #icon>
                             <Icon icon="icon-park-outline:close" />
                         </template>
@@ -28,39 +27,75 @@
                 </template>
                 </Input>
             </FormItem>
-            <Divider />
-            <FormItem label="Title">
-                <Input v-model:value="profile.title" />
-            </FormItem>
-            <FormItem label="SubTitle">
-                <Input v-model:value="profile.subTitle" />
-            </FormItem>
-            <FormItem label="About">
-                <Textarea v-model:value="profile.about" />
-            </FormItem>
-            <Divider />
-            <FormItem>
-                <template #label>
-                    <span>Contacts</span>
-                    <Button type="text" shape="circle" class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addContacts">
+            <FormItem label="Last">
+                <Input v-model:value="profile.fullName.last">
+                <template #suffix>
+                    <Button @click="profile.fullName.last = ''" type="text" danger size="small" shape="circle"
+                        class="!flex justify-center items-center">
                         <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
+                            <Icon icon="icon-park-outline:close" />
                         </template>
                     </Button>
                 </template>
-                <div class="grid grid-cols-[1fr,max-content] gap-1">
-                    <template v-for="(item, index) in profile.contacts" :key="index">
-                        <div class="grid grid-cols-3 gap-1">
-                            <Select v-model="item.icon">
-                                <template v-for="item in contactIcons">
-                                    <SelectOption :value="item.icon" class="flex items-center justify-center">
-                                        <Icon :icon="item.icon" />
-                                    </SelectOption>
-                                </template>
-                            </Select>
-                            <Input class="col-span-2" v-model:value="item.label" type="text" />
-                        </div>
+                </Input>
+            </FormItem>
+        </div>
+        <Divider />
+        <div class="grid grid-cols-2 gap-4">
+            <FormItem label="Title">
+                <Input v-model:value="profile.title">
+                <template #suffix>
+                    <Button @click="profile.title = ''" type="text" danger size="small" shape="circle"
+                        class="!flex justify-center items-center">
+                        <template #icon>
+                            <Icon icon="icon-park-outline:close" />
+                        </template>
+                    </Button>
+                </template>
+                </Input>
+            </FormItem>
+            <FormItem label="SubTitle">
+                <Input v-model:value="profile.subTitle">
+                <template #suffix>
+                    <Button @click="profile.subTitle = ''" type="text" danger size="small" shape="circle"
+                        class="!flex justify-center items-center">
+                        <template #icon>
+                            <Icon icon="icon-park-outline:close" />
+                        </template>
+                    </Button>
+                </template>
+                </Input>
+            </FormItem>
+        </div>
+
+
+        <FormItem label="About">
+            <Textarea :rows="5" v-model:value="profile.about" />
+        </FormItem>
+        <Divider />
+        <FormItem>
+            <template #label>
+                <span>Contacts</span>
+                <Button type="text" shape="circle" class="!flex justify-center items-center"
+                    @click.prevent="profileStore.addContacts">
+                    <template #icon>
+                        <Icon icon="icon-park-outline:plus" />
+                    </template>
+                </Button>
+            </template>
+            <div class="grid grid-cols-[1fr,max-content] gap-1">
+                <template v-for="(item, index) in profile.contacts" :key="index">
+                    <Input class="col-span-2" v-model:value="item.label" type="text">
+                    <template #prefix>
+                        <Select v-model="item.icon" class="">
+                            <template v-for="item in contactIcons">
+                                <SelectOption :value="item.icon" class="flex items-center justify-center">
+                                    <Icon :icon="item.icon" />
+                                </SelectOption>
+                            </template>
+                        </Select>
+                    </template>
+                    <template #suffix>
                         <Button type="text" danger shape="circle" class="!flex justify-center items-center"
                             @click.prevent="profileStore.removeContacts(index)">
                             <template #icon>
@@ -68,22 +103,25 @@
                             </template>
                         </Button>
                     </template>
-                </div>
-            </FormItem>
-            <Divider />
-            <FormItem>
-                <template #label>
-                    <span>Skills Summary</span>
-                    <Button type="text" shape="circle" class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addSkillSummary">
-                        <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
-                        </template>
-                    </Button>
+                    </Input>
                 </template>
-                <div class="grid grid-cols-[1fr,max-content] gap-1">
-                    <template v-for="(item, index) in profile.skillsSummary" :key="index">
-                        <Input v-model:value="item.label" type="text" />
+            </div>
+        </FormItem>
+        <Divider />
+        <FormItem>
+            <template #label>
+                <span>Skills Summary</span>
+                <Button type="text" shape="circle" class="!flex justify-center items-center"
+                    @click.prevent="profileStore.addSkillSummary">
+                    <template #icon>
+                        <Icon icon="icon-park-outline:plus" />
+                    </template>
+                </Button>
+            </template>
+            <div class="grid grid-cols-[1fr,max-content] gap-1">
+                <template v-for="(item, index) in profile.skillsSummary" :key="index">
+                    <Input class="col-span-2" v-model:value="item.label" type="text">
+                    <template #suffix>
                         <Button type="text" danger shape="circle" class="!flex justify-center items-center"
                             @click.prevent="profileStore.removeSkillSummary(index)">
                             <template #icon>
@@ -91,22 +129,25 @@
                             </template>
                         </Button>
                     </template>
-                </div>
-            </FormItem>
-            <Divider />
-            <FormItem>
-                <template #label>
-                    <span>Educations</span>
-                    <Button type="text" shape="circle" class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addEducations">
-                        <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
-                        </template>
-                    </Button>
+                    </Input>
                 </template>
-                <div class="grid grid-cols-[1fr,max-content] gap-1">
-                    <template v-for="(item, index) in profile.educations" :key="index">
-                        <Input v-model:value="item.label" type="text" />
+            </div>
+        </FormItem>
+        <Divider />
+        <FormItem>
+            <template #label>
+                <span>Educations</span>
+                <Button type="text" shape="circle" class="!flex justify-center items-center"
+                    @click.prevent="profileStore.addEducations">
+                    <template #icon>
+                        <Icon icon="icon-park-outline:plus" />
+                    </template>
+                </Button>
+            </template>
+            <div class="grid grid-cols-[1fr,max-content] gap-1">
+                <template v-for="(item, index) in profile.educations" :key="index">
+                    <Input class="col-span-2" v-model:value="item.label" type="text">
+                    <template #suffix>
                         <Button type="text" danger shape="circle" class="!flex justify-center items-center"
                             @click.prevent="profileStore.removeEducations(index)">
                             <template #icon>
@@ -114,22 +155,26 @@
                             </template>
                         </Button>
                     </template>
-                </div>
-            </FormItem>
-            <Divider />
-            <FormItem>
-                <template #label>
-                    <span>Teach Experiences</span>
-                    <Button type="text" shape="circle" class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addTechExperiences">
-                        <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
-                        </template>
-                    </Button>
+                    </Input>
                 </template>
-                <div class="grid grid-cols-[1fr,max-content] gap-1">
-                    <template v-for="(item, index) in profile.techExperiences" :key="index">
-                        <Input v-model:value="item.label" type="text" />
+            </div>
+        </FormItem>
+        <Divider />
+        <FormItem>
+            <template #label>
+                <span>Teach Experiences</span>
+                <Button type="text" shape="circle" class="!flex justify-center items-center"
+                    @click.prevent="profileStore.addTechExperiences">
+                    <template #icon>
+                        <Icon icon="icon-park-outline:plus" />
+                    </template>
+                </Button>
+            </template>
+            <div class="grid grid-cols-[1fr,max-content] gap-1">
+                <template v-for="(item, index) in profile.techExperiences" :key="index">
+
+                    <Input class="col-span-2" v-model:value="item.label" type="text">
+                    <template #suffix>
                         <Button type="text" danger shape="circle" class="!flex justify-center items-center"
                             @click.prevent="profileStore.removeTechExperiences(index)">
                             <template #icon>
@@ -137,97 +182,112 @@
                             </template>
                         </Button>
                     </template>
-                </div>
-            </FormItem>
-            <Divider />
-            <FormItem>
-                <template #label>
-                    <span>Social</span>
-                    <Button type="text" shape="circle" class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addSocials">
+                    </Input>
+
+                </template>
+            </div>
+        </FormItem>
+        <Divider />
+        <FormItem>
+            <template #label>
+                <span>Social</span>
+                <Button type="text" shape="circle" class="!flex justify-center items-center"
+                    @click.prevent="profileStore.addSocials">
+                    <template #icon>
+                        <Icon icon="icon-park-outline:plus" />
+                    </template>
+                </Button>
+            </template>
+            <template v-for="(item, index) in profile.socials" :key="index">
+
+                <Input class=" mb-1" v-model:value="item.label" type="text">
+
+                <template #prefix>
+                    <Select v-model="item.icon" class="">
+                        <template v-for="item in contactIcons" :key="index">
+                            <SelectOption :value="item.icon" class="flex items-center justify-center">
+                                <Icon :icon="item.icon" />
+                            </SelectOption>
+                        </template>
+                    </Select>
+                </template>
+                <template #suffix>
+                    <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                        @click.prevent="profileStore.removeSocials(index)">
                         <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
+                            <Icon icon="icon-park-outline:minus" />
                         </template>
                     </Button>
                 </template>
-                <template v-for="(item, index) in profile.socials" :key="index">
-                    <div class="grid grid-cols-[1fr,max-content] items-center gap-1 mb-5">
-                        <div class=" grid grid-cols-3 gap-1 relative">
-                            <Select v-model="item.icon">
-                                <template v-for="item in contactIcons">
-                                    <SelectOption :value="item.icon" class="flex items-center justify-center">
-                                        <Icon :icon="item.icon" />
-                                    </SelectOption>
+                </Input>
+
+
+
+            </template>
+        </FormItem>
+        <Divider />
+        <FormItem>
+            <template #label>
+                <span>Experiences</span>
+                <Button type="text" shape="circle" class="!flex justify-center items-center"
+                    @click.prevent="profileStore.addExperiences">
+                    <template #icon>
+                        <Icon icon="icon-park-outline:plus" />
+                    </template>
+                </Button>
+            </template>
+            <template v-for="(item, index) in profile.experiences" :key="index">
+                <Card class="!bg-gray-50 relative">
+                    <Button type="text" danger shape="circle"
+                        class="!absolute right-0 top-0 !flex justify-center items-center"
+                        @click.prevent="profileStore.removeExperiences(index)">
+                        <template #icon>
+                            <Icon icon="icon-park-outline:close" />
+                        </template>
+                    </Button>
+                    <FormItem label="Title">
+                        <Input v-model:value="item.title" type="text" placeholder="label" />
+                    </FormItem>
+                    <FormItem label="Company name">
+                        <Input v-model:value="item.company.name" type="text" placeholder="label" />
+                    </FormItem>
+                    <FormItem label="Company url">
+                        <Input v-model:value="item.company.url" type="text" placeholder="label" />
+                    </FormItem>
+                    <FormItem label="Description">
+                        <Textarea :rows="5" v-model:value="item.description" type="text" placeholder="label" />
+                    </FormItem>
+                    <FormItem label="Skills">
+                        <div class="grid grid-cols-2 gap-2">
+                            <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
+           
+
+
+                                <Input class=" mb-1" v-model:value="single.label" type="text">
+
+
+                                <template #suffix>
+                                    <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                                        @click.prevent="profileStore.removeExperiencesSkill(item.company.name, skillIndex)">
+                                        <template #icon>
+                                            <Icon icon="icon-park-outline:minus" />
+                                        </template>
+                                    </Button>
                                 </template>
-                            </Select>
-                            <Input class="col-span-2" v-model:value="item.label" type="text" placeholder="label" />
-                            <Input class="col-span-3" v-model:value="item.link" type="text" placeholder="link" />
+                                </Input>
+
+
+
+                            </template>
+                            <Button type="dashed" block class="!flex justify-center items-center"
+                                @click.prevent="profileStore.addExperiencesSkills(index)">
+                                <template #icon>
+                                    <Icon icon="icon-park-outline:plus" />
+                                </template>
+                            </Button>
                         </div>
-                        <Button type="text" danger shape="circle" class="!flex justify-center items-center"
-                            @click.prevent="profileStore.removeSocials(index)">
-                            <template #icon>
-                                <Icon icon="icon-park-outline:minus" />
-                            </template>
-                        </Button>
-                    </div>
-                </template>
-            </FormItem>
-            <Divider />
-            <FormItem>
-                <template #label>
-                    <span>Experiences</span>
-                    <Button type="text" shape="circle" class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addExperiences">
-                        <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
-                        </template>
-                    </Button>
-                </template>
-                <template v-for="(item, index) in profile.experiences" :key="index">
-                    <Card class="!bg-gray-50 relative">
-                        <Button type="text" danger shape="circle"
-                            class="!absolute right-0 top-0 !flex justify-center items-center"
-                            @click.prevent="profileStore.removeExperiences(index)">
-                            <template #icon>
-                                <Icon icon="icon-park-outline:close" />
-                            </template>
-                        </Button>
-                        <FormItem label="Title">
-                            <Input v-model:value="item.title" type="text" placeholder="label" />
-                        </FormItem>
-                        <FormItem label="Company name">
-                            <Input v-model:value="item.company.name" type="text" placeholder="label" />
-                        </FormItem>
-                        <FormItem label="Company url">
-                            <Input v-model:value="item.company.url" type="text" placeholder="label" />
-                        </FormItem>
-                        <FormItem label="Description">
-                            <Textarea :rows="5" v-model:value="item.description" type="text" placeholder="label" />
-                        </FormItem>
-                        <FormItem label="Skills">
-                            <div class="grid grid-cols-2 gap-2">
-                                <template v-for="(single,skillIndex) in item.skills" :key="skillIndex">
-                                    <Input v-model:value="single.label" type="text" placeholder="label">
-                                    <template #suffix>
-                                        <Button type="text" danger size="small" shape="circle"
-                                            class="!flex justify-center items-center"
-                                            @click.prevent="profileStore.removeExperiencesSkill(index,skillIndex)">
-                                            <template #icon>
-                                                <Icon icon=" icon-park-outline:close" />
-                                            </template>
-                                        </Button>
-                                    </template>
-                                    </Input>
-                                </template>
-                                <Button type="dashed" block class="!flex justify-center items-center"
-                                    @click.prevent="profileStore.addExperiencesSkills(index)">
-                                    <template #icon>
-                                        <Icon icon="icon-park-outline:plus" />
-                                    </template>
-                                </Button>
-                            </div>
-                        </FormItem>
-                        <!-- <div class="flex gap-x-3">
+                    </FormItem>
+                    <!-- <div class="flex gap-x-3">
                             <FormItem label="Begin Date">
                                 <DatePicker v-model:value="item.beginDate" placeholder="label" />
                             </FormItem>
@@ -235,17 +295,17 @@
                                 <DatePicker v-model:value="item.endDate" placeholder="label" />
                             </FormItem>
                         </div> -->
-                    </Card>
-                </template>
-            </FormItem>
+                </Card>
+            </template>
+        </FormItem>
 
-            <FormItem>
-                <Button type="primary" @click="updatePrsonal">
-                    update
-                </Button>
-            </FormItem>
-        </Form>
-    </Card>
+        <FormItem>
+            <Button type="primary" @click="updatePrsonal">
+                update
+            </Button>
+        </FormItem>
+    </Form>
+    <!-- </Card> -->
 </template>
 <script setup lang="ts">
 import stores from '@/stores'
@@ -345,6 +405,9 @@ const handleChange = (info: UploadChangeParam) => {
 
 </script>
 <style >
+
+
+
 .ant-col.ant-form-item-label label {
     display: flex;
     justify-content: space-between;
@@ -359,5 +422,12 @@ span.ant-select-selection-item {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+span.ant-input-prefix {
+    width: 4rem;
+    transform: translateX(-10px);
+}
+.ant-select-selector{
+    border: 0 !important;
 }
 </style>
