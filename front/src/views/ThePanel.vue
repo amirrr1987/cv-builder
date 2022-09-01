@@ -9,8 +9,7 @@
 
 <script setup lang="ts">
 
-import { Layout, LayoutHeader, LayoutSider, LayoutContent, Menu, MenuItem, SubMenu } from "ant-design-vue";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import stores from '@/stores'
 import TheSide from "@/components/panel/TheSide.vue";
@@ -31,5 +30,4 @@ onMounted(async () => {
 </script>
 
 <style>
-
 </style>

@@ -17,5 +17,28 @@ export default defineConfig({
     watch: {
       usePolling: true
     }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          "primary-color": "#5685ee",
+          "secondary-color": "#f87171",
+          "black": "#333333",
+          "layout-header-background": "#333333",
+          "layout-header-height": "52px",
+          "link-color": "#1DA57A",
+          "border-radius-base": "8px",
+        },
+        javascriptEnabled: true,
+      },
+      sass: {},
+      scss: {
+        additionalData: `$injectedColor: orange;`
+      }
+    }
   }
 })
+
+
+
