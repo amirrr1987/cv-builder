@@ -1,4 +1,4 @@
-import type { Dayjs } from 'dayjs';
+
 
 export interface ProfileModel {
     profileId: string;
@@ -41,8 +41,8 @@ export interface Experience {
     title: string;
     company: Company;
     description: string;
-    beginDate: Dayjs | null;
-    endDate: Dayjs | null;
+    beginDate: String;
+    endDate: String;
     skills: Education[];
 }
 

@@ -327,14 +327,18 @@
                                         </Button>
                                     </div>
                                 </FormItem>
-                                <!-- <div class="flex gap-x-3">
-                            <FormItem label="Begin Date">
-                                <DatePicker v-model:value="item.beginDate" placeholder="label" />
-                            </FormItem>
-                            <FormItem label="End Date">
-                                <DatePicker v-model:value="item.endDate" placeholder="label" />
-                            </FormItem>
-                        </div> -->
+
+                                      
+                                <div class="flex gap-x-3">
+                                    <FormItem label="Begin Date">
+                                    <DatePicker v-model:value="item.beginDate" placeholder="label" />
+                                    </FormItem>
+                                    <FormItem label="End Date">
+                                    <DatePicker v-model:value="item.endDate" placeholder="label" />
+                                    </FormItem>
+                                </div>
+                              
+                       
                             </CollapsePanel>
                         </template>
                     </Collapse>

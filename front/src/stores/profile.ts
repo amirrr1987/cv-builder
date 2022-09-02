@@ -8,7 +8,7 @@ import { remove } from '@vue/shared';
 // let temp = ref(0);
 export const useProfileStore = defineStore({
   id: 'personal',
-  state: () => <any>({
+  state: () => <ProfileModel>({
     profileId: '',
     profile: {
       fullName: {
@@ -64,8 +64,8 @@ export const useProfileStore = defineStore({
             url: ''
           },
           description: "",
-          beginDate: null,
-          endDate: null,
+          beginDate: "",
+          endDate: "",
           skills: [{
             label: ''
           }]
@@ -148,7 +148,7 @@ export const useProfileStore = defineStore({
         label: ''
       })
     },
-    removeSoftwareKnowledgesItem(index: string, skillIndex: number) {
+    removeSoftwareKnowledgesItem(index: number, skillIndex: number) {
       this.profile.softwareKnowledges[index].skills.splice(skillIndex, 1)
     },
 
@@ -166,8 +166,8 @@ export const useProfileStore = defineStore({
           url: ''
         },
         description: "",
-        beginDate: null,
-        endDate: null,
+        beginDate: "",
+        endDate: "",
         skills: [{
           label: ''
         }]
