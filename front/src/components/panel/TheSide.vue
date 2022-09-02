@@ -1,7 +1,7 @@
 <template>
     <Form layout="vertical" class="overflow-y-scroll">
-        <Collapse>
-            <CollapsePanel>
+        <Collapse v-model:activeKey="activeKey" accordion>
+            <CollapsePanel key="1">
                 <template #header>
                     <span class="header__title">Your name:</span>
                 </template>
@@ -30,7 +30,7 @@
                     </Input>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="2">
                 <template #header>
                     <span class="header__title">Title:</span>
                 </template>
@@ -59,7 +59,7 @@
                     </Input>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="3">
                 <template #header>
                     <span class="header__title">About:</span>
                 </template>
@@ -67,7 +67,7 @@
                     <Textarea :rows="5" v-model:value="profile.about" />
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="4">
                 <template #header>
                     <span class="header__title">Contacts:</span>
                 </template>
@@ -76,7 +76,7 @@
                         <template v-for="(item, index) in profile.contacts" :key="index">
                             <Input class="col-span-2" v-model:value="item.label" type="text">
                             <template #prefix>
-                                <Select v-model="item.icon" class="">
+                                <Select v-model:value="item.icon" class="">
                                     <template v-for="item in contactIcons">
                                         <SelectOption :value="item.icon" class="flex items-center justify-center">
                                             <Icon :icon="item.icon" />
@@ -103,7 +103,7 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="5">
                 <template #header>
                     <span class="header__title">Skills Summary:</span>
                 </template>
@@ -130,7 +130,7 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="6">
                 <template #header>
                     <span class="header__title">Educations:</span>
                 </template>
@@ -157,7 +157,7 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="7">
                 <template #header>
                     <span class="header__title">Teach Experiences:</span>
                 </template>
@@ -184,7 +184,7 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="8">
                 <template #header>
                     <span class="header__title">Social:</span>
                 </template>
@@ -192,7 +192,7 @@
                     <template v-for="(item, index) in profile.socials" :key="index">
                         <Input class=" mb-1" v-model:value="item.label" type="text">
                         <template #prefix>
-                            <Select v-model="item.icon" class="">
+                            <Select v-model:value="item.icon" class="">
                                 <template v-for="item in contactIcons" :key="index">
                                     <SelectOption :value="item.icon" class="flex items-center justify-center">
                                         <Icon :icon="item.icon" />
@@ -218,7 +218,56 @@
                     </Button>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel>
+            <CollapsePanel key="9">
+                <template #header>
+                    <span class="header__title">Software Knowledge:</span>
+                </template>
+                <Collapse>
+                    <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
+                        <CollapsePanel>
+                <template #header>
+                    <span class="header__title">{{item.label}}</span>
+                </template>
+                            <FormItem label="Software Knowledge">
+                                <Input v-model:value="item.label" type="text" class="mb-4">
+                                <template #suffix>
+                                    <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                                        @click.prevent="profileStore.removeSoftwareKnowledges">
+                                        <template #icon>
+                                            <Icon icon="icon-park-outline:minus" />
+                                        </template>
+                                    </Button>
+                                </template>
+                                {{ item.label }}
+                                </Input>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <template v-for="(single,skillIndex) in item.skills" :key="skillIndex">
+                                        <Input v-model:value="single.label" type="text">
+                                        <template #suffix>
+                                            <Button type="text" danger shape="circle"
+                                                class="!flex justify-center items-center"
+                                                @click.prevent="profileStore.removeSoftwareKnowledgesItem(index,skillIndex)">
+                                                <template #icon>
+                                                    <Icon icon="icon-park-outline:minus" />
+                                                </template>
+                                            </Button>
+                                        </template>
+                                        {{ item.label }}
+                                        </Input>
+                                    </template>
+                                        <Button type="dashed" block class="!flex justify-center items-center"
+                                            @click.prevent="profileStore.addSoftwareKnowledgesItem(index)">
+                                            <template #icon>
+                                                <Icon icon="icon-park-outline:plus" />
+                                            </template>
+                                        </Button>
+                                </div>
+                            </FormItem>
+                        </CollapsePanel>
+                    </template>
+                </Collapse>
+            </CollapsePanel>
+            <CollapsePanel key="10">
                 <template #header>
                     <span class="header__title">Experiences:</span>
                 </template>
@@ -304,18 +353,15 @@
 import stores from '@/stores'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
-import { Input, FormItem, Form, DatePicker, Card, Divider, Select, SelectOption, Textarea, Button, Upload, Collapse, CollapsePanel } from 'ant-design-vue';
+import { Input, FormItem, Form, DatePicker, Card, Divider, Select, SelectOption, Textarea, Button, Upload, Collapse, CollapsePanel, message } from 'ant-design-vue';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
-import { message } from 'ant-design-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 const profileStore = stores.useProfileStore()
 const profile = computed(() => {
     return profileStore.$state.profile
 })
-const updatePrsonal = () => {
-    profileStore.updatePersonal()
-}
+const activeKey = ref([]);
 const contactIcons = reactive([
     {
         label: "linkedin",
@@ -381,6 +427,10 @@ const handleChange = (info: UploadChangeParam) => {
 };
 </script>
 <style lang="less">
+.ant-collapse {
+    background-color: #F1F1F1 !important;
+    border-radius: 0 !important;
+}
 .ant-collapse-header {
     justify-content: space-between;
     align-items: center;

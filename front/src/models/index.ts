@@ -64,5 +64,5 @@ export interface Social {
 
 export interface SoftwareKnowledge {
     label: string;
-    skills: string[];
+    skills: any[];
 }

@@ -1,12 +1,14 @@
 import Services from '@/services'
 import { defineStore } from 'pinia'
 import type { ProfileModel } from '../models'
+import { message } from 'ant-design-vue';
+import { remove } from '@vue/shared';
 // import moment from 'moment'
 // import { ref } from 'vue';
 // let temp = ref(0);
 export const useProfileStore = defineStore({
   id: 'personal',
-  state: () => <ProfileModel>({
+  state: () => <any>({
     profileId: '',
     profile: {
       fullName: {
@@ -48,7 +50,9 @@ export const useProfileStore = defineStore({
         {
           label: "",
           skills: [
-            ""
+            {
+              label: ""
+            }
           ]
         }
       ],
@@ -92,12 +96,22 @@ export const useProfileStore = defineStore({
     // })
   },
   actions: {
+    techExperiencesAdd() {
+      this.profile.techExperiences.push({ label: "" })
+
+    },
+    techExperiencesRemove(index: number) {
+      this.profile.techExperiences.splice(index, 1)
+
+    },
+
     addTechExperiences() {
       this.profile.techExperiences.push({ label: "" })
     },
     removeTechExperiences(index: number) {
       this.profile.techExperiences.splice(index, 1)
     },
+
     addContacts() {
       this.profile.contacts.push({ label: "", icon: '' })
     },
@@ -122,6 +136,28 @@ export const useProfileStore = defineStore({
     removeSocials(index: number) {
       this.profile.socials.splice(index, 1)
     },
+
+    addSoftwareKnowledges() {
+      this.profile.softwareKnowledges.push({ label: "", skills: [{ label: "" }] })
+    },
+    removeSoftwareKnowledges(index: number) {
+      this.profile.softwareKnowledges.splice(index, 1)
+    },
+    addSoftwareKnowledgesItem(index: number) {
+      this.profile.softwareKnowledges[index].skills.push({
+        label: ''
+      })
+    },
+    removeSoftwareKnowledgesItem(index: string, skillIndex: number) {
+      this.profile.softwareKnowledges[index].skills.splice(skillIndex, 1)
+    },
+
+
+    // addSoftwareKnowledges() {
+
+    // },
+    // removeSoftwareKnowledges() {
+    // },
     addExperiences() {
       this.profile.experiences.push({
         title: "",
@@ -162,8 +198,9 @@ export const useProfileStore = defineStore({
       try {
         const { data } = await Services.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
         await this.getData()
+        message.success('Update data')
       } catch (error) {
-        console.log('🔥 error', error)
+        message.error('error update')
       }
     },
     async getData() {

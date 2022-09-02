@@ -50,7 +50,11 @@ const schemaProfile = new mongoose.Schema({
     softwareKnowledges: {
         type: [Object], required: true, default: [{
             label: { type: String, required: true, default: "" },
-            skills: { type: Array, required: true, default: [""] },
+            skills: {
+                type: [Object], required: true, default: [{
+                    label: { type: String, required: true, default: "" }
+                }]
+            },
         }]
     },
     experiences: {

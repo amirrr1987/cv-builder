@@ -14,7 +14,7 @@ import { useRoute } from "vue-router";
 import stores from '@/stores'
 import TheSide from "@/components/panel/TheSide.vue";
 import TheMain from "@/components/panel/TheMain.vue";
-import Header from "../components/landing/Header.vue";
+import Header from "@/components/panel/TheHeader.vue";
 
 const route = useRoute()
 const personalId = String(route.params.personalId)

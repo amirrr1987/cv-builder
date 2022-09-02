@@ -11,7 +11,9 @@
                         </div>
                         <div class="text- font-light text-gray">
                             (
-                            <span class="text-green-600">{{ personalStore.$state.profile.subTitle }}</span>
+                            <span class="text-green-600" v-if="personalStore.$state.profile.subTitle.length > 0">{{
+                                personalStore.$state.profile.subTitle
+                                }}</span>
                             <span class="text-yellow-500">.js</span>
                             )
                         </div>
@@ -20,12 +22,14 @@
                 <hr>
                 <div>
                     <div class="capitalize font-bold text-primary-dark">about me</div>
-                    <div class="p-1 text-xs font-light text-gray">{{ personalStore.$state.profile.about }}</div>
+                    <div class="p-1 text-xs font-light text-gray" v-if="personalStore.$state.profile.about.length > 0">
+                        {{ personalStore.$state.profile.about }}</div>
                 </div>
                 <div>
                     <div class="capitalize font-bold text-primary-dark">contact me</div>
                     <template v-for="item in personalStore.$state.profile.contacts" :key="item.index">
-                        <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1">
+                        <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1"
+                            v-if="item.label.length > 0">
                             <Icon :icon="item.icon" />
                             <span>{{ item.label }}</span>
                         </div>
@@ -68,7 +72,34 @@
                 <div class="grid auto-rows-max gap-y-3">
                     <div class="grid auto-rows-max gap-y-3">
                         <div class="capitalize font-bold text-lg text-primary-dark">software knowledge</div>
-                        <div class="grid grid-cols-[max-content,1fr] gap-x-2 gap-y-1 px-3 items-center">
+                        <template v-for="item in personalStore.$state.profile.softwareKnowledges">
+
+                            <div class="grid grid-cols-[max-content,1fr] gap-x-2 gap-y-1 px-3 items-center">
+                                <div class="font-medium text-primary-dark"> {{item.label}}:</div>
+                                <div class="text-sm text-gray-light">
+                                    <template v-for="skill in item.skills">
+                                        {{skill.label}},
+                                    </template>
+                                </div>
+                                <!-- <div class="font-medium text-primary-dark">CSS:</div>
+                                <div class="text-sm text-gray-light">Flex Box, Grid Layout, Animation, BEM, SCSS</div>
+                                <div class="font-medium text-primary-dark">CSS Framework:</div>
+                                <div class="text-sm text-gray-light">Bootstrap, TailwindCSS, Bulma</div>
+                                <div class="font-medium text-primary-dark">javaScript</div>
+                                <div class="text-sm text-gray-light">Bom, Dom, Axios, ES6</div>
+                                <div class="font-medium text-primary-dark">Vue.js</div>
+                                <div class="text-sm text-gray-light">Vue Option API,Vue Composition API, Vue-Router,
+                                    Vuex
+                                </div>
+                                <div class="font-medium text-primary-dark">Vue.js Framework:</div>
+                                <div class="text-sm text-gray-light">Vuetify, Ant Desgin, BootstrapVue</div>
+                                <div class="font-medium text-primary-dark">Protocol:</div>
+                                <div class="text-sm text-gray-light">REST</div>
+                                <div class="font-medium text-primary-dark">Control Version:</div>
+                                <div class="text-sm text-gray-light">Git, Git Flow</div> -->
+                            </div>
+                        </template>
+                        <!-- <div class="grid grid-cols-[max-content,1fr] gap-x-2 gap-y-1 px-3 items-center">
                             <div class="font-medium text-primary-dark">Basic:</div>
                             <div class="text-sm text-gray-light">HTML, CSS, javaScript </div>
                             <div class="font-medium text-primary-dark">CSS:</div>
@@ -86,7 +117,7 @@
                             <div class="text-sm text-gray-light">REST</div>
                             <div class="font-medium text-primary-dark">Control Version:</div>
                             <div class="text-sm text-gray-light">Git, Git Flow</div>
-                        </div>
+                        </div> -->
                     </div>
                     <hr class="mx-5">
                     <div class="capitalize font-bold text-lg text-primary-dark flex justify-between">

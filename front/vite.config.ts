@@ -22,13 +22,9 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         modifyVars: {
-          "primary-color": "#5685ee",
-          "secondary-color": "#f87171",
-          "black": "#333333",
-          "layout-header-background": "#333333",
-          "layout-header-height": "52px",
-          "link-color": "#1DA57A",
-          "border-radius-base": "8px",
+          "primary-color": "#6096BA",
+          "secondary-color": "#00b4f1",
+          "black": "#212121",
         },
         javascriptEnabled: true,
       },

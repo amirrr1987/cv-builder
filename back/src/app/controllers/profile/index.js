@@ -79,7 +79,13 @@ class Controller {
                 ...body.softwareKnowledges.map((item) => {
                     return {
                         label: item.label,
-                        skills: item.skills
+                        skills: [
+                            ...item.skills.map((single) => {
+                                return {
+                                    label: single.label
+                                }
+                            }),
+                        ]
                     }
                 }),
             ],
@@ -183,7 +189,13 @@ class Controller {
                 ...body.softwareKnowledges.map((item) => {
                     return {
                         label: item.label,
-                        skills: item.skills
+                        skills: [
+                            ...item.skills.map((single) => {
+                                return {
+                                    label: single.label
+                                }
+                            }),
+                        ]
                     }
                 }),
             ],
