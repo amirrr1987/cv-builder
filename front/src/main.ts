@@ -7,6 +7,7 @@ import router from './router'
 import print from 'vue3-print-nb'
 
 import './assets/style/index.css'
+import './assets/style/index.less'
 import 'virtual:windi.css'
 import 'virtual:windi-devtools'
 import 'ant-design-vue/dist/antd.less';

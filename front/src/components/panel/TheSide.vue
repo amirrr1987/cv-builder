@@ -1,7 +1,7 @@
 <template>
-    <Form layout="vertical" class="overflow-y-scroll">
+    <Form layout="vertical" class="overflow-y-scroll" :class="[`${prefixCls}`]">
         <Collapse v-model:activeKey="activeKey" accordion>
-            <CollapsePanel key="1">
+            <CollapsePanel key="1" :class="[`${prefixCls}__fullname`]">
                 <template #header>
                     <span class="header__title">Your name:</span>
                 </template>
@@ -30,7 +30,7 @@
                     </Input>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="2">
+            <CollapsePanel key="2" :class="[`${prefixCls}__title`]">
                 <template #header>
                     <span class="header__title">Title:</span>
                 </template>
@@ -59,7 +59,7 @@
                     </Input>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="3">
+            <CollapsePanel key="3" :class="[`${prefixCls}__about`]">
                 <template #header>
                     <span class="header__title">About:</span>
                 </template>
@@ -67,18 +67,12 @@
                     <Textarea :rows="5" v-model:value="profile.about" />
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="4">
+            <CollapsePanel key="4" :class="[`${prefixCls}__contacts`]">
                 <template #header>
                     <span class="header__title">Contacts:</span>
                 </template>
                 <FormItem label="Contacts">
-
-
-
-
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
-
-
                         <draggable tag="div" :list="profile.contacts" class="list-group" handle=".handle"
                             item-key="index" @change="dargHandler">
                             <template #item="{ element, index }">
@@ -113,8 +107,6 @@
                                 </div>
                             </template>
                         </draggable>
-
-
                         <Button type="dashed" block class="col-span-2 !flex justify-center items-center"
                             @click.prevent="profileStore.addContacts">
                             <template #icon>
@@ -124,14 +116,12 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="5">
+            <CollapsePanel key="5" :class="[`${prefixCls}__skills-summary`]">
                 <template #header>
                     <span class="header__title">Skills Summary:</span>
                 </template>
                 <FormItem label="Skills Summary">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
-
-
                         <draggable tag="div" :list="profile.skillsSummary" class="list-group" handle=".handle"
                             item-key="index" @change="dargHandler">
                             <template #item="{ element, index }">
@@ -156,9 +146,6 @@
                                 </div>
                             </template>
                         </draggable>
-
-
-
                         <Button type="dashed" block class="col-span-2 !flex justify-center items-center"
                             @click.prevent="profileStore.addSkillSummary">
                             <template #icon>
@@ -168,14 +155,13 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="6">
+            <CollapsePanel key="6" :class="[`${prefixCls}__educations`]">
                 <template #header>
                     <span class="header__title">Educations:</span>
                 </template>
                 <FormItem label="Educations">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
-
-                        <draggable tag="div" :list="profile.skillsSummary" class="list-group" handle=".handle"
+                        <draggable tag="div" :list="profile.educations" class="list-group" handle=".handle"
                             item-key="index" @change="dargHandler">
                             <template #item="{ element, index }">
                                 <div class="grid grid-cols-[max-content,1fr] gap-1 mb-3">
@@ -208,13 +194,12 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="7">
+            <CollapsePanel key="7" :class="[`${prefixCls}__tech-experiences`]">
                 <template #header>
                     <span class="header__title">Teach Experiences:</span>
                 </template>
                 <FormItem label="Teach Experiences">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
-
                         <draggable tag="div" :list="profile.techExperiences" class="list-group" handle=".handle"
                             item-key="index" @change="dargHandler">
                             <template #item="{ element, index }">
@@ -248,7 +233,7 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="8">
+            <CollapsePanel key="8" :class="[`${prefixCls}__socials`]">
                 <template #header>
                     <span class="header__title">Social:</span>
                 </template>
@@ -285,8 +270,6 @@
                             </div>
                         </template>
                     </draggable>
-
-
                     <Button type="dashed" block class="col-span-2 !flex justify-center items-center"
                         @click.prevent="profileStore.addSocials">
                         <template #icon>
@@ -295,31 +278,31 @@
                     </Button>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="9">
+            <CollapsePanel key="9" :class="[`${prefixCls}__software-knowledges`]">
                 <template #header>
                     <span class="header__title">Software Knowledge:</span>
                 </template>
-                <Collapse>
 
+                <div class="grid grid-cols-[max-content,1fr]">
                     <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle"
                         item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
-
-
+                            <Button type="ghost" size="small"
+                                class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
+                                <template #icon>
+                                    <Icon icon="icon-park-outline:drag" />
+                                </template>
+                            </Button>
+                        </template>
+                    </draggable>
+                    <Collapse>
+                        <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
                             <CollapsePanel>
                                 <template #header>
-                                    <span class="header__title">
-                                        <Button type="ghost" size="small"
-                                            class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
-                                            <template #icon>
-                                                <Icon icon="icon-park-outline:drag" />
-                                            </template>
-                                        </Button>
-                                        <span>{{ element.label }}</span>
-                                    </span>
+                                    <span class="header__title">{{ item.label }}</span>
                                 </template>
                                 <FormItem label="Software Knowledge Title">
-                                    <Input v-model:value="element.label" type="text" class="mb-4">
+                                    <Input v-model:value="item.label" type="text" class="mb-4">
                                     <template #suffix>
                                         <Button type="text" danger shape="circle"
                                             class="!flex justify-center items-center"
@@ -329,10 +312,10 @@
                                             </template>
                                         </Button>
                                     </template>
-                                    {{ element.label }}
+                                    {{ item.label }}
                                     </Input>
                                     <div class="grid grid-cols-3 gap-4">
-                                        <template v-for="(single, skillIndex) in element.skills" :key="skillIndex">
+                                        <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
                                             <Input v-model:value="single.label" type="text">
                                             <template #suffix>
                                                 <Button type="text" danger shape="circle"
@@ -343,7 +326,7 @@
                                                     </template>
                                                 </Button>
                                             </template>
-                                            {{ element.label }}
+                                            {{ item.label }}
                                             </Input>
                                         </template>
                                         <Button type="dashed" block class="!flex justify-center items-center"
@@ -354,60 +337,10 @@
                                         </Button>
                                     </div>
                                 </FormItem>
-
-
                             </CollapsePanel>
-
                         </template>
-                    </draggable>
-
-
-                    <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
-                        <CollapsePanel>
-                            <template #header>
-                                <span class="header__title">{{ item.label }}</span>
-                            </template>
-                            <FormItem label="Software Knowledge Title">
-                                <Input v-model:value="item.label" type="text" class="mb-4">
-                                <template #suffix>
-                                    <Button type="text" danger shape="circle" class="!flex justify-center items-center"
-                                        @click.prevent="profileStore.removeSoftwareKnowledges">
-                                        <template #icon>
-                                            <Icon icon="icon-park-outline:minus" />
-                                        </template>
-                                    </Button>
-                                </template>
-                                {{ item.label }}
-                                </Input>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
-                                        <Input v-model:value="single.label" type="text">
-                                        <template #suffix>
-                                            <Button type="text" danger shape="circle"
-                                                class="!flex justify-center items-center"
-                                                @click.prevent="profileStore.removeSoftwareKnowledgesItem(index, skillIndex)">
-                                                <template #icon>
-                                                    <Icon icon="icon-park-outline:minus" />
-                                                </template>
-                                            </Button>
-                                        </template>
-                                        {{ item.label }}
-                                        </Input>
-                                    </template>
-                                    <Button type="dashed" block class="!flex justify-center items-center"
-                                        @click.prevent="profileStore.addSoftwareKnowledgesItem(index)">
-                                        <template #icon>
-                                            <Icon icon="icon-park-outline:plus" />
-                                        </template>
-                                    </Button>
-                                </div>
-                            </FormItem>
-
-
-                        </CollapsePanel>
-                    </template>
-
-                </Collapse>
+                    </Collapse>
+                </div>
                 <Button type="dashed" block class="!flex justify-center items-center !h-12"
                     @click.prevent="profileStore.addSoftwareKnowledges">
                     <template #icon>
@@ -415,7 +348,7 @@
                     </template>
                 </Button>
             </CollapsePanel>
-            <CollapsePanel key="10">
+            <CollapsePanel key="10" :class="[`${prefixCls}__experiences`]">
                 <template #header>
                     <span class="header__title">Experiences:</span>
                 </template>
@@ -475,8 +408,6 @@
                                         </Button>
                                     </div>
                                 </FormItem>
-
-
                                 <div class="flex gap-x-3">
                                     <FormItem label="Begin Date">
                                         <DatePicker v-model:value="item.beginDate" placeholder="label" />
@@ -485,8 +416,6 @@
                                         <DatePicker v-model:value="item.endDate" placeholder="label" />
                                     </FormItem>
                                 </div>
-
-
                             </CollapsePanel>
                         </template>
                     </Collapse>
@@ -510,8 +439,7 @@ import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 import draggable from 'vuedraggable'
-
-
+import {useDesign} from "@/utils";
 const profileStore = stores.useProfileStore()
 const profile = computed(() => {
     return profileStore.$state.profile
@@ -580,58 +508,247 @@ const handleChange = (info: UploadChangeParam) => {
         message.error('upload error');
     }
 };
-
-
-const dargHandler = () => {
+const dargHandler = (id: any) => {
+    console.log(id);
+    
     profile.value.contacts.forEach((item, index) => {
         index = index + 1
     })
-
 }
-
+const { prefixCls } = useDesign('the-side')
 </script>
 <style lang="less">
-.ant-collapse {
-    background-color: #F1F1F1 !important;
-    border-radius: 0 !important;
-}
+@prefix: ~'amirmaghami-the-side';
 
-.ant-collapse-header {
-    justify-content: space-between;
-    align-items: center;
+.@{prefix} {
+    &__fullname {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
 
-    div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
     }
 
-    .header__title {
-        order: -1;
+    &__title {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+    }
+
+    &__about {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+    }
+
+    &__contacts {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+
+        .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ant-input-prefix {
+            width: 4rem;
+            transform: translateX(-10px);
+        }
+
+        .ant-select-selector {
+            border: 0 !important;
+        }
+    }
+
+    &__skills-summary {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+    }
+
+    &__educations {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+    }
+
+    &__tech-experiences {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+    }
+
+    &__socials {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
+
+        .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ant-input-prefix {
+            width: 4rem;
+            transform: translateX(-10px);
+        }
+
+        .ant-select-selector {
+            border: 0 !important;
+        }
+    }
+
+    &__software-knowledges {
+        .ant-collapse-header {
+
+            justify-content: space-between;
+            // align-items: center !important;
+            &>div {
+                //     display: flex;
+                //     justify-content: center;
+                //     align-items: center;
+            }
+
+            .header__title {
+                    order: -1;
+            }
+        }
+
+        .amirmaghami-the-side__software-knowledges-item {
+            .ant-collapse-header {
+
+                // justify-content: space-between;
+                // align-items: center !important;
+                &>div {
+                    // display: flex;
+                    // justify-content: center;
+                    // align-items: center;
+                }
+
+                .header__title {
+                    // order: -1;
+                }
+            }
+        }
+    }
+
+    &__experiences {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header__title {
+                order: -1;
+            }
+        }
     }
 }
 
-.ant-col.ant-form-item-label label {
-    display: flex;
-    justify-content: space-between;
-}
-
+// .ant-collapse {
+//     background-color: #F1F1F1 !important;
+//     border-radius: 0 !important;
+// }
+// .ant-col.ant-form-item-label label {
+//     display: flex;
+//     justify-content: space-between;
+// }
 // .ant-collapse-header {
 //     display: grid !important;
 //     grid-template-columns: max-content 1fr max-content;
 // }
-span.ant-select-selection-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-span.ant-input-prefix {
-    width: 4rem;
-    transform: translateX(-10px);
-}
-
-.ant-select-selector {
-    border: 0 !important;
-}
 </style>
