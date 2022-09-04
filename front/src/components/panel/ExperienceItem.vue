@@ -6,7 +6,7 @@
     <div class=" grid grid-cols-[1fr,max-content] mb-2">
       <div class="font-medium text-primary-dark">
         <span>{{ data.title }} </span>
-        <span> at </span>
+        <span class="mx-1"> {{$t('at')}} </span>
         <a :href="data.companyUrl" target="_blank" class="cap">{{ data.companyName }}</a>
       </div>
       <div class="font-light text-xs text-gray-light">

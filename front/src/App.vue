@@ -1,5 +1,5 @@
 <template>
-  <RouterView />
+  <RouterView class="font-farsi" />
 </template>
 <script setup lang="ts">
 

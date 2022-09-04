@@ -12,8 +12,8 @@
                         <div class="text- font-light text-gray">
                             (
                             <span class="text-green-600" v-if="personalStore.$state.profile.subTitle.length > 0">{{
-                                personalStore.$state.profile.subTitle
-                                }}</span>
+                            personalStore.$state.profile.subTitle
+                            }}</span>
                             <span class="text-yellow-500">.js</span>
                             )
                         </div>
@@ -21,12 +21,12 @@
                 </div>
                 <hr>
                 <div>
-                    <div class="capitalize font-bold text-primary-dark">about me</div>
+                    <div class="capitalize font-bold text-primary-dark"> {{ $t('aboutMe') }}</div>
                     <div class="p-1 text-xs font-light text-gray" v-if="personalStore.$state.profile.about.length > 0">
                         {{ personalStore.$state.profile.about }}</div>
                 </div>
                 <div>
-                    <div class="capitalize font-bold text-primary-dark">contact me</div>
+                    <div class="capitalize font-bold text-primary-dark"> {{ $t('contactMe') }}</div>
                     <template v-for="item in personalStore.$state.profile.contacts" :key="item.index">
                         <div class="p-1 text-xs font-light text-gray flex items-center gap-x-1"
                             v-if="item.label.length > 0">
@@ -36,7 +36,7 @@
                     </template>
                 </div>
                 <div class="">
-                    <div class="capitalize font-bold text-primary-dark">skill summery</div>
+                    <div class="capitalize font-bold text-primary-dark">{{ $t('skillSummary') }} </div>
                     <div class="p-1 text-xs capitalize font-light  text-gray">
                         <template v-for="item in personalStore.$state.profile.skillsSummary" :key="item.index">
                             <div>{{ item.label }}</div>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="">
-                    <div class="capitalize font-bold text-primary-dark">education</div>
+                    <div class="capitalize font-bold text-primary-dark">{{ $t('education') }}</div>
                     <template v-for="item in personalStore.$state.profile.educations" :key="item.index">
                         <div class="p-1 text-xs font-light text-gray ">
                             {{ item.label }}
@@ -52,7 +52,8 @@
                     </template>
                 </div>
                 <div class="">
-                    <div class="capitalize font-bold text-primary-dark">teaching exprince</div>
+                    <div class="capitalize font-bold text-primary-dark">{{ $t('teachingExprince') }}
+                    </div>
                     <div class="p-1 text-xs font-light text-gray ">
                         <template v-for="item in personalStore.$state.profile.techExperiences" :key="item.index">
                             <div>{{ item.label }}</div>
@@ -71,14 +72,15 @@
             <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-9">
                 <div class="grid auto-rows-max gap-y-3">
                     <div class="grid auto-rows-max gap-y-3">
-                        <div class="capitalize font-bold text-lg text-primary-dark">software knowledge</div>
+                        <div class="capitalize font-bold text-lg text-primary-dark">{{ $t('softwareKnowledge') }}
+                        </div>
                         <template v-for="item in personalStore.$state.profile.softwareKnowledges">
 
                             <div class="grid grid-cols-[max-content,1fr] gap-x-2 gap-y-1 px-3 items-center">
-                                <div class="font-medium text-primary-dark"> {{item.label}}:</div>
+                                <div class="font-medium text-primary-dark"> {{ item.label }}:</div>
                                 <div class="text-sm text-gray-light">
                                     <template v-for="skill in item.skills">
-                                        {{skill.label}},
+                                        {{ skill.label }},
                                     </template>
                                 </div>
                                 <!-- <div class="font-medium text-primary-dark">CSS:</div>
@@ -121,7 +123,7 @@
                     </div>
                     <hr class="mx-5">
                     <div class="capitalize font-bold text-lg text-primary-dark flex justify-between">
-                        <span>experience</span>
+                        <span>{{ $t('experience') }} </span>
                         <span>{{ personalStore.$state.profileId }} </span>
                     </div>
 

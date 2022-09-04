@@ -1,1 +1,18 @@
 @namespace: "amirmaghami";
+
+   @font-face {
+    font-family: 'vazir';
+    src: url('../font/Vazirmatn-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+   }
+   
+html.is-rtl {
+    direction: rtl;
+    font-family: 'vazir' !important;
+
+    .ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow svg {
+            transition: transform 0.24s;
+            transform: rotate(180deg);
+        }
+}

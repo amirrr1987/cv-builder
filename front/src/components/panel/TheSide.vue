@@ -3,9 +3,13 @@
         <Collapse v-model:activeKey="activeKey" accordion>
             <CollapsePanel key="1" :class="[`${prefixCls}__fullname`]">
                 <template #header>
-                    <span class="header__title">Your name:</span>
+                    <span class="header__title">{{ $t('yourName') }}:</span>
                 </template>
-                <FormItem label="First">
+                <FormItem>
+                    <template #label>
+
+                        {{ $t('firstName') }}
+                    </template>
                     <Input v-model:value="profile.fullName.first">
                     <template #suffix>
                         <Button @click="profile.fullName.first = ''" type="text" danger size="small" shape="circle"
@@ -17,7 +21,11 @@
                     </template>
                     </Input>
                 </FormItem>
-                <FormItem label="Last">
+                <FormItem>
+                    <template #label>
+
+                        {{ $t('lastName') }}
+                    </template>
                     <Input v-model:value="profile.fullName.last">
                     <template #suffix>
                         <Button @click="profile.fullName.last = ''" type="text" danger size="small" shape="circle"
@@ -32,9 +40,15 @@
             </CollapsePanel>
             <CollapsePanel key="2" :class="[`${prefixCls}__title`]">
                 <template #header>
-                    <span class="header__title">Title:</span>
+                    <span class="header__title">{{ $t('title') }}:</span>
                 </template>
-                <FormItem label="Title">
+                <FormItem>
+                    <template #label>
+
+                        <span class="header__title">
+                            {{ $t('title') }}
+                        </span>
+                    </template>
                     <Input v-model:value="profile.title">
                     <template #suffix>
                         <Button @click="profile.title = ''" type="text" danger size="small" shape="circle"
@@ -46,7 +60,10 @@
                     </template>
                     </Input>
                 </FormItem>
-                <FormItem label="SubTitle">
+                <FormItem>
+                    <template #label>
+                        {{ $t('subTitle') }}
+                    </template>
                     <Input v-model:value="profile.subTitle">
                     <template #suffix>
                         <Button @click="profile.subTitle = ''" type="text" danger size="small" shape="circle"
@@ -61,7 +78,9 @@
             </CollapsePanel>
             <CollapsePanel key="3" :class="[`${prefixCls}__about`]">
                 <template #header>
-                    <span class="header__title">About:</span>
+                    <span class="header__title">
+                        {{ $t('aboutMe') }}:
+                    </span>
                 </template>
                 <FormItem label="About">
                     <Textarea :rows="5" v-model:value="profile.about" />
@@ -69,9 +88,9 @@
             </CollapsePanel>
             <CollapsePanel key="4" :class="[`${prefixCls}__contacts`]">
                 <template #header>
-                    <span class="header__title">Contacts:</span>
+                    <span class="header__title">{{ $t('contactMe') }}:</span>
                 </template>
-                <FormItem label="Contacts">
+                <FormItem>
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
                         <draggable tag="div" :list="profile.contacts" class="list-group" handle=".handle"
                             item-key="index" @change="dargHandler">
@@ -439,7 +458,7 @@ import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 import draggable from 'vuedraggable'
-import {useDesign} from "@/utils";
+import { useDesign } from "@/utils";
 const profileStore = stores.useProfileStore()
 const profile = computed(() => {
     return profileStore.$state.profile
@@ -510,7 +529,7 @@ const handleChange = (info: UploadChangeParam) => {
 };
 const dargHandler = (id: any) => {
     console.log(id);
-    
+
     profile.value.contacts.forEach((item, index) => {
         index = index + 1
     })
@@ -691,6 +710,7 @@ const { prefixCls } = useDesign('the-side')
         .ant-collapse-header {
 
             justify-content: space-between;
+
             // align-items: center !important;
             &>div {
                 //     display: flex;
@@ -699,7 +719,7 @@ const { prefixCls } = useDesign('the-side')
             }
 
             .header__title {
-                    order: -1;
+                order: -1;
             }
         }
 

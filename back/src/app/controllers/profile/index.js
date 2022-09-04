@@ -2,6 +2,7 @@ const Joi = require("joi");
 const { useProfileModel } = require("../../models");
 
 class Controller {
+
     async getAll(req, res) {
         try {
             const resualt = await useProfileModel
@@ -16,6 +17,7 @@ class Controller {
             console.log(error);
         }
     }
+
     async getProfile(req, res) {
         try {
             const resualt = await useProfileModel
@@ -45,7 +47,6 @@ class Controller {
                 province: body.address.province,
                 region: body.address.region,
             },
-
             skillsSummary: [
                 ...body.skillsSummary.map((item) => {
                     return {
@@ -131,13 +132,8 @@ class Controller {
             });
         } catch (error) {
             console.log(error);
-
         }
-
     }
-
-
-
     async postProfile(req, res) {
         const { body } = req;
         let obj = {
@@ -245,8 +241,6 @@ class Controller {
         }
 
     }
-
 }
-
 
 module.exports = new Controller();

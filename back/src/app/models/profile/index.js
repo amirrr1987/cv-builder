@@ -67,8 +67,8 @@ const schemaProfile = new mongoose.Schema({
                 }
             },
             description: { type: String, required: true, default: "" },
-            beginDate: { type: String, required: true, default: "" },
-            endDate: { type: String, required: true, default: "" },
+            beginDate: { type: Date, required: true, default: Date.now() },
+            endDate: { type: Date, required: true, default: Date.now() },
             skills: {
                 type: [Object], required: true, default: [{
                     label: { type: String, required: true, default: "" }
