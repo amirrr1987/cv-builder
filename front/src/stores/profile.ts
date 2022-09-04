@@ -16,6 +16,8 @@ export const useProfileStore = defineStore({
         last: ''
       },
       _id: "",
+      font: "",
+      theme: "",
       image: "",
       about: "",
       title: "",

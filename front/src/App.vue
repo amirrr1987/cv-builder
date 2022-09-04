@@ -1,7 +1,8 @@
 <template>
-  <RouterView class="font-farsi" />
+  <RouterView  />
 </template>
 <script setup lang="ts">
+
 
 </script>
 <style>

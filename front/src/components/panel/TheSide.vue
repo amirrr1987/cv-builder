@@ -7,7 +7,6 @@
                 </template>
                 <FormItem>
                     <template #label>
-
                         {{ $t('firstName') }}
                     </template>
                     <Input v-model:value="profile.fullName.first">
@@ -23,7 +22,6 @@
                 </FormItem>
                 <FormItem>
                     <template #label>
-
                         {{ $t('lastName') }}
                     </template>
                     <Input v-model:value="profile.fullName.last">
@@ -44,7 +42,6 @@
                 </template>
                 <FormItem>
                     <template #label>
-
                         <span class="header__title">
                             {{ $t('title') }}
                         </span>
@@ -137,7 +134,7 @@
             </CollapsePanel>
             <CollapsePanel key="5" :class="[`${prefixCls}__skills-summary`]">
                 <template #header>
-                    <span class="header__title">Skills Summary:</span>
+                    <span class="header__title">{{ $t('skillsSummary') }}:</span>
                 </template>
                 <FormItem label="Skills Summary">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -176,7 +173,7 @@
             </CollapsePanel>
             <CollapsePanel key="6" :class="[`${prefixCls}__educations`]">
                 <template #header>
-                    <span class="header__title">Educations:</span>
+                    <span class="header__title">{{ $t('educations') }}:</span>
                 </template>
                 <FormItem label="Educations">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -215,7 +212,7 @@
             </CollapsePanel>
             <CollapsePanel key="7" :class="[`${prefixCls}__tech-experiences`]">
                 <template #header>
-                    <span class="header__title">Teach Experiences:</span>
+                    <span class="header__title">{{ $t('teachExperiences') }}:</span>
                 </template>
                 <FormItem label="Teach Experiences">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -254,7 +251,7 @@
             </CollapsePanel>
             <CollapsePanel key="8" :class="[`${prefixCls}__socials`]">
                 <template #header>
-                    <span class="header__title">Social:</span>
+                    <span class="header__title">{{ $t('Social') }}:</span>
                 </template>
                 <FormItem label="Social">
                     <draggable tag="div" :list="profile.socials" class="list-group" handle=".handle" item-key="index"
@@ -299,9 +296,8 @@
             </CollapsePanel>
             <CollapsePanel key="9" :class="[`${prefixCls}__software-knowledges`]">
                 <template #header>
-                    <span class="header__title">Software Knowledge:</span>
+                    <span class="header__title">{{ $t('softwareKnowledge') }}:</span>
                 </template>
-
                 <div class="grid grid-cols-[max-content,1fr]">
                     <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle"
                         item-key="index" @change="dargHandler">
@@ -369,7 +365,7 @@
             </CollapsePanel>
             <CollapsePanel key="10" :class="[`${prefixCls}__experiences`]">
                 <template #header>
-                    <span class="header__title">Experiences:</span>
+                    <span class="header__title">{{ $t('experiences') }}::</span>
                 </template>
                 <FormItem>
                     <template #label>
@@ -444,6 +440,55 @@
                             <Icon icon="icon-park-outline:plus" />
                         </template>
                     </Button>
+                </FormItem>
+            </CollapsePanel>
+            <CollapsePanel key="11" :class="[`${prefixCls}__fullname`]">
+                <template #header>
+                    <span class="header__title">{{ $t('theme') }}:</span>
+                </template>
+                <FormItem>
+                    <template #label>
+                        {{ $t('color') }}
+                    </template>
+                    <Select v-model:value="profile.theme">
+                        <SelectOption value="pink">{{ $t('pink') }} </SelectOption>
+                        <SelectOption value="rose">{{ $t('rose') }}</SelectOption>
+                        <SelectOption value="orange">{{ $t('orange') }}</SelectOption>
+                        <SelectOption value="yellow">{{ $t('yellow') }}</SelectOption>
+                        <SelectOption value="amber">{{ $t('amber') }}</SelectOption>
+                        <SelectOption value="lime">{{ $t('lime') }}</SelectOption>
+                        <SelectOption value="green">{{ $t('green') }}</SelectOption>
+                        <SelectOption value="emerald">{{ $t('emerald') }}</SelectOption>
+                        <SelectOption value="teal">{{ $t('teal') }}</SelectOption>
+                        <SelectOption value="cyan">{{ $t('cyan') }}</SelectOption>
+                        <SelectOption value="sky">{{ $t('sky') }}</SelectOption>
+                        <SelectOption value="blue">{{ $t('blue') }}</SelectOption>
+                        <SelectOption value="indigo">{{ $t('indigo') }}</SelectOption>
+                        <SelectOption value="purple">{{ $t('purple') }}</SelectOption>
+                        <SelectOption value="violet">{{ $t('violet') }}</SelectOption>
+                        <SelectOption value="fuchsia">{{ $t('fuchsia') }}</SelectOption>
+                        <SelectOption value="gray">{{ $t('gray') }}</SelectOption>
+                        <SelectOption value="slate">{{ $t('slate') }}</SelectOption>
+                        <SelectOption value="stone">{{ $t('stone') }}</SelectOption>
+                        <SelectOption value="neutral">{{ $t('neutral') }}</SelectOption>
+                        <SelectOption value="zinc">{{ $t('zinc') }}</SelectOption>
+                        <SelectOption value="light">{{ $t('light') }}</SelectOption>
+                        <SelectOption value="dark">{{ $t('dark') }}</SelectOption>
+                    </Select>
+                </FormItem>
+                <FormItem>
+                    <template #label>
+                        {{ $t('font') }}
+                    </template>
+                    <Select v-model:value="profile.font">
+                        <SelectOption value="sofia">Sofia</SelectOption>
+                        <SelectOption value="roboto">Roboto</SelectOption>
+                        <SelectOption value="spaceMono">Space Mono</SelectOption>
+                        <SelectOption value="calibri">Calibri</SelectOption>
+                        <SelectOption value="helvetica">Helvetica</SelectOption>
+                        <SelectOption value="georgia">Georgia</SelectOption>
+                        <SelectOption value="vazir">Vazir</SelectOption>
+                    </Select>
                 </FormItem>
             </CollapsePanel>
         </Collapse>
@@ -529,7 +574,6 @@ const handleChange = (info: UploadChangeParam) => {
 };
 const dargHandler = (id: any) => {
     console.log(id);
-
     profile.value.contacts.forEach((item, index) => {
         index = index + 1
     })
@@ -708,7 +752,6 @@ const { prefixCls } = useDesign('the-side')
 
     &__software-knowledges {
         .ant-collapse-header {
-
             justify-content: space-between;
 
             // align-items: center !important;
