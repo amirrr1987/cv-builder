@@ -25,7 +25,7 @@ class Application {
     }
     async setDataBase() {
         try {
-            await mongoose.connect("mongodb://localhost:27017/my-server", {
+            await mongoose.connect("mongodb://localhost:27017/cv", {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             })

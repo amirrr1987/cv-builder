@@ -34,6 +34,8 @@ class Controller {
     async postAll(req, res) {
         const { body } = req;
         let obj = {
+            theme: body.theme,
+            font: body.font,
             image: body.image,
             about: body.about,
             title: body.title,
@@ -138,6 +140,8 @@ class Controller {
         const { body } = req;
         let obj = {
             _id: body._id,
+            theme: body.theme,
+            font: body.font,
             image: body.image,
             about: body.about,
             title: body.title,

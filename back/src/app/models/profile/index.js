@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
 const schemaProfile = new mongoose.Schema({
+    theme: { type: String, required: true, default: "primary" },
+    font: { type: String, required: true, default: "Arial" },
     image: { type: String, required: true, default: "" },
     about: { type: String, required: true, default: "" },
     title: { type: String, required: true, default: "" },
