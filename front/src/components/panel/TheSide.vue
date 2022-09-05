@@ -442,7 +442,7 @@
                     </Button>
                 </FormItem>
             </CollapsePanel>
-            <CollapsePanel key="11" :class="[`${prefixCls}__fullname`]">
+            <CollapsePanel key="11" :class="[`${prefixCls}__theme`]">
                 <template #header>
                     <span class="header__title">{{ $t('theme') }}:</span>
                 </template>
@@ -450,44 +450,46 @@
                     <template #label>
                         {{ $t('color') }}
                     </template>
-                    <Select v-model:value="profile.theme">
-                        <SelectOption value="pink">{{ $t('pink') }} </SelectOption>
-                        <SelectOption value="rose">{{ $t('rose') }}</SelectOption>
-                        <SelectOption value="orange">{{ $t('orange') }}</SelectOption>
-                        <SelectOption value="yellow">{{ $t('yellow') }}</SelectOption>
-                        <SelectOption value="amber">{{ $t('amber') }}</SelectOption>
-                        <SelectOption value="lime">{{ $t('lime') }}</SelectOption>
-                        <SelectOption value="green">{{ $t('green') }}</SelectOption>
-                        <SelectOption value="emerald">{{ $t('emerald') }}</SelectOption>
-                        <SelectOption value="teal">{{ $t('teal') }}</SelectOption>
-                        <SelectOption value="cyan">{{ $t('cyan') }}</SelectOption>
-                        <SelectOption value="sky">{{ $t('sky') }}</SelectOption>
-                        <SelectOption value="blue">{{ $t('blue') }}</SelectOption>
-                        <SelectOption value="indigo">{{ $t('indigo') }}</SelectOption>
-                        <SelectOption value="purple">{{ $t('purple') }}</SelectOption>
-                        <SelectOption value="violet">{{ $t('violet') }}</SelectOption>
-                        <SelectOption value="fuchsia">{{ $t('fuchsia') }}</SelectOption>
-                        <SelectOption value="gray">{{ $t('gray') }}</SelectOption>
-                        <SelectOption value="slate">{{ $t('slate') }}</SelectOption>
-                        <SelectOption value="stone">{{ $t('stone') }}</SelectOption>
-                        <SelectOption value="neutral">{{ $t('neutral') }}</SelectOption>
-                        <SelectOption value="zinc">{{ $t('zinc') }}</SelectOption>
-                        <SelectOption value="light">{{ $t('light') }}</SelectOption>
-                        <SelectOption value="dark">{{ $t('dark') }}</SelectOption>
-                    </Select>
+                    <RadioGroup v-model:value="profile.theme.color" class="space-3">
+                        <!-- <div class="grid grid-cols-5 gap-3"> -->
+                        <RadioButton value="pink" class="!bg-pink-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="rose" class="!bg-rose-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="orange" class="!bg-orange-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="yellow" class="!bg-yellow-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="amber" class="!bg-amber-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="lime" class="!bg-lime-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="green" class="!bg-green-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="emerald" class="!bg-emerald-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="teal" class="!bg-teal-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="cyan" class="!bg-cyan-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="sky" class="!bg-sky-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="blue" class="!bg-blue-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="indigo" class="!bg-indigo-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="purple" class="!bg-purple-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="violet" class="!bg-violet-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="fuchsia" class="!bg-fuchsia-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="gray" class="!bg-gray-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="slate" class="!bg-slate-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="stone" class="!bg-stone-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="neutral" class="!bg-neutral-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="zinc" class="!bg-zinc-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="light" class="!bg-light-500 !w-6 !h-6 !p-0" />
+                        <RadioButton value="dark" class="!bg-dark-500 !w-6 !h-6 !p-0" />
+                        <!-- </div> -->
+                    </RadioGroup>
                 </FormItem>
                 <FormItem>
                     <template #label>
                         {{ $t('font') }}
                     </template>
-                    <Select v-model:value="profile.font">
-                        <SelectOption value="sofia">Sofia</SelectOption>
-                        <SelectOption value="roboto">Roboto</SelectOption>
-                        <SelectOption value="spaceMono">Space Mono</SelectOption>
-                        <SelectOption value="calibri">Calibri</SelectOption>
-                        <SelectOption value="helvetica">Helvetica</SelectOption>
-                        <SelectOption value="georgia">Georgia</SelectOption>
-                        <SelectOption value="vazir">Vazir</SelectOption>
+                    <Select v-model:value="profile.theme.font" :class="`font-${profile.theme.font}`">
+                        <SelectOption value="sofia" class="font-sofia">Sofia</SelectOption>
+                        <SelectOption value="roboto" class="font-roboto">Roboto</SelectOption>
+                        <SelectOption value="spaceMono" class="font-spaceMono">Space Mono</SelectOption>
+                        <SelectOption value="calibri" class="font-calibri">Calibri</SelectOption>
+                        <SelectOption value="helvetica" class="font-helvetica">Helvetica</SelectOption>
+                        <SelectOption value="georgia" class="font-georgia">Georgia</SelectOption>
+                        <SelectOption value="vazir" class="font-vazir">Vazir</SelectOption>
                     </Select>
                 </FormItem>
             </CollapsePanel>
@@ -498,7 +500,7 @@
 import stores from '@/stores'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
-import { Input, FormItem, Form, DatePicker, Card, Divider, Select, SelectOption, Textarea, Button, Upload, Collapse, CollapsePanel, message } from 'ant-design-vue';
+import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Dropdown, Menu, RadioGroup, RadioButton } from 'ant-design-vue';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
@@ -582,193 +584,158 @@ const { prefixCls } = useDesign('the-side')
 </script>
 <style lang="less">
 @prefix: ~'amirmaghami-the-side';
-
 .@{prefix} {
     &__fullname {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
-
     &__title {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
-
     &__about {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
-
     &__contacts {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
-
         .ant-select-selection-item {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .ant-input-prefix {
             width: 4rem;
             transform: translateX(-10px);
         }
-
         .ant-select-selector {
             border: 0 !important;
         }
     }
-
     &__skills-summary {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
-
     &__educations {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
-
     &__tech-experiences {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
-
     &__socials {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
-
         .ant-select-selection-item {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .ant-input-prefix {
             width: 4rem;
             transform: translateX(-10px);
         }
-
         .ant-select-selector {
             border: 0 !important;
         }
     }
-
     &__software-knowledges {
         .ant-collapse-header {
             justify-content: space-between;
-
             // align-items: center !important;
             &>div {
                 //     display: flex;
                 //     justify-content: center;
                 //     align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
-
         .amirmaghami-the-side__software-knowledges-item {
             .ant-collapse-header {
-
                 // justify-content: space-between;
                 // align-items: center !important;
                 &>div {
@@ -776,42 +743,43 @@ const { prefixCls } = useDesign('the-side')
                     // justify-content: center;
                     // align-items: center;
                 }
-
                 .header__title {
                     // order: -1;
                 }
             }
         }
     }
-
     &__experiences {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
-
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-
             .header__title {
                 order: -1;
             }
         }
     }
+    &__theme {
+        .ant-collapse-header {
+            justify-content: space-between;
+            align-items: center !important;
+            &>div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .header__title {
+                order: -1;
+            }
+        }
+        .ant-radio-group>label {
+            margin: 0.2rem;
+        }
+    }
 }
 
-// .ant-collapse {
-//     background-color: #F1F1F1 !important;
-//     border-radius: 0 !important;
-// }
-// .ant-col.ant-form-item-label label {
-//     display: flex;
-//     justify-content: space-between;
-// }
-// .ant-collapse-header {
-//     display: grid !important;
-//     grid-template-columns: max-content 1fr max-content;
-// }
 </style>

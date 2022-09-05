@@ -2,9 +2,12 @@
     <nav class="py-3 shadow relative z-50">
         <div class="mx-auto px-3">
             <div class="flex justify-between items-center">
-                <div class="item">
+                <div class="flex gap-x-3">
                     <Button type="primary" @click="updatePrsonal">
                         Update
+                    </Button>
+                    <Button type="primary" v-print="'#printMe'">
+                        Print CV
                     </Button>
                 </div>
                 <div class="flex items-center gap-x-4">
@@ -37,7 +40,6 @@
                             <Menu>
                                 <MenuItem>
                                 <div class="flex gap-x-3 items-center">
-
                                 </div>
                                 </MenuItem>
                                 <MenuItem>
@@ -69,12 +71,9 @@ const profileStore = stores.useProfileStore()
 const updatePrsonal = () => {
     profileStore.updatePersonal()
 }
-
 const { locale } = useI18n()
-
 const currentLocale = ref('en')
 const locales = reactive(["fa", "en"])
-
 const html = window.document.getElementsByTagName('html')
 const changeLocale = () => {
     locale.value = currentLocale.value

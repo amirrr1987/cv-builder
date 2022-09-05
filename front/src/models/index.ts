@@ -8,7 +8,7 @@ export interface ProfileModel {
 export interface Profile {
     fullName: FullName;
     _id: string;
-    theme: string;
+    theme: Theme;
     font: string;
     image: string;
     about: string;
@@ -23,7 +23,10 @@ export interface Profile {
     experiences: Experience[];
     socials: Social[];
 }
-
+export interface Theme {
+    color: string;
+    font: string;
+}
 export interface Address {
     country: string;
     province: string;

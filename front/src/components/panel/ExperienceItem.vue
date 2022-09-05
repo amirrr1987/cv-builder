@@ -40,8 +40,8 @@ interface Props {
   companyName: string;
   companyUrl: string;
   description: string;
-  beginDate: string;
-  endDate: string;
+  beginDate?: string;
+  endDate?: string;
   skills: any;
 
 }
