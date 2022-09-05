@@ -1,9 +1,10 @@
 const Joi = require("joi");
 const { useProfileModel } = require("../../models");
+const { useProfileValidator } = require("../../validators");
 
 class Controller {
 
-    async getAll(req, res) {
+    async GetAllProfile(req, res) {
         try {
             const resualt = await useProfileModel
                 .find()
@@ -18,7 +19,7 @@ class Controller {
         }
     }
 
-    async getProfile(req, res) {
+    async GetProfile(req, res) {
         try {
             const resualt = await useProfileModel
                 .findById(req.params.profileId)
@@ -31,8 +32,9 @@ class Controller {
         }
     }
 
-    async postAll(req, res) {
+    async CreateProfile(req, res) {
         const { body } = req;
+
         let obj = {
             theme: {
                 color: body.theme.color,
@@ -125,20 +127,29 @@ class Controller {
                 }),
             ]
         }
+
+
+        try {
+            await useProfileValidator.valdateCreateProfile(obj)
+        } catch (error) {
+            res.send({ error: error.message })
+        }
+
         try {
             const item = await useProfileModel(obj)
             Object.assign(item, obj)
             console.log(item);
             await item.save();
             res.statusCode = 200;
-            res.send({
+            res.status(200).send({
                 message: "Created",
             });
         } catch (error) {
-            console.log(error);
+            res.send({ error: error.message })
         }
     }
-    async postProfile(req, res) {
+
+    async UpdateProfile(req, res) {
         const { body } = req;
         let obj = {
             _id: body._id,
@@ -248,6 +259,16 @@ class Controller {
 
         }
 
+    }
+
+
+    async DeleteProfile(req, res) {
+        try {
+            await useProfileModel.findByIdAndRemove(req.params.profileId);
+            res.status(200).send({ message: "delete success" })
+        } catch (error) {
+            res.send({ error: error });
+        }
     }
 }
 
