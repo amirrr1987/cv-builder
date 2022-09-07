@@ -2,10 +2,7 @@ import Services from '@/services'
 import { defineStore } from 'pinia'
 import type { ProfileModel } from '../models'
 import { message } from 'ant-design-vue';
-import { remove } from '@vue/shared';
-// import moment from 'moment'
-// import { ref } from 'vue';
-// let temp = ref(0);
+
 export const useProfileStore = defineStore({
   id: 'personal',
   state: () => <ProfileModel>({
@@ -19,7 +16,8 @@ export const useProfileStore = defineStore({
       font: "",
       theme: {
         color: "",
-        font: ""
+        font: "",
+        lang: ""
       },
       image: "",
       about: "",
@@ -69,8 +67,8 @@ export const useProfileStore = defineStore({
             url: ''
           },
           description: "",
-          beginDate: "",
-          endDate: "",
+          beginDate: Date(),
+          endDate: Date() ,
           skills: [{
             label: ''
           }]
@@ -201,7 +199,7 @@ export const useProfileStore = defineStore({
     },
     async postData() {
       try {
-        const { data } = await Services.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
+        const { data } = await Services.Profile.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
         await this.getData()
         message.success('Update data')
       } catch (error) {
@@ -210,7 +208,7 @@ export const useProfileStore = defineStore({
     },
     async getData() {
       try {
-        const { data } = await Services.GetPersonalApi(this.$state.profileId)
+        const { data } = await Services.Profile.GetPersonalApi(this.$state.profileId)
         Object.assign(this.$state.profile, data.payload)
       } catch (error) {
         console.log('🔥 error', error)

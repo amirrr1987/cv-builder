@@ -4,8 +4,13 @@ const router = express.Router();
 
 const { AuthController } = require("../../controllers");
 
-router.get("/", AuthController.getAll);
+router.get("/", AuthController.GetAuth);
 
-router.post("/", AuthController.postAll);
+router.post("/", AuthController.CreateAuth);
+
+router.put("/", AuthController.UpdateAuth);
+
+router.delete("/", AuthController.DeleteAuth);
+
 
 module.exports = router;

@@ -65,7 +65,7 @@
 import stores from '@/stores'
 import { Dropdown, Menu, MenuItem, Button, Select, SelectOption } from "ant-design-vue";
 import { Icon } from '@iconify/vue';
-import { onUnmounted, reactive, ref } from 'vue';
+import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import { useI18n } from "vue-i18n";
 const profileStore = stores.useProfileStore()
 const updatePrsonal = () => {
@@ -76,9 +76,17 @@ const currentLocale = ref('en')
 const locales = reactive(["fa", "en"])
 const html = window.document.getElementsByTagName('html')
 const changeLocale = () => {
+    
     locale.value = currentLocale.value
     html[0].classList.toggle('is-rtl')
 }
+onMounted(()=>{
+    // if (profileStore.$state.profile.theme.lang === "fa"){
+        // html[0].classList.toggle('is-rtl')
+    // }
+    locale.value = profileStore.$state.profile.theme.lang
+
+})
 onUnmounted(() => {
     html[0].classList.remove('is-rtl')
 })

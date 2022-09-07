@@ -1,9 +1,9 @@
 const Joi = require("joi");
 const { useAuthModel } = require("../../models");
-
+const { useAuthValidator } = require("../../validators");
 class Controller {
     
-    async getAll(req, res) {
+    async GetAuth(req, res) {
         const resualt = await useAuthModel
             .find()
             .sort({ _id: 1 })
@@ -11,7 +11,36 @@ class Controller {
         res.send(resualt);
     }
 
-    async postAll(req, res) {
+    async CreateAuth(req, res) {
+        const { body } = req;
+        let obj = {
+            email: body.email,
+            password: body.password,
+            repassword: body.repassword
+        }
+        try {
+            await useAuthValidator.valdateCreateAuth(obj)
+        }
+        catch (err) {
+            res.status(500).send({ error: error.message });
+        }
+
+        try {
+            const item = await useAuthModel(obj);
+            Object.assign(item, obj);
+            await item.save();
+            res.statusCode = 200;
+            res.status(200).send({
+              message: "Created",
+              item:item
+            });
+          } catch (error) {
+            res.status(500).send({ error: error.message });
+          }
+
+    }
+
+    async UpdateAuth(req, res) {
         const { body } = req;
         let obj = {
             email: body.email,
@@ -42,6 +71,15 @@ class Controller {
         }
 
     }
+
+    async DeleteAuth(req, res) {
+        try {
+          await useProfileModel.findByIdAndRemove(req.params.profileId);
+          res.status(200).send({ message: "delete success" });
+        } catch (error) {
+          res.send({ error: error });
+        }
+      }
 }
 
 
