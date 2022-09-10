@@ -136,7 +136,7 @@ class Controller {
     }
 
     try {
-      const item = await useProfileModel(obj);
+      const item = await new useProfileModel(obj);
       Object.assign(item, obj);
       await item.save();
       res.statusCode = 200;

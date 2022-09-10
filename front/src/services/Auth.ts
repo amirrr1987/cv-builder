@@ -31,27 +31,33 @@ const useAxios = (headers = {}): AxiosInstance => {
     return _axios
 }
 
-const PostAuthApi = async (user:object) => {
-    return await useAxios().post(`auth`, user)
+const LoginAuthApi = async (user:object) => {
+    return await useAxios().post(`auth/login`, user)
 }
 
-const setAuthApi = async (survey: any) => {
+const RegisterAuthApi = async (survey: any) => {
     return await useAxios().post(
-        `profile/`, survey
+        `auth/register`, survey
     )
 }
 
 const UpdateAuthApi = async (AuthId: string, AuthData: any) => {
     return await useAxios().put(
-        `profile/${AuthId}`, AuthData
+        `auth/update${AuthId}`, AuthData
+    )
+}
+const DeleteAuthApi = async (AuthId: string, AuthData: any) => {
+    return await useAxios().put(
+        `auth/delete${AuthId}`, AuthData
     )
 }
 
 const Services = {
     useAxios,
-    setAuthApi,
-    PostAuthApi,
-    UpdateAuthApi
+    LoginAuthApi,
+    RegisterAuthApi,
+    UpdateAuthApi,
+    DeleteAuthApi
 }
 
 export default Services

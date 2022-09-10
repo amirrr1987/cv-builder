@@ -72,9 +72,9 @@
                                 </Menu>
                             </template>
                         </Dropdown>
-                        <RouterLink to="/auth/login" class="font-medium text-base text-gray-600">Login</RouterLink>
-                        <RouterLink to="/auth/register"
-                            class="font-normal text-base bg-primary-600 text-primary-50 px-5 py-1 rounded-lg">Signup
+                            <RouterLink to="/auth/register" class="font-medium text-base text-gray-600">register</RouterLink>
+                        <RouterLink to="/auth/login"
+                            class="font-normal text-base bg-primary-600 text-primary-50 px-5 py-1 rounded-lg">login
                         </RouterLink>
                     </div>
                 </div>

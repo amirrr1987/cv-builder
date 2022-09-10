@@ -9,10 +9,10 @@ import type { AxiosError } from 'axios';
 export const useAuthStore = defineStore({
   id: 'personal',
   state: () => <AuthModel>({
-    user:{
-        email: '',
-        password: "",
-        repassword: ""
+    user: {
+      mobile: '',
+      password: "",
+      repassword: ""
     }
   }),
   getters: {
@@ -20,19 +20,24 @@ export const useAuthStore = defineStore({
   },
   actions: {
     async login() {
-        try {
-          const { data } = await Services.Auth.PostAuthApi(this.$state.user)
-
-          console.log(data);
-          
-          message.success('user corrected')
-        } catch (e) {
-          message.error((e as AxiosError).message)
-        }
-      },
-      setUser(user:any){
-        Object.assign(this.$state.user,user)
+      try {
+        const { data } = await Services.Auth.LoginAuthApi(this.$state.user)
+        message.success('user corrected', data)
+      } catch (e) {
+        message.error((e as AxiosError).message)
       }
+    },
+    async register() {
+      try {
+        const { data } = await Services.Auth.RegisterAuthApi(this.$state.user)
+        message.success('user corrected', data)
+      } catch (e) {
+        message.error((e as AxiosError).message)
+      }
+    },
+    setUser(user: any) {
+      Object.assign(this.$state.user, user)
+    }
 
   }
 })

@@ -3,7 +3,7 @@
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-                    alt="logo">
+                    alt="logo" />
                 ResumeIT
             </a>
             <div
@@ -13,48 +13,83 @@
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Sign in to your account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                email</label>
-                            <input type="email" name="email" id="email"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com" >
-                        </div>
-                        <div>
-                            <label for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox"
-                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                        >
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
-                                </div>
-                            </div>
-                            <a href="#"
-                                class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
-                                password?</a>
-                        </div>
-                        <button type="submit"
-                            class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign
-                            in</button>
-                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+
+                    <Form :model="formState" name="basic" layout="vertical" autocomplete="off" @finish="onFinish"
+                        @finishFailed="onFinishFailed">
+                        <FormItem label="mobile" name="mobile" :rules="[
+                          { required: true, message: 'Please input your mobile!' },
+                        ]">
+                            <Input v-model:value="formState.mobile" />
+                        </FormItem>
+
+                        <FormItem label="Password" name="password" :rules="[
+                          { required: true, message: 'Please input your password!' },
+                        ]">
+                            <InputPassword v-model:value="formState.password" />
+                        </FormItem>
+
+                        <FormItem label="rePassword" name="repassword" :rules="[
+                          { required: true, message: 'Please input your password!' },
+                        ]">
+                            <InputPassword v-model:value="formState.repassword" />
+                        </FormItem>
+
+                        <FormItem>
+                            <Button type="primary" html-type="submit">Submit</Button>
+                        </FormItem>
+                        <p class="text-sm font-light text-gray-500 dark:text-yellow-400">
                             Don’t have an account yet?
                             <RouterLink to="/auth/register"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up
                             </RouterLink>
                         </p>
-                    </form>
+                    </Form>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+import {
+    Form,
+    FormItem,
+    Input,
+    InputPassword,
+    Checkbox,
+    Button,
+} from "ant-design-vue";
+import { reactive } from "vue";
+import stores from "@/stores";
+import { useRouter } from "vue-router";
+
+interface FormState {
+    mobile: string;
+    password: string;
+    repassword: string;
+}
+
+const formState = reactive<FormState>({
+    mobile: "",
+    password: "",
+    repassword: "",
+});
+const router = useRouter();
+
+const onFinish = async (values: any) => {
+    // console.log("Success:", values);
+
+    try {
+        await stores.useAuthStore().setUser(formState);
+        await stores.useAuthStore().register().then(() => {
+            router.push("/");
+        })
+
+    } catch (error) { }
+};
+
+const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+};
+
+</script>

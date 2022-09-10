@@ -1,42 +1,95 @@
 const Joi = require("joi");
 const { useAuthModel } = require("../../models");
 const { useAuthValidator } = require("../../validators");
+const _ = require("lodash")
+const bcrypt = require("bcrypt")
 class Controller {
-    
-    async GetAuth(req, res) {
-        const resualt = await useAuthModel
-            .find()
-            .sort({ _id: 1 })
-        res.statusCode = 200;
-        res.send(resualt);
+
+    async LoginAuth(req, res) {
+        const {body} = req
+        let obj = _.pick(body, ["mobile", "password"])
+
+
+        try {
+            await useAuthValidator.valdateRegisterAuth(obj)
+            console.log(obj);
+            console.log(obj);
+        } catch (error) {
+            console.log(obj);
+            res.status(500).send({ error: error.message });
+        }
+
+
+
+        try {
+            let auth = await useAuthModel.findOne({ mobile: body.mobile })
+            if (!auth) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
+        } catch (error) {
+            res.status(500).send({ message: error.message })
+        }
+
+
+        try {
+            const result = await bcrypt.compare(obj.password, auth.password)
+            if (!result) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
+
+            res.status(200).send(true)
+
+        } catch (error) {
+            res.status(500).send({ error: error.message });
+        }
+
+        try {
+            let auth = await new useAuthModel(obj);
+            Object.assign(auth, obj);
+            const salt = await bcrypt.genSalt(10)
+            const password = await bcrypt.hash(auth.password, salt)
+            auth.password = password
+            await auth.save();
+            res.status(200).send({
+                message: "Created",
+                auth: _.pick(auth, ["mobile", "_id"])
+            });
+        } catch (error) {
+            res.status(500).send({ error: error });
+        }
+
     }
 
-    async CreateAuth(req, res) {
+    async RegisterAuth(req, res) {
         const { body } = req;
-        let obj = {
-            email: body.email,
-            password: body.password,
-            repassword: body.repassword
-        }
+        let obj = _.pick(req.body, ["mobile", "password"])
+
+
         try {
-            await useAuthValidator.valdateCreateAuth(obj)
+            await useAuthValidator.valdateRegisterAuth(obj)
+        } catch (error) {
+            res.status(400).send({ error: error.message });
         }
-        catch (err) {
-            res.status(500).send({ error: error.message });
+
+
+        let auth;
+        try {
+            auth = await useAuthModel.findOne({ mobile: body.mobile })
+            if (auth) return res.status(400).send({ message: "این کاربر قبلا ثبت نام شده" })
+        } catch (error) {
+            res.status(400).send({ message: error.message })
         }
 
         try {
-            const item = await useAuthModel(obj);
-            Object.assign(item, obj);
-            await item.save();
-            res.statusCode = 200;
+            auth = await new useAuthModel(obj);
+            Object.assign(auth, obj);
+            const salt = await bcrypt.genSalt(10)
+            const password = await bcrypt.hash(auth.password, salt)
+            auth.password = password
+            await auth.save();
             res.status(200).send({
-              message: "Created",
-              item:item
+                message: "Created",
+                auth: _.pick(auth, ["mobile", "_id"])
             });
-          } catch (error) {
-            res.status(500).send({ error: error.message });
-          }
+        } catch (error) {
+            res.status(500).send({ error: error });
+        }
 
     }
 
@@ -74,12 +127,12 @@ class Controller {
 
     async DeleteAuth(req, res) {
         try {
-          await useProfileModel.findByIdAndRemove(req.params.profileId);
-          res.status(200).send({ message: "delete success" });
+            await useProfileModel.findByIdAndRemove(req.params.profileId);
+            res.status(200).send({ message: "delete success" });
         } catch (error) {
-          res.send({ error: error });
+            res.send({ error: error });
         }
-      }
+    }
 }
 
 

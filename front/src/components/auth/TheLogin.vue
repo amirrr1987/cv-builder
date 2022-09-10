@@ -33,13 +33,13 @@
             @finishFailed="onFinishFailed"
           >
             <FormItem
-              label="email"
-              name="email"
+              label="mobile"
+              name="mobile"
               :rules="[
-                { required: true, message: 'Please input your username!' },
+                { required: true, message: 'Please input your mobile!' },
               ]"
             >
-              <Input v-model:value="formState.email" />
+              <Input v-model:value="formState.mobile" />
             </FormItem>
 
             <FormItem
@@ -52,15 +52,7 @@
               <InputPassword v-model:value="formState.password" />
             </FormItem>
 
-            <FormItem
-              label="rePassword"
-              name="repassword"
-              :rules="[
-                { required: true, message: 'Please input your password!' },
-              ]"
-            >
-              <InputPassword v-model:value="formState.repassword" />
-            </FormItem>
+
 
             <FormItem>
               <Button type="primary" html-type="submit">Submit</Button>
@@ -94,13 +86,13 @@ import stores from "@/stores";
 import { useRouter } from "vue-router";
 
 interface FormState {
-  email: string;
+  mobile: string;
   password: string;
   repassword: string;
 }
 
 const formState = reactive<FormState>({
-  email: "",
+  mobile: "",
   password: "",
   repassword: "",
 });
@@ -111,12 +103,15 @@ const onFinish = async (values: any) => {
 
   try {
     await stores.useAuthStore().setUser(formState);
-    await stores.useAuthStore().login();
-    router.push("/");
+    await stores.useAuthStore().login().then(() => {
+      router.push("/");
+    })
+    
   } catch (error) {}
 };
 
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
+
 </script>

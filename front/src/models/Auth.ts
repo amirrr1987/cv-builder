@@ -2,7 +2,7 @@ export interface AuthModel {
     user: User;
 }
 interface User {
-    email: string;
+    mobile: string;
     password: string;
     repassword: string;
 }
