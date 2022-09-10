@@ -3,26 +3,24 @@ const { useAuthModel } = require("../../models");
 const { useAuthValidator } = require("../../validators");
 const _ = require("lodash")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 class Controller {
 
     async LoginAuth(req, res) {
-        const {body} = req
+        const { body } = req
         let obj = _.pick(body, ["mobile", "password"])
 
 
         try {
-            await useAuthValidator.valdateRegisterAuth(obj)
-            console.log(obj);
-            console.log(obj);
+            await useAuthValidator.valdateLoginAuth(obj)
         } catch (error) {
-            console.log(obj);
-            res.status(500).send({ error: error.message });
+            res.status(400).send({ error: error.message });
         }
 
 
-
+        let auth;
         try {
-            let auth = await useAuthModel.findOne({ mobile: body.mobile })
+            auth = await useAuthModel.findOne({ mobile: obj.mobile })
             if (!auth) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
         } catch (error) {
             res.status(500).send({ message: error.message })
@@ -33,32 +31,28 @@ class Controller {
             const result = await bcrypt.compare(obj.password, auth.password)
             if (!result) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
 
-            res.status(200).send(true)
+
+            const data = {
+                _id: auth._id,
+                mobile: auth.mobile
+            }
+
+            const token = jwt.sign(data, "amirMaghami")
+
+            res.header("X-Auth-token", token).status(200).send({
+      
+                scsess: true
+            })
 
         } catch (error) {
             res.status(500).send({ error: error.message });
-        }
-
-        try {
-            let auth = await new useAuthModel(obj);
-            Object.assign(auth, obj);
-            const salt = await bcrypt.genSalt(10)
-            const password = await bcrypt.hash(auth.password, salt)
-            auth.password = password
-            await auth.save();
-            res.status(200).send({
-                message: "Created",
-                auth: _.pick(auth, ["mobile", "_id"])
-            });
-        } catch (error) {
-            res.status(500).send({ error: error });
         }
 
     }
 
     async RegisterAuth(req, res) {
         const { body } = req;
-        let obj = _.pick(req.body, ["mobile", "password"])
+        let obj = _.pick(body, ["mobile", "password"])
 
 
         try {
@@ -70,7 +64,7 @@ class Controller {
 
         let auth;
         try {
-            auth = await useAuthModel.findOne({ mobile: body.mobile })
+            auth = await useAuthModel.findOne({ mobile: obj.mobile })
             if (auth) return res.status(400).send({ message: "این کاربر قبلا ثبت نام شده" })
         } catch (error) {
             res.status(400).send({ message: error.message })
@@ -83,9 +77,16 @@ class Controller {
             const password = await bcrypt.hash(auth.password, salt)
             auth.password = password
             await auth.save();
-            res.status(200).send({
+            const data = {
+                _id: auth._id,
+                mobile: auth.mobile
+            }
+
+            const token = jwt.sign(data, "amirMaghami")
+
+            res.header("X-Auth-token", token).status(200).send({
                 message: "Created",
-                auth: _.pick(auth, ["mobile", "_id"])
+                auth: _.pick(auth, ["mobile", "_id"]),
             });
         } catch (error) {
             res.status(500).send({ error: error });
