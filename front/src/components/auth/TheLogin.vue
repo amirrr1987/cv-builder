@@ -1,54 +1,28 @@
 <template>
   <section class="bg-gray-50 dark:bg-gray-900">
-    <div
-      class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
-    >
-      <a
-        href="#"
-        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-      >
-        <img
-          class="w-8 h-8 mr-2"
-          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-          alt="logo"
-        />
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+        <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
         ResumeIT
       </a>
       <div
-        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
-      >
+        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1
-            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-          >
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Sign in to your account
           </h1>
 
-          <Form
-            :model="formState"
-            name="basic"
-            layout="vertical"
-            autocomplete="off"
-            @finish="onFinish"
-            @finishFailed="onFinishFailed"
-          >
-            <FormItem
-              label="mobile"
-              name="mobile"
-              :rules="[
-                { required: true, message: 'Please input your mobile!' },
-              ]"
-            >
+          <Form :model="formState" name="basic" layout="vertical" autocomplete="off" @finish="onFinish"
+            @finishFailed="onFinishFailed">
+            <FormItem label="mobile" name="mobile" :rules="[
+              { required: true, message: 'Please input your mobile!' },
+            ]">
               <Input v-model:value="formState.mobile" />
             </FormItem>
 
-            <FormItem
-              label="Password"
-              name="password"
-              :rules="[
-                { required: true, message: 'Please input your password!' },
-              ]"
-            >
+            <FormItem label="Password" name="password" :rules="[
+              { required: true, message: 'Please input your password!' },
+            ]">
               <InputPassword v-model:value="formState.password" />
             </FormItem>
 
@@ -59,10 +33,8 @@
             </FormItem>
             <p class="text-sm font-light text-gray-500 dark:text-yellow-400">
               Don’t have an account yet?
-              <RouterLink
-                to="/auth/register"
-                class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >Sign up
+              <RouterLink to="/auth/register"
+                class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up
               </RouterLink>
             </p>
           </Form>
@@ -98,16 +70,28 @@ const formState = reactive<FormState>({
 });
 const router = useRouter();
 
+
+const authStore = stores.useAuthStore();
+
 const onFinish = async (values: any) => {
   // console.log("Success:", values);
 
   try {
-    await stores.useAuthStore().setUser(formState);
-    await stores.useAuthStore().login().then(() => {
+    await authStore.setUser(formState);
+    await authStore.login()
+
+    if (stores.useAuthStore().$state.isLogin) {
+      router.push("/panel");
+      authStore.isLoginHandler(false)
+    }
+    else {
       router.push("/");
-    })
-    
-  } catch (error) {}
+    }
+
+
+  } catch (error) {
+
+  }
 };
 
 const onFinishFailed = (errorInfo: any) => {

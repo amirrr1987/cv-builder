@@ -13,7 +13,8 @@ export const useAuthStore = defineStore({
       mobile: '',
       password: "",
       repassword: ""
-    }
+    },
+    isLogin: false
   }),
   getters: {
 
@@ -23,6 +24,7 @@ export const useAuthStore = defineStore({
       try {
         const { data } = await Services.Auth.LoginAuthApi(this.$state.user)
         message.success('user corrected', data)
+        this.$state.isLogin = true
       } catch (e) {
         message.error((e as AxiosError).message)
       }
@@ -37,6 +39,9 @@ export const useAuthStore = defineStore({
     },
     setUser(user: any) {
       Object.assign(this.$state.user, user)
+    },
+    isLoginHandler(state:boolean) {
+      this.$state.isLogin = state
     }
 
   }
