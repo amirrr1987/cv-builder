@@ -1,9 +1,12 @@
 <template>
     <Form layout="vertical" class="overflow-y-scroll" :class="[`${prefixCls}`]">
         <Collapse v-model:activeKey="activeKey" accordion>
+
             <CollapsePanel key="1" :class="[`${prefixCls}__fullname`]">
                 <template #header>
-                    <span class="header__title">{{ $t('yourName') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:user" />
+                        {{ $t('yourName') }}:</span>
                 </template>
                 <FormItem>
                     <template #label>
@@ -36,9 +39,12 @@
                     </Input>
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="2" :class="[`${prefixCls}__title`]">
                 <template #header>
-                    <span class="header__title">{{ $t('title') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:hourglass" />
+                        {{ $t('title') }}:</span>
                 </template>
                 <FormItem>
                     <template #label>
@@ -73,9 +79,11 @@
                     </Input>
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="3" :class="[`${prefixCls}__about`]">
                 <template #header>
-                    <span class="header__title">
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:me" />
                         {{ $t('aboutMe') }}:
                     </span>
                 </template>
@@ -83,9 +91,12 @@
                     <Textarea :rows="5" v-model:value="profile.about" />
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="4" :class="[`${prefixCls}__contacts`]">
                 <template #header>
-                    <span class="header__title">{{ $t('contactMe') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:phone" />
+                        {{ $t('contactMe') }}:</span>
                 </template>
                 <FormItem>
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -132,9 +143,12 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="5" :class="[`${prefixCls}__skills-summary`]">
                 <template #header>
-                    <span class="header__title">{{ $t('skillsSummary') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:star" />
+                        {{ $t('skillsSummary') }}:</span>
                 </template>
                 <FormItem label="Skills Summary">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -171,9 +185,12 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="6" :class="[`${prefixCls}__educations`]">
                 <template #header>
-                    <span class="header__title">{{ $t('educations') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:hat" />
+                        {{ $t('educations') }}:</span>
                 </template>
                 <FormItem label="Educations">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -210,9 +227,12 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="7" :class="[`${prefixCls}__tech-experiences`]">
                 <template #header>
-                    <span class="header__title">{{ $t('teachExperiences') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:book" />
+                        {{ $t('teachExperiences') }}:</span>
                 </template>
                 <FormItem label="Teach Experiences">
                     <div class="grid grid-cols-[1fr,max-content] gap-1">
@@ -249,9 +269,12 @@
                     </div>
                 </FormItem>
             </CollapsePanel>
+
             <CollapsePanel key="8" :class="[`${prefixCls}__socials`]">
                 <template #header>
-                    <span class="header__title">{{ $t('Social') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:app-switch" />
+                        {{ $t('Social') }}:</span>
                 </template>
                 <FormItem label="Social">
                     <draggable tag="div" :list="profile.socials" class="list-group" handle=".handle" item-key="index"
@@ -294,9 +317,27 @@
                     </Button>
                 </FormItem>
             </CollapsePanel>
+
+          
+     
+        </Collapse>
+
+        <div class="bg-white p-4">
+            <Divider class="" />
+            <div class="">
+                Main:
+            </div>
+        
+        </div>
+        
+        <Collapse v-model:activeKey="activeKey" accordion>
+
             <CollapsePanel key="9" :class="[`${prefixCls}__software-knowledges`]">
                 <template #header>
-                    <span class="header__title">{{ $t('softwareKnowledge') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:home" />
+                        {{ $t('softwareKnowledge') }}:
+                    </span>
                 </template>
                 <div class="grid grid-cols-[max-content,1fr]">
                     <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle"
@@ -314,7 +355,10 @@
                         <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
                             <CollapsePanel>
                                 <template #header>
-                                    <span class="header__title">{{ item.label }}</span>
+                                    <span class="header__title flex items-center gap-x-2">
+                                        <Icon icon="icon-park-outline:home" />
+                                        {{ item.label }}
+                                    </span>
                                 </template>
                                 <FormItem label="Software Knowledge Title">
                                     <Input v-model:value="item.label" type="text" class="mb-4">
@@ -365,7 +409,8 @@
             </CollapsePanel>
             <CollapsePanel key="10" :class="[`${prefixCls}__experiences`]">
                 <template #header>
-                    <span class="header__title">{{ $t('experiences') }}::</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="icon-park-outline:code" />{{ $t('experiences') }}::</span>
                 </template>
                 <FormItem>
                     <template #label>
@@ -444,7 +489,8 @@
             </CollapsePanel>
             <CollapsePanel key="11" :class="[`${prefixCls}__theme`]">
                 <template #header>
-                    <span class="header__title">{{ $t('theme') }}:</span>
+                    <span class="header__title flex items-center gap-x-2">
+                        <Icon icon="pepicons:paint-pallet" />{{ $t('theme') }}:</span>
                 </template>
                 <FormItem>
                     <template #label>
@@ -500,7 +546,7 @@
 import stores from '@/stores'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
-import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Dropdown, Menu, RadioGroup, RadioButton } from 'ant-design-vue';
+import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Divider, RadioGroup, RadioButton } from 'ant-design-vue';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
@@ -584,158 +630,193 @@ const { prefixCls } = useDesign('the-side')
 </script>
 <style lang="less">
 @prefix: ~'amirmaghami-the-side';
+
 .@{prefix} {
     &__fullname {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__title {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__about {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__contacts {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
+
         .ant-select-selection-item {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .ant-input-prefix {
             width: 4rem;
             transform: translateX(-10px);
         }
+
         .ant-select-selector {
             border: 0 !important;
         }
     }
+
     &__skills-summary {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__educations {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__tech-experiences {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__socials {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
+
         .ant-select-selection-item {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .ant-input-prefix {
             width: 4rem;
             transform: translateX(-10px);
         }
+
         .ant-select-selector {
             border: 0 !important;
         }
     }
+
     &__software-knowledges {
         .ant-collapse-header {
             justify-content: space-between;
+
             // align-items: center !important;
             &>div {
                 //     display: flex;
                 //     justify-content: center;
                 //     align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
+
         .amirmaghami-the-side__software-knowledges-item {
             .ant-collapse-header {
+
                 // justify-content: space-between;
                 // align-items: center !important;
                 &>div {
@@ -743,43 +824,50 @@ const { prefixCls } = useDesign('the-side')
                     // justify-content: center;
                     // align-items: center;
                 }
+
                 .header__title {
                     // order: -1;
                 }
             }
         }
     }
+
     &__experiences {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
     }
+
     &__theme {
         .ant-collapse-header {
             justify-content: space-between;
             align-items: center !important;
+
             &>div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .header__title {
                 order: -1;
             }
         }
+
         .ant-radio-group>label {
             margin: 0.2rem;
         }
     }
 }
-
 </style>
