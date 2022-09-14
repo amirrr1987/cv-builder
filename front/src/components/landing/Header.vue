@@ -23,34 +23,13 @@
                     </ul>
                     <div class="flex justify-end gap-x-5 items-center">
 
-                        <Dropdown>
-                            <a class="ant-dropdown-link text-xl" @click.prevent>
-                                <Icon icon="fa:language" />
 
-                            </a>
-                            <template #overlay>
-                                <Menu>
-                                    <MenuItem>
-                                    <div class="flex gap-x-3 items-center">
-                                        <Icon icon="circle-flags:us" />
-                                        <span>English</span>
-                                    </div>
-                                    </MenuItem>
-
-                                    <MenuItem>
-                                    <div class="flex gap-x-3 items-center">
-
-                                        <Icon icon="emojione:flag-for-iran" />
-                                        Persian
-                                    </div>
-                                    </MenuItem>
-                                </Menu>
-                            </template>
-                        </Dropdown>
                         <Dropdown>
 
-                            <Button type="text">
-                                <Icon icon="iconoir:profile-circled" />
+                            <Button type="text" >
+                                <template #icon>
+                                    <Icon icon="fa:language" />
+                                </template>
 
                             </Button>
                             <template #overlay>
@@ -72,10 +51,11 @@
                                 </Menu>
                             </template>
                         </Dropdown>
-                            <RouterLink to="/auth/register" class="font-medium text-base text-gray-600">register</RouterLink>
+
                         <RouterLink to="/auth/login"
-                            class="font-normal text-base bg-primary-600 text-primary-50 px-5 py-1 rounded-lg">login
+                            class="font-normal text-base bg-blue-500 text-blue-50 px-5 py-1 rounded-lg">login
                         </RouterLink>
+
                     </div>
                 </div>
             </div>
@@ -85,7 +65,7 @@
 
 <script setup lang="ts">
 
-import { Dropdown, Menu, MenuItem } from "ant-design-vue";
+import { Dropdown, Menu, MenuItem,Button } from "ant-design-vue";
 
 import { Icon } from '@iconify/vue';
 </script>

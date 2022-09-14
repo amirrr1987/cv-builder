@@ -32,108 +32,89 @@ class Controller {
     }
   }
 
-  async CreateProfile(req, res) {
-    const { body } = req;
+  async CreateProfile(useId) {
+
 
     let obj = {
+      user_id: useId,
       theme: {
-        color: body.theme.color,
-        font: body.theme.font,
-        lang: body.theme.lang,
+        color: '',
+        font: '',
+        lang: '',
       },
-      image: body.image,
-      about: body.about,
-      title: body.title,
-      subTitle: body.subTitle,
+      image: '',
+      about: '',
+      title: '',
+      subTitle: '',
       fullName: {
-        first: body.fullName.first,
-        last: body.fullName.last,
+        first: '',
+        last: '',
       },
       address: {
-        country: body.address.country,
-        province: body.address.province,
-        region: body.address.region,
+        country: '',
+        province: '',
+        region: '',
       },
       skillsSummary: [
-        ...body.skillsSummary.map((item) => {
-          return {
-            label: item.label,
-          };
-        }),
+        {
+          label: '',
+        }
       ],
       contacts: [
-        ...body.contacts.map((item) => {
-          return {
-            label: item.label,
-            icon: item.icon,
-          };
-        }),
+        {
+          label: '',
+          icon: ''
+        }
       ],
       educations: [
-        ...body.educations.map((item) => {
-          return {
-            label: item.label,
-          };
-        }),
+        {
+          label: '',
+        }
       ],
       techExperiences: [
-        ...body.techExperiences.map((item) => {
-          return {
-            label: item.label,
-          };
-        }),
+        {
+          label: '',
+        }
       ],
-      softwareKnowledges: [
-        ...body.softwareKnowledges.map((item) => {
-          return {
-            label: item.label,
-            skills: [
-              ...item.skills.map((single) => {
-                return {
-                  label: single.label,
-                };
-              }),
-            ],
-          };
-        }),
-      ],
+      softwareKnowledges: [{
+        label: '',
+        skills: [
+          {
+            label: '',
+          }
+        ],
+      }],
       experiences: [
-        ...body.experiences.map((item) => {
-          return {
-            title: item.title,
-            company: {
-              name: item.company.name,
-              url: item.company.url,
-            },
-            description: item.description,
-            beginDate: item.beginDate,
-            endDate: item.endDate,
-            skills: [
-              ...item.skills.map((single) => {
-                return {
-                  label: single.label,
-                };
-              }),
-            ],
-          };
-        }),
+        {
+          title: '',
+          company: {
+            name: '',
+            url: '',
+          },
+          description: '',
+          beginDate: '',
+          endDate: '',
+          skills: [
+            {
+              label: '',
+            }
+          ],
+        }
       ],
       socials: [
-        ...body.socials.map((item) => {
-          return {
-            label: item.label,
-            icon: item.icon,
-            link: item.link,
-          };
-        }),
+        {
+          label: '',
+          icon: '',
+          link: '',
+        }
       ],
     };
 
-    try {
-      await useProfileValidator.valdateCreateProfile(obj);
-    } catch (error) {
-      res.status(400).send({ error: error.message });
-    }
+    // try {
+    //   await useProfileValidator.valdateCreateProfile(obj);
+    // } catch (error) {
+    //   res.status(400).send({ error: error.message });
+    // }
 
     try {
       const item = await new useProfileModel(obj);

@@ -19,7 +19,7 @@ const useAxios = (headers = {}): AxiosInstance => {
             if (config.headers) {
                 // const token = getToken()
                 //debugger
-                // config.headers['Authorization'] = token
+                config.headers['x-auth-token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzIxYzljNGRjY2YzNDkzMjUzMGJiOTMiLCJtb2JpbGUiOiIzNCIsImlhdCI6MTY2MzE1ODcyNH0.x4lfLjTTSyLtBTinWJ-bQhwoF1mpuqb7A0aGzPSMYv4'
             }
             return config
         },

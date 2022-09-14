@@ -4,9 +4,11 @@ const router = express.Router();
 
 const { ProfileController } = require("../../controllers");
 
+const { Auth } = require("../../middlewares");
+
 // router.get("/", ProfileController.GetAllProfile);
 
-router.get("/:profileId", ProfileController.GetProfile);
+router.get("/:profileId", Auth, ProfileController.GetProfile);
 
 router.post("/", ProfileController.CreateProfile);
 

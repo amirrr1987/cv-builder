@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const schemaProfile = new mongoose.Schema({
+    user_id: { type: String, required: true, default: "" },
     theme: {
         type: Object, required: true, default: {
             color: { type: String, required: true, default: "blue" },

@@ -19,10 +19,10 @@ import Header from "@/components/panel/TheHeader.vue";
 const route = useRoute()
 const personalId = String(route.params.personalId)
 const profileStore = stores.useProfileStore()
-profileStore.setProfileId(personalId)
+
 onMounted(async () => {
     try {
-        await profileStore.getData()
+        await profileStore.getData(personalId)
     } catch (error) {
         console.log(error);
     }
@@ -30,4 +30,5 @@ onMounted(async () => {
 </script>
 
 <style>
+
 </style>

@@ -1,7 +1,7 @@
 import Services from '@/services'
 import { defineStore } from 'pinia'
 import type { AuthModel } from '../models'
-import { message } from 'ant-design-vue';
+
 import type { AxiosError } from 'axios';
 
 
@@ -20,27 +20,28 @@ export const useAuthStore = defineStore({
 
   },
   actions: {
-    async login() {
+    async login(user: any) {
       try {
-        const { data } = await Services.Auth.LoginAuthApi(this.$state.user)
-        message.success('user corrected', data)
-        this.$state.isLogin = true
+        const { data } = await Services.Auth.LoginAuthApi(user)
+        return data.data._id
       } catch (e) {
-        message.error((e as AxiosError).message)
+        console.log((e as AxiosError).message);
       }
     },
-    async register() {
+    async register(user: any) {
+      console.log('start');
+      
       try {
-        const { data } = await Services.Auth.RegisterAuthApi(this.$state.user)
-        message.success('user corrected', data)
+        const { data } = await Services.Auth.RegisterAuthApi(user)
+        return data.data._id
       } catch (e) {
-        message.error((e as AxiosError).message)
+        console.log((e as AxiosError).message);
       }
     },
     setUser(user: any) {
       Object.assign(this.$state.user, user)
     },
-    isLoginHandler(state:boolean) {
+    isLoginHandler(state: boolean) {
       this.$state.isLogin = state
     }
 

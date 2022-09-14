@@ -1,4 +1,5 @@
-import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import { message } from 'ant-design-vue'
+import Axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios'
 // import { getToken } from '/@/utils/auth'
 
 const APP_SURVEY_API_URL = 'http://localhost:5000/api/'
@@ -23,8 +24,9 @@ const useAxios = (headers = {}): AxiosInstance => {
             }
             return config
         },
-        (error) => {
-            return Promise.reject(error)
+        (e) => {
+            message.error((e as AxiosError).message)
+            return Promise.reject(e)
         },
     )
 

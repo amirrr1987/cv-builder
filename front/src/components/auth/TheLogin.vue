@@ -1,10 +1,10 @@
 <template>
   <section class="bg-gray-50 dark:bg-gray-900">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+      <RouterLink to="/" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
         <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
         ResumeIT
-      </a>
+      </RouterLink>
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -14,7 +14,7 @@
 
           <Form :model="formState" name="basic" layout="vertical" autocomplete="off" @finish="onFinish"
             @finishFailed="onFinishFailed">
-            <FormItem label="mobile" name="mobile" :rules="[
+            <FormItem label="Mobile" name="mobile" :rules="[
               { required: true, message: 'Please input your mobile!' },
             ]">
               <Input v-model:value="formState.mobile" />
@@ -52,10 +52,12 @@ import {
   InputPassword,
   Checkbox,
   Button,
+  message,
 } from "ant-design-vue";
 import { reactive } from "vue";
 import stores from "@/stores";
 import { useRouter } from "vue-router";
+import type { AxiosError } from "axios";
 
 interface FormState {
   mobile: string;
@@ -73,24 +75,12 @@ const router = useRouter();
 
 const authStore = stores.useAuthStore();
 
-const onFinish = async (values: any) => {
-  // console.log("Success:", values);
-
+const onFinish = async () => {
   try {
-    await authStore.setUser(formState);
-    await authStore.login()
-
-    if (stores.useAuthStore().$state.isLogin) {
-      router.push("/panel");
-      authStore.isLoginHandler(false)
-    }
-    else {
-      router.push("/");
-    }
-
-
-  } catch (error) {
-
+    const id = await authStore.login(formState)
+    router.push({ name: 'ThePanel', params: { personalId: id } });
+  } catch (e) {
+    message.error((e as AxiosError).message)
   }
 };
 

@@ -1,6 +1,6 @@
 
 export interface ProfileModel {
-    profileId: string;
+
     profile: Profile;
 }
 

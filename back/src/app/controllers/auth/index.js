@@ -1,9 +1,12 @@
 const Joi = require("joi");
 const { useAuthModel } = require("../../models");
 const { useAuthValidator } = require("../../validators");
+
 const _ = require("lodash")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const config = require('config')
+
 class Controller {
 
     async LoginAuth(req, res) {
@@ -39,13 +42,22 @@ class Controller {
 
             const token = jwt.sign(data, "amirMaghami")
 
-            res.header("X-Auth-token", token).status(200).send({
-      
-                scsess: true
-            })
+            res.header("x-auth-token", token).status(200).send(
+                {
+                    code: 200,
+                    data: data,
+                    message: "User created",
+                    success: true,
+                }
+            )
 
         } catch (error) {
-            res.status(500).send({ error: error.message });
+            res.status(500).send({
+                code: 500,
+                error: error.message,
+                success: false,
+
+            });
         }
 
     }
@@ -82,16 +94,24 @@ class Controller {
                 mobile: auth.mobile
             }
 
-            const token = jwt.sign(data, "amirMaghami")
+            const token = jwt.sign(data, config.get('tokenKey'))
 
-            res.header("X-Auth-token", token).status(200).send({
-                message: "Created",
-                auth: _.pick(auth, ["mobile", "_id"]),
-            });
+            res.header("x-auth-token", token).status(201).send(
+                {
+                    code: 201,
+                    data: _.pick(auth, ["mobile", "_id"]),
+                    message: "User created",
+                    success: true,
+          
+                }
+
+            );
+            
         } catch (error) {
             res.status(500).send({ error: error });
         }
-
+        
+      
     }
 
     async UpdateAuth(req, res) {
@@ -117,7 +137,17 @@ class Controller {
 
         try {
             await newUser.save()
-            res.send(newUser);
+            res.send(
+
+                {
+                    code: 200,
+                    data: newUser,
+                    message: "User updated",
+                    success: true,
+                }
+            );
+
+
         }
         catch (err) {
             console.log("error:", "save error");
@@ -129,7 +159,12 @@ class Controller {
     async DeleteAuth(req, res) {
         try {
             await useProfileModel.findByIdAndRemove(req.params.profileId);
-            res.status(200).send({ message: "delete success" });
+            res.status(200).send({
+                code: 200,
+                data: '',
+                message: "User deleted",
+                success: true,
+            });
         } catch (error) {
             res.send({ error: error });
         }

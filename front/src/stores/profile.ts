@@ -6,7 +6,7 @@ import { message } from 'ant-design-vue';
 export const useProfileStore = defineStore({
   id: 'personal',
   state: () => <ProfileModel>({
-    profileId: '',
+
     profile: {
       fullName: {
         first: '',
@@ -191,24 +191,22 @@ export const useProfileStore = defineStore({
       })
       this.profile.experiences[indexx].skills.splice(skillIndex, 1)
     },
-    setProfileId(id: string) {
-      this.profileId = id
-    },
-    updatePersonal() {
-      this.postData()
-    },
-    async postData() {
+
+    // updatePersonal() {
+    //   this.postData()
+    // },
+    // async postData(id) {
+    //   try {
+    //     const { data } = await Services.Profile.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
+    //     await this.getData(id)
+    //     message.success('Update data')
+    //   } catch (error) {
+    //     message.error('error update')
+    //   }
+    // },
+    async getData(id:string) {
       try {
-        const { data } = await Services.Profile.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
-        await this.getData()
-        message.success('Update data')
-      } catch (error) {
-        message.error('error update')
-      }
-    },
-    async getData() {
-      try {
-        const { data } = await Services.Profile.GetPersonalApi(this.$state.profileId)
+        const { data } = await Services.Profile.GetPersonalApi(id)
         Object.assign(this.$state.profile, data.payload)
       } catch (error) {
         console.log('🔥 error', error)
