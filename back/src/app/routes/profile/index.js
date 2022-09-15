@@ -10,10 +10,10 @@ const { Auth } = require("../../middlewares");
 
 router.get("/:profileId", Auth, ProfileController.GetProfile);
 
-router.post("/", ProfileController.CreateProfile);
+router.post("/", Auth, ProfileController.CreateProfile);
 
-router.put("/:profileId", ProfileController.UpdateProfile);
+router.put("/:profileId" ,Auth , ProfileController.UpdateProfile);
 
-router.delete("/:profileId", ProfileController.DeleteProfile);
+router.delete("/:profileId", Auth , ProfileController.DeleteProfile);
 
 module.exports = router;

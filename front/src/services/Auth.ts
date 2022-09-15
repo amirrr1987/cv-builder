@@ -21,6 +21,10 @@ const useAxios = (headers = {}): AxiosInstance => {
                 // const token = getToken()
                 //debugger
                 // config.headers['Authorization'] = token
+
+                console.log('config.headers');
+                console.log(config.headers);
+                console.log('config.headers');
             }
             return config
         },

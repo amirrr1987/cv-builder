@@ -13,11 +13,12 @@ export const useProfileStore = defineStore({
         last: ''
       },
       _id: "",
+      userId: '',
       font: "",
       theme: {
-        color: "",
-        font: "",
-        lang: ""
+        color: "red",
+        font: "Calibri",
+        lang: "en"
       },
       image: "",
       about: "",
@@ -68,7 +69,7 @@ export const useProfileStore = defineStore({
           },
           description: "",
           beginDate: Date(),
-          endDate: Date() ,
+          endDate: Date(),
           skills: [{
             label: ''
           }]
@@ -195,18 +196,24 @@ export const useProfileStore = defineStore({
     // updatePersonal() {
     //   this.postData()
     // },
-    // async postData(id) {
-    //   try {
-    //     const { data } = await Services.Profile.UpdatePersonalApi(this.$state.profileId, this.$state.profile)
-    //     await this.getData(id)
-    //     message.success('Update data')
-    //   } catch (error) {
-    //     message.error('error update')
-    //   }
-    // },
-    async getData(id:string) {
+    async updatePersonal() {
+      try {
+        const { data } = await Services.Profile.UpdatePersonalApi(this.$state.profile._id, this.$state.profile)
+        await this.getData(id)
+        message.success('Update data')
+      } catch (error) {
+        message.error('error update')
+      }
+    },
+    async getData(id: string) {
       try {
         const { data } = await Services.Profile.GetPersonalApi(id)
+        console.log('data');
+        console.log(data);
+        console.log(data);
+        console.log(data);
+        console.log('data');
+        
         Object.assign(this.$state.profile, data.payload)
       } catch (error) {
         console.log('🔥 error', error)

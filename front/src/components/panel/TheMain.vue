@@ -1,5 +1,5 @@
 <template>
-    <div id="printMe" class="overflow-y-scroll h-screen" :class="`font-${personalStore.$state.profile.theme.font}`">
+    <div id="printMe" class="overflow-y-scroll" :class="`font-${personalStore.$state.profile.theme.font}`">
         <main class="grid grid-cols-12 h-full">
             <section class=" col-span-3 grid grid-rows-silde gap-y-5  py-3 px-5"
                 :class="`bg-${personalStore.$state.profile.theme.color}-50`">

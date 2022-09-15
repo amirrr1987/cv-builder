@@ -6,7 +6,7 @@ const schemaProfile = new mongoose.Schema({
         type: Object, required: true, default: {
             color: { type: String, required: true, default: "blue" },
             font: { type: String, required: true, default: "vazir" },
-            lang: { type: String, required: true, default: "fa" }
+            lang: { type: String, required: true, default: "en" }
         }
     },
 

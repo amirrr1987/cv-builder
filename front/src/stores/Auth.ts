@@ -23,6 +23,7 @@ export const useAuthStore = defineStore({
     async login(user: any) {
       try {
         const { data } = await Services.Auth.LoginAuthApi(user)
+        localStorage.setItem('token',data.data.token)
         return data.data._id
       } catch (e) {
         console.log((e as AxiosError).message);

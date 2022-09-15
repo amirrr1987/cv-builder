@@ -7,6 +7,7 @@ export interface ProfileModel {
 export interface Profile {
     fullName: FullName;
     _id: string;
+    userId: string;
     theme: Theme;
     font: string;
     image: string;

@@ -84,10 +84,8 @@ const authStore = stores.useAuthStore();
 const onFinish = async () => {
     try {
         const id = await authStore.register(formState)
-
-        console.log('id',id);
-        
         router.push({ name: 'ThePanel', params: { personalId: id } });
+
     } catch (e) {
         message.error((e as AxiosError).message)
     }

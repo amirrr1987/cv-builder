@@ -1,40 +1,33 @@
 const Joi = require("joi");
 const { useProfileModel } = require("../../models");
 const { useProfileValidator } = require("../../validators");
-
 class Controller {
-  async GetAllProfile(req, res) {
-    try {
-      const resualt = await useProfileModel.find().sort({ _id: 1 });
-      res.statusCode = 200;
-      res.send({
-        payload: resualt,
-        message: "success",
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   async GetProfile(req, res) {
     try {
       const resualt = await useProfileModel.findById(req.params.profileId);
-
-      res.status(200).send({
-        payload: resualt,
-        message: "success",
-        time_request: Date.now(),
-        ip_address: req.connection.remoteAddress,
-        agent: req.get("User-Agent"),
-      });
+      if (resualt) {
+        res.status(200).send({
+          code: 200,
+          message: 'user found',
+          data: resualt,
+          success: true,
+        });
+      }
+      else {
+        res.status(200).send({
+          code: 200,
+          message: 'user not found',
+          data: null,
+          success: false,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
   async CreateProfile(useId) {
-
-
     let obj = {
       user_id: useId,
       theme: {
@@ -109,13 +102,11 @@ class Controller {
         }
       ],
     };
-
     // try {
     //   await useProfileValidator.valdateCreateProfile(obj);
     // } catch (error) {
     //   res.status(400).send({ error: error.message });
     // }
-
     try {
       const item = await new useProfileModel(obj);
       Object.assign(item, obj);
@@ -150,7 +141,6 @@ class Controller {
         province: body.address.province,
         region: body.address.region,
       },
-
       skillsSummary: [
         ...body.skillsSummary.map((item) => {
           return {
@@ -225,7 +215,6 @@ class Controller {
         }),
       ],
     };
-
     try {
       await useProfileValidator.valdateCreateProfile(obj);
     } catch (error) {
@@ -234,7 +223,6 @@ class Controller {
       // res.status(400).send({ error: error.message });
       res.status(400).send({ error: error.message });
     }
-
     try {
       const item = await useProfileModel.findById(req.params.profileId);
       Object.assign(item, obj);
@@ -259,6 +247,6 @@ class Controller {
       res.send({ error: error });
     }
   }
-}
 
+}
 module.exports = new Controller();
