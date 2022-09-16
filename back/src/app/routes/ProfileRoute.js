@@ -2,9 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-const { ProfileController } = require("../../controllers");
+const { ProfileController } = require("../controllers");
 
-const { Auth } = require("../../middlewares");
+const { Auth } = require("../middlewares");
 
 // router.get("/", ProfileController.GetAllProfile);
 

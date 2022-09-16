@@ -1,6 +1,6 @@
 
-const useProfileModel = require("./profile");
-const useAuthModel = require("./auth");
+const useProfileModel = require("./ProfileModel");
+const useAuthModel = require("./AuthModel");
 
 const models = {
     useProfileModel,

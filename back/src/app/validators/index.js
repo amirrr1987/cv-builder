@@ -1,6 +1,6 @@
 
-const useProfileValidator = require("./profile");
-const useAuthValidator = require("./auth");
+const useProfileValidator = require("./ProfileValidator");
+const useAuthValidator = require("./AuthValidator");
 
 
 const models = {

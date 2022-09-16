@@ -1,6 +1,6 @@
 const Joi = require("joi");
-const { useProfileModel } = require("../../models");
-const { useProfileValidator } = require("../../validators");
+const { useProfileModel } = require("../models");
+const { useProfileValidator } = require("../validators");
 class Controller {
 
   async GetProfile(req, res) {

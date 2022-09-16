@@ -1,15 +1,13 @@
 const Joi = require("joi");
-const { useAuthModel } = require("../../models");
-const { useAuthValidator } = require("../../validators");
+const { useAuthModel } = require("../models");
+const { useAuthValidator } = require("../validators");
 const _ = require("lodash")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const {tokenKey} = require('../../config')
+const { tokenKey } = require('../config')
 class Controller {
-
     async LoginAuth(req, res) {
-        const { body } = req
-        let obj = _.pick(body, ["mobile", "password"])
+        let obj = _.pick(req.body, ["mobile", "password"])
         try {
             await useAuthValidator.valdateLoginAuth(obj)
         } catch (error) {
@@ -33,7 +31,7 @@ class Controller {
             res.header("x-auth-token", token).status(200).send(
                 {
                     code: 200,
-                    data: { ...data , token: token},
+                    data: { ...data, token: token },
                     message: "User found",
                     success: true,
                 }
@@ -46,10 +44,8 @@ class Controller {
             });
         }
     }
-
     async RegisterAuth(req, res) {
-        const { body } = req;
-        let obj = _.pick(body, ["mobile", "password"])
+        let obj = _.pick(req.body, ["mobile", "password"])
         try {
             await useAuthValidator.valdateRegisterAuth(obj)
         } catch (error) {
@@ -60,33 +56,41 @@ class Controller {
             auth = await useAuthModel.findOne({ mobile: obj.mobile })
             if (auth) return res.status(400).send({ message: "این کاربر قبلا ثبت نام شده" })
         } catch (error) {
-            res.status(400).send({ message: error.message })
+            res.status(500).send({ error: error });
         }
         try {
             auth = await new useAuthModel(obj);
             Object.assign(auth, obj);
+        } catch (error) {
+            res.status(500).send({ error: error });
+        }
+        try {
             const salt = await bcrypt.genSalt(10)
             const password = await bcrypt.hash(auth.password, salt)
             auth.password = password
             await auth.save();
-            const data = {
-                _id: auth._id,
-                mobile: auth.mobile
-            }
-            const token = jwt.sign(data, tokenKey)
-            res.header("x-auth-token", token).status(201).send(
-                {
-                    code: 201,
-                    data: { ..._.pick(auth, ["mobile", "_id"]),token: token },
-                    message: "User created",
-                    success: true,
-                }
-            );
+        } catch (error) {
+            res.status(500).send({ error: error });
+        }
+        try {
+            const token = jwt.sign(obj.password, tokenKey)
+            res
+                .status(201)
+                .send(
+                    {
+                        code: 201,
+                        data: {
+                            ..._.pick(auth, ["mobile", "_id"]),
+                            token: token
+                        },
+                        message: "User created",
+                        success: true,
+                    }
+                );
         } catch (error) {
             res.status(500).send({ error: error });
         }
     }
-
     async UpdateAuth(req, res) {
         const { body } = req;
         let obj = {
@@ -121,7 +125,6 @@ class Controller {
             res.send({ error: err.message });
         }
     }
-
     async DeleteAuth(req, res) {
         try {
             await useProfileModel.findByIdAndRemove(req.params.profileId);
@@ -135,6 +138,5 @@ class Controller {
             res.send({ error: error });
         }
     }
-
 }
 module.exports = new Controller();

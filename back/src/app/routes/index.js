@@ -2,8 +2,8 @@ const express = require("express");
 const middleWare = require('../middlewares')
 const router = express.Router();
 
-const ProfileRoutes = require("./profile");
-const AuthRoutes = require("./auth");
+const ProfileRoutes = require("./ProfileRoute");
+const AuthRoutes = require("./AuthRoute");
 
 router.use("/api/profile", ProfileRoutes);
 

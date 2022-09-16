@@ -1,6 +1,6 @@
 
-const ProfileController = require("./profile");
-const AuthController = require("./auth");
+const ProfileController = require("./ProfileController");
+const AuthController = require("./AuthController");
 
 const controllers = {
     ProfileController,
