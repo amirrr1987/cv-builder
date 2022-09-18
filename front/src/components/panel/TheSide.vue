@@ -562,7 +562,7 @@ const handleChange = (info: UploadChangeParam) => {
     }
 };
 const dargHandler = (id: any) => {
-    console.log(id);
+
     profile.value.contacts.forEach((item, index) => {
         index = index + 1
     })

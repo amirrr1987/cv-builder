@@ -30,11 +30,9 @@ export const useAuthStore = defineStore({
       }
     },
     async register(user: any) {
-      console.log('start');
-      
       try {
         const { data } = await Services.Auth.RegisterAuthApi(user)
-        return data.data._id
+        return data
       } catch (e) {
         console.log((e as AxiosError).message);
       }

@@ -4,16 +4,14 @@ const router = express.Router();
 
 const { ProfileController } = require("../controllers");
 
-const { Auth } = require("../middlewares");
+const { AuthMiddleware } = require("../middlewares");
 
-// router.get("/", ProfileController.GetAllProfile);
+router.post("/", AuthMiddleware, ProfileController.CreateProfile);
 
-router.get("/:profileId", Auth, ProfileController.GetProfile);
+router.get("/:profileId", AuthMiddleware, ProfileController.GetProfile);
 
-router.post("/", Auth, ProfileController.CreateProfile);
+router.put("/:profileId", AuthMiddleware , ProfileController.UpdateProfile);
 
-router.put("/:profileId" ,Auth , ProfileController.UpdateProfile);
-
-router.delete("/:profileId", Auth , ProfileController.DeleteProfile);
+router.delete("/:profileId", AuthMiddleware , ProfileController.DeleteProfile);
 
 module.exports = router;

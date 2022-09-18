@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const { tokenKey } = require('../config')
 class Controller {
+    
     async LoginAuth(req, res) {
         let obj = _.pick(req.body, ["mobile", "password"])
         try {
@@ -44,6 +45,7 @@ class Controller {
             });
         }
     }
+
     async RegisterAuth(req, res) {
         let obj = _.pick(req.body, ["mobile", "password"])
         try {
@@ -91,6 +93,7 @@ class Controller {
             res.status(500).send({ error: error });
         }
     }
+
     async UpdateAuth(req, res) {
         const { body } = req;
         let obj = {
@@ -125,6 +128,7 @@ class Controller {
             res.send({ error: err.message });
         }
     }
+
     async DeleteAuth(req, res) {
         try {
             await useProfileModel.findByIdAndRemove(req.params.profileId);
@@ -138,5 +142,6 @@ class Controller {
             res.send({ error: error });
         }
     }
+
 }
 module.exports = new Controller();

@@ -85,19 +85,6 @@ export const useProfileStore = defineStore({
     }
   }),
   getters: {
-    // getYears: (state) => state.profile.experiences.map((item) => {
-    //   const startTime = moment(item.beginDate)
-    //   const endTime = moment(item.endDate)
-    //   const duration = moment.duration(endTime.diff(startTime));
-    //   // if (duration.asMonths() > 12) {
-    //   //   return `${(duration.asMonths() / 12).toFixed(1)} Year`
-    //   // }
-    //   // else {
-    //   //   return `${(duration.asMonths().toFixed(0))} month`
-    //   // }
-    //   temp.value = temp.value + parseInt(`${duration.asMilliseconds()}`)
-    //   console.log(temp.value);
-    // })
   },
   actions: {
     techExperiencesAdd() {
@@ -208,12 +195,6 @@ export const useProfileStore = defineStore({
     async getData(id: string) {
       try {
         const { data } = await Services.Profile.GetPersonalApi(id)
-        console.log('data');
-        console.log(data);
-        console.log(data);
-        console.log(data);
-        console.log('data');
-        
         Object.assign(this.$state.profile, data.payload)
       } catch (error) {
         console.log('🔥 error', error)
