@@ -484,7 +484,7 @@
     </Form>
 </template>
 <script setup lang="ts">
-import stores from '@/stores'
+import {useProfileStore} from '@/stores/ProfileStore'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
 import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Divider } from 'ant-design-vue';
@@ -493,7 +493,7 @@ import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 import draggable from 'vuedraggable'
 import { useDesign } from "@/utils";
-const profileStore = stores.useProfileStore()
+const profileStore = useProfileStore()
 const profile = computed(() => {
     return profileStore.$state.profile
 })

@@ -11,16 +11,20 @@
 
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
-import stores from '@/stores'
+import { useProfileStore } from '@/stores/ProfileStore.ts'
+
 import TheSide from "@/components/panel/TheSide.vue";
 import TheMain from "@/components/panel/TheMain.vue";
 import Header from "@/components/panel/TheHeader.vue";
 
 const route = useRoute()
 const personalId = String(route.params.personalId)
-const profileStore = stores.useProfileStore()
+const profileStore = useProfileStore()
 
 onMounted(async () => {
+
+    console.dir(route.params.personalId);
+    
     try {
         await profileStore.getData(personalId)
     } catch (error) {

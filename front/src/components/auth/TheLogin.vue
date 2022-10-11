@@ -55,7 +55,7 @@ import {
   message,
 } from "ant-design-vue";
 import { reactive } from "vue";
-import stores from "@/stores";
+import {useAuthStore}  from "@/stores/AuthStore";
 import { useRouter } from "vue-router";
 import type { AxiosError } from "axios";
 
@@ -73,7 +73,7 @@ const formState = reactive<FormState>({
 const router = useRouter();
 
 
-const authStore = stores.useAuthStore();
+const authStore = useAuthStore();
 
 const onFinish = async () => {
   try {

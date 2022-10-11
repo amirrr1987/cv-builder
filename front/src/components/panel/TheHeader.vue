@@ -102,12 +102,12 @@
     </nav>
 </template>
 <script setup lang="ts">
-import stores from '@/stores'
+import {useProfileStore} from '@/stores/ProfileStore'
 import { Dropdown, Menu, MenuItem, Button, RadioGroup, RadioButton, Select,SelectOption } from "ant-design-vue";
 import { Icon } from '@iconify/vue';
 import { onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from "vue-i18n";
-const profileStore = stores.useProfileStore()
+const profileStore = useProfileStore()
 
 
 const profile = computed(() => {

@@ -122,14 +122,14 @@
     </div>
 </template>
 <script setup lang="ts">
-import stores from '@/stores'
+import {useProfileStore} from '@/stores/ProfileStore'
 import { Icon } from '@iconify/vue';
 import ExperienceItem from "@/components/panel/ExperienceItem.vue";
 import { computed } from 'vue';
 const print = {
     mounted: () => print
 }
-const personalStore = stores.useProfileStore()
+const personalStore = useProfileStore()
 const fullName = computed(() => {
     return `${personalStore.$state.profile.fullName.first} ${personalStore.$state.profile.fullName.last}`
 })

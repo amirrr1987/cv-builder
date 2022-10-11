@@ -25,13 +25,13 @@
                         <FormItem label="Password" name="password" :rules="[
                           { required: true, message: 'Please input your password!' },
                         ]">
-                            <InputPassword v-model:value="formState.password" />
+                            <InputPassword v-model:value="formState.password" autocomplete  />
                         </FormItem>
 
                         <FormItem label="Repeat Password" name="repassword" :rules="[
                           { required: true, message: 'Please input your password!' },
                         ]">
-                            <InputPassword v-model:value="formState.repassword" />
+                            <InputPassword v-model:value="formState.repassword" autocomplete  />
                         </FormItem>
 
                         <FormItem>
@@ -61,7 +61,7 @@ import {
     message,
 } from "ant-design-vue";
 import { reactive } from "vue";
-import { useAuthStore } from "@/stores";
+import {useAuthStore}  from "@/stores/AuthStore";
 import { useRouter } from "vue-router";
 import type { AxiosError } from "axios";
 
@@ -78,13 +78,15 @@ const formState = reactive<FormState>({
 });
 const router = useRouter();
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 
 const onFinish = async () => {
     try {
         const id = await authStore.register(formState)
-        router.push({ name: 'ThePanel', params: { personalId: id } });
+        // router.push({ name: 'ThePanel', params: { personalId: id } });
+        router.push(`/panel/${id}`);
+
 
     } catch (e) {
         message.error((e as AxiosError).message)

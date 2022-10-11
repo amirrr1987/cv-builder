@@ -1,4 +1,4 @@
-import Services from '@/services'
+import { UpdatePersonalApi, GetPersonalApi } from '@/services/ProfileApi'
 import { defineStore } from 'pinia'
 import type { ProfileModel } from '../models'
 import { message } from 'ant-design-vue';
@@ -185,7 +185,7 @@ export const useProfileStore = defineStore({
     // },
     async updatePersonal() {
       try {
-        const { data } = await Services.Profile.UpdatePersonalApi(this.$state.profile._id, this.$state.profile)
+        const { data } = await UpdatePersonalApi(this.$state.profile._id, this.$state.profile)
         await this.getData(id)
         message.success('Update data')
       } catch (error) {
@@ -194,7 +194,7 @@ export const useProfileStore = defineStore({
     },
     async getData(id: string) {
       try {
-        const { data } = await Services.Profile.GetPersonalApi(id)
+        const { data } = await GetPersonalApi(id)
         Object.assign(this.$state.profile, data.payload)
       } catch (error) {
         console.log('🔥 error', error)
