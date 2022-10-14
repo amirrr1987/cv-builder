@@ -1,5 +1,8 @@
 <template>
     <Form layout="vertical" class="overflow-y-scroll" :class="[`${prefixCls}`]">
+
+        <Tabs v-model:activeKey="tabKey" type="card" size="large">
+            <TabPane key="1" tab="Sidebar Panel">
         <Collapse v-model:activeKey="activeKey" accordion>
             <CollapsePanel key="1" :class="[`${prefixCls}__fullname`]">
                 <template #header>
@@ -148,9 +151,8 @@
                     </span>
                 </template>
                 <FormItem label="Skills Summary">
-                    <draggable tag="div" :list="profile.skillsSummary"
-                        class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
-                        @change="dargHandler">
+                    <draggable tag="div" :list="profile.skillsSummary" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                        handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
                                 <Button type="default" size="small"
@@ -231,9 +233,8 @@
                     </span>
                 </template>
                 <FormItem label="Teach Experiences">
-                    <draggable tag="div" :list="profile.techExperiences"
-                        class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
-                        @change="dargHandler">
+                    <draggable tag="div" :list="profile.techExperiences" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                        handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
                                 <Button type="default" size="small"
@@ -316,61 +317,42 @@
                 </FormItem>
             </CollapsePanel>
         </Collapse>
-        <div class="bg-white p-4">
-            <Divider class="" />
-            <div class="">
-                Main:
-            </div>
-        </div>
-        <Collapse v-model:activeKey="activeKey" accordion>
-            <CollapsePanel key="9" :class="[`${prefixCls}__software-knowledges`]">
-                <template #header>
-                    <span class="header__title flex items-center gap-x-2">
-                        <Icon icon="icon-park-outline:home" />
-                        {{ $t('softwareKnowledge') }}:
-                    </span>
-                </template>
-                <div class="grid grid-cols-[max-content,1fr]">
-                    <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle"
-                        item-key="index" @change="dargHandler">
-                        <template #item="{ element, index }">
-                            <Button type="ghost" size="small"
-                                class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
-                                <template #icon>
-                                    <Icon icon="icon-park-outline:drag" />
-                                </template>
-                            </Button>
+            </TabPane>
+            <TabPane key="2" tab="Main Panel">
+                <Collapse v-model:activeKey="activeKey" accordion>
+                    <CollapsePanel key="9" :class="[`${prefixCls}__software-knowledges`]">
+                        <template #header>
+                            <span class="header__title flex items-center gap-x-2">
+                                <Icon icon="icon-park-outline:home" />
+                                {{ $t('softwareKnowledge') }}:
+                            </span>
                         </template>
-                    </draggable>
-                    <Collapse>
-                        <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
-                            <CollapsePanel>
-                                <template #header>
-                                    <span class="header__title flex items-center gap-x-2">
-                                        <Icon icon="icon-park-outline:home" />
-                                        {{ item.label }}
-                                    </span>
+                        <div class="grid grid-cols-[max-content,1fr]">
+                            <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle" item-key="index"
+                                @change="dargHandler">
+                                <template #item="{ element, index }">
+                                    <Button type="ghost" size="small"
+                                        class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
+                                        <template #icon>
+                                            <Icon icon="icon-park-outline:drag" />
+                                        </template>
+                                    </Button>
                                 </template>
-                                <FormItem label="Software Knowledge Title">
-                                    <Input v-model:value="item.label" type="text" class="mb-4">
-                                    <template #suffix>
-                                        <Button type="text" danger shape="circle"
-                                            class="!flex justify-center items-center"
-                                            @click.prevent="profileStore.removeSoftwareKnowledges">
-                                            <template #icon>
-                                                <Icon icon="icon-park-outline:minus" />
-                                            </template>
-                                        </Button>
-                                    </template>
-                                    {{ item.label }}
-                                    </Input>
-                                    <div class="grid grid-cols-3 gap-4">
-                                        <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
-                                            <Input v-model:value="single.label" type="text">
+                            </draggable>
+                            <Collapse>
+                                <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
+                                    <CollapsePanel>
+                                        <template #header>
+                                            <span class="header__title flex items-center gap-x-2">
+                                                <Icon icon="icon-park-outline:home" />
+                                                {{ item.label }}
+                                            </span>
+                                        </template>
+                                        <FormItem label="Software Knowledge Title">
+                                            <Input v-model:value="item.label" type="text" class="mb-4">
                                             <template #suffix>
-                                                <Button type="text" danger shape="circle"
-                                                    class="!flex justify-center items-center"
-                                                    @click.prevent="profileStore.removeSoftwareKnowledgesItem(index, skillIndex)">
+                                                <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                                                    @click.prevent="profileStore.removeSoftwareKnowledges">
                                                     <template #icon>
                                                         <Icon icon="icon-park-outline:minus" />
                                                     </template>
@@ -378,116 +360,135 @@
                                             </template>
                                             {{ item.label }}
                                             </Input>
-                                        </template>
-                                        <Button type="dashed" block class="!flex justify-center items-center"
-                                            @click.prevent="profileStore.addSoftwareKnowledgesItem(index)">
-                                            <template #icon>
-                                                <Icon icon="icon-park-outline:plus" />
-                                            </template>
-                                        </Button>
-                                    </div>
-                                </FormItem>
-                            </CollapsePanel>
-                        </template>
-                    </Collapse>
-                </div>
-                <Button type="dashed" block class="!flex justify-center items-center !h-12"
-                    @click.prevent="profileStore.addSoftwareKnowledges">
-                    <template #icon>
-                        <Icon icon="icon-park-outline:plus" />
-                    </template>
-                </Button>
-            </CollapsePanel>
-            <CollapsePanel key="10" :class="[`${prefixCls}__experiences`]">
-                <template #header>
-                    <span class="header__title flex items-center gap-x-2">
-                        <Icon icon="icon-park-outline:code" />{{ $t('experiences') }}::
-                    </span>
-                </template>
-                <FormItem>
-                    <template #label>
-                        <span>Experiences</span>
-                    </template>
-                    <Collapse>
-                        <template v-for="(item, index) in profile.experiences" :key="index">
-                            <CollapsePanel>
-                                <template #header>
-                                    <span class="header__title">
-                                        {{ item.title }} at
-                                        {{ item.company.name }}
-                                    </span>
-                                </template>
-                                <Button type="text" danger shape="circle"
-                                    class="!absolute right-0 top-0 !flex justify-center items-center"
-                                    @click.prevent="profileStore.removeExperiences(index)">
-                                    <template #icon>
-                                        <Icon icon="icon-park-outline:close" />
-                                    </template>
-                                </Button>
-                                <FormItem label="Title">
-                                    <Input v-model:value="item.title" type="text" placeholder="label" />
-                                </FormItem>
-                                <FormItem label="Company name">
-                                    <Input v-model:value="item.company.name" type="text" placeholder="label" />
-                                </FormItem>
-                                <FormItem label="Company url">
-                                    <Input v-model:value="item.company.url" type="text" placeholder="label" />
-                                </FormItem>
-                                <FormItem label="Description">
-                                    <Textarea :rows="5" v-model:value="item.description" type="text"
-                                        placeholder="label" />
-                                </FormItem>
-                                <FormItem label="Skills">
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
-                                            <Input class=" mb-1" v-model:value="single.label" type="text">
-                                            <template #suffix>
-                                                <Button type="text" danger shape="circle"
-                                                    class="!flex justify-center items-center"
-                                                    @click.prevent="profileStore.removeExperiencesSkill(item.company.name, skillIndex)">
+                                            <div class="grid grid-cols-3 gap-4">
+                                                <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
+                                                    <Input v-model:value="single.label" type="text">
+                                                    <template #suffix>
+                                                        <Button type="text" danger shape="circle"
+                                                            class="!flex justify-center items-center"
+                                                            @click.prevent="profileStore.removeSoftwareKnowledgesItem(index, skillIndex)">
+                                                            <template #icon>
+                                                                <Icon icon="icon-park-outline:minus" />
+                                                            </template>
+                                                        </Button>
+                                                    </template>
+                                                    {{ item.label }}
+                                                    </Input>
+                                                </template>
+                                                <Button type="dashed" block class="!flex justify-center items-center"
+                                                    @click.prevent="profileStore.addSoftwareKnowledgesItem(index)">
                                                     <template #icon>
-                                                        <Icon icon="icon-park-outline:minus" />
+                                                        <Icon icon="icon-park-outline:plus" />
                                                     </template>
                                                 </Button>
-                                            </template>
-                                            </Input>
+                                            </div>
+                                        </FormItem>
+                                    </CollapsePanel>
+                                </template>
+                            </Collapse>
+                        </div>
+                        <Button type="dashed" block class="!flex justify-center items-center !h-12"
+                            @click.prevent="profileStore.addSoftwareKnowledges">
+                            <template #icon>
+                                <Icon icon="icon-park-outline:plus" />
+                            </template>
+                        </Button>
+                    </CollapsePanel>
+                    <CollapsePanel key="10" :class="[`${prefixCls}__experiences`]">
+                        <template #header>
+                            <span class="header__title flex items-center gap-x-2">
+                                <Icon icon="icon-park-outline:code" />{{ $t('experiences') }}::
+                            </span>
+                        </template>
+                        <FormItem>
+                            <template #label>
+                                <span>Experiences</span>
+                            </template>
+                            <Collapse>
+                                <template v-for="(item, index) in profile.experiences" :key="index">
+                                    <CollapsePanel>
+                                        <template #header>
+                                            <span class="header__title">
+                                                {{ item.title }} at
+                                                {{ item.company.name }}
+                                            </span>
                                         </template>
-                                        <Button type="dashed" block class="!flex justify-center items-center"
-                                            @click.prevent="profileStore.addExperiencesSkills(index)">
+                                        <Button type="text" danger shape="circle"
+                                            class="!absolute right-0 top-0 !flex justify-center items-center"
+                                            @click.prevent="profileStore.removeExperiences(index)">
                                             <template #icon>
-                                                <Icon icon="icon-park-outline:plus" />
+                                                <Icon icon="icon-park-outline:close" />
                                             </template>
                                         </Button>
-                                    </div>
-                                </FormItem>
-                                <div class="flex gap-x-3">
-                                    <FormItem label="Begin Date">
-                                        <DatePicker v-model:value="item.beginDate" placeholder="label" />
-                                    </FormItem>
-                                    <FormItem label="End Date">
-                                        <DatePicker v-model:value="item.endDate" placeholder="label" />
-                                    </FormItem>
-                                </div>
-                            </CollapsePanel>
-                        </template>
-                    </Collapse>
-                    <Button type="dashed" block class="!flex justify-center items-center"
-                        @click.prevent="profileStore.addExperiences">
-                        <template #icon>
-                            <Icon icon="icon-park-outline:plus" />
-                        </template>
-                    </Button>
-                </FormItem>
-            </CollapsePanel>
-     
-        </Collapse>
+                                        <FormItem label="Title">
+                                            <Input v-model:value="item.title" type="text" placeholder="label" />
+                                        </FormItem>
+                                        <FormItem label="Company name">
+                                            <Input v-model:value="item.company.name" type="text" placeholder="label" />
+                                        </FormItem>
+                                        <FormItem label="Company url">
+                                            <Input v-model:value="item.company.url" type="text" placeholder="label" />
+                                        </FormItem>
+                                        <FormItem label="Description">
+                                            <Textarea :rows="5" v-model:value="item.description" type="text" placeholder="label" />
+                                        </FormItem>
+                                        <FormItem label="Skills">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
+                                                    <Input class=" mb-1" v-model:value="single.label" type="text">
+                                                    <template #suffix>
+                                                        <Button type="text" danger shape="circle"
+                                                            class="!flex justify-center items-center"
+                                                            @click.prevent="profileStore.removeExperiencesSkill(item.company.name, skillIndex)">
+                                                            <template #icon>
+                                                                <Icon icon="icon-park-outline:minus" />
+                                                            </template>
+                                                        </Button>
+                                                    </template>
+                                                    </Input>
+                                                </template>
+                                                <Button type="dashed" block class="!flex justify-center items-center"
+                                                    @click.prevent="profileStore.addExperiencesSkills(index)">
+                                                    <template #icon>
+                                                        <Icon icon="icon-park-outline:plus" />
+                                                    </template>
+                                                </Button>
+                                            </div>
+                                        </FormItem>
+                                        <div class="flex gap-x-3">
+                                            <FormItem label="Begin Date">
+                                                <DatePicker v-model:value="item.beginDate" placeholder="label" />
+                                            </FormItem>
+                                            <FormItem label="End Date">
+                                                <DatePicker v-model:value="item.endDate" placeholder="label" />
+                                            </FormItem>
+                                        </div>
+                                    </CollapsePanel>
+                                </template>
+                            </Collapse>
+                            <Button type="dashed" block class="!flex justify-center items-center"
+                                @click.prevent="profileStore.addExperiences">
+                                <template #icon>
+                                    <Icon icon="icon-park-outline:plus" />
+                                </template>
+                            </Button>
+                        </FormItem>
+                    </CollapsePanel>
+                
+                </Collapse>
+            </TabPane>
+            <TabPane key="3" tab="Theme Panel"></TabPane>
+        </Tabs>
+
+
+  
     </Form>
 </template>
 <script setup lang="ts">
 import {useProfileStore} from '@/stores/ProfileStore'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
-import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Divider } from 'ant-design-vue';
+import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Divider, Tabs,TabPane } from 'ant-design-vue';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
@@ -497,6 +498,7 @@ const profileStore = useProfileStore()
 const profile = computed(() => {
     return profileStore.$state.profile
 })
+const tabKey = ref('1')
 const activeKey = ref([]);
 const contactIcons = reactive([
     {

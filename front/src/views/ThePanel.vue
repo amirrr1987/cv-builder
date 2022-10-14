@@ -11,7 +11,7 @@
 
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useProfileStore } from '@/stores/ProfileStore.ts'
+import { useProfileStore } from '@/stores/ProfileStore'
 
 import TheSide from "@/components/panel/TheSide.vue";
 import TheMain from "@/components/panel/TheMain.vue";
@@ -22,11 +22,9 @@ const personalId = String(route.params.personalId)
 const profileStore = useProfileStore()
 
 onMounted(async () => {
-
-    console.dir(route.params.personalId);
-    
     try {
         await profileStore.getData(personalId)
+
     } catch (error) {
         console.log(error);
     }

@@ -1,11 +1,18 @@
 const Joi = require("joi");
+const { EventBus } = require("../global/event-bus");
 const { useProfileModel } = require("../models");
 const { useProfileValidator } = require("../validators");
 class Controller {
 
+  constructor() {
+    EventBus.on('create-profile', (userId) => {
+      this.CreateProfile(userId)
+    })
+  }
+
   async GetProfile(req, res) {
     try {
-      const resualt = await useProfileModel.findById(req.params.profileId);
+      const resualt = await useProfileModel.findOne({ user_id: req.params.personalId })
       if (resualt) {
         res.status(200).send({
           code: 200,
@@ -27,81 +34,82 @@ class Controller {
     }
   }
 
-  async CreateProfile(useId) {
+  async CreateProfile(userId, req, res) {
     let obj = {
-      user_id: useId,
+      user_id: userId.toString(),
       theme: {
-        color: '',
-        font: '',
-        lang: '',
+        color: 'blue',
+        font: 'calibri',
+        lang: 'en',
       },
-      image: '',
-      about: '',
-      title: '',
-      subTitle: '',
+      image: 'https://i1.sndcdn.com/avatars-000812665324-tbg3oh-t500x500.jpg',
+      about: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat',
+      title: 'title',
+      subTitle: 'subTitle',
       fullName: {
-        first: '',
-        last: '',
+        first: 'amir',
+        last: 'maghami',
       },
       address: {
-        country: '',
-        province: '',
-        region: '',
+        country: 'iren',
+        province: 'azerbajan',
+        region: 'khoy',
       },
       skillsSummary: [
         {
-          label: '',
+          label: 'web',
         }
       ],
       contacts: [
         {
-          label: '',
-          icon: ''
+          label: 'web',
+          icon: 'cib:linkedin'
         }
       ],
       educations: [
         {
-          label: '',
+          label: 'it',
         }
       ],
       techExperiences: [
         {
-          label: '',
+          label: 'html',
         }
       ],
       softwareKnowledges: [{
-        label: '',
+        label: 'basic',
         skills: [
           {
-            label: '',
+            label: 'html',
           }
         ],
       }],
       experiences: [
         {
-          title: '',
+          title: 'front end developer',
           company: {
-            name: '',
-            url: '',
+            name: 'haco',
+            url: 'haco.ir',
           },
-          description: '',
+          description: 'lorem',
           beginDate: '',
           endDate: '',
           skills: [
             {
-              label: '',
+              label: 'html',
             }
           ],
         }
       ],
       socials: [
         {
-          label: '',
-          icon: '',
-          link: '',
+          label: 'instagram',
+          icon: 'cib:linkedin',
+          link: 'instagram.ir',
         }
       ],
     };
+
     // try {
     //   await useProfileValidator.valdateCreateProfile(obj);
     // } catch (error) {
@@ -110,11 +118,20 @@ class Controller {
     try {
       const item = await new useProfileModel(obj);
       Object.assign(item, obj);
+      item.user_id = userId.toString(),
+
       await item.save();
-      res.statusCode = 200;
-      res.status(200).send({
-        message: "Created",
-      });
+      res
+        .status(201)
+        .send(
+          {
+            code: 201,
+            data: {},
+            message: "User created",
+            success: true,
+          }
+        );
+
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
@@ -123,6 +140,7 @@ class Controller {
   async UpdateProfile(req, res) {
     const { body } = req;
     let obj = {
+      user_id: body.theme.userId,
       theme: {
         color: body.theme.color,
         font: body.theme.font,
@@ -224,7 +242,7 @@ class Controller {
       res.status(400).send({ error: error.message });
     }
     try {
-      const item = await useProfileModel.findById(req.params.profileId);
+      const item = await useProfileModel.findById(req.params.personalId);
       Object.assign(item, obj);
       await item.save();
       res.status(200).send({

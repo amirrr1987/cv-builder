@@ -8,10 +8,10 @@ const { AuthMiddleware } = require("../middlewares");
 
 router.post("/", AuthMiddleware, ProfileController.CreateProfile);
 
-router.get("/:profileId", AuthMiddleware, ProfileController.GetProfile);
+router.get("/:personalId", ProfileController.GetProfile);
 
-router.put("/:profileId", AuthMiddleware , ProfileController.UpdateProfile);
+router.put("/:personalId", AuthMiddleware , ProfileController.UpdateProfile);
 
-router.delete("/:profileId", AuthMiddleware , ProfileController.DeleteProfile);
+router.delete("/:personalId", AuthMiddleware , ProfileController.DeleteProfile);
 
 module.exports = router;

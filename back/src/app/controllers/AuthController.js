@@ -4,9 +4,33 @@ const { useAuthValidator } = require("../validators");
 const _ = require("lodash")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const { tokenKey } = require('../config')
+const { tokenKey } = require('../config');
+const { EventBus } = require("../global/event-bus");
 class Controller {
-    
+
+
+    async validator(res, obj) {
+        // try {
+        //     await useAuthValidator.valdateRegisterAuth(obj)
+        //     return true
+        // } catch (error) {
+        //     res.status(400).send({ error: error.message });
+        // }
+
+        console.log(234);
+    }
+
+
+    async checkValidate(res, obj) {
+
+    }
+
+    async checkUserRegistered(auth, obj) {
+
+    }
+
+
+
     async LoginAuth(req, res) {
         let obj = _.pick(req.body, ["mobile", "password"])
         try {
@@ -48,24 +72,25 @@ class Controller {
 
     async RegisterAuth(req, res) {
         let obj = _.pick(req.body, ["mobile", "password"])
-        try {
-            await useAuthValidator.valdateRegisterAuth(obj)
-        } catch (error) {
-            res.status(400).send({ error: error.message });
-        }
         let auth;
+
+
+
+
         try {
             auth = await useAuthModel.findOne({ mobile: obj.mobile })
             if (auth) return res.status(400).send({ message: "این کاربر قبلا ثبت نام شده" })
         } catch (error) {
             res.status(500).send({ error: error });
         }
+
         try {
             auth = await new useAuthModel(obj);
             Object.assign(auth, obj);
         } catch (error) {
             res.status(500).send({ error: error });
         }
+
         try {
             const salt = await bcrypt.genSalt(10)
             const password = await bcrypt.hash(auth.password, salt)
@@ -74,8 +99,9 @@ class Controller {
         } catch (error) {
             res.status(500).send({ error: error });
         }
+
         try {
-            const token = jwt.sign(obj.password, tokenKey)
+            const token = await jwt.sign(obj.password, tokenKey)
             res
                 .status(201)
                 .send(
@@ -89,9 +115,14 @@ class Controller {
                         success: true,
                     }
                 );
+
+            await EventBus.emit('create-profile', auth._id)
         } catch (error) {
             res.status(500).send({ error: error });
         }
+
+
+
     }
 
     async UpdateAuth(req, res) {

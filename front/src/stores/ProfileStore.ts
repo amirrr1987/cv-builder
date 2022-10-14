@@ -186,7 +186,12 @@ export const useProfileStore = defineStore({
     async updatePersonal() {
       try {
         const { data } = await UpdatePersonalApi(this.$state.profile._id, this.$state.profile)
-        await this.getData(id)
+
+        console.log('update');
+        console.log(data);
+        console.log('update');
+        
+        await this.getData(this.$state.profile.userId)
         message.success('Update data')
       } catch (error) {
         message.error('error update')
@@ -195,7 +200,7 @@ export const useProfileStore = defineStore({
     async getData(id: string) {
       try {
         const { data } = await GetPersonalApi(id)
-        Object.assign(this.$state.profile, data.payload)
+        Object.assign(this.$state.profile, data.data)
       } catch (error) {
         console.log('🔥 error', error)
       }

@@ -33,6 +33,13 @@ export const useAuthStore = defineStore({
     async register(user: any) {
       try {
         const { data } = await RegisterAuthApi(user)
+        console.log(data.data.token);
+        console.log(data.data.token);
+        console.log(data.data.token);
+        console.log(data.data.token);
+        
+        localStorage.setItem('token', data.data.token)
+
         return data
       } catch (e) {
         console.log((e as AxiosError).message);

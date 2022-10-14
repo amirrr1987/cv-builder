@@ -1,41 +1,41 @@
 const mongoose = require("mongoose");
 
 const schemaProfile = new mongoose.Schema({
-    user_id: { type: String, required: true, default: "" },
+    user_id: { type: String,  default: "" },
     theme: {
-        type: Object, required: true, default: {
-            color: { type: String, required: true, default: "blue" },
-            font: { type: String, required: true, default: "vazir" },
-            lang: { type: String, required: true, default: "en" }
+        type: Object,  default: {
+            color: { type: String,  default: "blue" },
+            font: { type: String,  default: "vazir" },
+            lang: { type: String,  default: "en" }
         }
     },
 
-    image: { type: String, required: true, default: "" },
-    about: { type: String, required: true, default: "" },
-    title: { type: String, required: true, default: "" },
-    subTitle: { type: String, required: true, default: "" },
+    image: { type: String,  default: "" },
+    about: { type: String,  default: "" },
+    title: { type: String,  default: "" },
+    subTitle: { type: String,  default: "" },
     fullName: {
-        type: Object, required: true, default: {
-            first: { type: String, required: true, default: "" },
-            last: { type: String, required: true, default: "" }
+        type: Object,  default: {
+            first: { type: String,  default: "" },
+            last: { type: String,  default: "" }
         }
     },
     address: {
-        type: Object, required: true, default: {
-            country: { type: String, required: true, default: "" },
-            province: { type: String, required: true, default: "" },
-            region: { type: String, required: true, default: "" }
+        type: Object,  default: {
+            country: { type: String,  default: "" },
+            province: { type: String,  default: "" },
+            region: { type: String,  default: "" }
         }
     },
     skillsSummary: {
-        type: [Object], required: true, default: [
+        type: [Object],  default: [
             {
                 label: "",
             }
         ]
     },
     contacts: {
-        type: [Object], required: true, default: [
+        type: [Object],  default: [
             {
                 label: "",
                 icon: ""
@@ -43,50 +43,50 @@ const schemaProfile = new mongoose.Schema({
         ]
     },
     educations: {
-        type: [Object], required: true, default: [
+        type: [Object],  default: [
             {
                 label: "",
             }
         ]
     },
     techExperiences: {
-        type: [Object], required: true, default: [
+        type: [Object],  default: [
             {
                 label: "",
             }
         ]
     },
     softwareKnowledges: {
-        type: [Object], required: true, default: [{
-            label: { type: String, required: true, default: "" },
+        type: [Object],  default: [{
+            label: { type: String,  default: "" },
             skills: {
-                type: [Object], required: true, default: [{
-                    label: { type: String, required: true, default: "" }
+                type: [Object],  default: [{
+                    label: { type: String,  default: "" }
                 }]
             },
         }]
     },
     experiences: {
-        type: [Object], required: true, default: [{
-            label: { type: String, required: true, default: "" },
+        type: [Object],  default: [{
+            label: { type: String,  default: "" },
             company: {
-                type: Object, required: true, default: {
-                    name: { type: String, required: true, default: "" },
-                    url: { type: String, required: true, default: "" }
+                type: Object,  default: {
+                    name: { type: String,  default: "" },
+                    url: { type: String,  default: "" }
                 }
             },
-            description: { type: String, required: true, default: "" },
-            beginDate: { type: Date, required: true, default: Date.now() },
-            endDate: { type: Date, required: true, default: Date.now() },
+            description: { type: String,  default: "" },
+            beginDate: { type: Date,  default: Date.now() },
+            endDate: { type: Date,  default: Date.now() },
             skills: {
-                type: [Object], required: true, default: [{
-                    label: { type: String, required: true, default: "" }
+                type: [Object],  default: [{
+                    label: { type: String,  default: "" }
                 }]
             },
         }]
     },
     socials: {
-        type: [Object], required: true, default: [{
+        type: [Object],  default: [{
             label: "", icon: "", link: ""
         }]
     },

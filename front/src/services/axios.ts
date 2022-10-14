@@ -22,9 +22,9 @@ export const useAxios = (headers = {}): AxiosInstance => {
                 //debugger
                 // config.headers['Authorization'] = token
 
-                console.log('config.headers');
-                console.log(config.headers);
-                console.log('config.headers');
+                // console.log('config.headers');
+                // console.log(config.headers);
+                // console.log('config.headers');
             }
             return config
         },
