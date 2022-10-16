@@ -71,56 +71,42 @@ class Controller {
     }
 
     async RegisterAuth(req, res) {
-        let obj = _.pick(req.body, ["mobile", "password"])
-        let auth;
+        // let obj = _.pick(req.body, ["mobile", "password"])
+        // let auth;
+
+        const { body } = req;
+        console.log(body);
 
 
 
 
-        try {
-            auth = await useAuthModel.findOne({ mobile: obj.mobile })
-            if (auth) return res.status(400).send({ message: "این کاربر قبلا ثبت نام شده" })
-        } catch (error) {
-            res.status(500).send({ error: error });
-        }
+        // auth = await useAuthModel.findOne({ mobile: obj.mobile })
+        // if (auth) return res.status(400).send({ message: "این کاربر قبلا ثبت نام شده" })
+        // auth = await new useAuthModel(obj);
+        // Object.assign(auth, obj);
 
-        try {
-            auth = await new useAuthModel(obj);
-            Object.assign(auth, obj);
-        } catch (error) {
-            res.status(500).send({ error: error });
-        }
 
-        try {
-            const salt = await bcrypt.genSalt(10)
-            const password = await bcrypt.hash(auth.password, salt)
-            auth.password = password
-            await auth.save();
-        } catch (error) {
-            res.status(500).send({ error: error });
-        }
+        // const salt = await bcrypt.genSalt(10)
+        // const password = await bcrypt.hash(auth.password, salt)
+        // auth.password = password
+        // await auth.save()
 
-        try {
-            const token = await jwt.sign(obj.password, tokenKey)
-            res
-                .status(201)
-                .send(
-                    {
-                        code: 201,
-                        data: {
-                            ..._.pick(auth, ["mobile", "_id"]),
-                            token: token
-                        },
-                        message: "User created",
-                        success: true,
-                    }
-                );
+        // const token = await jwt.sign(obj.password, tokenKey)
+        // res
+        //     .status(201)
+        //     .send(
+        //         {
+        //             code: 201,
+        //             data: {
+        //                 ..._.pick(auth, ["mobile", "_id"]),
+        //                 token: token
+        //             },
+        //             message: "User created",
+        //             success: true,
+        //         }
+        //     );
 
-            await EventBus.emit('create-profile', auth._id)
-        } catch (error) {
-            res.status(500).send({ error: error });
-        }
-
+        // await EventBus.emit('create-profile', auth._id)
 
 
     }

@@ -101,7 +101,7 @@
                     </span>
                 </template>
                 <FormItem>
-                    <draggable tag="div" :list="profile.contacts" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                    <VueDraggableNext tag="div" :list="profile.contacts" class="list-group grid grid-cols-[3rem,1fr] gap-1"
                         handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
@@ -140,7 +140,7 @@
                                 </template>
                             </Button>
                         </template>
-                    </draggable>
+                    </VueDraggableNext>
                 </FormItem>
             </CollapsePanel>
             <CollapsePanel key="5" :class="[`${prefixCls}__skills-summary`]">
@@ -151,7 +151,7 @@
                     </span>
                 </template>
                 <FormItem label="Skills Summary">
-                    <draggable tag="div" :list="profile.skillsSummary" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                    <VueDraggableNext tag="div" :list="profile.skillsSummary" class="list-group grid grid-cols-[3rem,1fr] gap-1"
                         handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
@@ -181,7 +181,7 @@
                                 </template>
                             </Button>
                         </template>
-                    </draggable>
+                    </VueDraggableNext>
                 </FormItem>
             </CollapsePanel>
             <CollapsePanel key="6" :class="[`${prefixCls}__educations`]">
@@ -192,7 +192,7 @@
                     </span>
                 </template>
                 <FormItem label="Educations">
-                    <draggable tag="div" :list="profile.educations" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                    <VueDraggableNext tag="div" :list="profile.educations" class="list-group grid grid-cols-[3rem,1fr] gap-1"
                         handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
@@ -222,7 +222,7 @@
                                 </template>
                             </Button>
                         </template>
-                    </draggable>
+                    </VueDraggableNext>
                 </FormItem>
             </CollapsePanel>
             <CollapsePanel key="7" :class="[`${prefixCls}__tech-experiences`]">
@@ -233,7 +233,7 @@
                     </span>
                 </template>
                 <FormItem label="Teach Experiences">
-                    <draggable tag="div" :list="profile.techExperiences" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                    <VueDraggableNext tag="div" :list="profile.techExperiences" class="list-group grid grid-cols-[3rem,1fr] gap-1"
                         handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
@@ -263,7 +263,7 @@
                                 </template>
                             </Button>
                         </template>
-                    </draggable>
+                    </VueDraggableNext>
                 </FormItem>
             </CollapsePanel>
             <CollapsePanel key="8" :class="[`${prefixCls}__socials`]">
@@ -274,7 +274,7 @@
                     </span>
                 </template>
                 <FormItem label="Social">
-                    <draggable tag="div" :list="profile.socials" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                    <VueDraggableNext tag="div" :list="profile.socials" class="list-group grid grid-cols-[3rem,1fr] gap-1"
                         handle=".handle" item-key="index" @change="dargHandler">
                         <template #item="{ element, index }">
                             <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
@@ -313,7 +313,7 @@
                                 </template>
                             </Button>
                         </template>
-                    </draggable>
+                    </VueDraggableNext>
                 </FormItem>
             </CollapsePanel>
         </Collapse>
@@ -328,7 +328,7 @@
                             </span>
                         </template>
                         <div class="grid grid-cols-[max-content,1fr]">
-                            <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle" item-key="index"
+                            <VueDraggableNext tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
                                     <Button type="ghost" size="small"
@@ -338,7 +338,7 @@
                                         </template>
                                     </Button>
                                 </template>
-                            </draggable>
+                            </VueDraggableNext>
                             <Collapse>
                                 <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
                                     <CollapsePanel>
@@ -492,7 +492,7 @@ import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Butt
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
-import draggable from 'vuedraggable'
+import { VueDraggableNext } from 'vue-draggable-next'
 import { useDesign } from "@/utils";
 const profileStore = useProfileStore()
 const profile = computed(() => {
