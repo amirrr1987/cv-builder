@@ -1,11 +1,11 @@
 import { message } from 'ant-design-vue'
-import Axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import Axios, { type AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios'
 // import { getToken } from '/@/utils/auth'
 
 const APP_SURVEY_API_URL = 'http://localhost:5000/api/'
 //const APP_SURVEY_API_URL = 'https://api.hacoupian.net/survey/api/'
-export const useAxios = (headers = {}): AxiosInstance => {
-    const _axios = Axios.create({
+export const useAxios = async (headers = {}): AxiosInstance => {
+    const _axios = await Axios.create({
         baseURL: APP_SURVEY_API_URL,
         withCredentials: false,
         headers: {

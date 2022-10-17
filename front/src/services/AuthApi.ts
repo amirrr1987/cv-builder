@@ -4,9 +4,10 @@ export const LoginAuthApi = async (user: object) => {
     return await useAxios().post(`auth/login`, user)
 }
 
-export const RegisterAuthApi = async (survey: any) => {
+export const RegisterAuthApi = async (auth: any) => {
+    console.log('survey',auth);
     return await useAxios().post(
-        `auth/register`, survey
+        `auth/register`, {name:'amie'}
     )
 }
 

@@ -5,9 +5,10 @@ const router = express.Router();
 const ProfileRoutes = require("./ProfileRoute");
 const AuthRoutes = require("./AuthRoute");
 
+router.use("/api/auth", AuthRoutes);
+
 router.use("/api/profile", ProfileRoutes);
 
-router.use("/api/auth", AuthRoutes);
 
 router.use((req, res) => {
     res.status(404);
