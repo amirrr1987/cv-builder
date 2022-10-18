@@ -36,10 +36,10 @@ class Controller {
 
   async CreateProfile(data, req, res) {
 
-    console.log('data',data);
+    console.log('data', data);
 
     let obj = {
-      user_id: data._id.toString(),
+      user_id: data._id,
       theme: {
         color: 'blue',
         font: 'calibre',
@@ -113,36 +113,20 @@ class Controller {
       ],
     };
 
-    const { err } = await useProfileValidator.valdateCreateProfile(obj);
-    if (err) {
-      return res.send({
-        code: 345,
-        valdate: err,
-        message: "valdate error",
-        success: false,
-      })
-    }
+    // const { err } = await useProfileValidator.valdateCreateProfile(obj);
+    // if (err) {
+    //   return res.send({
+    //     code: 345,
+    //     valdate: err,
+    //     message: "valdate error",
+    //     success: false,
+    //   })
+    // }
 
-    try {
-      const item = await new useProfileModel(obj);
-      Object.assign(item, obj);
-      item.user_id = data._id;
-      await item.save();
-      res.status(201).send({
-        code: 201,
-        data: data,
-        message: "User created",
-        success: true,
-      });
-
-    } catch (error) {
-      res.status(500).send({
-        code: 500,
-        error: error.details,
-        message: "",
-        success: false,
-      });
-    }
+    const item = await new useProfileModel(obj);
+    item.user_id = data._id;
+    Object.assign(item, obj);
+    await item.save();
   }
 
   async UpdateProfile(req, res) {

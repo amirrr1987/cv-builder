@@ -114,8 +114,15 @@ class Controller {
                 ...auth._doc, token
 
             }
-            console.log(sendData);
-            await EventBus.emit('create-profile', sendData)
+            EventBus.emit('create-profile', sendData)
+            res.status(201).send({
+                code: 201,
+                data: sendData,
+                message: "",
+                success: true,
+            });
+
+           
 
         } catch (error) {
             console.log('1', 1);
