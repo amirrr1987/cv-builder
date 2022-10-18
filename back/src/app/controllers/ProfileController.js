@@ -39,7 +39,7 @@ class Controller {
       user_id: userId.toString(),
       theme: {
         color: 'blue',
-        font: 'calibri',
+        font: 'calibre',
         lang: 'en',
       },
       image: 'https://i1.sndcdn.com/avatars-000812665324-tbg3oh-t500x500.jpg',
@@ -110,16 +110,16 @@ class Controller {
       ],
     };
 
-    // try {
-    //   await useProfileValidator.valdateCreateProfile(obj);
-    // } catch (error) {
-    //   res.status(400).send({ error: error.message });
-    // }
+    try {
+      await useProfileValidator.valdateCreateProfile(obj);
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+
     try {
       const item = await new useProfileModel(obj);
       Object.assign(item, obj);
-      item.user_id = userId.toString(),
-
+      item.user_id = userId.toString();
       await item.save();
       res
         .status(201)
@@ -127,11 +127,10 @@ class Controller {
           {
             code: 201,
             data: {},
-            message: "User created",
+            message: "profile created",
             success: true,
           }
         );
-
     } catch (error) {
       res.status(400).send({ error: error.message });
     }

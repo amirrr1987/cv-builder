@@ -1,10 +1,9 @@
 import { message } from 'ant-design-vue'
 import Axios, { type AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios'
 // import { getToken } from '/@/utils/auth'
-
+// 09198881400
 const APP_SURVEY_API_URL = 'http://localhost:5000/api/'
-//const APP_SURVEY_API_URL = 'https://api.hacoupian.net/survey/api/'
-export const useAxios = async (headers = {}): AxiosInstance => {
+export const useAxios = async (headers = {}): Promise<AxiosInstance> => {
     const _axios = await Axios.create({
         baseURL: APP_SURVEY_API_URL,
         withCredentials: false,
@@ -12,19 +11,12 @@ export const useAxios = async (headers = {}): AxiosInstance => {
             Accept: 'application/json',
             'content-type': 'application/json',
             ...headers,
-        },
+        }
     })
-
     _axios.interceptors.request.use(
         (config: AxiosRequestConfig) => {
             if (config.headers) {
-                // const token = getToken()
-                //debugger
-                // config.headers['Authorization'] = token
-
-                // console.log('config.headers');
-                // console.log(config.headers);
-                // console.log('config.headers');
+               // config.headers['Authorization'] = getToken()
             }
             return config
         },
@@ -33,6 +25,5 @@ export const useAxios = async (headers = {}): AxiosInstance => {
             return Promise.reject(e)
         },
     )
-
     return _axios
 }
