@@ -1,17 +1,25 @@
 import { useAxios } from "./axios"
 
-export const GetPersonalApi = async (personalId: string) => {
-    return await useAxios().get(`profile/${personalId}`)
+export const GetPersonalApi = async (id: string) => {
+    return await useAxios({
+        method: 'get',
+        url: `profile/${id}`,
+        data: null
+    })
 }
 
-export const setPersonalApi = async (survey: any) => {
-    return await useAxios().post(
-        `profile/`, survey
-    )
+export const setPersonalApi = async (data: any) => {
+    return await useAxios({
+        method: 'post',
+        url: `profile`,
+        data: data
+    })
 }
 
-export const UpdatePersonalApi = async (personalId: string, personalData: any) => {
-    return await useAxios().put(
-        `profile/${personalId}`, personalData
-    )
+export const UpdatePersonalApi = async (id: string, data: any) => {
+    return await useAxios({
+        method: 'put',
+        url: `profile/${id}`,
+        data: data
+    })
 }

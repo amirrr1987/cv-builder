@@ -83,9 +83,7 @@ const authStore = useAuthStore()
 
 const onFinish = async () => {
     try {
-        const { data } = await authStore.register(formState)
-
-        
+        const { data } = await authStore.register({...formState})
         router.push({ name: 'ThePanel', params: { personalId: data._id } });
 
     } catch (e) {

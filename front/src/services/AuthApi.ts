@@ -1,24 +1,35 @@
 import { useAxios } from "./axios"
 
-export const LoginAuthApi = async (user: object) => {
-    return await (await useAxios()).post(`auth/login`, user)
+export const LoginAuthApi = async (data: object) => {
+
+    return await useAxios({
+        method: 'post',
+        url: `auth/login`,
+        data: data
+    })
 }
 
-export const RegisterAuthApi = async (auth: any) => {
-    return await (await useAxios()).post(
-        `auth/register`, auth
-    )
+export const RegisterAuthApi = async (data: any) => {
+    return await useAxios({
+        method: 'post',
+        url: `auth/register`,
+        data: data
+    })
 }
 
-export const UpdateAuthApi = async (AuthId: string, AuthData: any) => {
-    return await (await useAxios()).put(
-        `auth/update${AuthId}`, AuthData
-    )
+export const UpdateAuthApi = async (id: string, data: any) => {
+    return await useAxios({
+        method: 'put',
+        url: `auth/update/${id}`,
+        data: data
+    })
 }
-export const DeleteAuthApi = async (AuthId: string, AuthData: any) => {
-    return await (await useAxios()).put(
-        `auth/delete${AuthId}`, AuthData
-    )
+export const DeleteAuthApi = async (id: string, data: any) => {
+
+    return await useAxios({
+        method: 'delete',
+        url: `auth/delete/${id}`,
+    })
 }
 
 

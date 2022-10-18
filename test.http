@@ -1,7 +1,0 @@
-POST http://localhost:5000/api/auth/register HTTP/2.1
-content-type: application/json
-
-{
-    "mobile": "0s1jcdcc5cc",
-    "password": "09198881400"
-}

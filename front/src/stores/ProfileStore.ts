@@ -190,7 +190,7 @@ export const useProfileStore = defineStore({
         console.log('update');
         console.log(data);
         console.log('update');
-        
+
         await this.getData(this.$state.profile.userId)
         message.success('Update data')
       } catch (error) {
@@ -200,7 +200,8 @@ export const useProfileStore = defineStore({
     async getData(id: string) {
       try {
         const { data } = await GetPersonalApi(id)
-        Object.assign(this.$state.profile, data.data)
+        console.log('data', data);
+        // Object.assign(this.$state.profile, data.data)
       } catch (error) {
         console.log('🔥 error', error)
       }

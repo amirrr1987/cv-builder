@@ -5,8 +5,8 @@ const { useProfileValidator } = require("../validators");
 class Controller {
 
   constructor() {
-    EventBus.on('create-profile', (userId) => {
-      this.CreateProfile(userId)
+    EventBus.on('create-profile', (data) => {
+      this.CreateProfile(data)
     })
   }
 
@@ -22,8 +22,8 @@ class Controller {
         });
       }
       else {
-        res.status(200).send({
-          code: 200,
+        res.status(404).send({
+          code: 404,
           message: 'user not found',
           data: null,
           success: false,
@@ -34,9 +34,12 @@ class Controller {
     }
   }
 
-  async CreateProfile(userId, req, res) {
+  async CreateProfile(data, req, res) {
+
+    console.log('data',data);
+
     let obj = {
-      user_id: userId.toString(),
+      user_id: data._id.toString(),
       theme: {
         color: 'blue',
         font: 'calibre',
@@ -92,8 +95,8 @@ class Controller {
             url: 'haco.ir',
           },
           description: 'lorem',
-          beginDate: '',
-          endDate: '',
+          beginDate: '234243',
+          endDate: '234243',
           skills: [
             {
               label: 'html',
@@ -110,29 +113,35 @@ class Controller {
       ],
     };
 
-    try {
-      await useProfileValidator.valdateCreateProfile(obj);
-    } catch (error) {
-      res.status(400).send({ error: error.message });
+    const { err } = await useProfileValidator.valdateCreateProfile(obj);
+    if (err) {
+      return res.send({
+        code: 345,
+        valdate: err,
+        message: "valdate error",
+        success: false,
+      })
     }
 
     try {
       const item = await new useProfileModel(obj);
       Object.assign(item, obj);
-      item.user_id = userId.toString();
+      item.user_id = data._id;
       await item.save();
-      res
-        .status(201)
-        .send(
-          {
-            code: 201,
-            data: {},
-            message: "profile created",
-            success: true,
-          }
-        );
+      res.status(201).send({
+        code: 201,
+        data: data,
+        message: "User created",
+        success: true,
+      });
+
     } catch (error) {
-      res.status(400).send({ error: error.message });
+      res.status(500).send({
+        code: 500,
+        error: error.details,
+        message: "",
+        success: false,
+      });
     }
   }
 

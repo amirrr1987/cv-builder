@@ -3,6 +3,7 @@ Joi.objectId = require("joi-objectid")(Joi);
 
 const valdateCreateProfile = async (data) => {
   const schema = Joi.object({
+    user_id: Joi.objectId(),
     title: Joi.string().min(2).max(30).required().messages({
       "string.min": "title Min 2 characteers",
       "string.max": "title Max 30 characteers",
@@ -25,7 +26,7 @@ const valdateCreateProfile = async (data) => {
         "string.empty": "theme lang Display name cannot be empty",
       }),
     }),
-    image: Joi.string().min(5).max(50).required().messages({
+    image: Joi.string().min(5).max(350).required().messages({
       "string.min": "image Min 5 characteers",
       "string.max": "image Max 50 characteers",
       "string.empty": "image Display name cannot be empty",

@@ -55,7 +55,7 @@ class Controller {
         } catch (error) {
             res.status(500).send({
                 code: 500,
-                error: error,
+                error: error.details,
                 message: "",
                 success: false,
             });
@@ -73,28 +73,13 @@ class Controller {
         } catch (error) {
             res.status(500).send({
                 code: 500,
-                error: error,
+                error: error.details,
                 message: "",
                 success: false,
             });
         }
 
-        try {
-            auth = await useAuthModel.findOne({ mobile: obj.mobile })
-            if (auth) return res.status(400).send({
-                code: 400,
-                data: {},
-                message: "این کاربر قبلا ثبت نام شده",
-                success: false,
-            })
-        } catch (error) {
-            res.status(500).send({
-                code: 500,
-                error: error,
-                message: "",
-                success: false,
-            });
-        }
+
 
         try {
             auth = await new useAuthModel(obj);
@@ -102,7 +87,7 @@ class Controller {
         } catch (error) {
             res.status(500).send({
                 code: 500,
-                error: error,
+                error: error.details,
                 message: "",
                 success: false,
             });
@@ -116,34 +101,31 @@ class Controller {
         } catch (error) {
             res.status(500).send({
                 code: 500,
-                error: error,
+                error: error.details,
                 message: "",
                 success: false,
             });
         }
 
         try {
-            const token = await jwt.sign(obj.password, tokenKey)
-            res.status(201).send({
-                code: 201,
-                data: {
-                    ..._.pick(auth, ["mobile", "_id"]),
-                    token: token
-                },
-                message: "User created",
-                success: true,
-            });
 
-            await EventBus.emit('create-profile', auth._id)
+            const token = await jwt.sign(obj.password, tokenKey)
+            let sendData = {
+                ...auth._doc, token
+
+            }
+            console.log(sendData);
+            await EventBus.emit('create-profile', sendData)
+
         } catch (error) {
+            console.log('1', 1);
             res.status(500).send({
                 code: 500,
-                error: error,
+                error: error.details,
                 message: "",
                 success: false,
             });
         }
-        await EventBus.emit('create-profile', auth._id)
     }
 
     async UpdateAuth(req, res) {
