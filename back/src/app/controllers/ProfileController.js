@@ -22,7 +22,7 @@ class Controller {
         });
       }
       else {
-        res.status(404).send({
+        res.status(200).send({
           code: 404,
           message: 'user not found',
           data: null,
@@ -42,10 +42,10 @@ class Controller {
       user_id: data._id,
       theme: {
         color: 'blue',
-        font: 'calibre',
+        font: 'calibri',
         lang: 'en',
       },
-      image: 'https://i1.sndcdn.com/avatars-000812665324-tbg3oh-t500x500.jpg',
+      image: 'https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870',
       about: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat',
       title: 'title',
       subTitle: 'subTitle',
@@ -113,15 +113,6 @@ class Controller {
       ],
     };
 
-    // const { err } = await useProfileValidator.valdateCreateProfile(obj);
-    // if (err) {
-    //   return res.send({
-    //     code: 345,
-    //     valdate: err,
-    //     message: "valdate error",
-    //     success: false,
-    //   })
-    // }
 
     const item = await new useProfileModel(obj);
     item.user_id = data._id;

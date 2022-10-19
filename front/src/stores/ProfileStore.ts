@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import type { ProfileModel } from '../models'
 import { message } from 'ant-design-vue';
 
+
 export const useProfileStore = defineStore({
   id: 'personal',
   state: () => <ProfileModel>({
@@ -185,25 +186,28 @@ export const useProfileStore = defineStore({
     // },
     async updatePersonal() {
       try {
-        const { data } = await UpdatePersonalApi(this.$state.profile._id, this.$state.profile)
-
-        console.log('update');
-        console.log(data);
-        console.log('update');
-
+        const { data } = await UpdatePersonalApi(this.$state.profile.userId, this.$state.profile)
         await this.getData(this.$state.profile.userId)
         message.success('Update data')
       } catch (error) {
         message.error('error update')
       }
     },
+
     async getData(id: string) {
       try {
-        const { data } = await GetPersonalApi(id)
-        console.log('data', data);
-        // Object.assign(this.$state.profile, data.data)
+        const { data }: any = await GetPersonalApi(id)
+        // if (data.data) {
+          Object.assign(this.$state.profile, data.data)
+        // }
+        // else {
+        //   
+        // }
+
+        
       } catch (error) {
-        console.log('🔥 error', error)
+        console.log('🔥 error getData', error)
+
       }
     }
   }

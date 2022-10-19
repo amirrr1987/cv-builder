@@ -15,7 +15,7 @@ export default {
     educations: "آموزش",
     teachExperiences: " تجربه تدریس",
     experiences: "تجارت",
-    Social: 'اجتماعی',
+    social: 'اجتماعی',
     at: "در",
     theme: "موضوع",
     color: "رنگ",

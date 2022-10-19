@@ -10,7 +10,7 @@
 <script setup lang="ts">
 
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useProfileStore } from '@/stores/ProfileStore'
 
 import TheSide from "@/components/panel/TheSide.vue";
@@ -20,11 +20,13 @@ import Header from "@/components/panel/TheHeader.vue";
 const route = useRoute()
 const personalId = String(route.params.personalId)
 const profileStore = useProfileStore()
-
+const router = useRouter()
 onMounted(async () => {
     try {
         await profileStore.getData(personalId)
-
+        if (profileStore.profile._id.length < 3) {
+            router.push('/panel/auth/register')
+        }
     } catch (error) {
         console.log(error);
     }

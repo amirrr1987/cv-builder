@@ -8,13 +8,6 @@ export const GetPersonalApi = async (id: string) => {
     })
 }
 
-export const setPersonalApi = async (data: any) => {
-    return await useAxios({
-        method: 'post',
-        url: `profile`,
-        data: data
-    })
-}
 
 export const UpdatePersonalApi = async (id: string, data: any) => {
     return await useAxios({

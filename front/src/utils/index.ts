@@ -22,3 +22,8 @@ export const useMyLocale = function (lang: string) {
 import i18n from '../i18n'
 
 const { t } = i18n.global
+
+
+export const getToken = () => {
+    return localStorage.getItem('token')
+}
