@@ -3,10 +3,9 @@ const { EventBus } = require("../global/event-bus");
 const { useCvModel } = require("../models");
 const { useCvValidator } = require("../validators");
 class Controller {
-
   constructor() {
     EventBus.on('create-cv', (data) => {
-      this.CreateOneCv(data)
+      this.CreateFirstCv(data)
     })
     EventBus.on('delete-cv', (data) => {
       this.DeleteCv(data)
@@ -15,142 +14,35 @@ class Controller {
       // this.UpdateProfile(data)
     })
   }
-
   async GetAllCv(req, res) {
-
     const { params } = req;
-
-    const resualt = await useProfileModel.find({ userId: params.id })
-
-    if (resualt) {
-      res.status(200).send({
-        code: 200,
-        message: 'user found',
-        data: resualt,
-        success: true,
-      });
-    }
-    else {
-      res.status(200).send({
-        code: 404,
-        message: 'user not found',
-        data: null,
-        success: false,
-      });
-    }
-
+    const resualt = await useCvModel.find({ userId: params.id })
+    res.status(200).send({
+      code: 200,
+      message: 'all user cv found',
+      data: resualt,
+      success: true,
+    });
   }
-
-
   async GetOneCv(req, res) {
-
     const { params } = req;
-
-    const resualt = await useProfileModel.findOne({ _Id: params.cvId, userId: params.id, })
-
-    if (resualt) {
-      res.status(200).send({
-        code: 200,
-        message: 'cv found',
-        data: resualt,
-        success: true,
-      });
-    }
-    else {
-      res.status(200).send({
-        code: 404,
-        message: 'cv not found',
-        data: null,
-        success: false,
-      });
-    }
+    const resualt = await useCvModel.findOne({ _Id: params.cvId, userId: params.id, })
+    res.status(200).send({
+      code: 200,
+      message: 'cv found',
+      data: resualt,
+      success: true,
+    });
   }
-
-
-  async CreateOneCv(req, res, data) {
-    const { params } = req;
-    // let obj = {
-    //   theme: {
-    //     color: 'blue',
-    //     font: 'calibri',
-    //     lang: 'en',
-    //   },
-    //   image: 'https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870',
-    //   about: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat',
-    //   title: 'title',
-    //   subTitle: 'subTitle',
-    //   fullName: {
-    //     first: 'amir',
-    //     last: 'maghami',
-    //   },
-    //   address: {
-    //     country: 'iren',
-    //     province: 'azerbajan',
-    //     region: 'khoy',
-    //   },
-    //   skillsSummary: [
-    //     {
-    //       label: 'web',
-    //     }
-    //   ],
-    //   contacts: [
-    //     {
-    //       label: 'web',
-    //       icon: 'cib:linkedin'
-    //     }
-    //   ],
-    //   educations: [
-    //     {
-    //       label: 'it',
-    //     }
-    //   ],
-    //   techExperiences: [
-    //     {
-    //       label: 'html',
-    //     }
-    //   ],
-    //   softwareKnowledges: [{
-    //     label: 'basic',
-    //     skills: [
-    //       {
-    //         label: 'html',
-    //       }
-    //     ],
-    //   }],
-    //   experiences: [
-    //     {
-    //       title: 'front end developer',
-    //       company: {
-    //         name: 'haco',
-    //         url: 'haco.ir',
-    //       },
-    //       description: 'lorem',
-    //       beginDate: '234243',
-    //       endDate: '234243',
-    //       skills: [
-    //         {
-    //           label: 'html',
-    //         }
-    //       ],
-    //     }
-    //   ],
-    //   socials: [
-    //     {
-    //       label: 'instagram',
-    //       icon: 'cib:linkedin',
-    //       link: 'instagram.ir',
-    //     }
-    //   ],
-    // };
+  async CreateFirstCv(data) {
     const item = await new useCvModel();
-
-    if (data) {
-      item.userId = data._id;
-    }
-
-    if (params) {
-      item.userId = params.id;
-    }
+    item.userId = data._id;
+    await item.save();
+  }
+  async CreateOneCv(req, res) {
+    const { params } = req;
+    const item = await new useCvModel();
+    item.userId = params.id;
     await item.save();
     res.status(200).send({
       code: 201,
@@ -159,7 +51,6 @@ class Controller {
       success: true,
     });
   }
-
   async UpdateOneCv(req, res) {
     const { body, params } = req;
     delete body.__v
@@ -179,10 +70,8 @@ class Controller {
       success: true,
     });
   }
-
   async DeleteOneCv(data, req, res) {
     await useProfileModel.findOneAndRemove({ userId: data })
   }
-
 }
 module.exports = new Controller();
