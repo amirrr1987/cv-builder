@@ -7,13 +7,14 @@ const jwt = require("jsonwebtoken")
 const { tokenKey } = require('../config');
 const { EventBus } = require("../global/event-bus");
 class Controller {
+
     async LoginUser(req, res) {
         let obj = _.pick(req.body, ["mobile", "password"])
         let auth;
         await useUserValidator.valdateLoginUser(obj)
         auth = await useUserModel.findOne({ mobile: obj.mobile })
         console.log('auth', auth);
-        if (auth.mobile.length === 0 ) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
+        if (auth.mobile.length === 0) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
         const result = await bcrypt.compare(obj.password, auth.password)
         if (result === false) return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
         const data = {
@@ -30,81 +31,47 @@ class Controller {
             }
         )
     }
+
     async RegisterUser(req, res) {
-        let obj = _.pick(req.body, ["mobile", "password"])
-        let auth;
-        try {
-            await useUserValidator.valdateRegisterUser(obj)
-        } catch (error) {
-            res.status(400).send({
-                code: 400,
-                error: error.details,
-                message: "",
-                success: false,
-            });
+    
+        const { body } = req;
+
+        await useUserValidator.valdateRegisterUser(body)
+
+        let auth = await useUserModel.findOne({ mobile: body.mobile })
+
+        if (auth) return res.status(400).send({
+            code: 400,
+            data: {},
+            message: "این کاربر قبلا ثبت نام شده",
+            success: false,
+        })
+
+        else {
+            auth = await new useUserModel(body);
+            Object.assign(auth, body);
         }
-        try {
-            auth = await useUserModel.findOne({ mobile: obj.mobile })
-            if (auth) return res.status(400).send({
-                code: 400,
-                data: {},
-                message: "این کاربر قبلا ثبت نام شده",
-                success: false,
-            })
-        } catch (error) {
-            res.status(500).send({
-                code: 500,
-                error: error.details,
-                message: "",
-                success: false,
-            });
+
+
+        const salt = await bcrypt.genSalt(10)
+        const password = await bcrypt.hash(auth.password, salt)
+        auth.password = password
+        await auth.save();
+
+        const token = await jwt.sign(body.password, tokenKey)
+        const obj = {
+            ...auth._doc, token
         }
-        try {
-            auth = await new useUserModel(obj);
-            Object.assign(auth, obj);
-        } catch (error) {
-            res.status(500).send({
-                code: 500,
-                error: error.details,
-                message: "",
-                success: false,
-            });
-        }
-        try {
-            const salt = await bcrypt.genSalt(10)
-            const password = await bcrypt.hash(auth.password, salt)
-            auth.password = password
-            await auth.save();
-        } catch (error) {
-            res.status(500).send({
-                code: 500,
-                error: error.details,
-                message: "",
-                success: false,
-            });
-        }
-        try {
-            const token = await jwt.sign(obj.password, tokenKey)
-            let sendData = {
-                ...auth._doc, token
-            }
-            EventBus.emit('create-cv', sendData)
-            res.status(201).send({
-                code: 201,
-                data: sendData,
-                message: "",
-                success: true,
-            });
-        } catch (error) {
-            console.log('1', 1);
-            res.status(500).send({
-                code: 500,
-                error: error.details,
-                message: "",
-                success: false,
-            });
-        }
+        EventBus.emit('create-cv', obj)
+        res.status(201).send({
+            code: 201,
+            data: obj,
+            message: "",
+            success: true,
+        });
+
     }
+
     async UpdateUser(req, res) {
         const { body, params } = req;
         console.log('params.id', params.id);
@@ -126,6 +93,7 @@ class Controller {
             })
         }
     }
+
     async DeleteUser(req, res) {
         let auth = await useUserModel.findByIdAndRemove(req.params.id)
         if (auth._id) {
@@ -140,5 +108,6 @@ class Controller {
             })
         }
     }
+
 }
 module.exports = new Controller();

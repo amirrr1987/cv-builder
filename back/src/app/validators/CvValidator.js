@@ -1,7 +1,7 @@
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 
-const valdateCreateProfile = async (data) => {
+const valdateCreateCv = async (data) => {
   const schema = Joi.object({
     userId: Joi.objectId(),
     title: Joi.string().min(2).max(30).required().messages({
@@ -194,7 +194,7 @@ const valdateCreateProfile = async (data) => {
   return await schema.validateAsync(data);
 };
 
-const valdateUpdateProfile = (data) => {
+const valdateUpdateCv = (data) => {
   const schema = Joi.object({
     _id: Joi.objectId(),
     userId: Joi.objectId(),
@@ -388,6 +388,6 @@ const valdateUpdateProfile = (data) => {
 };
 
 module.exports = {
-  valdateCreateProfile,
-  valdateUpdateProfile,
+  valdateCreateCv,
+  valdateUpdateCv,
 };

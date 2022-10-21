@@ -1,11 +1,11 @@
 
-const useProfileValidator = require("./ProfileValidator");
-const useAuthValidator = require("./AuthValidator");
+const useCvValidator = require("./CvValidator");
+const useUserValidator = require("./UserValidator");
 
 
 const models = {
-    useProfileValidator,
-    useAuthValidator
+    useCvValidator,
+    useUserValidator
 };
 
 module.exports = models;

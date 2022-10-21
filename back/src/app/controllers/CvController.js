@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const { EventBus } = require("../global/event-bus");
-const { useProfileModel } = require("../models");
-const { useProfileValidator } = require("../validators");
+const { useCvModel } = require("../models");
+const { useCvValidator } = require("../validators");
 class Controller {
 
   constructor() {
@@ -67,100 +67,111 @@ class Controller {
   }
 
 
-  async CreateOneCv(data, req, res) {
-    console.log('data', data);
-    let obj = {
-      userId: data._id,
-      theme: {
-        color: 'blue',
-        font: 'calibri',
-        lang: 'en',
-      },
-      image: 'https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870',
-      about: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat',
-      title: 'title',
-      subTitle: 'subTitle',
-      fullName: {
-        first: 'amir',
-        last: 'maghami',
-      },
-      address: {
-        country: 'iren',
-        province: 'azerbajan',
-        region: 'khoy',
-      },
-      skillsSummary: [
-        {
-          label: 'web',
-        }
-      ],
-      contacts: [
-        {
-          label: 'web',
-          icon: 'cib:linkedin'
-        }
-      ],
-      educations: [
-        {
-          label: 'it',
-        }
-      ],
-      techExperiences: [
-        {
-          label: 'html',
-        }
-      ],
-      softwareKnowledges: [{
-        label: 'basic',
-        skills: [
-          {
-            label: 'html',
-          }
-        ],
-      }],
-      experiences: [
-        {
-          title: 'front end developer',
-          company: {
-            name: 'haco',
-            url: 'haco.ir',
-          },
-          description: 'lorem',
-          beginDate: '234243',
-          endDate: '234243',
-          skills: [
-            {
-              label: 'html',
-            }
-          ],
-        }
-      ],
-      socials: [
-        {
-          label: 'instagram',
-          icon: 'cib:linkedin',
-          link: 'instagram.ir',
-        }
-      ],
-    };
-    const item = await new useProfileModel(obj);
-    item.user_id = data._id;
-    Object.assign(item, obj);
+  async CreateOneCv(req, res, data) {
+    const { params } = req;
+    // let obj = {
+    //   theme: {
+    //     color: 'blue',
+    //     font: 'calibri',
+    //     lang: 'en',
+    //   },
+    //   image: 'https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870',
+    //   about: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat',
+    //   title: 'title',
+    //   subTitle: 'subTitle',
+    //   fullName: {
+    //     first: 'amir',
+    //     last: 'maghami',
+    //   },
+    //   address: {
+    //     country: 'iren',
+    //     province: 'azerbajan',
+    //     region: 'khoy',
+    //   },
+    //   skillsSummary: [
+    //     {
+    //       label: 'web',
+    //     }
+    //   ],
+    //   contacts: [
+    //     {
+    //       label: 'web',
+    //       icon: 'cib:linkedin'
+    //     }
+    //   ],
+    //   educations: [
+    //     {
+    //       label: 'it',
+    //     }
+    //   ],
+    //   techExperiences: [
+    //     {
+    //       label: 'html',
+    //     }
+    //   ],
+    //   softwareKnowledges: [{
+    //     label: 'basic',
+    //     skills: [
+    //       {
+    //         label: 'html',
+    //       }
+    //     ],
+    //   }],
+    //   experiences: [
+    //     {
+    //       title: 'front end developer',
+    //       company: {
+    //         name: 'haco',
+    //         url: 'haco.ir',
+    //       },
+    //       description: 'lorem',
+    //       beginDate: '234243',
+    //       endDate: '234243',
+    //       skills: [
+    //         {
+    //           label: 'html',
+    //         }
+    //       ],
+    //     }
+    //   ],
+    //   socials: [
+    //     {
+    //       label: 'instagram',
+    //       icon: 'cib:linkedin',
+    //       link: 'instagram.ir',
+    //     }
+    //   ],
+    // };
+    const item = await new useCvModel();
+
+    if (data) {
+      item.userId = data._id;
+    }
+
+    if (params) {
+      item.userId = params.id;
+    }
     await item.save();
+    res.status(200).send({
+      code: 201,
+      data: item,
+      message: "cv create",
+      success: true,
+    });
   }
 
   async UpdateOneCv(req, res) {
     const { body, params } = req;
     delete body.__v
     try {
-      await useProfileValidator.valdateUpdateProfile(body);
+      await useCvValidator.valdateUpdateCv(body);
     } catch (error) {
       // console.log(false);
       // res.setHeader('Content-Type', 'application/json');
       // res.status(400).send({ error: error.message });
       res.status(400).send({ error: error.message });
     }
-    let one = await useProfileModel.findByIdAndUpdate(params.personalId, body)
+    let one = await useCvModel.findByIdAndUpdate(params.id, body)
     res.status(200).send({
       code: 201,
       data: one,

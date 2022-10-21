@@ -1,7 +1,7 @@
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 
-const valdateLoginAuth = async (data) => {
+const valdateLoginUser = async (data) => {
   const schema = Joi.object({
     mobile: Joi.string().required(),
     password: Joi.string().required()
@@ -10,7 +10,7 @@ const valdateLoginAuth = async (data) => {
   return await schema.validateAsync(data);
 };
 
-const valdateRegisterAuth = async (data) => {
+const valdateRegisterUser = async (data) => {
   const schema = Joi.object({
     mobile: Joi.string().min(11).max(11).required().messages({
       "string.min": "mobile Min 11 characteers",
@@ -27,6 +27,6 @@ const valdateRegisterAuth = async (data) => {
 };
 
 module.exports = {
-  valdateLoginAuth,
-  valdateRegisterAuth,
+  valdateLoginUser,
+  valdateRegisterUser,
 };
