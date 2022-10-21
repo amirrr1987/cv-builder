@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const schemaAuth = new mongoose.Schema({
+const schemaUser = new mongoose.Schema({
     mobile: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
 
-const useAuthModel = mongoose.model("auth", schemaAuth);
+const useUserModel = mongoose.model("user", schemaUser);
 
-module.exports = useAuthModel;
+module.exports = useUserModel;

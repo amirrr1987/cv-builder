@@ -11,13 +11,13 @@
                             :class="`text-${personalStore.$state.profile.theme.color}-900`">{{ fullName }}</div>
                         <div class="capitalize text-base"
                             :class="`text-${personalStore.$state.profile.theme.color}-900`">{{
-                                    personalStore.$state.profile.title
+                            personalStore.$state.profile.title
                             }}
                         </div>
                         <div class="text- font-light text-dark-50">
                             (
                             <span class="text-green-600" v-if="personalStore.$state.profile.subTitle.length > 0">{{
-                                    personalStore.$state.profile.subTitle
+                            personalStore.$state.profile.subTitle
                             }}</span>
                             <span class="text-yellow-500">.js</span>
                             )
@@ -28,7 +28,7 @@
                 <div>
                     <div class="capitalize font-bold" :class="`text-${personalStore.$state.profile.theme.color}-900`">
                         {{
-                                $t('aboutMe')
+                        $t('aboutMe')
                         }}</div>
                     <div class="p-1 text-xs font-light text-dark-50"
                         v-if="personalStore.$state.profile.about.length > 0">
@@ -37,7 +37,7 @@
                 <div>
                     <div class="capitalize font-bold" :class="`text-${personalStore.$state.profile.theme.color}-900`">
                         {{
-                                $t('contactMe')
+                        $t('contactMe')
                         }}</div>
                     <template v-for="item in personalStore.$state.profile.contacts" :key="item.index">
                         <div class="p-1 text-xs font-light text-dark-50 flex items-center gap-x-1"
@@ -49,7 +49,7 @@
                 </div>
                 <div class="">
                     <div class="capitalize font-bold" :class="`text-${personalStore.$state.profile.theme.color}-900`">{{
-                            $t('skillsSummary')
+                    $t('skillsSummary')
                     }} </div>
                     <div class="p-1 text-xs capitalize font-light  text-dark-50">
                         <template v-for="item in personalStore.$state.profile.skillsSummary" :key="item.index">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="">
                     <div class="capitalize font-bold" :class="`text-${personalStore.$state.profile.theme.color}-900`">{{
-                            $t('education')
+                    $t('education')
                     }}</div>
                     <template v-for="item in personalStore.$state.profile.educations" :key="item.index">
                         <div class="p-1 text-xs font-light text-dark-50 ">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="">
                     <div class="capitalize font-bold" :class="`text-${personalStore.$state.profile.theme.color}-900`">{{
-                            $t('teachingExprince')
+                    $t('teachingExprince')
                     }}
                     </div>
                     <div class="p-1 text-xs font-light text-dark-50 ">
@@ -122,9 +122,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import {useProfileStore} from '@/stores/ProfileStore'
+import { useProfileStore } from '@/stores/CvStore
 import { Icon } from '@iconify/vue';
-import ExperienceItem from "@/components/panel/ExperienceItem.vue";
+ import ExperienceItem from "@/components/panel/ExperienceItem.vue";
 import { computed } from 'vue';
 const print = {
     mounted: () => print

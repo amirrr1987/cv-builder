@@ -63,7 +63,7 @@
                     </Select>
                     <Dropdown>
                         <Button type="text" :style="{backgroundColor: profile.theme.color}">
-                            <Icon  icon="pepicons:paint-pallet" />
+                            <Icon icon="pepicons:paint-pallet" />
                         </Button>
                         <template #overlay>
                             <RadioGroup v-model:value="profile.theme.color"
@@ -102,7 +102,7 @@
     </nav>
 </template>
 <script setup lang="ts">
-import {useProfileStore} from '@/stores/ProfileStore'
+import {useProfileStore} from '@/stores/CvStore
 import { Dropdown, Menu, MenuItem, Button, RadioGroup, RadioButton, Select,SelectOption } from "ant-design-vue";
 import { Icon } from '@iconify/vue';
 import { onMounted, onUnmounted, computed } from 'vue';

@@ -1,3 +1,3 @@
 
-export { AuthModel } from './Auth'
-export { ProfileModel } from './Profile'
+export type { AuthModel } from './AuthModel'
+export type { CvModel } from './CvModel'

@@ -1,10 +1,9 @@
 
-export interface ProfileModel {
-
-    profile: Profile;
+export interface CvModel {
+    cv: Cv;
 }
 
-export interface Profile {
+export interface Cv {
     fullName: FullName;
     _id: string;
     userId: string;

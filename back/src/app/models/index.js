@@ -1,10 +1,10 @@
 
-const useProfileModel = require("./ProfileModel");
-const useAuthModel = require("./AuthModel");
+const useCvModel = require("./CvModel");
+const useUserModel = require("./UserModel");
 
 const models = {
-    useProfileModel,
-    useAuthModel
+    useCvModel,
+    useUserModel
 };
 
 module.exports = models;

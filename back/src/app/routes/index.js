@@ -1,14 +1,12 @@
 const express = require("express");
-const middleWare = require('../middlewares')
 const router = express.Router();
 
-const ProfileRoutes = require("./ProfileRoute");
-const AuthRoutes = require("./AuthRoute");
+const CvRoute = require("./CvRoute");
+const UserRoute = require("./UserRoute");
 
-router.use("/api/auth", AuthRoutes);
+router.use("/api/user", UserRoute);
 
-router.use("/api/profile", ProfileRoutes);
-
+router.use("/api/cv", CvRoute);
 
 router.use((req, res) => {
     res.status(404);

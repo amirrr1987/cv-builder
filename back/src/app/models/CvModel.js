@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const schemaProfile = new mongoose.Schema({
-    user_id: { type: String,  default: "" },
+const schemaCv = new mongoose.Schema({
+    userId: { type: String,  default: "" },
     theme: {
         type: Object,  default: {
             color: { type: String,  default: "blue" },
@@ -9,7 +9,6 @@ const schemaProfile = new mongoose.Schema({
             lang: { type: String,  default: "en" }
         }
     },
-
     image: { type: String,  default: "" },
     about: { type: String,  default: "" },
     title: { type: String,  default: "" },
@@ -93,6 +92,6 @@ const schemaProfile = new mongoose.Schema({
 
 });
 
-const useProfileModel = mongoose.model("profile", schemaProfile);
+const useCvModel = mongoose.model("Cv", schemaCv);
 
-module.exports = useProfileModel;
+module.exports = useCvModel;

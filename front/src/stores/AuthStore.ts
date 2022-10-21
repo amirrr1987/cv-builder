@@ -32,7 +32,7 @@ export const useAuthStore = defineStore({
     },
     async register(user: any) {
       try {
-        const { data } = await RegisterAuthApi(user)
+        const { data }:any = await RegisterAuthApi(user)
         console.log('data', data);
         console.log('data', data);
         console.log('data',data);

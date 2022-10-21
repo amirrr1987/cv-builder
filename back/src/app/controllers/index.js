@@ -1,10 +1,10 @@
 
-const ProfileController = require("./ProfileController");
-const AuthController = require("./AuthController");
+const CvController = require("./CvController");
+const UserController = require("./UserController");
 
 const controllers = {
-    ProfileController,
-    AuthController
+    CvController,
+    UserController
 };
 
 module.exports = controllers;
