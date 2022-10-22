@@ -72,11 +72,10 @@ class Controller {
         const password = await bcrypt.hash(auth.password, salt)
         auth.password = password
         await auth.save();
-
-        const token = await jwt.sign(body.password, tokenKey)
-        const { _id } = auth;
+        const { _id, mobile } = auth;
         const obj = {
-            _id, token
+            _id,
+            mobile
         }
         EventBus.emit('create-cv', obj)
         res.status(201).send({
@@ -124,9 +123,8 @@ class Controller {
     }
 
     async DeleteUser(req, res) {
-        let auth = await useUserModel.findByIdAndRemove(req.params.id)
-        if (auth._id) {
-            EventBus.emit('delete-cv', req.params.id)
+        const auth = await useUserModel.findByIdAndRemove(req.params.id)
+        if (auth) {
             res.status(200).send({
                 code: 200,
                 data: {
