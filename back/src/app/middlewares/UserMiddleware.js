@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken')
-const {tokenKey} = require('../config')
+const { tokenKey } = require('../config')
 
 module.exports = function (req, res, next) {
     const token = req.header("x-auth-token")
 
     if (!token) return res.status(401).send({
-        message: "شما دسترسی ندارید",
+        message: "token is not valid plz login",
         token: token
     })
     try {
@@ -14,7 +14,6 @@ module.exports = function (req, res, next) {
         next();
 
     } catch (error) {
-        console.log(error);
-        res.status(401).send("token is not valid")
+        res.status(401).send(erorr)
     }
 }

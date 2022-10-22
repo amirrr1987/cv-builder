@@ -12,7 +12,7 @@ export const useCvStore = defineStore('cv', () => {
       fullName: {
         first: '',
         last: ''
-      }
+      },
       _id: "",
       userId: '',
       font: "",
@@ -20,7 +20,7 @@ export const useCvStore = defineStore('cv', () => {
         color: "red",
         font: "Calibri",
         lang: "en"
-      }
+      },
       image: "",
       about: "",
       title: "",
@@ -29,7 +29,7 @@ export const useCvStore = defineStore('cv', () => {
         country: "",
         province: "",
         region: ""
-      }
+      },
       skillsSummary: [
         {
           label: ""
@@ -67,7 +67,7 @@ export const useCvStore = defineStore('cv', () => {
           company: {
             name: '',
             url: ''
-          }
+          },
           description: "",
           beginDate: Date(),
           endDate: Date(),
@@ -117,7 +117,7 @@ export const useCvStore = defineStore('cv', () => {
   const addEducations = () => {
     state.cv.educations.push({ label: "" })
   }
-  const removeEducations = (index: number)=> {
+  const removeEducations = (index: number) => {
     state.cv.educations.splice(index, 1)
   }
   const addSocials = () => {
