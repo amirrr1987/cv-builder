@@ -1,8 +1,8 @@
 
-const AuthMiddleware = require("./AuthMiddleware")
+const UserMiddleware = require("./UserMiddleware")
 
 const middelware = {
-    AuthMiddleware
+    UserMiddleware
 };
 
 module.exports = middelware;

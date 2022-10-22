@@ -4,17 +4,17 @@ const router = express.Router();
 
 const { CvController } = require("../controllers");
 
-const { AuthMiddleware } = require("../middlewares");
+const { UserMiddleware } = require("../middlewares");
 
 
-router.get("/:id", CvController.GetAllCv);
+router.get("/:id", UserMiddleware, CvController.GetAllCv);
 
-router.get("/:id/:cvId", CvController.GetOneCv);
+router.get("/:id/:cvId", UserMiddleware, CvController.GetOneCv);
 
-router.post("/:id", AuthMiddleware, CvController.CreateOneCv);
+router.post("/:id", UserMiddleware, CvController.CreateOneCv);
 
-router.put("/:id/:cvId", AuthMiddleware, CvController.UpdateOneCv);
+router.put("/:id/:cvId", UserMiddleware, CvController.UpdateOneCv);
 
-router.delete("/:id/:cvId", AuthMiddleware, CvController.DeleteOneCv);
+router.delete("/:id/:cvId", UserMiddleware, CvController.DeleteOneCv);
 
 module.exports = router;

@@ -26,8 +26,6 @@
               <InputPassword v-model:value="formState.password" />
             </FormItem>
 
-
-
             <FormItem>
               <Button type="primary" html-type="submit">Submit</Button>
             </FormItem>
@@ -54,10 +52,11 @@ import {
   Button,
   message,
 } from "ant-design-vue";
-import { reactive } from "vue";
-import {useAuthStore}  from "@/stores/AuthStore";
+import { reactive, ref } from "vue";
+import { useAuthStore } from "@/stores/AuthStore";
 import { useRouter } from "vue-router";
 import type { AxiosError } from "axios";
+
 
 interface FormState {
   mobile: string;
@@ -87,5 +86,9 @@ const onFinish = async () => {
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
+
+
+
+
 
 </script>

@@ -8,7 +8,7 @@ class Controller {
       this.CreateFirstCv(data)
     })
     EventBus.on('delete-cv', (data) => {
-      this.DeleteCv(data)
+      this.DeleteOneCv(data)
     })
     EventBus.on('update-cv', (data) => {
       // this.UpdateProfile(data)
@@ -71,7 +71,7 @@ class Controller {
     });
   }
   async DeleteOneCv(data, req, res) {
-    await useProfileModel.findOneAndRemove({ userId: data })
+    await useCvModel.findOneAndDelete({ userId: data })
   }
 }
 module.exports = new Controller();
