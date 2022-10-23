@@ -1,4 +1,4 @@
-import { UpdateOneCvApi, GetOneCvApi } from '@/services/CvApi'
+import { UpdateOneCvApi, GetOneCvApi, GetAllCvApi } from '@/services/CvApi'
 import { defineStore } from 'pinia'
 import type { CvModel } from '../models'
 import { message } from 'ant-design-vue';
@@ -8,82 +8,85 @@ import { reactive } from 'vue';
 
 export const useCvStore = defineStore('cv', () => {
   const state = reactive<CvModel>({
-    cv: {
-      fullName: {
-        first: '',
-        last: ''
-      },
-      _id: "",
-      userId: '',
-      font: "",
-      theme: {
-        color: "red",
-        font: "calibri",
-        lang: "en"
-      },
-      image: "",
-      about: "",
-      title: "",
-      subTitle: "",
-      address: {
-        country: "",
-        province: "",
-        region: ""
-      },
-      skillsSummary: [
-        {
-          label: ""
-        }
-      ],
-      contacts: [
-        {
-          label: "",
-          icon: ""
-        }
-      ],
-      educations: [
-        {
-          label: ""
-        }
-      ],
-      techExperiences: [
-        {
-          label: ""
-        }
-      ],
-      softwareKnowledges: [
-        {
-          label: "",
-          skills: [
-            {
-              label: ""
-            }
-          ]
-        }
-      ],
-      experiences: [
-        {
-          title: "",
-          company: {
-            name: '',
-            url: ''
-          },
-          description: "",
-          beginDate: Date(),
-          endDate: Date(),
-          skills: [{
-            label: ''
-          }]
-        }
-      ],
-      socials: [
-        {
-          label: "",
-          icon: "",
-          link: ""
-        }
-      ],
-    }
+    id: '',
+    cv: [
+      {
+        fullName: {
+          first: '',
+          last: ''
+        },
+        _id: "",
+        userId: '',
+        font: "",
+        theme: {
+          color: "red",
+          font: "calibri",
+          lang: "en"
+        },
+        image: "",
+        about: "",
+        title: "",
+        subTitle: "",
+        address: {
+          country: "",
+          province: "",
+          region: ""
+        },
+        skillsSummary: [
+          {
+            label: ""
+          }
+        ],
+        contacts: [
+          {
+            label: "",
+            icon: ""
+          }
+        ],
+        educations: [
+          {
+            label: ""
+          }
+        ],
+        techExperiences: [
+          {
+            label: ""
+          }
+        ],
+        softwareKnowledges: [
+          {
+            label: "",
+            skills: [
+              {
+                label: ""
+              }
+            ]
+          }
+        ],
+        experiences: [
+          {
+            title: "",
+            company: {
+              name: '',
+              url: ''
+            },
+            description: "",
+            beginDate: Date(),
+            endDate: Date(),
+            skills: [{
+              label: ''
+            }]
+          }
+        ],
+        socials: [
+          {
+            label: "",
+            icon: "",
+            link: ""
+          }
+        ],
+      }
+    ]
   })
   const addToCv = (name: string, obj: object) => {
     state.cv[name].push(obj)
@@ -178,20 +181,31 @@ export const useCvStore = defineStore('cv', () => {
   //   state.cv.experiences[indexx].skills.splice(skillIndex, 1)
   // }
 
-  // const updatePersonal = async () => {
-  //   try {
-  //     const { data } = await UpdateOneCvApi(state.cv.userId, state.cv)
-  //     await getData($state.cv.userId)
-  //     message.success('Update data')
-  //   } catch (error) {
-  //     message.error('error update')
-  //   }
-  // }
+  const updateCv = async (id) => {
+    try {
+      await UpdateOneCvApi(state.cv.userId, state.cv)
+      await getOneCv(state.id, state.cv)
+      // message.success('Update data')
+    } catch (error) {
+      message.error('error update')
+    }
+  }
 
-  const getData = async (id: string) => {
+  const getAllCv = async (id: string) => {
     console.log('id', id);
     try {
-      const { data }: any = await GetOneCvApi(id)
+      const { data }: any = await GetAllCvApi(id)
+
+      Object.assign(state.cv, data.data)
+    } catch (error) {
+      console.log('🔥 error getData', error)
+
+    }
+  }
+  const getOneCv = async (id: string, cvId: string) => {
+    console.log('id', id);
+    try {
+      const { data }: any = await GetOneCvApi(id, cvId)
 
       Object.assign(state.cv, data.data)
     } catch (error) {
@@ -200,5 +214,5 @@ export const useCvStore = defineStore('cv', () => {
     }
   }
 
-  return { state, addToCv, removeFromCv, getData }
+  return { state, addToCv, removeFromCv, getOneCv, getAllCv }
 })

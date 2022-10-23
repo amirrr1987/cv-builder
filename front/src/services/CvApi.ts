@@ -1,9 +1,17 @@
 import { useAxios } from "./axios"
 
-export const GetOneCvApi = async (id: string) => {
+export const GetAllCvApi = async (id: string) => {
     return await useAxios({
         method: 'get',
-        url: `cv/${id}`,
+        url: `cv/${id}}`,
+        data: null
+    })
+}
+
+export const GetOneCvApi = async (id: string,cvId:string) => {
+    return await useAxios({
+        method: 'get',
+        url: `cv/${id}/${cvId}`,
         data: null
     })
 }
