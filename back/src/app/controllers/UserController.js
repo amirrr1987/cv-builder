@@ -125,6 +125,7 @@ class Controller {
     async DeleteUser(req, res) {
         const auth = await useUserModel.findByIdAndRemove(req.params.id)
         if (auth) {
+            EventBus.emit('delete-cv', req.params.id)
             res.status(200).send({
                 code: 200,
                 data: {
@@ -134,6 +135,7 @@ class Controller {
                 success: true,
             })
         }
+        console.log('DeleteUser');
     }
 
 }

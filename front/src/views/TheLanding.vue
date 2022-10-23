@@ -16,7 +16,8 @@
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                         Get
                         started</RouterLink>
-                        <!-- <RouterLink to="/auth/register" class="font-medium text-base text-gray-600">register</RouterLink> -->
+                    <!-- <RouterLink to="/auth/register" class="font-medium text-base text-gray-600">register</RouterLink> -->
+                    <button @click="cvStore.addToCv('techExperiences',{label : ''})">fff</button>
                 </div>
             </div>
         </section>
@@ -108,8 +109,8 @@
             </div>
         </section>
 
-        <Services/>
-        <Counter/>
+        <Services />
+        <Counter />
         <OurTeam />
         <Company />
         <ContactUs />
@@ -126,4 +127,7 @@ import Company from '../components/landing/Company.vue';
 import ContactUs from '../components/landing/ContactUs.vue';
 import Counter from '../components/landing/Counter.vue';
 import Services from '../components/landing/Services.vue';
+import { useCvStore } from '@/stores/CvStore';
+
+const cvStore = useCvStore()
 </script>
