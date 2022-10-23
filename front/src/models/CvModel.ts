@@ -1,14 +1,14 @@
-
-export interface CvModel {
-    cv: Cv;
+export interface Welcome {
+    id: string;
+    cv: Cv[];
 }
 
 export interface Cv {
     fullName: FullName;
     _id: string;
     userId: string;
-    theme: Theme;
     font: string;
+    theme: Theme;
     image: string;
     about: string;
     title: string;
@@ -22,11 +22,7 @@ export interface Cv {
     experiences: Experience[];
     socials: Social[];
 }
-export interface Theme {
-    color: string;
-    font: string;
-    lang: string;
-}
+
 export interface Address {
     country: string;
     province: string;
@@ -46,8 +42,8 @@ export interface Experience {
     title: string;
     company: Company;
     description: string;
-    beginDate: String;
-    endDate: String;
+    beginDate: string;
+    endDate: string;
     skills: Education[];
 }
 
@@ -69,5 +65,11 @@ export interface Social {
 
 export interface SoftwareKnowledge {
     label: string;
-    skills: any[];
+    skills: Education[];
+}
+
+export interface Theme {
+    color: string;
+    font: string;
+    lang: string;
 }

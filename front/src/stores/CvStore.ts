@@ -89,14 +89,15 @@ export const useCvStore = defineStore('cv', () => {
     ]
   })
   const addToCv = (name: string, obj: object) => {
-    state.cv[name].push(obj)
+    // state.cv[name].push(obj)
+    // state.cv
   }
 
   const removeFromCv = (name: string, index: number) => {
-    state.cv[name].splice(index, 1)
+    // state.cv[name].splice(index, 1)
   }
   const removeItemFromCv = (name: string, index: number) => {
-    state.cv[name].splice(index, 1)
+    // state.cv[name].splice(index, 1)
   }
 
 

@@ -1,6 +1,6 @@
 <template>
     <nav class="py-3 shadow relative z-50">
-        <div class="mx-auto px-3">
+        <!-- <div class="mx-auto px-3">
             <div class="flex justify-between items-center">
                 <div class="flex gap-x-3">
                     <Button type="primary" @click="">
@@ -68,7 +68,7 @@
                         <template #overlay>
                             <RadioGroup v-model:value="theme.color"
                                 class="grid grid-cols-4 gap-1 p-1 bg-gray-50 shadow border">
-                                <!-- <div class="grid grid-cols-5 gap-3"> -->
+                              
                                 <RadioButton value="pink" class="!bg-pink-500 !w-6 !h-6 !p-0" />
                                 <RadioButton value="rose" class="!bg-rose-500 !w-6 !h-6 !p-0" />
                                 <RadioButton value="orange" class="!bg-orange-500 !w-6 !h-6 !p-0" />
@@ -92,13 +92,13 @@
                                 <RadioButton value="zinc" class="!bg-zinc-500 !w-6 !h-6 !p-0" />
                                 <RadioButton value="light" class="!bg-light-500 !w-6 !h-6 !p-0" />
                                 <RadioButton value="dark" class="!bg-dark-500 !w-6 !h-6 !p-0" />
-                                <!-- </div> -->
+                             
                             </RadioGroup>
                         </template>
                     </Dropdown>
                 </div>
             </div>
-        </div>
+        </div> -->
     </nav>
 </template>
 <script setup lang="ts">
