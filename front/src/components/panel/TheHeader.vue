@@ -3,7 +3,7 @@
         <div class="mx-auto px-3">
             <div class="flex justify-between items-center">
                 <div class="flex gap-x-3">
-                    <Button type="primary" @click="updatePrsonal">
+                    <Button type="primary" @click="">
                         Update
                     </Button>
                     <Button type="primary" v-print="'#printMe'">
@@ -52,7 +52,7 @@
                             </Menu>
                         </template>
                     </Dropdown>
-                    <Select v-model:value="profile.theme.font" :class="`font-${profile.theme.font}`">
+                    <Select v-model:value="theme.font" :class="`font-${theme.font}`">
                         <SelectOption value="sofia" class="font-sofia">Sofia</SelectOption>
                         <SelectOption value="roboto" class="font-roboto">Roboto</SelectOption>
                         <SelectOption value="spaceMono" class="font-spaceMono">Space Mono</SelectOption>
@@ -62,11 +62,11 @@
                         <SelectOption value="vazir" class="font-vazir">Vazir</SelectOption>
                     </Select>
                     <Dropdown>
-                        <Button type="text" :style="{backgroundColor: profile.theme.color}">
+                        <Button type="text" :style="{backgroundColor: theme.color}">
                             <Icon icon="pepicons:paint-pallet" />
                         </Button>
                         <template #overlay>
-                            <RadioGroup v-model:value="profile.theme.color"
+                            <RadioGroup v-model:value="theme.color"
                                 class="grid grid-cols-4 gap-1 p-1 bg-gray-50 shadow border">
                                 <!-- <div class="grid grid-cols-5 gap-3"> -->
                                 <RadioButton value="pink" class="!bg-pink-500 !w-6 !h-6 !p-0" />
@@ -102,21 +102,14 @@
     </nav>
 </template>
 <script setup lang="ts">
-import {useProfileStore} from '@/stores/CvStore
-import { Dropdown, Menu, MenuItem, Button, RadioGroup, RadioButton, Select,SelectOption } from "ant-design-vue";
+import { useCvStore } from '@/stores/CvStore'
+import { Dropdown, Menu, MenuItem, Button, RadioGroup, RadioButton, Select, SelectOption } from "ant-design-vue";
 import { Icon } from '@iconify/vue';
 import { onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from "vue-i18n";
-const profileStore = useProfileStore()
+const cvStore = useCvStore()
 
 
-const profile = computed(() => {
-    return profileStore.$state.profile
-})
-
-const updatePrsonal = () => {
-    profileStore.updatePersonal()
-}
 
 
 const { locale } = useI18n()
@@ -125,8 +118,14 @@ const changeLocale = (flag: string) => {
     locale.value = flag
     html[0].classList.toggle('is-rtl')
 }
+
+const theme = computed(() => {
+    console.log('cvStore.state.cv.theme',cvStore.state.cv.theme);
+    return cvStore.state.cv.theme
+})
+
 onMounted(() => {
-    locale.value = profileStore.$state.profile.theme.lang
+    locale.value = cvStore.state.cv.theme.lang
 
 })
 onUnmounted(() => {

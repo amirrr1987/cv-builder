@@ -1,4 +1,4 @@
-export interface AuthModel {
+export interface UserModel {
     user: User;
     isLogin: boolean
 }

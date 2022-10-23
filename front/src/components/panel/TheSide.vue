@@ -15,9 +15,9 @@
                             <template #label>
                                 {{ $t('firstName') }}
                             </template>
-                            <Input v-model:value="profile.fullName.first">
+                            <Input v-model:value="cvStore.state.cv.fullName.first">
                             <template #suffix>
-                                <Button @click="profile.fullName.first = ''" type="text" danger size="small"
+                                <Button @click="cvStore.state.cv.fullName.first = ''" type="text" danger size="small"
                                     shape="circle" class="!flex justify-center items-center">
                                     <template #icon>
                                         <Icon icon="icon-park-outline:close" />
@@ -30,9 +30,9 @@
                             <template #label>
                                 {{ $t('lastName') }}
                             </template>
-                            <Input v-model:value="profile.fullName.last">
+                            <Input v-model:value="cvStore.state.cv.fullName.last">
                             <template #suffix>
-                                <Button @click="profile.fullName.last = ''" type="text" danger size="small"
+                                <Button @click="cvStore.state.cv.fullName.last = ''" type="text" danger size="small"
                                     shape="circle" class="!flex justify-center items-center">
                                     <template #icon>
                                         <Icon icon="icon-park-outline:close" />
@@ -55,10 +55,10 @@
                                     {{ $t('title') }}
                                 </span>
                             </template>
-                            <Input v-model:value="profile.title">
+                            <Input v-model:value="cvStore.state.cv.title">
                             <template #suffix>
-                                <Button @click="profile.title = ''" type="text" danger size="small" shape="circle"
-                                    class="!flex justify-center items-center">
+                                <Button @click="cvStore.state.cv.title = ''" type="text" danger size="small"
+                                    shape="circle" class="!flex justify-center items-center">
                                     <template #icon>
                                         <Icon icon="icon-park-outline:close" />
                                     </template>
@@ -70,10 +70,10 @@
                             <template #label>
                                 {{ $t('subTitle') }}
                             </template>
-                            <Input v-model:value="profile.subTitle">
+                            <Input v-model:value="cvStore.state.cv.subTitle">
                             <template #suffix>
-                                <Button @click="profile.subTitle = ''" type="text" danger size="small" shape="circle"
-                                    class="!flex justify-center items-center">
+                                <Button @click="cvStore.state.cv.subTitle = ''" type="text" danger size="small"
+                                    shape="circle" class="!flex justify-center items-center">
                                     <template #icon>
                                         <Icon icon="icon-park-outline:close" />
                                     </template>
@@ -90,7 +90,7 @@
                             </span>
                         </template>
                         <FormItem label="About">
-                            <Textarea :rows="5" v-model:value="profile.about" />
+                            <Textarea :rows="5" v-model:value="cvStore.state.cv.about" />
                         </FormItem>
                     </CollapsePanel>
                     <CollapsePanel key="4" :class="[`${prefixCls}__contacts`]">
@@ -102,7 +102,7 @@
                         </template>
                         <FormItem>
 
-                            <draggable tag="div" :list="profile.contacts"
+                            <draggable tag="div" :list="cvStore.state.cv.contacts"
                                 class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
@@ -127,7 +127,7 @@
                                         <template #suffix>
                                             <Button type="text" danger shape="circle"
                                                 class="!flex justify-center items-center"
-                                                @click.prevent="profileStore.removeContacts(index)">
+                                                @click.prevent="cvStore.removeFromCv('contacts', index )">
                                                 <template #icon>
                                                     <Icon icon="icon-park-outline:minus" />
                                                 </template>
@@ -139,7 +139,7 @@
                                 <template #footer>
                                     <Button type="dashed" block
                                         class="col-strat-2 col-end-3  !flex justify-center items-center"
-                                        @click.prevent="profileStore.addContacts">
+                                        @click.prevent="cvStore.addToCv('contacts', { label: '' ,icon: '' })">
                                         <template #icon>
                                             <Icon icon="icon-park-outline:plus" />
                                         </template>
@@ -156,7 +156,7 @@
                             </span>
                         </template>
                         <FormItem label="Skills Summary">
-                            <draggable tag="div" :list="profile.skillsSummary"
+                            <draggable tag="div" :list="cvStore.state.cv.skillsSummary"
                                 class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
@@ -171,7 +171,7 @@
                                         <template #suffix>
                                             <Button type="text" danger shape="circle"
                                                 class="!flex justify-center items-center"
-                                                @click.prevent="profileStore.removeSkillSummary(index)">
+                                                @click.prevent="cvStore.removeFromCv('skillsSummary', index )">
                                                 <template #icon>
                                                     <Icon icon="icon-park-outline:minus" />
                                                 </template>
@@ -183,7 +183,7 @@
                                 <template #footer>
                                     <Button type="dashed" block
                                         class="col-strat-2 col-end-3  !flex justify-center items-center"
-                                        @click.prevent="profileStore.addSkillSummary">
+                                        @click.prevent="cvStore.addToCv('skillsSummary',{ label: '' })">
                                         <template #icon>
                                             <Icon icon="icon-park-outline:plus" />
                                         </template>
@@ -200,7 +200,7 @@
                             </span>
                         </template>
                         <FormItem label="Educations">
-                            <draggable tag="div" :list="profile.educations"
+                            <draggable tag="div" :list="cvStore.state.cv.educations"
                                 class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
@@ -215,7 +215,7 @@
                                         <template #suffix>
                                             <Button type="text" danger shape="circle"
                                                 class="!flex justify-center items-center"
-                                                @click.prevent="profileStore.removeEducations(index)">
+                                                @click.prevent="cvStore.removeFromCv('educations', index )">
                                                 <template #icon>
                                                     <Icon icon="icon-park-outline:minus" />
                                                 </template>
@@ -226,8 +226,8 @@
                                 </template>
                                 <template #footer>
                                     <Button type="dashed" block
-                                        class="col-strat-2 col-end-3  !flex justify-center items-center"
-                                        @click.prevent="profileStore.addEducations">
+                                        class="col-strat-2 col-end-3 !flex justify-center items-center"
+                                        @click.prevent="cvStore.addToCv('educations',{ label: '' })">
                                         <template #icon>
                                             <Icon icon="icon-park-outline:plus" />
                                         </template>
@@ -244,7 +244,7 @@
                             </span>
                         </template>
                         <FormItem label="Teach Experiences">
-                            <draggable tag="div" :list="profile.techExperiences"
+                            <draggable tag="div" :list="cvStore.state.cv.techExperiences"
                                 class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
@@ -259,7 +259,7 @@
                                         <template #suffix>
                                             <Button type="text" danger shape="circle"
                                                 class="!flex justify-center items-center"
-                                                @click.prevent="profileStore.removeTechExperiences(index)">
+                                                @click.prevent="cvStore.removeFromCv('techExperiences', index )">
                                                 <template #icon>
                                                     <Icon icon="icon-park-outline:minus" />
                                                 </template>
@@ -271,7 +271,7 @@
                                 <template #footer>
                                     <Button type="dashed" block
                                         class="col-strat-2 col-end-3  !flex justify-center items-center"
-                                        @click.prevent="profileStore.addTechExperiences">
+                                        @click.prevent="cvStore.addToCv('techExperiences',{ label: '' })">
                                         <template #icon>
                                             <Icon icon="icon-park-outline:plus" />
                                         </template>
@@ -288,7 +288,7 @@
                             </span>
                         </template>
                         <FormItem label="Social">
-                            <draggable tag="div" :list="profile.socials"
+                            <draggable tag="div" :list="cvStore.state.cv.socials"
                                 class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
@@ -313,7 +313,7 @@
                                         <template #suffix>
                                             <Button type="text" danger shape="circle"
                                                 class="!flex justify-center items-center"
-                                                @click.prevent="profileStore.removeSocials(index)">
+                                                @click.prevent="cvStore.removeFromCv('socials', index )">
                                                 <template #icon>
                                                     <Icon icon="icon-park-outline:minus" />
                                                 </template>
@@ -325,7 +325,7 @@
                                 <template #footer>
                                     <Button type="dashed" block
                                         class="col-strat-2 col-end-3  !flex justify-center items-center"
-                                        @click.prevent="profileStore.addSocials">
+                                        @click.prevent="cvStore.addToCv('socials',{ label: '', icon: '', link: '' })">
                                         <template #icon>
                                             <Icon icon="icon-park-outline:plus" />
                                         </template>
@@ -346,8 +346,8 @@
                             </span>
                         </template>
                         <div class="grid grid-cols-[max-content,1fr]">
-                            <draggable tag="div" :list="profile.softwareKnowledges" class="list-group" handle=".handle"
-                                item-key="index" @change="dargHandler">
+                            <draggable tag="div" :list="cvStore.state.cv.softwareKnowledges" class="list-group"
+                                handle=".handle" item-key="index" @change="dargHandler">
                                 <template #item="{ element, index }">
                                     <Button type="ghost" size="small"
                                         class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
@@ -358,7 +358,7 @@
                                 </template>
                             </draggable>
                             <Collapse>
-                                <template v-for="(item, index) in profile.softwareKnowledges" :key="index">
+                                <template v-for="(item, index) in cvStore.state.cv.softwareKnowledges" :key="index">
                                     <CollapsePanel>
                                         <template #header>
                                             <span class="header__title flex items-center gap-x-2">
@@ -371,7 +371,7 @@
                                             <template #suffix>
                                                 <Button type="text" danger shape="circle"
                                                     class="!flex justify-center items-center"
-                                                    @click.prevent="profileStore.removeSoftwareKnowledges">
+                                                    @click.prevent="cvStore.removeFromCv('softwareKnowledges', index )">
                                                     <template #icon>
                                                         <Icon icon="icon-park-outline:minus" />
                                                     </template>
@@ -385,7 +385,7 @@
                                                     <template #suffix>
                                                         <Button type="text" danger shape="circle"
                                                             class="!flex justify-center items-center"
-                                                            @click.prevent="profileStore.removeSoftwareKnowledgesItem(index, skillIndex)">
+                                                            @click.prevent="cvStore.state.removeSoftwareKnowledgesItem(index, skillIndex)">
                                                             <template #icon>
                                                                 <Icon icon="icon-park-outline:minus" />
                                                             </template>
@@ -395,7 +395,7 @@
                                                     </Input>
                                                 </template>
                                                 <Button type="dashed" block class="!flex justify-center items-center"
-                                                    @click.prevent="profileStore.addSoftwareKnowledgesItem(index)">
+                                                    @click.prevent="cvStore.state.addSoftwareKnowledgesItem(index)">
                                                     <template #icon>
                                                         <Icon icon="icon-park-outline:plus" />
                                                     </template>
@@ -406,8 +406,8 @@
                                 </template>
                             </Collapse>
                         </div>
-                        <Button type="dashed" block class="!flex justify-center items-center !h-12"
-                            @click.prevent="profileStore.addSoftwareKnowledges">
+
+                        <Button type="dashed" block class="!flex justify-center items-center !h-12" @click.prevent="">
                             <template #icon>
                                 <Icon icon="icon-park-outline:plus" />
                             </template>
@@ -424,7 +424,7 @@
                                 <span>Experiences</span>
                             </template>
                             <Collapse>
-                                <template v-for="(item, index) in profile.experiences" :key="index">
+                                <template v-for="(item, index) in cvStore.state.cv.experiences" :key="index">
                                     <CollapsePanel>
                                         <template #header>
                                             <span class="header__title">
@@ -434,7 +434,7 @@
                                         </template>
                                         <Button type="text" danger shape="circle"
                                             class="!absolute right-0 top-0 !flex justify-center items-center"
-                                            @click.prevent="profileStore.removeExperiences(index)">
+                                            @click.prevent="cvStore.removeFromCv('experiences', index )">
                                             <template #icon>
                                                 <Icon icon="icon-park-outline:close" />
                                             </template>
@@ -459,7 +459,7 @@
                                                     <template #suffix>
                                                         <Button type="text" danger shape="circle"
                                                             class="!flex justify-center items-center"
-                                                            @click.prevent="profileStore.removeExperiencesSkill(item.company.name, skillIndex)">
+                                                            @click.prevent="cvStore.state.removeExperiencesSkill(item.company.name, skillIndex)">
                                                             <template #icon>
                                                                 <Icon icon="icon-park-outline:minus" />
                                                             </template>
@@ -468,7 +468,7 @@
                                                     </Input>
                                                 </template>
                                                 <Button type="dashed" block class="!flex justify-center items-center"
-                                                    @click.prevent="profileStore.addExperiencesSkills(index)">
+                                                    @click.prevent="cvStore.state.addExperiencesSkills(index)">
                                                     <template #icon>
                                                         <Icon icon="icon-park-outline:plus" />
                                                     </template>
@@ -487,7 +487,7 @@
                                 </template>
                             </Collapse>
                             <Button type="dashed" block class="!flex justify-center items-center"
-                                @click.prevent="profileStore.addExperiences">
+                                @click.prevent="cvStore.addToCv('experiences', )">
                                 <template #icon>
                                     <Icon icon="icon-park-outline:plus" />
                                 </template>
@@ -505,19 +505,17 @@
     </Form>
 </template>
 <script setup lang="ts">
-import {useProfileStore} from '@/stores/CvStore
+import { useCvStore } from '@/stores/CvStore'
 import { computed, reactive } from 'vue';
 import { Icon } from '@iconify/vue';
-import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Divider, Tabs,TabPane } from 'ant-design-vue';
+import { Input, FormItem, Form, DatePicker, Select, SelectOption, Textarea, Button, Collapse, CollapsePanel, message, Divider, Tabs, TabPane } from 'ant-design-vue';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 import draggable from 'vuedraggable'
 import { useDesign } from "@/utils";
-const profileStore = useProfileStore()
-const profile = computed(() => {
-    return profileStore.$state.profile
-})
+const cvStore = useCvStore()
+
 const tabKey = ref('1')
 const activeKey = ref([]);
 const contactIcons = reactive([
@@ -585,7 +583,7 @@ const handleChange = (info: UploadChangeParam) => {
 };
 const dargHandler = (id: any) => {
 
-    profile.value.contacts.forEach((item, index) => {
+    cvStore.state.cv.contacts.forEach((item, index) => {
         index = index + 1
     })
 }

@@ -25,17 +25,17 @@
                         <FormItem label="Password" name="password" :rules="[
                           { required: true, message: 'Please input your password!' },
                         ]">
-                            <InputPassword v-model:value="formState.password" autocomplete />
+                            <InputPassword v-model:value="formState.password" />
                         </FormItem>
 
                         <FormItem label="Repeat Password" name="repassword" :rules="[
                           { required: true, message: 'Please input your password!' },
                         ]">
-                            <InputPassword v-model:value="formState.repassword" autocomplete />
+                            <InputPassword v-model:value="formState.repassword" />
                         </FormItem>
 
                         <FormItem>
-                            <Button type="primary" html-type="submit">Submit</Button>
+                            <Button type="primary" html-type="submit">Register</Button>
                         </FormItem>
                         <p class="text-sm font-light text-gray-500 dark:text-yellow-400">
                             Do you have an account?
@@ -61,7 +61,7 @@ import {
     message,
 } from "ant-design-vue";
 import { reactive } from "vue";
-import { useAuthStore } from "@/stores/AuthStore";
+import { useUserStore } from "@/stores/UserStore";
 import { useRouter } from "vue-router";
 import type { AxiosError } from "axios";
 
@@ -76,15 +76,15 @@ const formState = reactive<FormState>({
     password: "",
     repassword: "",
 });
-const router = useRouter();
 
-const authStore = useAuthStore()
+const userStore = useUserStore()
 
 
 const onFinish = async () => {
+
     try {
-        const { data } = await authStore.register({...formState})
-        router.push({ name: 'ThePanel', params: { personalId: data._id } });
+        await userStore.register({ ...formState })
+        
 
     } catch (e) {
         message.error((e as AxiosError).message)

@@ -20,9 +20,18 @@ export const useAxios = async (urlConfig: any, headers = {}): Promise<AxiosInsta
             return config
         },
         (e) => {
-            message.error((e as AxiosError).message)
+            // message.error((e as AxiosError).message)
+            // console.log('e',e);
             return Promise.reject(e)
         },
+    )
+    _axios.interceptors.response.use(
+        response => response,
+        error => {
+            const data = (error as AxiosError).response?.data;
+            message.error(data.message)
+            return Promise.reject(data);
+        }
     )
     switch (urlConfig.method) {
         case 'get':

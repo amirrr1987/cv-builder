@@ -53,7 +53,7 @@ import {
   message,
 } from "ant-design-vue";
 import { reactive, ref } from "vue";
-import { useAuthStore } from "@/stores/AuthStore";
+import { useUserStore } from "@/stores/UserStore";
 import { useRouter } from "vue-router";
 import type { AxiosError } from "axios";
 
@@ -72,12 +72,12 @@ const formState = reactive<FormState>({
 const router = useRouter();
 
 
-const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const onFinish = async () => {
   try {
-    const id = await authStore.login(formState)
-    router.push({ name: 'ThePanel', params: { personalId: id } });
+    const id = await userStore.login(formState)
+    router.push({ name: 'ThePanel', params: { id: id } });
   } catch (e) {
     message.error((e as AxiosError).message)
   }

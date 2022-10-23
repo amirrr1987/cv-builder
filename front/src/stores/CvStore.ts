@@ -18,7 +18,7 @@ export const useCvStore = defineStore('cv', () => {
       font: "",
       theme: {
         color: "red",
-        font: "Calibri",
+        font: "calibri",
         lang: "en"
       },
       image: "",
@@ -85,32 +85,32 @@ export const useCvStore = defineStore('cv', () => {
       ],
     }
   })
-  const addToCv = (name: string, obj) => {
+  const addToCv = (name: string, obj: object) => {
     state.cv[name].push(obj)
   }
 
-  
+  const removeFromCv = (name: string, index: number) => {
+    state.cv[name].splice(index, 1)
+  }
+  const removeItemFromCv = (name: string, index: number) => {
+    state.cv[name].splice(index, 1)
+  }
 
 
-  // const techExperiencesAdd = () => {
-  //   state.cv.techExperiences.push({ label: "" })
 
-  // }
+
+
   // const techExperiencesRemove = (index: number) => {
   //   state.cv.techExperiences.splice(index, 1)
 
   // }
 
-  // const addTechExperiences = () => {
-  //   state.cv.techExperiences.push({ label: "" })
-  // }
+
   // const removeTechExperiences = (index: number) => {
   //   state.cv.techExperiences.splice(index, 1)
   // }
 
-  // const addContacts = () => {
-  //   state.cv.contacts.push({ label: "", icon: '' })
-  // }
+
   // const removeContacts = (index: number) => {
   //   state.cv.contacts.splice(index, 1)
   // }
@@ -188,17 +188,17 @@ export const useCvStore = defineStore('cv', () => {
   //   }
   // }
 
-  // const getData = async (id: string) => {
-  //   console.log('id', id);
-  //   try {
-  //     const { data }: any = await GetOneCvApi(id)
+  const getData = async (id: string) => {
+    console.log('id', id);
+    try {
+      const { data }: any = await GetOneCvApi(id)
 
-  //     Object.assign(state.cv, data.data)
-  //   } catch (error) {
-  //     console.log('🔥 error getData', error)
+      Object.assign(state.cv, data.data)
+    } catch (error) {
+      console.log('🔥 error getData', error)
 
-  //   }
-  // }
+    }
+  }
 
-  return { state, addToCv }
+  return { state, addToCv, removeFromCv, getData }
 })

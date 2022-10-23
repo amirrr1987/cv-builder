@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { EventBus } = require("../global/event-bus");
 const { useCvModel } = require("../models");
+const useUserModel = require("../models/UserModel");
 const { useCvValidator } = require("../validators");
 
 const obj = {
@@ -93,6 +94,20 @@ class Controller {
   }
   async GetAllCv(req, res) {
     const { params } = req;
+
+    let user = await useUserModel.findById(params.id)
+    if (!user) {
+      return res.status(404).send({
+        code: 404,
+        data: {},
+        message: "cv not found",
+        success: true,
+      });
+
+    }
+    
+
+
     const resualt = await useCvModel.find({ userId: params.id })
     res.status(200).send({
       code: 200,
@@ -104,6 +119,15 @@ class Controller {
   async GetOneCv(req, res) {
     const { params } = req;
     const resualt = await useCvModel.findOne({ _Id: params.cvId, userId: params.id, })
+    if (!resualt) {
+      return res.status(404).send({
+        code: 404,
+        message: 'cv not found',
+        data: {},
+        success: false,
+      });
+
+    }
     res.status(200).send({
       code: 200,
       message: 'cv found',
@@ -118,6 +142,17 @@ class Controller {
   }
   async CreateOneCv(req, res) {
     const { params } = req;
+
+    let user = await useUserModel.findById(params.id)
+    if (!user) {
+      return res.status(404).send({
+        code: 404,
+        data: {},
+        message: "user not found",
+        success: true,
+      });
+
+    }
     const item = await new useCvModel(obj);
     item.userId = params.id;
     await item.save();
@@ -127,19 +162,33 @@ class Controller {
       message: "cv create",
       success: true,
     });
+
   }
   async UpdateOneCv(req, res) {
     const { body, params } = req;
-    delete body.__v
-    try {
-      await useCvValidator.valdateUpdateCv(body);
-    } catch (error) {
-      // console.log(false);
-      // res.setHeader('Content-Type', 'application/json');
-      // res.status(400).send({ error: error.message });
-      res.status(400).send({ error: error.message });
+
+    let user = await useUserModel.findById(params.id)
+    if (!user) {
+      return res.status(404).send({
+        code: 404,
+        data: {},
+        message: "cv not found",
+        success: true,
+      });
+
     }
+    await useCvValidator.valdateUpdateCv(body);
+
     let one = await useCvModel.findByIdAndUpdate(params.id, body)
+
+    if (!one) {
+      return res.status(404).send({
+        code: 404,
+        data: {},
+        message: "cv not found",
+        success: true,
+      });
+    }
     res.status(200).send({
       code: 201,
       data: one,
@@ -148,32 +197,30 @@ class Controller {
     });
   }
   async DeleteOneCvEventBus(id, req, res) {
-
-    // await useCvModel.findOneAndRemove({ userId: id })
-    
     await useCvModel.deleteMany({ userId: id })
     console.log('DeleteOneCvEventBus');
   }
+
   async DeleteOneCv(req, res) {
     const { params } = req
     const cv = await useCvModel.findOneAndRemove({ _id: params.cvId, userId: params.id })
 
-    if (cv) {
-      res.status(200).send({
-        code: 201,
-        data: {},
-        message: "cv delete",
-        success: true,
-      });
-    }
-    else {
-      res.status(404).send({
+    if (!cv) {
+      return res.status(404).send({
         code: 404,
         data: {},
         message: "cv not found",
         success: false,
       });
     }
+    res.status(200).send({
+      code: 201,
+      data: {},
+      message: "cv delete",
+      success: true,
+    });
+
+
   }
 }
 module.exports = new Controller();

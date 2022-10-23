@@ -9,38 +9,46 @@ const { EventBus } = require("../global/event-bus");
 class Controller {
 
     async LoginUser(req, res) {
-        const { body } = req;
+        const obj = _.pick(req.body, ["mobile", "password"])
 
-        await useUserValidator.valdateLoginUser(body)
+        await useUserValidator.valdateLoginUser(obj)
 
-        let user = await useUserModel.findOne({ mobile: body.mobile })
+        const user = await useUserModel.findOne({
+            mobile: obj.mobile
+        })
 
         if (!user) {
-            return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
+            return res
+                .status(404)
+                .send(
+                    {
+                        code: 404,
+                        data: {},
+                        message: "username or password not found",
+                        success: false,
+                    }
+                )
         }
 
-        const { _id } = user;
 
-        const result = await bcrypt.compare(body.password, user.password)
+        const result = await bcrypt.compare(obj.password, user.password)
 
         if (!result) {
-            return res.status(400).send({ message: "نام کاربری یا پسورد پیدا نشد" })
-        }
-        const data = {
-            _id
+            return res.status(400).send({ message: "username or password not found" })
         }
 
-        const token = jwt.sign(data, tokenKey)
+        const token = jwt.sign(obj, tokenKey)
 
-        data.token = token
+        obj.token = token
+        obj._id = user._id
+        delete obj.password
 
         res
-            .header("x-auth-token", token)
             .status(200)
             .send(
                 {
                     code: 200,
-                    data: data,
+                    data: obj,
                     message: "User found",
                     success: true,
                 }
@@ -48,39 +56,58 @@ class Controller {
     }
 
     async RegisterUser(req, res) {
+        const obj = _.pick(req.body, ["mobile", "password"])
 
-        const { body } = req;
 
-        await useUserValidator.valdateRegisterUser(body)
 
-        let auth = await useUserModel.findOne({ mobile: body.mobile })
+        try {
+            await useUserValidator.valdateRegisterUser(obj)
+        } catch (error) {
+            let errs = [];
+            error.details.forEach((item) => {
+                errs.push(item.message)
+            })
 
-        if (auth) return res.status(400).send({
-            code: 400,
-            data: {},
-            message: "این کاربر قبلا ثبت نام شده",
-            success: false,
-        })
-
-        else {
-            auth = await new useUserModel(body);
-            Object.assign(auth, body);
+            return res.status(400).send({
+                code: 400,
+                errors: errs,
+                message: "This user is already registered",
+                success: false,
+            })
         }
 
+
+
+        let auth = await useUserModel.findOne({
+            mobile: obj.mobile
+        })
+
+        if (auth) {
+            return res.status(400).send({
+                code: 400,
+                data: {},
+                message: "This user is already registered",
+                success: false,
+            })
+        }
+
+        auth = await new useUserModel(obj);
+        Object.assign(auth, obj);
 
         const salt = await bcrypt.genSalt(10)
         const password = await bcrypt.hash(auth.password, salt)
+
         auth.password = password
         await auth.save();
-        const { _id, mobile } = auth;
-        const obj = {
-            _id,
-            mobile
-        }
+
         EventBus.emit('create-cv', obj)
+        const { _id, mobile } = auth
         res.status(201).send({
             code: 201,
-            data: obj,
+            data: {
+                _id,
+                mobile
+            },
             message: "user created",
             success: true,
         });
@@ -88,28 +115,15 @@ class Controller {
     }
 
     async UpdateUser(req, res) {
-        const { body, params } = req;
-
-        const obj = {
-            mobile: body.mobile,
-            password: body.password
-        }
+        const obj = _.pick(req.body, ["mobile", "password"])
 
         await useUserValidator.valdateRegisterUser(obj)
 
         const user = await useUserModel.findByIdAndUpdate(req.params.id, obj)
-        const { _id } = user;
-        const data = {
-            _id
-        }
 
-        const token = jwt.sign(data, tokenKey)
-
-        data.token = token
 
         if (user) {
             res
-                .header("x-auth-token", token)
                 .status(200)
                 .send({
                     code: 200,
@@ -118,6 +132,16 @@ class Controller {
                     },
                     message: "User update",
                     success: true,
+                })
+        }
+        else {
+            res
+                .status(404)
+                .send({
+                    code: 404,
+                    data: {},
+                    message: "User not found",
+                    success: false,
                 })
         }
     }
@@ -135,7 +159,16 @@ class Controller {
                 success: true,
             })
         }
-        console.log('DeleteUser');
+        else {
+            res
+                .status(404)
+                .send({
+                    code: 404,
+                    data: {},
+                    message: "User not found",
+                    success: false,
+                })
+        }
     }
 
 }
