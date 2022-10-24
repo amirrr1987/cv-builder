@@ -4,82 +4,7 @@ const { useCvModel } = require("../models");
 const useUserModel = require("../models/UserModel");
 const { useCvValidator } = require("../validators");
 const _ = require("lodash")
-const obj = {
-  "userId": "",
-  "theme": {
-    "color": "sama",
-    "font": "calibri",
-    "lang": "en"
-  },
-  "image": "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
-  "about": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-  "title": "title",
-  "subTitle": "subTitle",
-  "fullName": {
-    "first": "amir",
-    "last": "maghami"
-  },
-  "address": {
-    "country": "iren",
-    "province": "azerbajan",
-    "region": "khoy"
-  },
-  "skillsSummary": [
-    {
-      "label": "web"
-    }
-  ],
-  "contacts": [
-    {
-      "label": "web",
-      "icon": "cib:linkedin"
-    }
-  ],
-  "educations": [
-    {
-      "label": "it"
-    }
-  ],
-  "techExperiences": [
-    {
-      "label": "html"
-    }
-  ],
-  "softwareKnowledges": [
-    {
-      "label": "basic",
-      "skills": [
-        {
-          "label": "html"
-        }
-      ]
-    }
-  ],
-  "experiences": [
-    {
-      "title": "front end developer",
-      "company": {
-        "name": "haco",
-        "url": "haco.ir"
-      },
-      "description": "lorem",
-      "beginDate": "234243",
-      "endDate": "234243",
-      "skills": [
-        {
-          "label": "html"
-        }
-      ]
-    }
-  ],
-  "socials": [
-    {
-      "label": "instagram",
-      "icon": "cib:linkedin",
-      "link": ""
-    }
-  ],
-}
+
 var mongoose = require('mongoose');
 
 class Controller {
@@ -114,6 +39,7 @@ class Controller {
   async GetOneCv(req, res) {
     const { params } = req;
     const resualt = await useCvModel.findOne({ _Id: params.cvId })
+
     if (!resualt) {
       return res.status(404).send({
         code: 404,
@@ -126,12 +52,88 @@ class Controller {
     res.status(200).send({
       code: 200,
       message: 'cv found',
-      data: resualt,
+      data: { cv: resualt },
       success: true,
     });
   }
   async CreateFirstCv(data) {
-    const item = await new useCvModel();
+    const obj = {
+      "userId": "",
+      "theme": {
+        "color": "red",
+        "font": "calibri",
+        "lang": "en"
+      },
+      "image": "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
+      "about": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      "title": "title",
+      "subTitle": "subTitle",
+      "fullName": {
+        "first": "amir",
+        "last": "maghami"
+      },
+      "address": {
+        "country": "iren",
+        "province": "azerbajan",
+        "region": "khoy"
+      },
+      "skillsSummary": [
+        {
+          "label": "web"
+        }
+      ],
+      "contacts": [
+        {
+          "label": "web",
+          "icon": "cib:linkedin"
+        }
+      ],
+      "educations": [
+        {
+          "label": "it"
+        }
+      ],
+      "techExperiences": [
+        {
+          "label": "html"
+        }
+      ],
+      "softwareKnowledges": [
+        {
+          "label": "basic",
+          "skills": [
+            {
+              "label": "html"
+            }
+          ]
+        }
+      ],
+      "experiences": [
+        {
+          "title": "front end developer",
+          "company": {
+            "name": "haco",
+            "url": "haco.ir"
+          },
+          "description": "lorem",
+          "beginDate": "234243",
+          "endDate": "234243",
+          "skills": [
+            {
+              "label": "html"
+            }
+          ]
+        }
+      ],
+      "socials": [
+        {
+          "label": "instagram",
+          "icon": "cib:linkedin",
+          "link": ""
+        }
+      ],
+    }
+    const item = await new useCvModel(obj);
     item.userId = data._id;
     await item.save();
   }

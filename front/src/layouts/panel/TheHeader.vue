@@ -1,5 +1,8 @@
 <template>
-    <nav class="py-3 shadow relative z-50">
+    <nav class="shadow">
+        <div class="container mx-auto">
+            {{ userStore.state.user }}dfs
+        </div>
         <!-- <div class="mx-auto px-3">
             <div class="flex justify-between items-center">
                 <div class="flex gap-x-3">
@@ -103,11 +106,13 @@
 </template>
 <script setup lang="ts">
 import { useCvStore } from '@/stores/CvStore'
+import { useUserStore } from '@/stores/UserStore'
 import { Dropdown, Menu, MenuItem, Button, RadioGroup, RadioButton, Select, SelectOption } from "ant-design-vue";
 import { Icon } from '@iconify/vue';
 import { onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from "vue-i18n";
 const cvStore = useCvStore()
+const userStore = useUserStore()
 
 
 
@@ -120,7 +125,7 @@ const changeLocale = (flag: string) => {
 }
 
 const theme = computed(() => {
-    console.log('cvStore.state.cv.theme',cvStore.state.cv.theme);
+    console.log('cvStore.state.cv.theme', cvStore.state.cv.theme);
     return cvStore.state.cv.theme
 })
 

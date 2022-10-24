@@ -1,6 +1,6 @@
 <template>
     <nav class="py-3 shadow relative z-50">
-        <!-- <div class="mx-auto px-3">
+        <div class="mx-auto px-3">
             <div class="flex justify-between items-center">
                 <div class="flex gap-x-3">
                     <Button type="primary" @click="">
@@ -98,7 +98,7 @@
                     </Dropdown>
                 </div>
             </div>
-        </div> -->
+        </div> 
     </nav>
 </template>
 <script setup lang="ts">

@@ -1,7 +1,9 @@
 <template>
-    <TheHeader />
-    <TheMain />
-    <TheSide />
+    <div class="grid grid-cols-12 grid-rows-[max-content,1fr] h-screen">
+        <TheHeader class="col-span-12" />
+        <TheSide class="col-span-3" />
+        <TheMain class="col-span-9" />
+    </div>
 </template>
 <script setup lang="ts">
 import { onMounted } from "vue";
@@ -14,9 +16,11 @@ const route = useRoute()
 const cvStore = useCvStore()
 
 const cvId = String(route.params.cvId)
+const userId = String(route.params.userId)
 
 onMounted(() => {
-    cvStore.getOneCv(cvId)
+    console.log('userId',userId);
+    cvStore.getOneCv(userId,cvId)
 })
 
 </script>

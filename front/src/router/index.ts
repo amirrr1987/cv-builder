@@ -51,7 +51,7 @@ const router = createRouter({
       component: ThePanel
     },
     {
-      path: '/panel/:id/:cvId',
+      path: '/panel/:userId/:cvId',
       name: 'TheSingle',
       component: TheSingle
     },

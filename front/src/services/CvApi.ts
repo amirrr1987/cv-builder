@@ -10,9 +10,9 @@ export const GetAllCvApi = async (id: string) => {
     })
 }
 
-export const GetOneCvApi = async (cvId: string) => {
+export const GetOneCvApi = async (userId: string, cvId: string) => {
     return await axios.get({
-        url: `cv/${cvId}`,
+        url: `cv/${userId}/${cvId}`,
         data: null
     })
 }

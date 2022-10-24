@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import type { CvModel } from '../models'
 import { message } from 'ant-design-vue';
 import { reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 
 
@@ -174,11 +175,18 @@ export const useCvStore = defineStore('cv', () => {
   const removeItemFromCv = (name: string, index: number) => {
     // state.cv[name].splice(index, 1)
   }
+  const router = useRouter()
+  const route = useRoute()
+  // const userId = computed(() => {
+  //   return String(route.params.userId)
+  // })
 
-
-
+  // const userId = computed(() => {
+  //   return String(route.params.userId)
+  // })
 
   const getAllCv = async (userId: string) => {
+    
     try {
       const { data }: any = await GetAllCvApi(userId)
       Object.assign(state.cvs, data.data.cvs)
@@ -186,11 +194,21 @@ export const useCvStore = defineStore('cv', () => {
       console.log('🔥 error getData', error)
     }
   }
-  const getOneCv = (cvId: string): void => {
-    const index = state.cvs.findIndex((item: any) => {
-      return item._id === cvId
-    })
-    Object.assign(state.cv, state.cvs[index])
+  const getOneCv = async (userId: string, cvId: string) => {
+
+    try {
+      const { data }: any = await GetOneCvApi(userId,cvId)
+      console.log('data',data);
+      Object.assign(state.cv, data.data.cv)
+    } catch (error) {
+      console.log('🔥 error getData', error)
+    }
+
+
+    // const index = state.cvs.findIndex((item: any) => {
+    //   return item._id === cvId
+    // })
+    // Object.assign(state.cv, state.cvs[index])
   }
 
   return { state, addToCv, removeFromCv, getOneCv, getAllCv }
