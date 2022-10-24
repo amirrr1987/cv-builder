@@ -26,7 +26,7 @@
 
                         <Dropdown>
 
-                            <Button type="text" >
+                            <Button type="text">
                                 <template #icon>
                                     <Icon icon="fa:language" />
                                 </template>
@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 
-import { Dropdown, Menu, MenuItem,Button } from "ant-design-vue";
+import { Dropdown, Menu, MenuItem, Button } from "ant-design-vue";
 
 import { Icon } from '@iconify/vue';
 </script>

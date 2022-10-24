@@ -3,7 +3,7 @@ const { EventBus } = require("../global/event-bus");
 const { useCvModel } = require("../models");
 const useUserModel = require("../models/UserModel");
 const { useCvValidator } = require("../validators");
-
+const _ = require("lodash")
 const obj = {
   "userId": "",
   "theme": {
@@ -80,6 +80,8 @@ const obj = {
     }
   ],
 }
+var mongoose = require('mongoose');
+
 class Controller {
   constructor() {
     EventBus.on('create-cv', (data) => {
@@ -93,32 +95,25 @@ class Controller {
     })
   }
   async GetAllCv(req, res) {
-    const { params } = req;
-
-    let user = await useUserModel.findById(params.id)
-    if (!user) {
-      return res.status(404).send({
-        code: 404,
-        data: {},
-        message: "cv not found",
-        success: true,
-      });
-
-    }
-    
+    const { id } = req.params;
+    const userId = mongoose.Types.ObjectId(id);
 
 
-    const resualt = await useCvModel.find({ userId: params.id })
+    const resualt = await useCvModel.find({ userId: userId })
+
     res.status(200).send({
       code: 200,
       message: 'all user cv found',
-      data: resualt,
+      data: {
+        id,
+        cvs: resualt
+      },
       success: true,
     });
   }
   async GetOneCv(req, res) {
     const { params } = req;
-    const resualt = await useCvModel.findOne({ _Id: params.cvId, userId: params.id, })
+    const resualt = await useCvModel.findOne({ _Id: params.cvId })
     if (!resualt) {
       return res.status(404).send({
         code: 404,

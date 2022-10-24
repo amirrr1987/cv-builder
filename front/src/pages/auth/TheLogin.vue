@@ -69,15 +69,13 @@ const formState = reactive<FormState>({
   password: "",
   repassword: "",
 });
-const router = useRouter();
 
 
 const userStore = useUserStore();
 
 const onFinish = async () => {
   try {
-    const id = await userStore.login(formState)
-    router.push({ name: 'ThePanel', params: { id: id } });
+    await userStore.login(formState)
   } catch (e) {
     message.error((e as AxiosError).message)
   }

@@ -79,12 +79,9 @@ const formState = reactive<FormState>({
 
 const userStore = useUserStore()
 
-
 const onFinish = async () => {
-
     try {
         await userStore.register({ ...formState })
-        
 
     } catch (e) {
         message.error((e as AxiosError).message)

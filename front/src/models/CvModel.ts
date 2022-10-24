@@ -1,6 +1,6 @@
-export interface Welcome {
-    id: string;
-    cv: Cv[];
+export interface CvModel {
+    cvs: Cv[];
+    cv: Cv;
 }
 
 export interface Cv {

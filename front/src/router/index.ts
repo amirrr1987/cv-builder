@@ -1,19 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import TheLandingVue from '@/views/TheLanding.vue'
+import TheLanding from '@/views/TheLanding.vue'
+import TheLandingHome from '@/pages/landing/TheLandingHome.vue'
 import TheAuth from '@/views/TheAuth.vue'
-import TheRegister from '@/components/auth/TheRegister.vue'
-import TheLogin from '@/components/auth/TheLogin.vue'
-import TheForgot from '@/components/auth/TheForgot.vue'
+import TheRegister from '@/pages/auth/TheRegister.vue'
+import TheLogin from '@/pages/auth/TheLogin.vue'
+import TheForgot from '@/pages/auth/TheForgot.vue'
 import ThePanel from '@/views/ThePanel.vue'
-// import ThePanel from '@/views/ThePanel.vue'
+import TheSingle from '@/views/TheSingle.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'TheLandingVue',
-      component: TheLandingVue
+      name: 'TheLanding',
+      component: TheLanding,
+      children: [
+        {
+          path: '/',
+          name: 'TheLandingHome',
+          component: TheLandingHome,
+        },
+      ]
     },
     {
       path: '/auth',
@@ -38,15 +46,15 @@ const router = createRouter({
       ]
     },
     {
-      path: '/panel/:id',
+      path: '/panel/:userId',
       name: 'ThePanel',
       component: ThePanel
     },
-    // {
-    //   path: '/panel/:id/:cvId',
-    //   name: 'TheSingleCv',
-    //   component: TheSingleCv
-    // },
+    {
+      path: '/panel/:id/:cvId',
+      name: 'TheSingle',
+      component: TheSingle
+    },
 
 
   ]

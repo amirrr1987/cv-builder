@@ -24,7 +24,7 @@ export const useUserStore = defineStore('cv', () => {
     try {
       const { data }: any = await LoginUserApi(user)
       localStorage.setItem('token', data.data.token)
-      return data.data._id
+      router.push({ name: 'ThePanel', params: { id: data.data._id } });
     } catch (err) {
       console.log('err', err);
     }

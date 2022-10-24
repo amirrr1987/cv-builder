@@ -11,6 +11,8 @@ class Controller {
     async LoginUser(req, res) {
         const obj = _.pick(req.body, ["mobile", "password"])
 
+
+
         await useUserValidator.valdateLoginUser(obj)
 
         const user = await useUserModel.findOne({
@@ -29,7 +31,6 @@ class Controller {
                     }
                 )
         }
-
 
         const result = await bcrypt.compare(obj.password, user.password)
 
@@ -100,7 +101,7 @@ class Controller {
         auth.password = password
         await auth.save();
 
-        EventBus.emit('create-cv', obj)
+        EventBus.emit('create-cv', auth._id)
         const { _id, mobile } = auth
         res.status(201).send({
             code: 201,
