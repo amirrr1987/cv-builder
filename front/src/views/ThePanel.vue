@@ -4,8 +4,6 @@
         <ThePanelSide class="col-span-3" />
         <ThePanelMain class="col-span-9" />
     </div>
-    s
-    df
 </template>
 <script setup lang="ts">
 import ThePanelHeader from "@/layouts/panel/ThePanelHeader.vue";

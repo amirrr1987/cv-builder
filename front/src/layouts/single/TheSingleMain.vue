@@ -107,7 +107,7 @@
                     <div class="capitalize font-bold text-lg flex justify-between"
                         :class="`text-${cvStore.state.cv.theme.color}-900`">
                         <span>{{ $t('experience') }} </span>
-                        <span>{{ cvStore.state.cvId }} </span>
+                        <span>{{ cvStore.state.cv.experiences }} </span>
                     </div>
                     <template v-for="item in cvStore.state.cv.experiences" :key="item">
                         <ExperienceItem :title="item.title" :companyName="item.company.name"

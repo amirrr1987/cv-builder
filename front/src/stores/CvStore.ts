@@ -2,6 +2,7 @@ import { GetOneCvApi, GetAllCvApi, CreateOneCvApi, DeleteOneCvApi } from '@/serv
 import { defineStore } from 'pinia'
 import type { CvModel } from '../models'
 import { computed, reactive } from 'vue';
+import { message } from 'ant-design-vue';
 export const useCvStore = defineStore('cv', () => {
   const state = reactive<CvModel>({
     cvs: [
@@ -197,6 +198,7 @@ export const useCvStore = defineStore('cv', () => {
   const deleteCv = async (userId: string, cvId: string) => {
     try {
       await DeleteOneCvApi(cvId)
+      message.success(`this cv:${cvId} is delete`)
       await getAllCv(userId)
     } catch (error) {
       console.log('🔥 deleteCv error', error)
