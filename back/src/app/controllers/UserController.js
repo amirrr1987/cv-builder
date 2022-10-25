@@ -30,6 +30,7 @@ class Controller {
             return res.status(400).send({ message: "username or password not found" })
         }
         const token = jwt.sign(obj, tokenKey)
+        
         obj.token = token
         obj._id = user._id
         delete obj.password

@@ -5,6 +5,7 @@ import { defineStore } from 'pinia'
 import type { UserModel } from '../models'
 import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { message } from 'ant-design-vue/es';
 export const useUserStore = defineStore('User', () => {
   const state = reactive<UserModel>({
     user: {
@@ -36,7 +37,10 @@ export const useUserStore = defineStore('User', () => {
   const register = async (user: any) => {
     try {
       await RegisterUserApi(user)
-      router.push({ name: 'TheLogin' })
+      message.info('user created')
+      setTimeout(() => {
+        router.push({ name: 'TheLogin' })
+      }, 1000);
     } catch (error) {
       console.log('🔥 getOneCv error', error)
     }
@@ -44,11 +48,9 @@ export const useUserStore = defineStore('User', () => {
   const setUser = (user: any) => {
     Object.assign(state.user, user)
   }
+
+   
   const isLoginHandler = computed(() => {
-    if (!state.isLogin) {
-      localStorage.removeItem('token')
-      router.push({ name: 'TheLogin' })
-    }
     return state.isLogin
 
   })
