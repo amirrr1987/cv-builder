@@ -1,52 +1,56 @@
+
+
+import { GetUserApi, LoginUserApi, RegisterUserApi } from '@/services/UserApi'
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
-import { LoginUserApi, RegisterUserApi } from "@/services/UserApi";
-import type { UserModel } from '@/models'
-
-import type { AxiosError } from 'axios';
-
-
-import { useRouter } from 'vue-router'
-import { message } from 'ant-design-vue';
-// import { useContainerStore } from '/@survey/stores/ContainerStore'
-export const useUserStore = defineStore('cv', () => {
-
+import type { UserModel } from '../models'
+import { computed, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+export const useUserStore = defineStore('User', () => {
   const state = reactive<UserModel>({
     user: {
-      mobile: '',
-      password: "",
-      repassword: ""
+      _id: '',
+      mobile: 'sdf',
     },
     isLogin: false
   })
-
   const login = async (user: any) => {
-    console.log('user',user);
+    console.log('user', user);
     try {
       const { data }: any = await LoginUserApi(user)
-      console.log('data.data',data.data);
       localStorage.setItem('token', data.data.token)
       router.push({ name: 'ThePanel', params: { userId: data.data._id } });
-    } catch (err) {
-      console.log('err', err);
+    } catch (error) {
+      console.log('🔥 getOneCv error', error)
+    }
+  }
+  const getUserData = async (userId: string) => {
+    try {
+      const { data } = await GetUserApi(userId)
+      Object.assign(state.user, data.data)
+      state.isLogin = data.success
+    } catch (error) {
+      console.log('🔥 getOneCv error', error)
     }
   }
   const router = useRouter();
-
   const register = async (user: any) => {
     try {
       await RegisterUserApi(user)
       router.push({ name: 'TheLogin' })
-    } catch (err) {
-      console.log('err', err);
+    } catch (error) {
+      console.log('🔥 getOneCv error', error)
     }
   }
   const setUser = (user: any) => {
     Object.assign(state.user, user)
   }
-  const isLoginHandler = (status: boolean) => {
-    state.isLogin = status
-  }
+  const isLoginHandler = computed(() => {
+    if (!state.isLogin) {
+      localStorage.removeItem('token')
+      router.push({ name: 'TheLogin' })
+    }
+    return state.isLogin
 
-  return { state, login, register, setUser, isLoginHandler }
+  })
+  return { state, login, register, setUser, isLoginHandler, getUserData }
 })

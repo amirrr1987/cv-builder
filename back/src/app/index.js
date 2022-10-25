@@ -18,8 +18,8 @@ class Application {
         });
     }
     setMiddlewares() {
-        app.use(bodyParser.urlencoded({ extended: true }));
-        app.use(express.json())
+        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(bodyParser.json())
         app.use(cors());
     }
     async setDataBase() {
@@ -36,6 +36,7 @@ class Application {
     }
     setRoutes() {
         app.use(require("./routes"));
+        // console.log("routes is allready to use");
     }
 }
 

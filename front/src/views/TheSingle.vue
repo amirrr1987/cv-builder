@@ -9,9 +9,9 @@
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useCvStore } from '@/stores/CvStore'
-import TheHeader from "@/layouts/single/TheHeader.vue";
-import TheMain from "@/layouts/single/TheMain.vue";
-import TheSide from "@/layouts/single/TheSide.vue";
+import TheHeader from "@/layouts/single/TheSingleHeader.vue";
+import TheMain from "@/layouts/single/TheSingleMain.vue";
+import TheSide from "@/layouts/single/TheSingleSide.vue";
 const route = useRoute()
 const cvStore = useCvStore()
 
@@ -19,8 +19,8 @@ const cvId = String(route.params.cvId)
 const userId = String(route.params.userId)
 
 onMounted(() => {
-    console.log('userId',userId);
-    cvStore.getOneCv(userId,cvId)
+    console.log('userId', userId);
+    cvStore.getOneCv(userId, cvId)
 })
 
 </script>

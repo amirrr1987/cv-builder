@@ -4,6 +4,5 @@ export interface UserModel {
 }
 interface User {
     mobile: string;
-    password: string;
-    repassword: string;
+    _id: string;
 }

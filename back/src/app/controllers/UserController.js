@@ -7,18 +7,12 @@ const jwt = require("jsonwebtoken")
 const { tokenKey } = require('../config');
 const { EventBus } = require("../global/event-bus");
 class Controller {
-
     async LoginUser(req, res) {
         const obj = _.pick(req.body, ["mobile", "password"])
-
-
-
         await useUserValidator.valdateLoginUser(obj)
-
         const user = await useUserModel.findOne({
             mobile: obj.mobile
         })
-
         if (!user) {
             return res
                 .status(404)
@@ -31,19 +25,14 @@ class Controller {
                     }
                 )
         }
-
         const result = await bcrypt.compare(obj.password, user.password)
-
         if (!result) {
             return res.status(400).send({ message: "username or password not found" })
         }
-
         const token = jwt.sign(obj, tokenKey)
-
         obj.token = token
         obj._id = user._id
         delete obj.password
-
         res
             .status(200)
             .send(
@@ -55,12 +44,8 @@ class Controller {
                 }
             )
     }
-
     async RegisterUser(req, res) {
         const obj = _.pick(req.body, ["mobile", "password"])
-
-
-
         try {
             await useUserValidator.valdateRegisterUser(obj)
         } catch (error) {
@@ -68,7 +53,6 @@ class Controller {
             error.details.forEach((item) => {
                 errs.push(item.message)
             })
-
             return res.status(400).send({
                 code: 400,
                 errors: errs,
@@ -76,13 +60,9 @@ class Controller {
                 success: false,
             })
         }
-
-
-
         let auth = await useUserModel.findOne({
             mobile: obj.mobile
         })
-
         if (auth) {
             return res.status(400).send({
                 code: 400,
@@ -91,16 +71,12 @@ class Controller {
                 success: false,
             })
         }
-
         auth = await new useUserModel(obj);
         Object.assign(auth, obj);
-
         const salt = await bcrypt.genSalt(10)
         const password = await bcrypt.hash(auth.password, salt)
-
         auth.password = password
         await auth.save();
-
         EventBus.emit('create-cv', auth._id)
         const { _id, mobile } = auth
         res.status(201).send({
@@ -112,17 +88,11 @@ class Controller {
             message: "user created",
             success: true,
         });
-
     }
-
     async UpdateUser(req, res) {
         const obj = _.pick(req.body, ["mobile", "password"])
-
         await useUserValidator.valdateRegisterUser(obj)
-
         const user = await useUserModel.findByIdAndUpdate(req.params.id, obj)
-
-
         if (user) {
             res
                 .status(200)
@@ -146,7 +116,6 @@ class Controller {
                 })
         }
     }
-
     async DeleteUser(req, res) {
         const auth = await useUserModel.findByIdAndRemove(req.params.id)
         if (auth) {
@@ -171,6 +140,32 @@ class Controller {
                 })
         }
     }
-
+    async getUser(req, res) {
+        const user = await useUserModel.findById(req.params.id)
+        if (!user) {
+            return res
+                .status(404)
+                .send(
+                    {
+                        code: 404,
+                        data: {},
+                        message: "username or password not found",
+                        success: false,
+                    }
+                )
+        }
+        delete user.password
+        const { _id, mobile } = user;
+        res
+            .status(200)
+            .send(
+                {
+                    code: 200,
+                    data: { _id, mobile },
+                    message: "User found",
+                    success: true,
+                }
+            )
+    }
 }
 module.exports = new Controller();

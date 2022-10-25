@@ -20,9 +20,7 @@ class Controller {
     })
   }
   async GetAllCv(req, res) {
-    const { id } = req.params;
-    const userId = mongoose.Types.ObjectId(id);
-
+    const userId = mongoose.Types.ObjectId(req.params.userId);
 
     const resualt = await useCvModel.find({ userId: userId })
 
@@ -30,7 +28,7 @@ class Controller {
       code: 200,
       message: 'all user cv found',
       data: {
-        id,
+        userId,
         cvs: resualt
       },
       success: true,
@@ -60,22 +58,22 @@ class Controller {
     const obj = {
       "userId": "",
       "theme": {
-        "color": "red",
+        "color": "blue",
         "font": "calibri",
         "lang": "en"
       },
       "image": "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
       "about": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      "title": "title",
-      "subTitle": "subTitle",
+      "title": "sample",
+      "subTitle": "sample",
       "fullName": {
-        "first": "amir",
-        "last": "maghami"
+        "first": "sample",
+        "last": "v"
       },
       "address": {
-        "country": "iren",
-        "province": "azerbajan",
-        "region": "khoy"
+        "country": "sample",
+        "province": "sample",
+        "region": "sample"
       },
       "skillsSummary": [
         {
@@ -90,44 +88,44 @@ class Controller {
       ],
       "educations": [
         {
-          "label": "it"
+          "label": "sample"
         }
       ],
       "techExperiences": [
         {
-          "label": "html"
+          "label": "sample"
         }
       ],
       "softwareKnowledges": [
         {
-          "label": "basic",
+          "label": "sample",
           "skills": [
             {
-              "label": "html"
+              "label": "sample"
             }
           ]
         }
       ],
       "experiences": [
         {
-          "title": "front end developer",
+          "title": "sample",
           "company": {
-            "name": "haco",
-            "url": "haco.ir"
+            "name": "sample",
+            "url": "sample"
           },
-          "description": "lorem",
+          "description": "sample",
           "beginDate": "234243",
           "endDate": "234243",
           "skills": [
             {
-              "label": "html"
+              "label": "sample"
             }
           ]
         }
       ],
       "socials": [
         {
-          "label": "instagram",
+          "label": "sample",
           "icon": "cib:linkedin",
           "link": ""
         }
@@ -139,8 +137,83 @@ class Controller {
   }
   async CreateOneCv(req, res) {
     const { params } = req;
-
-    let user = await useUserModel.findById(params.id)
+    const obj = {
+      "userId": "",
+      "theme": {
+        "color": "blue",
+        "font": "calibri",
+        "lang": "en"
+      },
+      "image": "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
+      "about": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      "title": "sample",
+      "subTitle": "sample",
+      "fullName": {
+        "first": "sample",
+        "last": "v"
+      },
+      "address": {
+        "country": "sample",
+        "province": "sample",
+        "region": "sample"
+      },
+      "skillsSummary": [
+        {
+          "label": "web"
+        }
+      ],
+      "contacts": [
+        {
+          "label": "web",
+          "icon": "cib:linkedin"
+        }
+      ],
+      "educations": [
+        {
+          "label": "sample"
+        }
+      ],
+      "techExperiences": [
+        {
+          "label": "sample"
+        }
+      ],
+      "softwareKnowledges": [
+        {
+          "label": "sample",
+          "skills": [
+            {
+              "label": "sample"
+            }
+          ]
+        }
+      ],
+      "experiences": [
+        {
+          "title": "sample",
+          "company": {
+            "name": "sample",
+            "url": "sample"
+          },
+          "description": "sample",
+          "beginDate": "234243",
+          "endDate": "234243",
+          "skills": [
+            {
+              "label": "sample"
+            }
+          ]
+        }
+      ],
+      "socials": [
+        {
+          "label": "sample",
+          "icon": "cib:linkedin",
+          "link": ""
+        }
+      ],
+    }
+    let user = await useUserModel.findById(params.userId)
     if (!user) {
       return res.status(404).send({
         code: 404,
@@ -151,7 +224,7 @@ class Controller {
 
     }
     const item = await new useCvModel(obj);
-    item.userId = params.id;
+    item.userId = params.userId;
     await item.save();
     res.status(200).send({
       code: 201,
@@ -164,7 +237,7 @@ class Controller {
   async UpdateOneCv(req, res) {
     const { body, params } = req;
 
-    let user = await useUserModel.findById(params.id)
+    let user = await useUserModel.findById(params.userId)
     if (!user) {
       return res.status(404).send({
         code: 404,
@@ -200,7 +273,7 @@ class Controller {
 
   async DeleteOneCv(req, res) {
     const { params } = req
-    const cv = await useCvModel.findOneAndRemove({ _id: params.cvId, userId: params.id })
+    const cv = await useCvModel.findOneAndRemove({ _id: params.cvId })
 
     if (!cv) {
       return res.status(404).send({

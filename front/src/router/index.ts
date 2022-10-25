@@ -55,8 +55,6 @@ const router = createRouter({
       name: 'TheSingle',
       component: TheSingle
     },
-
-
   ]
 })
 

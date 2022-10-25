@@ -1,5 +1,5 @@
 <template>
-    <Form layout="vertical" class="overflow-y-scroll" :class="[`${prefixCls}`]">
+    <!-- <Form layout="vertical" class="overflow-y-scroll" :class="[`${prefixCls}`]">
 
         <Tabs v-model:activeKey="tabKey" type="card" size="large">
             <TabPane key="1" tab="Sidebar Panel">
@@ -502,7 +502,8 @@
 
 
 
-    </Form>
+    </Form> -->
+<div class="border">asd</div>
 </template>
 <script setup lang="ts">
 import { useCvStore } from '@/stores/CvStore'

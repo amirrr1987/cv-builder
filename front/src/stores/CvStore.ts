@@ -1,12 +1,7 @@
-import { UpdateOneCvApi, GetOneCvApi, GetAllCvApi } from '@/services/CvApi'
+import { GetOneCvApi, GetAllCvApi, CreateOneCvApi, DeleteOneCvApi } from '@/services/CvApi'
 import { defineStore } from 'pinia'
 import type { CvModel } from '../models'
-import { message } from 'ant-design-vue';
-import { reactive } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-
-
-
+import { computed, reactive } from 'vue';
 export const useCvStore = defineStore('cv', () => {
   const state = reactive<CvModel>({
     cvs: [
@@ -19,13 +14,13 @@ export const useCvStore = defineStore('cv', () => {
         userId: '',
         font: "",
         theme: {
-          color: "red",
-          font: "calibri",
-          lang: "en"
+          color: "",
+          font: "",
+          lang: ""
         },
         image: "",
         about: "",
-        title: "wer",
+        title: "",
         subTitle: "",
         address: {
           country: "",
@@ -71,8 +66,8 @@ export const useCvStore = defineStore('cv', () => {
               url: ''
             },
             description: "",
-            beginDate: Date(),
-            endDate: Date(),
+            beginDate: "",
+            endDate: "",
             skills: [{
               label: ''
             }]
@@ -96,13 +91,13 @@ export const useCvStore = defineStore('cv', () => {
       userId: '',
       font: "",
       theme: {
-        color: "red",
-        font: "calibri",
-        lang: "en"
+        color: "",
+        font: "",
+        lang: ""
       },
       image: "",
       about: "",
-      title: "wer",
+      title: "",
       subTitle: "",
       address: {
         country: "",
@@ -148,8 +143,8 @@ export const useCvStore = defineStore('cv', () => {
             url: ''
           },
           description: "",
-          beginDate: Date(),
-          endDate: Date(),
+          beginDate: "",
+          endDate: "",
           skills: [{
             label: ''
           }]
@@ -168,48 +163,44 @@ export const useCvStore = defineStore('cv', () => {
     // state.cv[name].push(obj)
     // state.cv
   }
-
   const removeFromCv = (name: string, index: number) => {
     // state.cv[name].splice(index, 1)
   }
   const removeItemFromCv = (name: string, index: number) => {
     // state.cv[name].splice(index, 1)
   }
-  const router = useRouter()
-  const route = useRoute()
-  // const userId = computed(() => {
-  //   return String(route.params.userId)
-  // })
-
-  // const userId = computed(() => {
-  //   return String(route.params.userId)
-  // })
-
   const getAllCv = async (userId: string) => {
-    
     try {
       const { data }: any = await GetAllCvApi(userId)
+      state.cvs = []
       Object.assign(state.cvs, data.data.cvs)
     } catch (error) {
-      console.log('🔥 error getData', error)
+      console.log('🔥 getAllCv error', error)
     }
   }
   const getOneCv = async (userId: string, cvId: string) => {
-
     try {
-      const { data }: any = await GetOneCvApi(userId,cvId)
-      console.log('data',data);
+      const { data }: any = await GetOneCvApi(userId, cvId)
       Object.assign(state.cv, data.data.cv)
     } catch (error) {
-      console.log('🔥 error getData', error)
+      console.log('🔥 getOneCv error', error)
     }
-
-
-    // const index = state.cvs.findIndex((item: any) => {
-    //   return item._id === cvId
-    // })
-    // Object.assign(state.cv, state.cvs[index])
   }
-
-  return { state, addToCv, removeFromCv, getOneCv, getAllCv }
+  const createCv = async (userId: string) => {
+    try {
+      await CreateOneCvApi(userId)
+      await getAllCv(userId)
+    } catch (error) {
+      console.log('🔥 createCv error', error)
+    }
+  }
+  const deleteCv = async (userId: string, cvId: string) => {
+    try {
+      await DeleteOneCvApi(cvId)
+      await getAllCv(userId)
+    } catch (error) {
+      console.log('🔥 deleteCv error', error)
+    }
+  }
+  return { state, addToCv, removeFromCv, getOneCv, getAllCv, createCv, deleteCv }
 })

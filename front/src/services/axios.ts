@@ -35,6 +35,7 @@ class Axios {
     }
 
     async post(config: any) {
+        console.log('config',config);
         return await this._instance.post(config.url, config.data)
     }
     async get(config: any) {

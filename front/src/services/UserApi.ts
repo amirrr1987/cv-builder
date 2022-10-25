@@ -28,4 +28,8 @@ export const DeleteUserApi = async (id: string, data: any) => {
     })
 }
 
-
+export const GetUserApi = async (id: string) => {
+    return await axios.get({
+        url: `user/${id}`
+    })
+}

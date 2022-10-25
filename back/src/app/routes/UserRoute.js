@@ -6,6 +6,8 @@ const { UserController } = require("../controllers");
 
 const { UserMiddleware } = require("../middlewares");
 
+router.get("/:id", UserController.getUser);
+
 router.post("/login", UserController.LoginUser);
 
 router.post("/register", UserController.RegisterUser);

@@ -6,14 +6,26 @@ export const GetAllCvApi = async (id: string) => {
     console.log('id', id);
     return await axios.get({
         url: `cv/${id}`,
-        data: null
+        data: {}
     })
 }
 
 export const GetOneCvApi = async (userId: string, cvId: string) => {
     return await axios.get({
         url: `cv/${userId}/${cvId}`,
-        data: null
+        data: {}
+    })
+}
+export const CreateOneCvApi = async (userId: string) => {
+    return await axios.post({
+        url: `cv/${userId}`,
+        data: {}
+    })
+}
+export const DeleteOneCvApi = async (cvId: string) => {
+    return await axios.delete({
+        url: `cv/${cvId}`,
+        data: {}
     })
 }
 
