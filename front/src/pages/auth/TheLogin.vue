@@ -25,6 +25,9 @@
             ]">
               <InputPassword v-model:value="formState.password" />
             </FormItem>
+            <div class="py-4 text-red-500 text-center" v-if="userStore.state.login.error.message">
+              {{ userStore.state.login.error.message }}
+            </div>
 
             <FormItem>
               <Button type="primary" html-type="submit">Submit</Button>
@@ -77,6 +80,7 @@ const onFinish = async () => {
   try {
     await userStore.login(formState)
   } catch (e) {
+    console.log('e', e);
     message.error((e as AxiosError).message)
   }
 };

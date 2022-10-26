@@ -503,7 +503,9 @@
 
 
     </Form> -->
-<div class="border">asd</div>
+<div class="p-4 border-r">
+    
+</div>
 </template>
 <script setup lang="ts">
 import { useCvStore } from '@/stores/CvStore'

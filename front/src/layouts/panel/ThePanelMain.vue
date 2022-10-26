@@ -1,10 +1,10 @@
 <template>
     <div class="container mx-auto grid grid-cols-4 auto-rows-h-96 gap-4 p-4 overflow-y-scroll">
-        <template v-for="(cv,index) in cvStore.state.cvs" :key="index">
+        <template v-for="(cv, index) in cvStore.state.cvs" :key="index">
             <div class="border p-4 rounded relative overflow-hidden card grid grid-rows-[max-content,1fr,max-content]"
                 :class="`bg-${cv.theme.color}-50`">
                 <div class="flex justify-between">
-                    <div class="">{{cv.title}}</div>
+                    <div class="">{{ cv.title }}</div>
                     <Button type="text" shape="circle" danger @click="deleteModalHandler(cv._id)"
                         class="!flex justify-center items-center">
                         <template #icon>
@@ -12,8 +12,10 @@
                         </template>
                     </Button>
                 </div>
-                <div class="">{{cv.about}}</div>
-                <Button type="primary" @click="getId(cv._id)" block>
+                <div>
+                    <div class="">{{ cv.about }}</div>
+                </div>
+                <Button type="primary" @click="getId(cv._id)" block size="large">
                     View CV
                 </Button>
             </div>
@@ -80,7 +82,8 @@ const deleteCvHandler = () => {
     height: 100% !important;
     aspect-ratio: 1/1;
 }
-.auto-rows-h-96{
+
+.auto-rows-h-96 {
     grid-auto-rows: 400px;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
     <nav class="shadow py-4">
-        <div class="px-4">
-            <Button type="primary">
+        <div class="px-4 flex justify-between">
+            {{ userStore.state.user.mobile }}
+            <Button type="primary" @click="toggleLogin" :loading="!userStore.state.isLogin">
                 {{ userStore.state.isLogin ? 'Logout' : 'Login' }}
             </Button>
-            {{userStore.state.user.mobile}}
         </div>
     </nav>
 </template>
@@ -19,13 +19,17 @@ const router = useRouter()
 const userId = String(route.params.userId)
 const userStore = useUserStore()
 
-const token = localStorage.getItem('token')
+const toggleLogin = () => {
+    userStore.state.isLogin = !userStore.state.isLogin
+    localStorage.removeItem('token')
+    router.push({ name: 'TheLogin' })
+}
 
 
 onMounted(async () => {
     try {
         await userStore.getUserData(userId)
-  
+
     } catch (error) {
         console.log('🔥 getOneCv error', error)
     }

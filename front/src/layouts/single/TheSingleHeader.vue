@@ -1,5 +1,5 @@
 <template>
-    <nav class="py-3 shadow relative z-50">
+    <nav class="py-3 border-b relative z-50">
         <div class="mx-auto px-3">
             <div class="flex justify-between items-center">
                 <div class="flex gap-x-3">
