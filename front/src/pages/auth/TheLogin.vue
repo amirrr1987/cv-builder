@@ -30,7 +30,7 @@
             </div>
 
             <FormItem>
-              <Button type="primary" html-type="submit">Submit</Button>
+              <Button type="primary" html-type="submit" :loading="loginLoading">Submit</Button>
             </FormItem>
             <p class="text-sm font-light text-gray-500 dark:text-yellow-400">
               Don’t have an account yet?
@@ -76,13 +76,20 @@ const formState = reactive<FormState>({
 
 const userStore = useUserStore();
 
+
+const loginLoading = ref(false)
 const onFinish = async () => {
-  try {
-    await userStore.login(formState)
-  } catch (e) {
-    console.log('e', e);
-    message.error((e as AxiosError).message)
-  }
+  loginLoading.value = true
+  await setTimeout(async () => {
+    try {
+      loginLoading.value = false
+      await userStore.login(formState)
+    } catch (e) {
+      console.log('e', e);
+      message.error((e as AxiosError).message)
+    }
+  }, 1000)
+
 };
 
 const onFinishFailed = (errorInfo: any) => {

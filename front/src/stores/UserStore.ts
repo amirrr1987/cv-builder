@@ -21,10 +21,8 @@ export const useUserStore = defineStore('User', () => {
     }
   })
   const login = async (user: any) => {
-    console.log('user', user);
     try {
       const { data }: any = await LoginUserApi(user)
-      console.log('data', data);
       localStorage.setItem('token', data.data.token)
       router.push({ name: 'ThePanel', params: { userId: data.data._id } });
     } catch (e) {
