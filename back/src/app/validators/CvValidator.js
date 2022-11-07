@@ -230,20 +230,20 @@ const valdateUpdateCv = (data) => {
       "string.max": "about Max 350 characteers",
       "string.empty": "about Display name cannot be empty",
     }),
-    subTitle: Joi.string().min(5).max(50).required().messages({
-      "string.min": "subTitle Min 5 characteers",
+    subTitle: Joi.string().min(1).max(50).required().messages({
+      "string.min": "subTitle Min 1 characteers",
       "string.max": "subTitle Max 50 characteers",
       "string.empty": "subTitle Display name cannot be empty",
     }),
     fullName: Joi.object({
-      first: Joi.string().min(2).max(10).required().messages({
+      first: Joi.string().min(2).max(70).required().messages({
         "string.min": "fullName first Min 2 characteers",
-        "string.max": "fullName first Max 10 characteers",
+        "string.max": "fullName first Max 70 characteers",
         "string.empty": "fullName first Display name cannot be empty",
       }),
-      last: Joi.string().min(2).max(10).required().messages({
+      last: Joi.string().min(2).max(70).required().messages({
         "string.min": "fullName last Min 2 characteers",
-        "string.max": "fullName last Max 10 characteers",
+        "string.max": "fullName last Max 70 characteers",
         "string.empty": "fullName last Display name cannot be empty",
       }),
     }),

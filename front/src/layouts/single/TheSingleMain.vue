@@ -1,7 +1,7 @@
 <template>
-    <div id="printMe" class="overflow-y-scroll" :class="`font-${cvStore.state.cv.theme.font}`">
-        <main class="grid grid-cols-12 h-full">
-            <section class=" col-span-3 grid grid-rows-silde gap-y-5  py-3 px-5"
+    <!-- <div  class="overflow-y-scroll print:min-h-screen print:bg-red-400" :class="`font-${cvStore.state.cv.theme.font}`"> -->
+        <main id="printMe" class="grid grid-cols-12 min-h-full overflow-y-scroll">
+            <section class="col-span-3 grid grid-rows-silde gap-y-5  py-3 px-5"
                 :class="`bg-${cvStore.state.cv.theme.color}-50`">
                 <div class="">
                     <img class="w-36 h-36 rounded-full m-auto" :src="cvStore.state.cv.image" :title="fullName"
@@ -117,7 +117,7 @@
                 </div>
             </section>
         </main>
-    </div>
+    <!-- </div> -->
 </template>
 <script setup lang="ts">
 import { useCvStore } from '@/stores/CvStore'

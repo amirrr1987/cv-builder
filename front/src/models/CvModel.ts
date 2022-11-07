@@ -7,7 +7,6 @@ export interface Cv {
     fullName: FullName;
     _id: string;
     userId: string;
-    font: string;
     theme: Theme;
     image: string;
     about: string;

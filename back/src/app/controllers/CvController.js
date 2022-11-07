@@ -3,134 +3,135 @@ const { EventBus } = require("../global/event-bus");
 const { useCvModel } = require("../models");
 const useUserModel = require("../models/UserModel");
 const { useCvValidator } = require("../validators");
-const _ = require("lodash")
+const _ = require("lodash");
 
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 class Controller {
   constructor() {
-    EventBus.on('create-cv', (data) => {
-      this.CreateFirstCv(data)
-    })
-    EventBus.on('delete-cv', (id) => {
-      this.DeleteOneCvEventBus(id)
-    })
-    EventBus.on('update-cv', (data) => {
+    EventBus.on("create-cv", (data) => {
+      this.CreateFirstCv(data);
+    });
+    EventBus.on("delete-cv", (id) => {
+      this.DeleteOneCvEventBus(id);
+    });
+    EventBus.on("update-cv", (data) => {
       // this.UpdateProfile(data)
-    })
+    });
   }
   async GetAllCv(req, res) {
     const userId = mongoose.Types.ObjectId(req.params.userId);
 
-    const resualt = await useCvModel.find({ userId: userId })
+    const resualt = await useCvModel.find({ userId: userId });
 
     res.status(200).send({
       code: 200,
-      message: 'all user cv found',
+      message: "all user cv found",
       data: {
         userId,
-        cvs: resualt
+        cvs: resualt,
       },
       success: true,
     });
   }
   async GetOneCv(req, res) {
     const { params } = req;
-    const resualt = await useCvModel.findOne({ _Id: params.cvId })
+    const resualt = await useCvModel.findOne({ _Id: params.cvId });
 
     if (!resualt) {
       return res.status(404).send({
         code: 404,
-        message: 'cv not found',
+        message: "cv not found",
         data: {},
         success: false,
       });
-
     }
     res.status(200).send({
       code: 200,
-      message: 'cv found',
+      message: "cv found",
       data: { cv: resualt },
       success: true,
     });
   }
   async CreateFirstCv(data) {
     const obj = {
-      "userId": "",
-      "theme": {
-        "color": "blue",
-        "font": "calibri",
-        "lang": "en"
+      userId: "",
+      theme: {
+        color: "blue",
+        font: "calibri",
+        lang: "en",
       },
-      "image": "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
-      "about": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      "title": "sample",
-      "subTitle": "sample",
-      "fullName": {
-        "first": "sample",
-        "last": "v"
+      image:
+        "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
+      about:
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      title: "sample",
+      subTitle: "sample",
+      fullName: {
+        first: "sample",
+        last: "v",
       },
-      "address": {
-        "country": "sample",
-        "province": "sample",
-        "region": "sample"
+      address: {
+        country: "sample",
+        province: "sample",
+        region: "sample",
       },
-      "skillsSummary": [
+      skillsSummary: [
         {
-          "label": "web"
-        }
+          label: "web",
+        },
       ],
-      "contacts": [
+      contacts: [
         {
-          "label": "web",
-          "icon": "cib:linkedin"
-        }
+          label: "web",
+          icon: "cib:linkedin",
+        },
       ],
-      "educations": [
+      educations: [
         {
-          "label": "sample"
-        }
+          label: "sample",
+        },
       ],
-      "techExperiences": [
+      techExperiences: [
         {
-          "label": "sample"
-        }
+          label: "sample",
+        },
       ],
-      "softwareKnowledges": [
+      softwareKnowledges: [
         {
-          "label": "sample",
-          "skills": [
+          label: "sample",
+          skills: [
             {
-              "label": "sample"
-            }
-          ]
-        }
+              label: "sample",
+            },
+          ],
+        },
       ],
-      "experiences": [
+      experiences: [
         {
-          "title": "sample",
-          "company": {
-            "name": "sample",
-            "url": "sample"
+          title: "sample",
+          company: {
+            name: "sample",
+            url: "sample",
           },
-          "description": "sample",
-          "beginDate": "234243",
-          "endDate": "234243",
-          "skills": [
+          description: "sample",
+          beginDate: "234243",
+          endDate: "234243",
+          skills: [
             {
-              "label": "sample"
-            }
-          ]
-        }
+              label: "sample",
+            },
+          ],
+        },
       ],
-      "socials": [
+      socials: [
         {
-          "label": "sample",
-          "icon": "cib:linkedin",
-          "link": ""
-        }
+          label: "sample",
+          icon: "cib:linkedin",
+          link: "",
+        },
       ],
-    }
+    };
     const item = await new useCvModel(obj);
     item.userId = data._id;
     await item.save();
@@ -138,82 +139,84 @@ class Controller {
   async CreateOneCv(req, res) {
     const { params } = req;
     const obj = {
-      "userId": "",
-      "theme": {
-        "color": "blue",
-        "font": "calibri",
-        "lang": "en"
+      userId: "",
+      theme: {
+        color: "blue",
+        font: "calibri",
+        lang: "en",
       },
-      "image": "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
-      "about": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      "title": "sample",
-      "subTitle": "sample",
-      "fullName": {
-        "first": "sample",
-        "last": "v"
+      image:
+        "https://static.farakav.com/files/newspapers/varzesh3/820_Esteghlal-1400-01-19_1617824656.jpg?w=870",
+      about:
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      title: "sample",
+      subTitle: "sample",
+      fullName: {
+        first: "sample",
+        last: "v",
       },
-      "address": {
-        "country": "sample",
-        "province": "sample",
-        "region": "sample"
+      address: {
+        country: "sample",
+        province: "sample",
+        region: "sample",
       },
-      "skillsSummary": [
+      skillsSummary: [
         {
-          "label": "web"
-        }
+          label: "web",
+        },
       ],
-      "contacts": [
+      contacts: [
         {
-          "label": "web",
-          "icon": "cib:linkedin"
-        }
+          label: "web",
+          icon: "cib:linkedin",
+        },
       ],
-      "educations": [
+      educations: [
         {
-          "label": "sample"
-        }
+          label: "sample",
+        },
       ],
-      "techExperiences": [
+      techExperiences: [
         {
-          "label": "sample"
-        }
+          label: "sample",
+        },
       ],
-      "softwareKnowledges": [
+      softwareKnowledges: [
         {
-          "label": "sample",
-          "skills": [
+          label: "sample",
+          skills: [
             {
-              "label": "sample"
-            }
-          ]
-        }
+              label: "sample",
+            },
+          ],
+        },
       ],
-      "experiences": [
+      experiences: [
         {
-          "title": "sample",
-          "company": {
-            "name": "sample",
-            "url": "sample"
+          title: "sample",
+          company: {
+            name: "sample",
+            url: "sample",
           },
-          "description": "sample",
-          "beginDate": "234243",
-          "endDate": "234243",
-          "skills": [
+          description: "sample",
+          beginDate: "234243",
+          endDate: "234243",
+          skills: [
             {
-              "label": "sample"
-            }
-          ]
-        }
+              label: "sample",
+            },
+          ],
+        },
       ],
-      "socials": [
+      socials: [
         {
-          "label": "sample",
-          "icon": "cib:linkedin",
-          "link": ""
-        }
+          label: "sample",
+          icon: "cib:linkedin",
+          link: "",
+        },
       ],
-    }
-    let user = await useUserModel.findById(params.userId)
+    };
+    let user = await useUserModel.findById(params.userId);
     if (!user) {
       return res.status(404).send({
         code: 404,
@@ -221,7 +224,6 @@ class Controller {
         message: "user not found",
         success: true,
       });
-
     }
     const item = await new useCvModel(obj);
     item.userId = params.userId;
@@ -232,25 +234,36 @@ class Controller {
       message: "cv create",
       success: true,
     });
-
   }
   async UpdateOneCv(req, res) {
     const { body, params } = req;
 
-    let user = await useUserModel.findById(params.userId)
-    if (!user) {
-      return res.status(404).send({
+    // console.log(params.cvId);
+    // console.log(params);
+    // console.log(body);
+    // let user = await useUserModel.findById(params.userId)
+    // if (!user) {
+    //   return res.status(404).send({
+    //     code: 404,
+    //     data: {},
+    //     message: "cv not found",
+    //     success: true,
+    //   });
+
+    // }
+    console.log(body);
+    try {
+      await useCvValidator.valdateUpdateCv(body);
+    } catch (error) {
+      return res.status(400).send({
         code: 404,
-        data: {},
-        message: "cv not found",
-        success: true,
+        error: error.details,
+        message: "data is not valdate",
+        success: false,
       });
-
     }
-    await useCvValidator.valdateUpdateCv(body);
 
-    let one = await useCvModel.findByIdAndUpdate(params.id, body)
-
+    let one = await useCvModel.findByIdAndUpdate(params.cvId, body);
     if (!one) {
       return res.status(404).send({
         code: 404,
@@ -267,13 +280,13 @@ class Controller {
     });
   }
   async DeleteOneCvEventBus(id, req, res) {
-    await useCvModel.deleteMany({ userId: id })
-    console.log('DeleteOneCvEventBus');
+    await useCvModel.deleteMany({ userId: id });
+    console.log("DeleteOneCvEventBus");
   }
 
   async DeleteOneCv(req, res) {
-    const { params } = req
-    const cv = await useCvModel.findOneAndRemove({ _id: params.cvId })
+    const { params } = req;
+    const cv = await useCvModel.findOneAndRemove({ _id: params.cvId });
 
     if (!cv) {
       return res.status(404).send({
@@ -289,8 +302,6 @@ class Controller {
       message: "cv delete",
       success: true,
     });
-
-
   }
 }
 module.exports = new Controller();

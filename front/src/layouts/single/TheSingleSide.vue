@@ -292,9 +292,9 @@
                                 class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
                                 @change="dargHandler">
                                 <template #item="{ element, index }">
-                                    <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
+                                    <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2 items-center">
                                         <Button type="default" size="small"
-                                            class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
+                                            class="handle !border-0 !flex justify-center items-center !w-11 !h-10 row-span-2">
                                             <template #icon>
                                                 <Icon icon="icon-park-outline:drag" />
                                             </template>
@@ -320,6 +320,8 @@
                                             </Button>
                                         </template>
                                         </Input>
+                                        
+                                        <Input v-model:value="element.link" type="text" class="col-start-2" placeholder="Social Link" />
                                     </div>
                                 </template>
                                 <template #footer>
