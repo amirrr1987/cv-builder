@@ -144,21 +144,7 @@ export const useCvStore = defineStore("cv", () => {
         },
       ],
       experiences: [
-        {
-          title: "",
-          company: {
-            name: "",
-            url: "",
-          },
-          description: "",
-          beginDate: "",
-          endDate: "",
-          skills: [
-            {
-              label: "",
-            },
-          ],
-        },
+         ,
       ],
       socials: [
         {
@@ -173,10 +159,20 @@ export const useCvStore = defineStore("cv", () => {
     state.cv[name].push(obj);
   };
   const removeFromCv = (name: string, index: number) => {
-    // state.cv[name].splice(index, 1)
+    state.cv[name].splice(index, 1);
   };
-  const removeItemFromCv = (name: string, index: number) => {
+  const addItemInCvFeild = (
+    name: string,
+    index: number,
+    childName: string,
+    obj: any
+  ) => {
+    state.cv[name][index][childName].push(obj);
+  };
+  const removeItemFromCv = (name: string, index: number, filedIndex: any) => {
     // state.cv[name].splice(index, 1)
+
+    console.log(name, index, filedIndex);
   };
   const getAllCv = async (userId: string) => {
     try {
@@ -231,5 +227,7 @@ export const useCvStore = defineStore("cv", () => {
     createCv,
     deleteCv,
     updateCv,
+    addItemInCvFeild,
+    removeItemFromCv,
   };
 });

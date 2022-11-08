@@ -1,77 +1,67 @@
 <template>
-
-  <!-- ***************************************************** -->
-
   <div class="px-3 mb-2">
-    <div class=" grid grid-cols-[1fr,max-content] mb-2">
+    <div class="grid grid-cols-[1fr,max-content] mb-2">
       <div class="font-medium text-primary-dark">
-        <span>{{ data.title }} </span>
-        <span class="mx-1"> {{$t('at')}} </span>
-        <a :href="data.companyUrl" target="_blank" class="cap">{{ data.companyName }}</a>
+        <span>{{ props.item?.title }} </span>
+        <span class="mx-1"> {{ $t("at") }} </span>
+        <!-- <a :href="data.companyUrl" target="_blank" class="cap">{{ data.companyName }}</a> -->
       </div>
       <div class="font-light text-xs text-gray-light">
-        <span>( {{ duration }} )</span>
-        <span class="ml-3"> {{ data.beginDate }}</span>
-        <span> / {{ data.endDate }}</span>
+        <span>( {{ props.item?.title }} )</span>
+        <span class="ml-3"> {{ props.item?.title }}</span>
+        <span> / {{ props.item?.title }}</span>
       </div>
     </div>
 
     <ul class="px-3 mx-3 text-sm font-light list-disc text-gray-light">
       <li class="">
-        {{ data.description }}
+        {{ duration }}
       </li>
       <li class="">
-        <template v-for="item in data.skills" :key="item">
+        <template v-for="item in props.item?.skills" :key="item">
           <span class="mr-1">{{ item.label }},</span>
         </template>
       </li>
     </ul>
-
   </div>
-
-  <!-- ***************************************************** -->
 </template>
 <script setup lang="ts">
-import { computed, defineComponent } from "vue";
-import moment from 'moment'
-
+import { computed } from "vue";
+import moment from "moment";
 interface Props {
-  title: string;
-  companyName: string;
+  item?: Item;
+}
+interface Item {
+  title?: string;
+  companyName?: string;
   companyUrl: string;
   description: string;
   beginDate?: string;
   endDate?: string;
-  skills: any;
-
+  skills: Label[];
 }
-
+interface Label {
+  label: string;
+}
 const props = withDefaults(defineProps<Props>(), {
-  title: "",
-  companyName: "",
-  companyUrl: "",
-  description: "",
-  beginDate: "",
-  endDate: "",
-  skills: [''],
-})
-
-
-const data = computed(() => {
-  return props
-})
-
-
+  item: {
+    title: "",
+    companyName: "",
+    companyUrl: "",
+    description: "",
+    beginDate: "",
+    endDate: "",
+    skills: [{ label: "" }],
+  },
+});
 const duration = computed(() => {
-  const startTime = moment(props.beginDate)
-  const endTime = moment(props.endDate)
+  const startTime = moment(props.item?.beginDate);
+  const endTime = moment(props.item?.endDate);
   const duration = moment.duration(endTime.diff(startTime));
   if (duration.asMonths() > 12) {
-    return `${(duration.asMonths() / 12).toFixed(1)} Year`
+    return `${(duration.asMonths() / 12).toFixed(1)} Year`;
+  } else {
+    return `${duration.asMonths().toFixed(0)} month`;
   }
-  else {
-    return `${(duration.asMonths().toFixed(0))} month`
-  }
-
-})
+});
 </script>

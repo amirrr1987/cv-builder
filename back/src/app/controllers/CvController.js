@@ -251,7 +251,6 @@ class Controller {
     //   });
 
     // }
-    console.log(body);
     try {
       await useCvValidator.valdateUpdateCv(body);
     } catch (error) {
