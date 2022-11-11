@@ -1,8 +1,8 @@
 import { getToken } from "@/utils";
 import { message } from "ant-design-vue";
 import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
-// const APP_SURVEY_API_URL = "http://localhost:5000/api/";
-const APP_SURVEY_API_URL = "https://aesthetic-salamander-f07654.netlify.app/";
+const APP_SURVEY_API_URL = "http://localhost:5000/api/";
+// const APP_SURVEY_API_URL = "https://aesthetic-salamander-f07654.netlify.app/";
 class Axios {
   private _baseUrl = APP_SURVEY_API_URL;
 
