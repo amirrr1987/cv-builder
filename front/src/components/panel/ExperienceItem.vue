@@ -29,20 +29,20 @@
 import { computed } from "vue";
 import moment from "moment";
 interface Props {
-  item?: Item;
+  item: any;
 }
-interface Item {
-  title?: string;
-  companyName?: string;
-  companyUrl: string;
-  description: string;
-  beginDate?: string;
-  endDate?: string;
-  skills: Label[];
-}
-interface Label {
-  label: string;
-}
+// interface Item {
+//   title?: string;
+//   companyName?: string;
+//   companyUrl: string;
+//   description: string;
+//   beginDate?: string;
+//   endDate?: string;
+//   skills: Label[];
+// }
+// interface Label {
+//   label: string;
+// }
 const props = withDefaults(defineProps<Props>(), {
   item: {
     title: "",
@@ -55,8 +55,8 @@ const props = withDefaults(defineProps<Props>(), {
   },
 });
 const duration = computed(() => {
-  const startTime = moment(props.item?.beginDate);
-  const endTime = moment(props.item?.endDate);
+  const startTime = moment(props.item.beginDate);
+  const endTime = moment(props.item.endDate);
   const duration = moment.duration(endTime.diff(startTime));
   if (duration.asMonths() > 12) {
     return `${(duration.asMonths() / 12).toFixed(1)} Year`;

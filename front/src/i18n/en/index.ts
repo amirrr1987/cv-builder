@@ -3,7 +3,7 @@ export default {
   contactMe: "Contact Me",
   skillSummery: "Skill Summery",
   education: "Education",
-  teachingExprince: "Teaching Exprince",
+  teachingExperience: "Teaching Experience",
   softwareKnowledge: "Software Knowledge",
   experience: "Experience",
   firstName: "First name",

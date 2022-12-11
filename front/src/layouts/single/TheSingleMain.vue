@@ -103,7 +103,7 @@
           class="capitalize font-bold"
           :class="`text-${cvStore.state.cv.theme.color}-900`"
         >
-          {{ $t("teachingExprince") }}
+          {{ $t("teachingExperience") }}
         </div>
         <div class="p-1 text-xs font-light text-dark-50">
           <template
@@ -114,7 +114,7 @@
           </template>
         </div>
       </div>
-      <div class="grid gap-y-1 text-center auto-rows-min py-5">
+      <div class="grid gap-y-1 text-center auto-rows-min py-5 relative">
         <template v-for="item in cvStore.state.cv.socials" :key="item.index">
           <a
             :href="item.link"
@@ -125,7 +125,10 @@
             <span class="text-xs text-dark-50">{{ item.label }}</span>
           </a>
         </template>
+            <img src="@/assets/images/qr-code.png" class="w-22 h-22 absolute right-0" alt="">
+
       </div>
+
     </section>
     <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-9">
       <div class="grid auto-rows-max gap-y-3">

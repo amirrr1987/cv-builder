@@ -3,7 +3,7 @@ export default {
     contactMe: "تماس با من",
     skillSummery: "مجموعه مهارت ها",
     education: "تحصیلات",
-    teachingExprince: " تجربه تدریس",
+    teachingExperience: " تجربه تدریس",
     softwareKnowledge: "دانش نرم افزاری",
     experience: "تجربه",
     firstName: "First نام",

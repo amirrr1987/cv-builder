@@ -5,12 +5,11 @@
         logo
 
         <div class="flex gap-x-4">
-          <Button type="primary" @click="UpdateCV"> Update </Button>
           <Button type="primary" v-print="'#printMe'"> Print CV </Button>
+          <Button type="primary" @click="UpdateCV" > Update CV </Button>
           <Dropdown>
             <Button
-              type="primary"
-              shape="circle"
+              type="ghost"
               class="!flex items-center justify-center"
             >
               <template #icon>
