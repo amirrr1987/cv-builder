@@ -114,7 +114,7 @@
           </template>
         </div>
       </div>
-      <div class="grid gap-y-1 text-center auto-rows-min py-5 relative">
+      <div class="grid gap-y-1 text-center auto-rows-min py-5">
         <template v-for="item in cvStore.state.cv.socials" :key="item.index">
           <a
             :href="item.link"
@@ -125,12 +125,11 @@
             <span class="text-xs text-dark-50">{{ item.label }}</span>
           </a>
         </template>
-            <img src="@/assets/images/qr-code.png" class="w-22 h-22 absolute right-0" alt="">
 
       </div>
 
     </section>
-    <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-9">
+    <section class="bg-white grid auto-rows-max gap-y-5 p-5 col-span-9 relative">
       <div class="grid auto-rows-max gap-y-3">
         <div class="grid auto-rows-max gap-y-3">
           <div
@@ -168,6 +167,8 @@
           <ExperienceItem :item="item" />
         </template>
       </div>
+            <img src="@/assets/images/qr-code.png" class="w-14 h-14 absolute right-4 top-4" alt="">
+
     </section>
   </main>
   <!-- </div> -->
