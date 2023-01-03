@@ -15,20 +15,14 @@
                 {{ $t("firstName") }}
               </template>
               <Input v-model:value="cvStore.state.cv.fullName.first">
-                <template #suffix>
-                  <Button
-                    @click="cvStore.state.cv.fullName.first = ''"
-                    type="text"
-                    danger
-                    size="small"
-                    shape="circle"
-                    class="!flex justify-center items-center"
-                  >
-                    <template #icon>
-                      <Icon icon="icon-park-outline:close" />
-                    </template>
-                  </Button>
-                </template>
+              <template #suffix>
+                <Button @click="cvStore.state.cv.fullName.first = ''" type="text" danger size="small" shape="circle"
+                  class="!flex justify-center items-center">
+                  <template #icon>
+                    <Icon icon="icon-park-outline:close" />
+                  </template>
+                </Button>
+              </template>
               </Input>
             </FormItem>
             <FormItem>
@@ -36,20 +30,14 @@
                 {{ $t("lastName") }}
               </template>
               <Input v-model:value="cvStore.state.cv.fullName.last">
-                <template #suffix>
-                  <Button
-                    @click="cvStore.state.cv.fullName.last = ''"
-                    type="text"
-                    danger
-                    size="small"
-                    shape="circle"
-                    class="!flex justify-center items-center"
-                  >
-                    <template #icon>
-                      <Icon icon="icon-park-outline:close" />
-                    </template>
-                  </Button>
-                </template>
+              <template #suffix>
+                <Button @click="cvStore.state.cv.fullName.last = ''" type="text" danger size="small" shape="circle"
+                  class="!flex justify-center items-center">
+                  <template #icon>
+                    <Icon icon="icon-park-outline:close" />
+                  </template>
+                </Button>
+              </template>
               </Input>
             </FormItem>
           </CollapsePanel>
@@ -67,20 +55,14 @@
                 </span>
               </template>
               <Input v-model:value="cvStore.state.cv.title">
-                <template #suffix>
-                  <Button
-                    @click="cvStore.state.cv.title = ''"
-                    type="text"
-                    danger
-                    size="small"
-                    shape="circle"
-                    class="!flex justify-center items-center"
-                  >
-                    <template #icon>
-                      <Icon icon="icon-park-outline:close" />
-                    </template>
-                  </Button>
-                </template>
+              <template #suffix>
+                <Button @click="cvStore.state.cv.title = ''" type="text" danger size="small" shape="circle"
+                  class="!flex justify-center items-center">
+                  <template #icon>
+                    <Icon icon="icon-park-outline:close" />
+                  </template>
+                </Button>
+              </template>
               </Input>
             </FormItem>
             <FormItem>
@@ -88,20 +70,14 @@
                 {{ $t("subTitle") }}
               </template>
               <Input v-model:value="cvStore.state.cv.subTitle">
-                <template #suffix>
-                  <Button
-                    @click="cvStore.state.cv.subTitle = ''"
-                    type="text"
-                    danger
-                    size="small"
-                    shape="circle"
-                    class="!flex justify-center items-center"
-                  >
-                    <template #icon>
-                      <Icon icon="icon-park-outline:close" />
-                    </template>
-                  </Button>
-                </template>
+              <template #suffix>
+                <Button @click="cvStore.state.cv.subTitle = ''" type="text" danger size="small" shape="circle"
+                  class="!flex justify-center items-center">
+                  <template #icon>
+                    <Icon icon="icon-park-outline:close" />
+                  </template>
+                </Button>
+              </template>
               </Input>
             </FormItem>
           </CollapsePanel>
@@ -124,65 +100,44 @@
               </span>
             </template>
             <FormItem>
-              <draggable
-                tag="div"
-                :list="cvStore.state.cv.contacts"
-                class="list-group grid grid-cols-[3rem,1fr] gap-1"
-                handle=".handle"
-                item-key="index"
-                @change="dargHandler"
-              >
+              <draggable tag="div" :list="cvStore.state.cv.contacts" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                handle=".handle" item-key="index" @change="dargHandler">
                 <template #item="{ element, index }">
                   <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
-                    <Button
-                      type="default"
-                      size="small"
-                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10"
-                    >
+                    <Button type="default" size="small"
+                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
                       <template #icon>
                         <Icon icon="icon-park-outline:drag" />
                       </template>
                     </Button>
                     <Input v-model:value="element.label" type="text">
-                      <template #prefix>
-                        <Select v-model:value="element.icon" class="">
-                          <template v-for="item in contactIcons">
-                            <SelectOption
-                              :value="item.icon"
-                              class="flex items-center justify-center"
-                            >
-                              <Icon :icon="item.icon" />
-                            </SelectOption>
-                          </template>
-                        </Select>
-                      </template>
-                      <template #suffix>
-                        <Button
-                          type="text"
-                          danger
-                          shape="circle"
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.removeFromCv('contacts', index)
-                          "
-                        >
-                          <template #icon>
-                            <Icon icon="icon-park-outline:minus" />
-                          </template>
-                        </Button>
-                      </template>
+                    <template #prefix>
+                      <Select v-model:value="element.icon" class="">
+                        <template v-for="item in contactIcons">
+                          <SelectOption :value="item.icon" class="flex items-center justify-center">
+                            <Icon :icon="item.icon" />
+                          </SelectOption>
+                        </template>
+                      </Select>
+                    </template>
+                    <template #suffix>
+                      <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                        @click.prevent="
+  cvStore.removeFromCv('contacts', index)
+">
+                        <template #icon>
+                          <Icon icon="icon-park-outline:minus" />
+                        </template>
+                      </Button>
+                    </template>
                     </Input>
                   </div>
                 </template>
                 <template #footer>
-                  <Button
-                    type="dashed"
-                    block
-                    class="col-strat-2 col-end-3 !flex justify-center items-center"
+                  <Button type="dashed" block class="col-strat-2 col-end-3 !flex justify-center items-center"
                     @click.prevent="
-                      cvStore.addToCv('contacts', { label: '', icon: '' })
-                    "
-                  >
+  cvStore.addToCv('contacts', { label: '', icon: '' })
+">
                     <template #icon>
                       <Icon icon="icon-park-outline:plus" />
                     </template>
@@ -199,53 +154,36 @@
               </span>
             </template>
             <FormItem label="Skills Summary">
-              <draggable
-                tag="div"
-                :list="cvStore.state.cv.skillsSummary"
-                class="list-group grid grid-cols-[3rem,1fr] gap-1"
-                handle=".handle"
-                item-key="index"
-                @change="dargHandler"
-              >
+              <draggable tag="div" :list="cvStore.state.cv.skillsSummary"
+                class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
+                @change="dargHandler">
                 <template #item="{ element, index }">
                   <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
-                    <Button
-                      type="default"
-                      size="small"
-                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10"
-                    >
+                    <Button type="default" size="small"
+                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
                       <template #icon>
                         <Icon icon="icon-park-outline:drag" />
                       </template>
                     </Button>
                     <Input v-model:value="element.label" type="text">
-                      <template #suffix>
-                        <Button
-                          type="text"
-                          danger
-                          shape="circle"
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.removeFromCv('skillsSummary', index)
-                          "
-                        >
-                          <template #icon>
-                            <Icon icon="icon-park-outline:minus" />
-                          </template>
-                        </Button>
-                      </template>
+                    <template #suffix>
+                      <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                        @click.prevent="
+  cvStore.removeFromCv('skillsSummary', index)
+">
+                        <template #icon>
+                          <Icon icon="icon-park-outline:minus" />
+                        </template>
+                      </Button>
+                    </template>
                     </Input>
                   </div>
                 </template>
                 <template #footer>
-                  <Button
-                    type="dashed"
-                    block
-                    class="col-strat-2 col-end-3 !flex justify-center items-center"
+                  <Button type="dashed" block class="col-strat-2 col-end-3 !flex justify-center items-center"
                     @click.prevent="
-                      cvStore.addToCv('skillsSummary', { label: '' })
-                    "
-                  >
+  cvStore.addToCv('skillsSummary', { label: '' })
+">
                     <template #icon>
                       <Icon icon="icon-park-outline:plus" />
                     </template>
@@ -262,53 +200,36 @@
               </span>
             </template>
             <FormItem label="Educations">
-              <draggable
-                tag="div"
-                :list="cvStore.state.cv.educations"
-                class="list-group grid grid-cols-[3rem,1fr] gap-1"
-                handle=".handle"
-                item-key="index"
-                @change="dargHandler"
-              >
+              <draggable tag="div" :list="cvStore.state.cv.educations"
+                class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
+                @change="dargHandler">
                 <template #item="{ element, index }">
                   <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
-                    <Button
-                      type="default"
-                      size="small"
-                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10"
-                    >
+                    <Button type="default" size="small"
+                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
                       <template #icon>
                         <Icon icon="icon-park-outline:drag" />
                       </template>
                     </Button>
                     <Input v-model:value="element.label" type="text">
-                      <template #suffix>
-                        <Button
-                          type="text"
-                          danger
-                          shape="circle"
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.removeFromCv('educations', index)
-                          "
-                        >
-                          <template #icon>
-                            <Icon icon="icon-park-outline:minus" />
-                          </template>
-                        </Button>
-                      </template>
+                    <template #suffix>
+                      <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                        @click.prevent="
+  cvStore.removeFromCv('educations', index)
+">
+                        <template #icon>
+                          <Icon icon="icon-park-outline:minus" />
+                        </template>
+                      </Button>
+                    </template>
                     </Input>
                   </div>
                 </template>
                 <template #footer>
-                  <Button
-                    type="dashed"
-                    block
-                    class="col-strat-2 col-end-3 !flex justify-center items-center"
+                  <Button type="dashed" block class="col-strat-2 col-end-3 !flex justify-center items-center"
                     @click.prevent="
-                      cvStore.addToCv('educations', { label: '' })
-                    "
-                  >
+  cvStore.addToCv('educations', { label: '' })
+">
                     <template #icon>
                       <Icon icon="icon-park-outline:plus" />
                     </template>
@@ -325,53 +246,36 @@
               </span>
             </template>
             <FormItem label="Teach Experiences">
-              <draggable
-                tag="div"
-                :list="cvStore.state.cv.techExperiences"
-                class="list-group grid grid-cols-[3rem,1fr] gap-1"
-                handle=".handle"
-                item-key="index"
-                @change="dargHandler"
-              >
+              <draggable tag="div" :list="cvStore.state.cv.techExperiences"
+                class="list-group grid grid-cols-[3rem,1fr] gap-1" handle=".handle" item-key="index"
+                @change="dargHandler">
                 <template #item="{ element, index }">
                   <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2">
-                    <Button
-                      type="default"
-                      size="small"
-                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10"
-                    >
+                    <Button type="default" size="small"
+                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
                       <template #icon>
                         <Icon icon="icon-park-outline:drag" />
                       </template>
                     </Button>
                     <Input v-model:value="element.label" type="text">
-                      <template #suffix>
-                        <Button
-                          type="text"
-                          danger
-                          shape="circle"
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.removeFromCv('techExperiences', index)
-                          "
-                        >
-                          <template #icon>
-                            <Icon icon="icon-park-outline:minus" />
-                          </template>
-                        </Button>
-                      </template>
+                    <template #suffix>
+                      <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                        @click.prevent="
+  cvStore.removeFromCv('techExperiences', index)
+">
+                        <template #icon>
+                          <Icon icon="icon-park-outline:minus" />
+                        </template>
+                      </Button>
+                    </template>
                     </Input>
                   </div>
                 </template>
                 <template #footer>
-                  <Button
-                    type="dashed"
-                    block
-                    class="col-strat-2 col-end-3 !flex justify-center items-center"
+                  <Button type="dashed" block class="col-strat-2 col-end-3 !flex justify-center items-center"
                     @click.prevent="
-                      cvStore.addToCv('techExperiences', { label: '' })
-                    "
-                  >
+  cvStore.addToCv('techExperiences', { label: '' })
+">
                     <template #icon>
                       <Icon icon="icon-park-outline:plus" />
                     </template>
@@ -388,78 +292,50 @@
               </span>
             </template>
             <FormItem label="Social">
-              <draggable
-                tag="div"
-                :list="cvStore.state.cv.socials"
-                class="list-group grid grid-cols-[3rem,1fr] gap-1"
-                handle=".handle"
-                item-key="index"
-                @change="dargHandler"
-              >
+              <draggable tag="div" :list="cvStore.state.cv.socials" class="list-group grid grid-cols-[3rem,1fr] gap-1"
+                handle=".handle" item-key="index" @change="dargHandler">
                 <template #item="{ element, index }">
-                  <div
-                    class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2 items-center"
-                  >
-                    <Button
-                      type="default"
-                      size="small"
-                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10 row-span-2"
-                    >
+                  <div class="grid grid-cols-[3rem,1fr] gap-1 mb-3 col-span-2 items-center">
+                    <Button type="default" size="small"
+                      class="handle !border-0 !flex justify-center items-center !w-11 !h-10 row-span-2">
                       <template #icon>
                         <Icon icon="icon-park-outline:drag" />
                       </template>
                     </Button>
                     <Input v-model:value="element.label" type="text">
-                      <template #prefix>
-                        <Select v-model:value="element.icon" class="">
-                          <template v-for="item in contactIcons">
-                            <SelectOption
-                              :value="item.icon"
-                              class="flex items-center justify-center"
-                            >
-                              <Icon :icon="item.icon" />
-                            </SelectOption>
-                          </template>
-                        </Select>
-                      </template>
-                      <template #suffix>
-                        <Button
-                          type="text"
-                          danger
-                          shape="circle"
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.removeFromCv('socials', index)
-                          "
-                        >
-                          <template #icon>
-                            <Icon icon="icon-park-outline:minus" />
-                          </template>
-                        </Button>
-                      </template>
+                    <template #prefix>
+                      <Select v-model:value="element.icon" class="">
+                        <template v-for="item in contactIcons">
+                          <SelectOption :value="item.icon" class="flex items-center justify-center">
+                            <Icon :icon="item.icon" />
+                          </SelectOption>
+                        </template>
+                      </Select>
+                    </template>
+                    <template #suffix>
+                      <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                        @click.prevent="
+  cvStore.removeFromCv('socials', index)
+">
+                        <template #icon>
+                          <Icon icon="icon-park-outline:minus" />
+                        </template>
+                      </Button>
+                    </template>
                     </Input>
 
-                    <Input
-                      v-model:value="element.link"
-                      type="text"
-                      class="col-start-2"
-                      placeholder="Social Link"
-                    />
+                    <Input v-model:value="element.link" type="text" class="col-start-2" placeholder="Social Link" />
                   </div>
                 </template>
                 <template #footer>
-                  <Button
-                    type="dashed"
-                    block
-                    class="col-strat-2 col-end-3 !flex justify-center items-center"
+                  <Button type="dashed" block class="col-strat-2 col-end-3 !flex justify-center items-center"
                     @click.prevent="
-                      cvStore.addToCv('socials', {
-                        label: '',
-                        icon: '',
-                        link: '',
-                      })
-                    "
-                  >
+  cvStore.addToCv('socials', {
+    label: '',
+    icon: '',
+    link: '',
+  })
+">
                     <template #icon>
                       <Icon icon="icon-park-outline:plus" />
                     </template>
@@ -480,20 +356,11 @@
               </span>
             </template>
             <div class="grid grid-cols-[max-content,1fr]">
-              <draggable
-                tag="div"
-                :list="cvStore.state.cv.softwareKnowledges"
-                class="list-group"
-                handle=".handle"
-                item-key="index"
-                @change="dargHandler"
-              >
+              <draggable tag="div" :list="cvStore.state.cv.softwareKnowledges" class="list-group" handle=".handle"
+                item-key="index" @change="dargHandler">
                 <template #item="{ element, index }">
-                  <Button
-                    type="ghost"
-                    size="small"
-                    class="handle !border-0 !flex justify-center items-center !w-11 !h-10"
-                  >
+                  <Button type="ghost" size="small"
+                    class="handle !border-0 !flex justify-center items-center !w-11 !h-10">
                     <template #icon>
                       <Icon icon="icon-park-outline:drag" />
                     </template>
@@ -501,10 +368,7 @@
                 </template>
               </draggable>
               <Collapse>
-                <template
-                  v-for="(item, index) in cvStore.state.cv.softwareKnowledges"
-                  :key="index"
-                >
+                <template v-for="(item, index) in cvStore.state.cv.softwareKnowledges" :key="index">
                   <CollapsePanel>
                     <template #header>
                       <span class="header__title flex items-center gap-x-2">
@@ -513,66 +377,44 @@
                       </span>
                     </template>
                     <FormItem label="Software Knowledge Title">
-                      <Input
-                        v-model:value="item.label"
-                        type="text"
-                        class="mb-4"
-                      >
-                        <template #suffix>
-                          <Button
-                            type="text"
-                            danger
-                            shape="circle"
-                            class="!flex justify-center items-center"
-                            @click.prevent="
-                              cvStore.removeFromCv('softwareKnowledges', index)
-                            "
-                          >
-                            <template #icon>
-                              <Icon icon="icon-park-outline:minus" />
-                            </template>
-                          </Button>
-                        </template>
-                        {{ item.label }}
+                      <Input v-model:value="item.label" type="text" class="mb-4">
+                      <template #suffix>
+                        <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                          @click.prevent="
+  cvStore.removeFromCv('softwareKnowledges', index)
+">
+                          <template #icon>
+                            <Icon icon="icon-park-outline:minus" />
+                          </template>
+                        </Button>
+                      </template>
+                      {{ item.label }}
                       </Input>
                       <div class="grid grid-cols-3 gap-4">
-                        <template
-                          v-for="(single, skillIndex) in item.skills"
-                          :key="skillIndex"
-                        >
+                        <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
                           <Input v-model:value="single.label" type="text">
-                            <template #suffix>
-                              <Button
-                                type="text"
-                                danger
-                                shape="circle"
-                                class="!flex justify-center items-center"
-                                @click.prevent="
-                                  cvStore.state.removeItemFromCv()
-                                "
-                              >
-                                <template #icon>
-                                  <Icon icon="icon-park-outline:minus" />
-                                </template>
-                              </Button>
-                            </template>
-                            {{ item.label }}
+                          <template #suffix>
+                            <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                              @click.prevent="
+  cvStore.state.removeItemFromCv()
+">
+                              <template #icon>
+                                <Icon icon="icon-park-outline:minus" />
+                              </template>
+                            </Button>
+                          </template>
+                          {{ item.label }}
                           </Input>
                         </template>
 
-                        <Button
-                          type="dashed"
-                          block
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.addItemInCvFeild(
-                              'softwareKnowledges',
-                              index,
-                              'skills',
-                              { label: '' }
-                            )
-                          "
-                        >
+                        <Button type="dashed" block class="!flex justify-center items-center" @click.prevent="
+  cvStore.addItemInCvFeild(
+    'softwareKnowledges',
+    index,
+    'skills',
+    { label: '' }
+  )
+">
                           <template #icon>
                             <Icon icon="icon-park-outline:plus" />
                           </template>
@@ -584,12 +426,8 @@
               </Collapse>
             </div>
 
-            <Button
-              type="dashed"
-              block
-              class="!flex justify-center items-center !h-12"
-              @click.prevent=""
-            >
+            <Button type="dashed" block class="!flex justify-center items-center !h-12"
+              @click.prevent="cvStore.addToCv('softwareKnowledges', { label: '', skills: [{ label: '' }] })">
               <template #icon>
                 <Icon icon="icon-park-outline:plus" />
               </template>
@@ -606,10 +444,7 @@
                 <span>Experiences</span>
               </template>
               <Collapse>
-                <template
-                  v-for="(item, index) in cvStore.state.cv.experiences"
-                  :key="index"
-                >
+                <template v-for="(item, index) in cvStore.state.cv.experiences" :key="index">
                   <CollapsePanel>
                     <template #header>
                       <span class="header__title">
@@ -617,92 +452,53 @@
                         {{ item.company.name }}
                       </span>
                     </template>
-                    <Button
-                      type="text"
-                      danger
-                      shape="circle"
-                      class="!absolute right-0 top-0 !flex justify-center items-center"
-                      @click.prevent="
-                        cvStore.removeFromCv('experiences', index)
-                      "
-                    >
+                    <Button type="text" danger shape="circle"
+                      class="!absolute right-0 top-0 !flex justify-center items-center" @click.prevent="
+  cvStore.removeFromCv('experiences', index)
+">
                       <template #icon>
                         <Icon icon="icon-park-outline:close" />
                       </template>
                     </Button>
                     <FormItem label="Title">
-                      <Input
-                        v-model:value="item.title"
-                        type="text"
-                        placeholder="label"
-                      />
+                      <Input v-model:value="item.title" type="text" placeholder="label" />
                     </FormItem>
                     <FormItem label="Company name">
-                      <Input
-                        v-model:value="item.company.name"
-                        type="text"
-                        placeholder="label"
-                      />
+                      <Input v-model:value="item.company.name" type="text" placeholder="label" />
                     </FormItem>
                     <FormItem label="Company url">
-                      <Input
-                        v-model:value="item.company.url"
-                        type="text"
-                        placeholder="label"
-                      />
+                      <Input v-model:value="item.company.url" type="text" placeholder="label" />
                     </FormItem>
                     <FormItem label="Description">
-                      <Textarea
-                        :rows="5"
-                        v-model:value="item.description"
-                        type="text"
-                        placeholder="label"
-                      />
+                      <Textarea :rows="5" v-model:value="item.description" type="text" placeholder="label" />
                     </FormItem>
                     <FormItem label="Skills">
                       <div class="grid grid-cols-2 gap-2">
-                        <template
-                          v-for="(single, skillIndex) in item.skills"
-                          :key="skillIndex"
-                        >
-                          <Input
-                            class="mb-1"
-                            v-model:value="single.label"
-                            type="text"
-                          >
-                            <template #suffix>
-                              <Button
-                                type="text"
-                                danger
-                                shape="circle"
-                                class="!flex justify-center items-center"
-                                @click.prevent="
-                                  cvStore.state.removeExperiencesSkill(
-                                    item.company.name,
-                                    skillIndex
-                                  )
-                                "
-                              >
-                                <template #icon>
-                                  <Icon icon="icon-park-outline:minus" />
-                                </template>
-                              </Button>
-                            </template>
+                        <template v-for="(single, skillIndex) in item.skills" :key="skillIndex">
+                          <Input class="mb-1" v-model:value="single.label" type="text">
+                          <template #suffix>
+                            <Button type="text" danger shape="circle" class="!flex justify-center items-center"
+                              @click.prevent="
+  cvStore.state.removeExperiencesSkill(
+    item.company.name,
+    skillIndex
+  )
+">
+                              <template #icon>
+                                <Icon icon="icon-park-outline:minus" />
+                              </template>
+                            </Button>
+                          </template>
                           </Input>
                         </template>
-                        <Button
-                          type="dashed"
-                          block
-                          class="!flex justify-center items-center"
-                          @click.prevent="
-                            cvStore.addItemInCvFeild(
-                              'experiences',
-                              index,
-                              'skills',
-                              { label: '' }
-                            )
-                          "
-                        >
+                        <Button type="dashed" block class="!flex justify-center items-center" @click.prevent="
+  cvStore.addItemInCvFeild(
+    'experiences',
+    index,
+    'skills',
+    { label: '' }
+  )
+">
                           <template #icon>
                             <Icon icon="icon-park-outline:plus" />
                           </template>
@@ -711,36 +507,25 @@
                     </FormItem>
                     <div class="flex gap-x-3">
                       <FormItem label="Begin Date">
-                        <DatePicker
-                          v-model:value="item.beginDate"
-                          placeholder="label"
-                        />
+                        <DatePicker v-model:value="item.beginDate" placeholder="label" />
                       </FormItem>
                       <FormItem label="End Date">
-                        <DatePicker
-                          v-model:value="item.endDate"
-                          placeholder="label"
-                        />
+                        <DatePicker v-model:value="item.endDate" placeholder="label" />
                       </FormItem>
                     </div>
                   </CollapsePanel>
                 </template>
               </Collapse>
-              <Button
-                type="dashed"
-                block
-                class="!flex justify-center items-center"
-                @click.prevent="
-                  cvStore.addToCv('experiences', {
-                    title: '',
-                    company: { name: '', url: '' },
-                    description: '',
-                    beginDate: '',
-                    endDate: '',
-                    skills: [{ label: '' }],
-                  })
-                "
-              >
+              <Button type="dashed" block class="!flex justify-center items-center" @click.prevent="
+  cvStore.addToCv('experiences', {
+    title: '',
+    company: { name: '', url: '' },
+    description: '',
+    beginDate: '',
+    endDate: '',
+    skills: [{ label: '' }],
+  })
+">
                 <template #icon>
                   <Icon icon="icon-park-outline:plus" />
                 </template>
@@ -758,10 +543,7 @@
                 <span>Language:</span>
               </div>
             </template>
-            <RadioGroup
-              v-model:value="cvStore.state.cv.theme.lang"
-              @change="changeLocale"
-            >
+            <RadioGroup v-model:value="cvStore.state.cv.theme.lang" @change="changeLocale">
               <Radio value="en">
                 <div class="flex gap-x-3 items-center">
                   <Icon icon="circle-flags:us" />
@@ -784,14 +566,9 @@
                 <span>Font face:</span>
               </div>
             </template>
-            <Select
-              v-model:value="cvStore.state.cv.theme.font"
-              :class="`font-${cvStore.state.cv.theme.font}`"
-              :options="fontList"
-            >
-              <SelectOption value="vazir" class="font-vazir"
-                >Vazir</SelectOption
-              >
+            <Select v-model:value="cvStore.state.cv.theme.font" :class="`font-${cvStore.state.cv.theme.font}`"
+              :options="fontList">
+              <SelectOption value="vazir" class="font-vazir">Vazir</SelectOption>
             </Select>
           </FormItem>
 
@@ -802,54 +579,27 @@
                 <span>Language:</span>o
               </div>
             </template>
-            <RadioGroup
-              v-model:value="cvStore.state.cv.theme.color"
-              class="w-40"
-            >
+            <RadioGroup v-model:value="cvStore.state.cv.theme.color" class="w-40">
               <RadioButton value="pink" class="!bg-pink-500 !w-6 !h-6 !p-0" />
               <RadioButton value="rose" class="!bg-rose-500 !w-6 !h-6 !p-0" />
-              <RadioButton
-                value="orange"
-                class="!bg-orange-500 !w-6 !h-6 !p-0"
-              />
-              <RadioButton
-                value="yellow"
-                class="!bg-yellow-500 !w-6 !h-6 !p-0"
-              />
+              <RadioButton value="orange" class="!bg-orange-500 !w-6 !h-6 !p-0" />
+              <RadioButton value="yellow" class="!bg-yellow-500 !w-6 !h-6 !p-0" />
               <RadioButton value="amber" class="!bg-amber-500 !w-6 !h-6 !p-0" />
               <RadioButton value="lime" class="!bg-lime-500 !w-6 !h-6 !p-0" />
               <RadioButton value="green" class="!bg-green-500 !w-6 !h-6 !p-0" />
-              <RadioButton
-                value="emerald"
-                class="!bg-emerald-500 !w-6 !h-6 !p-0"
-              />
+              <RadioButton value="emerald" class="!bg-emerald-500 !w-6 !h-6 !p-0" />
               <RadioButton value="teal" class="!bg-teal-500 !w-6 !h-6 !p-0" />
               <RadioButton value="cyan" class="!bg-cyan-500 !w-6 !h-6 !p-0" />
               <RadioButton value="sky" class="!bg-sky-500 !w-6 !h-6 !p-0" />
               <RadioButton value="blue" class="!bg-blue-500 !w-6 !h-6 !p-0" />
-              <RadioButton
-                value="indigo"
-                class="!bg-indigo-500 !w-6 !h-6 !p-0"
-              />
-              <RadioButton
-                value="purple"
-                class="!bg-purple-500 !w-6 !h-6 !p-0"
-              />
-              <RadioButton
-                value="violet"
-                class="!bg-violet-500 !w-6 !h-6 !p-0"
-              />
-              <RadioButton
-                value="fuchsia"
-                class="!bg-fuchsia-500 !w-6 !h-6 !p-0"
-              />
+              <RadioButton value="indigo" class="!bg-indigo-500 !w-6 !h-6 !p-0" />
+              <RadioButton value="purple" class="!bg-purple-500 !w-6 !h-6 !p-0" />
+              <RadioButton value="violet" class="!bg-violet-500 !w-6 !h-6 !p-0" />
+              <RadioButton value="fuchsia" class="!bg-fuchsia-500 !w-6 !h-6 !p-0" />
               <RadioButton value="gray" class="!bg-gray-500 !w-6 !h-6 !p-0" />
               <RadioButton value="slate" class="!bg-slate-500 !w-6 !h-6 !p-0" />
               <RadioButton value="stone" class="!bg-stone-500 !w-6 !h-6 !p-0" />
-              <RadioButton
-                value="neutral"
-                class="!bg-neutral-500 !w-6 !h-6 !p-0"
-              />
+              <RadioButton value="neutral" class="!bg-neutral-500 !w-6 !h-6 !p-0" />
               <RadioButton value="zinc" class="!bg-zinc-500 !w-6 !h-6 !p-0" />
               <RadioButton value="light" class="!bg-light-500 !w-6 !h-6 !p-0" />
               <RadioButton value="dark" class="!bg-dark-500 !w-6 !h-6 !p-0" />
@@ -1027,7 +777,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1044,7 +794,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1061,7 +811,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1078,7 +828,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1110,7 +860,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1127,7 +877,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1144,7 +894,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1161,7 +911,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1193,7 +943,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
 
       // align-items: center !important;
-      & > div {
+      &>div {
         //     display: flex;
         //     justify-content: center;
         //     align-items: center;
@@ -1206,9 +956,10 @@ const { prefixCls } = useDesign("the-side");
 
     .amirmaghami-the-side__software-knowledges-item {
       .ant-collapse-header {
+
         // justify-content: space-between;
         // align-items: center !important;
-        & > div {
+        &>div {
           // display: flex;
           // justify-content: center;
           // align-items: center;
@@ -1226,7 +977,7 @@ const { prefixCls } = useDesign("the-side");
       justify-content: space-between;
       align-items: center !important;
 
-      & > div {
+      &>div {
         display: flex;
         justify-content: center;
         align-items: center;
