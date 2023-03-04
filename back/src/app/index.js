@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 class Application {
     constructor() {
         this.setDataBase();
-        this.setMiddlewares();
+        this.setMiddleware();
         this.setRoutes();
         this.runServer();
     }
@@ -17,7 +17,7 @@ class Application {
             console.log("Server is running on port: " + port);
         });
     }
-    setMiddlewares() {
+    setMiddleware() {
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json())
         app.use(cors());

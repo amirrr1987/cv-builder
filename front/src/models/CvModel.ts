@@ -3,6 +3,40 @@ export interface CvModel {
     cv: Cv;
 }
 
+
+
+const FullName = z.object({
+    first: z.string(),
+    last: string;
+})
+
+
+const CvSchema = z.object({
+    fullName: FullName;
+    _id: z.string().uuid(),
+    userId: z.string(),
+    theme: Theme;
+    image: z.string(),
+    about: z.string(),
+    title: z.string(),
+    subTitle: z.string(),
+    address: Address,
+    skillsSummary: z.array(Education),
+    contacts: z.array(Contact),
+    educations: z.array(Education),
+    techExperiences: z.array(Education),
+    softwareKnowledges: z.array(SoftwareKnowledge),
+    experiences: z.array(Experience),
+    socials: z.array(Social)
+})
+
+const CvStateSchema = z.object({
+    cvs: z.array(CvSchema),
+    cv: CvSchema,
+})
+
+
+
 export interface Cv {
     fullName: FullName;
     _id: string;
@@ -72,3 +106,7 @@ export interface Theme {
     font: string;
     lang: string;
 }
+import { z } from 'zod'
+
+
+

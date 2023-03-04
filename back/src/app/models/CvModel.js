@@ -37,7 +37,8 @@ const schemaCv = new mongoose.Schema({
         type: [Object], default: [
             {
                 label: "sample",
-                icon: "sample"
+                icon: "sample",
+                link: "link",
             }
         ]
     },
