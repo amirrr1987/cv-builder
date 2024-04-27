@@ -1,6 +1,6 @@
 import { z } from 'nestjs-zod/z';
 
-export const UserSchema = z.object({
+export const personalSchema = z.object({
   _id: z.string(),
   username: z.string(),
   password: z.string(),
