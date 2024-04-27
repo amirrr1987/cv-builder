@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateSocialDto } from './create-social.dto';
+import { createZodDto } from 'nestjs-zod';
+import { skillSchema } from './social.dto';
 
-export class UpdateSocialDto extends PartialType(CreateSocialDto) {}
+const skillUpdateSchema = skillSchema;
+
+export class SkillUpdateDTO extends createZodDto(skillUpdateSchema) {}
