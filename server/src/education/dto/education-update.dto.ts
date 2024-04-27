@@ -3,4 +3,4 @@ import { educationSchema } from './education.dto';
 
 const educationUpdateSchema = educationSchema;
 
-export class educationUpdateDTO extends createZodDto(educationUpdateSchema) {}
+export class EducationUpdateDTO extends createZodDto(educationUpdateSchema) {}

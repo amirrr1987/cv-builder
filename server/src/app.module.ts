@@ -7,7 +7,7 @@ import { EducationModule } from './education/education.module';
 import { ExperienceModule } from './experience/experience.module';
 import { PersonalModule } from './personal/personal.module';
 import { SocialModule } from './social/social.module';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     UserModule,
@@ -16,6 +16,7 @@ import { SocialModule } from './social/social.module';
     ExperienceModule,
     PersonalModule,
     SocialModule,
+    ConfigModule.forRoot({ cache: true }),
   ],
   controllers: [AppController],
   providers: [AppService],

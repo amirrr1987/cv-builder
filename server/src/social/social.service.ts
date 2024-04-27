@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSocialDto } from './dto/create-social.dto';
-import { UpdateSocialDto } from './dto/update-social.dto';
+import { SocialCreateDTO } from './dto/social-create.dto';
+import { SocialUpdateDTO } from './dto/social-update.dto';
+import { SocialRepository } from './social-repository';
 
 @Injectable()
 export class SocialService {
-  create(createSocialDto: CreateSocialDto) {
-    return 'This action adds a new social';
+  constructor(private readonly repository: SocialRepository) {}
+  async create(dto: SocialCreateDTO) {
+    return await this.repository.create(dto);
   }
 
-  findAll() {
-    return `This action returns all social`;
+  async findAll() {
+    return await this.repository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} social`;
+  async findById(id: string) {
+    return await this.repository.findById(id);
   }
 
-  update(id: number, updateSocialDto: UpdateSocialDto) {
-    return `This action updates a #${id} social`;
+  async findOne(dto: SocialUpdateDTO) {
+    return await this.repository.findOne(dto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} social`;
+  async update(id: string, dto: SocialUpdateDTO) {
+    return await this.repository.update(id, dto);
+  }
+
+  async remove(id: string) {
+    return await this.repository.remove(id);
   }
 }

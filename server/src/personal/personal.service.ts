@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePersonalDto } from './dto/create-personal.dto';
-import { UpdatePersonalDto } from './dto/update-personal.dto';
+import { PersonalCreateDTO } from './dto/personal-create.dto';
+import { PersonalUpdateDTO } from './dto/personal-update.dto';
+import { PersonalRepository } from './personal-repository';
 
 @Injectable()
 export class PersonalService {
-  create(createPersonalDto: CreatePersonalDto) {
-    return 'This action adds a new personal';
+  constructor(private readonly repository: PersonalRepository) {}
+  async create(dto: PersonalCreateDTO) {
+    return await this.repository.create(dto);
   }
 
   findAll() {
-    return `This action returns all personal`;
+    return this.repository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} personal`;
+  findById(id: string) {
+    return this.repository.findById(id);
   }
 
-  update(id: number, updatePersonalDto: UpdatePersonalDto) {
-    return `This action updates a #${id} personal`;
+  findOne(dto: PersonalUpdateDTO) {
+    return this.repository.findOne(dto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} personal`;
+  update(id: string, dto: PersonalUpdateDTO) {
+    return this.update(id, dto);
+  }
+
+  remove(id: string) {
+    return this.repository.remove(id);
   }
 }

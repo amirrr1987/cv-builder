@@ -8,15 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { PersonalService } from './personal.service';
-import { CreatePersonalDto } from './dto/create-personal.dto';
-import { UpdatePersonalDto } from './dto/update-personal.dto';
+import { PersonalCreateDTO } from './dto/personal-create.dto';
+import { PersonalUpdateDTO } from './dto/personal-update.dto';
 
 @Controller('personal')
 export class PersonalController {
   constructor(private readonly personalService: PersonalService) {}
 
   @Post()
-  create(@Body() createPersonalDto: CreatePersonalDto) {
+  create(@Body() createPersonalDto: PersonalCreateDTO) {
     return this.personalService.create(createPersonalDto);
   }
 
@@ -25,21 +25,23 @@ export class PersonalController {
     return this.personalService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.personalService.findOne(+id);
+  @Get('findById/:id')
+  findById(@Param('id') id: string) {
+    return this.personalService.findById(id);
+  }
+
+  @Get('findOne')
+  findOne(@Body() dto: PersonalUpdateDTO) {
+    return this.personalService.findOne(dto);
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePersonalDto: UpdatePersonalDto,
-  ) {
-    return this.personalService.update(+id, updatePersonalDto);
+  update(@Param('id') id: string, @Body() dto: PersonalUpdateDTO) {
+    return this.personalService.update(id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.personalService.remove(+id);
+    return this.personalService.remove(id);
   }
 }

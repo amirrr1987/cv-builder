@@ -8,16 +8,16 @@ import {
   Delete,
 } from '@nestjs/common';
 import { SkillService } from './skill.service';
-import { CreateSkillDto } from './dto/create-skill.dto';
-import { UpdateSkillDto } from './dto/update-skill.dto';
+import { SkillCreateDTO } from './dto/skill-create.dto';
+import { SkillUpdateDTO } from './dto/skill-update.dto';
 
 @Controller('skill')
 export class SkillController {
   constructor(private readonly skillService: SkillService) {}
 
   @Post()
-  create(@Body() createSkillDto: CreateSkillDto) {
-    return this.skillService.create(createSkillDto);
+  create(@Body() dto: SkillCreateDTO) {
+    return this.skillService.create(dto);
   }
 
   @Get()
@@ -25,18 +25,23 @@ export class SkillController {
     return this.skillService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.skillService.findOne(+id);
+  @Get('findById/:id')
+  findById(@Param('id') id: string) {
+    return this.skillService.findById(id);
+  }
+
+  @Get('findOne/')
+  findOne(@Body() dto: SkillUpdateDTO) {
+    return this.skillService.findOne(dto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSkillDto: UpdateSkillDto) {
-    return this.skillService.update(+id, updateSkillDto);
+  update(@Param('id') id: string, @Body() dto: SkillUpdateDTO) {
+    return this.skillService.update(id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.skillService.remove(+id);
+    return this.skillService.remove(id);
   }
 }

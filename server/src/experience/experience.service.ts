@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateExperienceDto } from './dto/create-experience.dto';
-import { UpdateExperienceDto } from './dto/update-experience.dto';
+import { ExperienceCreateDTO } from './dto/experience-create.dto';
+import { ExperienceUpdateDTO } from './dto/experience-update.dto';
+import { ExperienceRepository } from './experience-repository';
 
 @Injectable()
 export class ExperienceService {
-  create(createExperienceDto: CreateExperienceDto) {
-    return 'This action adds a new experience';
+  constructor(private readonly repository: ExperienceRepository) {}
+  async create(dto: ExperienceCreateDTO) {
+    return await this.repository.create(dto);
   }
 
-  findAll() {
-    return `This action returns all experience`;
+  async findAll() {
+    return await this.repository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} experience`;
+  async findOne(dto: ExperienceUpdateDTO) {
+    return this.repository.findOne(dto);
   }
 
-  update(id: number, updateExperienceDto: UpdateExperienceDto) {
-    return `This action updates a #${id} experience`;
+  async findById(id: string) {
+    return await this.repository.findById(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} experience`;
+  async update(id: string, dto: ExperienceUpdateDTO) {
+    return await this.repository.update(id, dto);
+  }
+
+  async remove(id: string) {
+    return await this.repository.remove(id);
   }
 }

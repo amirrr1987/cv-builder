@@ -8,16 +8,16 @@ import {
   Delete,
 } from '@nestjs/common';
 import { EducationService } from './education.service';
-import { CreateEducationDto } from './dto/create-education.dto';
-import { UpdateEducationDto } from './dto/update-education.dto';
+import { EducationCreateDTO } from './dto/education-create.dto';
+import { EducationUpdateDTO } from './dto/education-update.dto';
 
 @Controller('education')
 export class EducationController {
   constructor(private readonly educationService: EducationService) {}
 
   @Post()
-  create(@Body() createEducationDto: CreateEducationDto) {
-    return this.educationService.create(createEducationDto);
+  create(@Body() dto: EducationCreateDTO) {
+    return this.educationService.create(dto);
   }
 
   @Get()
@@ -25,21 +25,23 @@ export class EducationController {
     return this.educationService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.educationService.findOne(+id);
+  @Get('findById/:id')
+  findById(@Param('id') id: string) {
+    return this.educationService.findById(id);
+  }
+
+  @Get('findOne')
+  findOne(@Body() dto: EducationUpdateDTO) {
+    return this.educationService.findOne(dto);
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEducationDto: UpdateEducationDto,
-  ) {
-    return this.educationService.update(+id, updateEducationDto);
+  update(@Param('id') id: string, @Body() dto: EducationUpdateDTO) {
+    return this.educationService.update(id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.educationService.remove(+id);
+    return this.educationService.remove(id);
   }
 }
