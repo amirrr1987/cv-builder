@@ -6,6 +6,7 @@ import { SkillModule } from './skill/skill.module';
 import { EducationModule } from './education/education.module';
 import { ExperienceModule } from './experience/experience.module';
 import { PersonalModule } from './personal/personal.module';
+import { SocialModule } from './social/social.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PersonalModule } from './personal/personal.module';
     EducationModule,
     ExperienceModule,
     PersonalModule,
+    SocialModule,
   ],
   controllers: [AppController],
   providers: [AppService],
