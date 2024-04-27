@@ -8,6 +8,7 @@ import { ExperienceModule } from './experience/experience.module';
 import { PersonalModule } from './personal/personal.module';
 import { SocialModule } from './social/social.module';
 import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
     UserModule,

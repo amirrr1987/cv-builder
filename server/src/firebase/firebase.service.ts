@@ -1,6 +1,7 @@
 import { Injectable, Module } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { FirebaseRepository } from './firebase.repository';
 
 export const firebaseProvider = {
   provide: 'FIREBASE_APP',
@@ -27,3 +28,10 @@ export const firebaseProvider = {
     });
   },
 };
+
+@Module({
+  imports: [ConfigModule],
+  providers: [firebaseProvider, FirebaseRepository],
+  exports: [],
+})
+export class FirebaseModule {}

@@ -1,11 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UserCreateDTO } from './dto/user-create.dto';
 import { UserUpdateDTO } from './dto/user-update.dto';
+import { FirebaseService } from '@speakbox/nestjs-firebase-admin';
 
 @Injectable()
 export class UserRepository {
-  create(dto: UserCreateDTO) {
-    return dto;
+  constructor(
+    @Inject(FirebaseService) private readonly firebase: FirebaseService,
+  ) {}
+  async create(dto: UserCreateDTO) {
+    try {
+      const userRecord = await this.firebase.auth().createUser(dto);
+
+      return userRecord;
+    } catch (error) {
+      throw error;
+    }
   }
 
   findAll() {
